@@ -9,13 +9,12 @@
 /* Begin PBXBuildFile section */
 		C242CDB62796BE7000905287 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C242CDB52796BE7000905287 /* AppDelegate.swift */; };
 		C242CDB82796BE7000905287 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C242CDB72796BE7000905287 /* SceneDelegate.swift */; };
-		C242CDBA2796BE7000905287 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C242CDB92796BE7000905287 /* LogInViewController.swift */; };
+		C242CDBA2796BE7000905287 /* RequestAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C242CDB92796BE7000905287 /* RequestAuthViewController.swift */; };
 		C242CDBF2796BE7200905287 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C242CDBE2796BE7200905287 /* Assets.xcassets */; };
 		C242CDC22796BE7200905287 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C242CDC02796BE7200905287 /* LaunchScreen.storyboard */; };
 		C242CDCD2796BE7300905287 /* SeSAC_FriendsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C242CDCC2796BE7300905287 /* SeSAC_FriendsTests.swift */; };
 		C242CDD72796BE7300905287 /* SeSAC_FriendsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C242CDD62796BE7300905287 /* SeSAC_FriendsUITests.swift */; };
 		C242CDD92796BE7300905287 /* SeSAC_FriendsUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C242CDD82796BE7300905287 /* SeSAC_FriendsUITestsLaunchTests.swift */; };
-		C28377A82796D98900151297 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C28377A72796D98900151297 /* GoogleService-Info.plist */; };
 		C28377AF2796E36100151297 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C28377AE2796E36100151297 /* UIColor+Extension.swift */; };
 		C28377BA2796EEEE00151297 /* NotoSansKR-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = C28377B42796EEEE00151297 /* NotoSansKR-Medium.otf */; };
 		C28377BC2796EEEE00151297 /* NotoSansKR-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = C28377B62796EEEE00151297 /* NotoSansKR-Regular.otf */; };
@@ -37,6 +36,9 @@
 		C28377E7279825D000151297 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C28377E6279825D000151297 /* AuthViewModel.swift */; };
 		C28377E9279825EF00151297 /* ViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C28377E8279825EF00151297 /* ViewModelType.swift */; };
 		C28377EC279831F000151297 /* InputTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = C28377EB279831F000151297 /* InputTextField.swift */; };
+		C28377EE2798674A00151297 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C28377ED2798674A00151297 /* GoogleService-Info.plist */; };
+		C28377F027987D0A00151297 /* TextFieldState.swift in Sources */ = {isa = PBXBuildFile; fileRef = C28377EF27987D0A00151297 /* TextFieldState.swift */; };
+		C28377F227988C0500151297 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C28377F127988C0500151297 /* LogInViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,7 +62,7 @@
 		C242CDB22796BE7000905287 /* SeSAC_Friends.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SeSAC_Friends.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C242CDB52796BE7000905287 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C242CDB72796BE7000905287 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		C242CDB92796BE7000905287 /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
+		C242CDB92796BE7000905287 /* RequestAuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestAuthViewController.swift; sourceTree = "<group>"; };
 		C242CDBE2796BE7200905287 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C242CDC12796BE7200905287 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C242CDC32796BE7200905287 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -69,7 +71,6 @@
 		C242CDD22796BE7300905287 /* SeSAC_FriendsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SeSAC_FriendsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C242CDD62796BE7300905287 /* SeSAC_FriendsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeSAC_FriendsUITests.swift; sourceTree = "<group>"; };
 		C242CDD82796BE7300905287 /* SeSAC_FriendsUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeSAC_FriendsUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		C28377A72796D98900151297 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C28377AE2796E36100151297 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		C28377B42796EEEE00151297 /* NotoSansKR-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansKR-Medium.otf"; sourceTree = "<group>"; };
 		C28377B62796EEEE00151297 /* NotoSansKR-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansKR-Regular.otf"; sourceTree = "<group>"; };
@@ -84,6 +85,9 @@
 		C28377E6279825D000151297 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
 		C28377E8279825EF00151297 /* ViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelType.swift; sourceTree = "<group>"; };
 		C28377EB279831F000151297 /* InputTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputTextField.swift; sourceTree = "<group>"; };
+		C28377ED2798674A00151297 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		C28377EF27987D0A00151297 /* TextFieldState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldState.swift; sourceTree = "<group>"; };
+		C28377F127988C0500151297 /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -151,7 +155,7 @@
 				C28377A92796D9F800151297 /* Pages */,
 				C242CDC02796BE7200905287 /* LaunchScreen.storyboard */,
 				C242CDC32796BE7200905287 /* Info.plist */,
-				C28377A72796D98900151297 /* GoogleService-Info.plist */,
+				C28377ED2798674A00151297 /* GoogleService-Info.plist */,
 			);
 			path = SeSAC_Friends;
 			sourceTree = "<group>";
@@ -231,7 +235,8 @@
 		C28377C02796F64C00151297 /* Auth */ = {
 			isa = PBXGroup;
 			children = (
-				C242CDB92796BE7000905287 /* LogInViewController.swift */,
+				C242CDB92796BE7000905287 /* RequestAuthViewController.swift */,
+				C28377F127988C0500151297 /* LogInViewController.swift */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -267,6 +272,7 @@
 			isa = PBXGroup;
 			children = (
 				C28377E427980E1000151297 /* ButtonState.swift */,
+				C28377EF27987D0A00151297 /* TextFieldState.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -394,9 +400,9 @@
 			files = (
 				C28377BA2796EEEE00151297 /* NotoSansKR-Medium.otf in Resources */,
 				C242CDC22796BE7200905287 /* LaunchScreen.storyboard in Resources */,
+				C28377EE2798674A00151297 /* GoogleService-Info.plist in Resources */,
 				C242CDBF2796BE7200905287 /* Assets.xcassets in Resources */,
 				C28377BC2796EEEE00151297 /* NotoSansKR-Regular.otf in Resources */,
-				C28377A82796D98900151297 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -445,11 +451,13 @@
 				C28377CC27971E7300151297 /* ViewRepresentable.swift in Sources */,
 				C28377E22797FE3F00151297 /* H48Button.swift in Sources */,
 				C28377E02797F1D400151297 /* UILabel+Extension.swift in Sources */,
-				C242CDBA2796BE7000905287 /* LogInViewController.swift in Sources */,
+				C28377F227988C0500151297 /* LogInViewController.swift in Sources */,
+				C242CDBA2796BE7000905287 /* RequestAuthViewController.swift in Sources */,
 				C28377E527980E1000151297 /* ButtonState.swift in Sources */,
 				C28377E9279825EF00151297 /* ViewModelType.swift in Sources */,
 				C242CDB62796BE7000905287 /* AppDelegate.swift in Sources */,
 				C242CDB82796BE7000905287 /* SceneDelegate.swift in Sources */,
+				C28377F027987D0A00151297 /* TextFieldState.swift in Sources */,
 				C28377DE279728E700151297 /* UIButton+Extension.swift in Sources */,
 				C28377EC279831F000151297 /* InputTextField.swift in Sources */,
 				C28377C627971D0300151297 /* OnBoardingViewController.swift in Sources */,

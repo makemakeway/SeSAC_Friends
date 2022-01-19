@@ -12,21 +12,53 @@ import SwiftUI
 
 class InputTextField: UIView, ViewRepresentable {
     
+    var textFieldState: TextFieldState = .inActive {
+        willSet {
+            switch newValue {
+            case .inActive, .active:
+                changeBorder(layer: bottomLine, color: .systemBackground)
+            case .focus:
+                changeBorder(layer: bottomLine, color: .systemFocus)
+            case .error:
+                changeBorder(layer: bottomLine, color: .systemError)
+            case .success:
+                changeBorder(layer: bottomLine, color: .systemSuccess)
+            default:
+                print("error")
+            }
+        }
+    }
+    
+    var placeHolderText: String = ""
+    
     let containerView = UIView()
     let leadingPadding = UIView()
     let textField = UITextField()
+    let bottomLine = CALayer()
+    
+    func makeBorder(layer: CALayer, view: UIView, color: UIColor) {
+        layer.frame = CGRect(x: 0, y: view.frame.height + 12, width: view.frame.width, height: 1)
+        layer.backgroundColor = color.cgColor
+        view.layer.addSublayer(layer)
+    }
+    
+    func changeBorder(layer: CALayer, color: UIColor) {
+        layer.backgroundColor = color.cgColor
+    }
+    
+    func textFieldSetUp(color: UIColor, text: String?) {
+        guard let text = text else { return }
+        let placeholderAttr = NSAttributedString(string: text, attributes: [NSAttributedString.Key.foregroundColor : color,
+                                                                 NSAttributedString.Key.font : UIFont.title4_R14])
+        
+        textField.attributedPlaceholder = placeholderAttr
+        textField.font = UIFont.title4_R14
+    }
     
     func setUp() {
         self.addSubview(containerView)
         containerView.addSubview(leadingPadding)
         containerView.addSubview(textField)
-    }
-    
-    func textFieldSetUp(color: UIColor, text: String?) {
-        guard let text = text else { return }
-        let attr = NSAttributedString(string: text, attributes: [NSAttributedString.Key.foregroundColor : color,
-                                                                 NSAttributedString.Key.font : UIFont.title4_R14])
-        textField.attributedPlaceholder = attr
     }
     
     func setConstraints() {
@@ -59,5 +91,10 @@ class InputTextField: UIView, ViewRepresentable {
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
+    }
+    
+    override func draw(_ rect: CGRect) {
+        super.draw(rect)
+        makeBorder(layer: bottomLine, view: containerView, color: .systemBackground)
     }
 }

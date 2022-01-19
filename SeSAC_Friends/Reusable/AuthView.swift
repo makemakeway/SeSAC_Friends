@@ -9,8 +9,14 @@ import UIKit
 import Then
 import SnapKit
 
+enum AuthViewState {
+    case request
+    case logIn
+}
+
 class AuthView: UIView, ViewRepresentable {
     
+    var authViewState: AuthViewState = .request
     let authRequestButton = H48Button()
     let phoneNumberTextField = InputTextField(color: .gray6, text: "휴대폰 번호(-없이 숫자만 입력)")
     
@@ -18,14 +24,21 @@ class AuthView: UIView, ViewRepresentable {
         $0.textColor = .defaultBlack
         $0.textAlignment = .center
         $0.numberOfLines = 0
-        $0.setTextWithLineHeight(text: "새싹 서비스 이용을 위해\n휴대폰 번호를 입력해주세요", lineHeight: 32, font: .display1_R20)
-        $0.backgroundColor = .yellow
+    }
+    
+    let calloutLabel = UILabel().then {
+        $0.textColor = .gray7
+        $0.textAlignment = .center
     }
     
     func setUp() {
         addSubview(titleLabel)
         addSubview(authRequestButton)
         addSubview(phoneNumberTextField)
+        
+        if authViewState == .logIn {
+            addSubview(calloutLabel)
+        }
         
         self.backgroundColor = .systemBackground
     }
@@ -37,35 +50,42 @@ class AuthView: UIView, ViewRepresentable {
             make.centerX.equalToSuperview()
         }
         
-        phoneNumberTextField.snp.makeConstraints { make in
-            make.leading.equalTo(16)
-            make.trailing.equalTo(-16)
-            make.height.equalTo(22)
-            make.bottom.equalTo(titleLabel.snp.bottom).offset(99)
+        if authViewState == .logIn {
+            calloutLabel.snp.makeConstraints { make in
+                make.top.equalTo(titleLabel.snp.bottom).offset(8)
+                make.centerX.equalToSuperview()
+            }
+            phoneNumberTextField.snp.makeConstraints { make in
+                make.leading.equalTo(16)
+                make.trailing.equalTo(-16)
+                make.height.equalTo(22)
+                make.top.equalTo(calloutLabel.snp.bottom).offset(76)
+            }
+            
+            authRequestButton.snp.makeConstraints { make in
+                make.center.equalToSuperview()
+                make.leading.equalToSuperview().offset(16)
+                make.trailing.equalToSuperview().offset(-16)
+            }
+        } else {
+            phoneNumberTextField.snp.makeConstraints { make in
+                make.leading.equalTo(16)
+                make.trailing.equalTo(-16)
+                make.height.equalTo(22)
+                make.bottom.equalTo(titleLabel.snp.bottom).offset(99)
+            }
+            
+            authRequestButton.snp.makeConstraints { make in
+                make.center.equalToSuperview()
+                make.leading.equalToSuperview().offset(16)
+                make.trailing.equalToSuperview().offset(-16)
+            }
         }
-        
-        authRequestButton.snp.makeConstraints { make in
-            make.center.equalToSuperview()
-            make.leading.equalTo(16)
-            make.trailing.equalTo(-16)
-        }
-    }
-    
-    func makeBorder(view: UIView, color: UIColor) {
-        let bottomLine = CALayer()
-        
-        view.backgroundColor = .yellow
-
-        bottomLine.frame = CGRect(x: 0, y: view.frame.height + 12, width: view.frame.width, height: 1)
-
-        bottomLine.backgroundColor = color.cgColor
-
-        view.layer.addSublayer(bottomLine)
     }
     
     override func draw(_ rect: CGRect) {
         super.draw(rect)
-        makeBorder(view: phoneNumberTextField.textField, color: .gray6)
+        titleLabel.textAlignment = .center
     }
     
     override init(frame: CGRect) {
