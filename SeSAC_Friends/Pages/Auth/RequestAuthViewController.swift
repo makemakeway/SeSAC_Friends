@@ -13,11 +13,11 @@ import Toast
 
 class RequestAuthViewController: UIViewController {
     //MARK: Properties
-    let viewModel = AuthViewModel()
+    let viewModel = RequestAuthViewModel()
     var disposeBag = DisposeBag()
     
     //MARK: UI
-    let mainView = AuthView()
+    let mainView = AuthView(state: .request)
     
     //MARK: Method
     func bind() {
@@ -80,7 +80,6 @@ class RequestAuthViewController: UIViewController {
     func pushToLoginViewController() {
         print("push")
         let vc = LogInViewController()
-        vc.mainView.authViewState = .logIn
         self.navigationController?.pushViewController(vc, animated: true)
     }
     

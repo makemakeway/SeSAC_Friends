@@ -12,11 +12,11 @@ import SnapKit
 enum AuthViewState {
     case request
     case logIn
+    case error
 }
 
 class AuthView: UIView, ViewRepresentable {
-    
-    var authViewState: AuthViewState = .request
+    var authViewState: AuthViewState?
     let authRequestButton = H48Button()
     let phoneNumberTextField = InputTextField(color: .gray6, text: "휴대폰 번호(-없이 숫자만 입력)")
     
@@ -29,6 +29,18 @@ class AuthView: UIView, ViewRepresentable {
     let calloutLabel = UILabel().then {
         $0.textColor = .gray7
         $0.textAlignment = .center
+        $0.font = .title2_R16
+    }
+    
+    func setUI(state: AuthViewState) {
+//        switch state {
+//        case .request:
+//            
+//        case .logIn:
+//            <#code#>
+//        case .error:
+//            <#code#>
+//        }
     }
     
     func setUp() {
@@ -36,7 +48,7 @@ class AuthView: UIView, ViewRepresentable {
         addSubview(authRequestButton)
         addSubview(phoneNumberTextField)
         
-        if authViewState == .logIn {
+        if authViewState != .request {
             addSubview(calloutLabel)
         }
         
@@ -44,26 +56,29 @@ class AuthView: UIView, ViewRepresentable {
     }
     
     func setConstraints() {
+        let height = UIScreen.main.bounds.height
         
         titleLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(168)
-            make.centerX.equalToSuperview()
+            make.top.equalTo(height * 0.2)
+            make.leading.equalToSuperview().offset(16)
+            make.trailing.equalToSuperview().offset(-16)
         }
         
         if authViewState == .logIn {
             calloutLabel.snp.makeConstraints { make in
                 make.top.equalTo(titleLabel.snp.bottom).offset(8)
-                make.centerX.equalToSuperview()
+                make.leading.equalToSuperview().offset(16)
+                make.trailing.equalToSuperview().offset(-16)
             }
             phoneNumberTextField.snp.makeConstraints { make in
                 make.leading.equalTo(16)
                 make.trailing.equalTo(-16)
                 make.height.equalTo(22)
-                make.top.equalTo(calloutLabel.snp.bottom).offset(76)
+                make.top.equalTo(calloutLabel.snp.bottom).offset(height * 0.09)
             }
             
             authRequestButton.snp.makeConstraints { make in
-                make.center.equalToSuperview()
+                make.top.equalTo(phoneNumberTextField.snp.bottom).offset(height * 0.1)
                 make.leading.equalToSuperview().offset(16)
                 make.trailing.equalToSuperview().offset(-16)
             }
@@ -72,11 +87,11 @@ class AuthView: UIView, ViewRepresentable {
                 make.leading.equalTo(16)
                 make.trailing.equalTo(-16)
                 make.height.equalTo(22)
-                make.bottom.equalTo(titleLabel.snp.bottom).offset(99)
+                make.top.equalTo(titleLabel.snp.bottom).offset(height * 0.09)
             }
             
             authRequestButton.snp.makeConstraints { make in
-                make.center.equalToSuperview()
+                make.top.equalTo(phoneNumberTextField.snp.bottom).offset(height * 0.1)
                 make.leading.equalToSuperview().offset(16)
                 make.trailing.equalToSuperview().offset(-16)
             }
@@ -88,10 +103,15 @@ class AuthView: UIView, ViewRepresentable {
         titleLabel.textAlignment = .center
     }
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    convenience init(state: AuthViewState) {
+        self.init(frame: CGRect.zero)
+        self.authViewState = state
         setUp()
         setConstraints()
+    }
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
     }
     
     required init?(coder: NSCoder) {

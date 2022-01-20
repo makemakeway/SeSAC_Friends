@@ -33,12 +33,13 @@
 		C28377E02797F1D400151297 /* UILabel+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C28377DF2797F1D400151297 /* UILabel+Extension.swift */; };
 		C28377E22797FE3F00151297 /* H48Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = C28377E12797FE3F00151297 /* H48Button.swift */; };
 		C28377E527980E1000151297 /* ButtonState.swift in Sources */ = {isa = PBXBuildFile; fileRef = C28377E427980E1000151297 /* ButtonState.swift */; };
-		C28377E7279825D000151297 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C28377E6279825D000151297 /* AuthViewModel.swift */; };
+		C28377E7279825D000151297 /* RequestAuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C28377E6279825D000151297 /* RequestAuthViewModel.swift */; };
 		C28377E9279825EF00151297 /* ViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C28377E8279825EF00151297 /* ViewModelType.swift */; };
 		C28377EC279831F000151297 /* InputTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = C28377EB279831F000151297 /* InputTextField.swift */; };
 		C28377EE2798674A00151297 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C28377ED2798674A00151297 /* GoogleService-Info.plist */; };
 		C28377F027987D0A00151297 /* TextFieldState.swift in Sources */ = {isa = PBXBuildFile; fileRef = C28377EF27987D0A00151297 /* TextFieldState.swift */; };
 		C28377F227988C0500151297 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C28377F127988C0500151297 /* LogInViewController.swift */; };
+		C28377F52799A41000151297 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C28377F42799A41000151297 /* LoginViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -82,12 +83,13 @@
 		C28377DF2797F1D400151297 /* UILabel+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Extension.swift"; sourceTree = "<group>"; };
 		C28377E12797FE3F00151297 /* H48Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = H48Button.swift; sourceTree = "<group>"; };
 		C28377E427980E1000151297 /* ButtonState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonState.swift; sourceTree = "<group>"; };
-		C28377E6279825D000151297 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
+		C28377E6279825D000151297 /* RequestAuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestAuthViewModel.swift; sourceTree = "<group>"; };
 		C28377E8279825EF00151297 /* ViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelType.swift; sourceTree = "<group>"; };
 		C28377EB279831F000151297 /* InputTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputTextField.swift; sourceTree = "<group>"; };
 		C28377ED2798674A00151297 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C28377EF27987D0A00151297 /* TextFieldState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldState.swift; sourceTree = "<group>"; };
 		C28377F127988C0500151297 /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
+		C28377F42799A41000151297 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -189,7 +191,7 @@
 		C28377AA2796D9FC00151297 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				C28377E6279825D000151297 /* AuthViewModel.swift */,
+				C28377F32799A3EF00151297 /* Auth */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -275,6 +277,15 @@
 				C28377EF27987D0A00151297 /* TextFieldState.swift */,
 			);
 			path = Util;
+			sourceTree = "<group>";
+		};
+		C28377F32799A3EF00151297 /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				C28377E6279825D000151297 /* RequestAuthViewModel.swift */,
+				C28377F42799A41000151297 /* LoginViewModel.swift */,
+			);
+			path = Auth;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -455,6 +466,7 @@
 				C242CDBA2796BE7000905287 /* RequestAuthViewController.swift in Sources */,
 				C28377E527980E1000151297 /* ButtonState.swift in Sources */,
 				C28377E9279825EF00151297 /* ViewModelType.swift in Sources */,
+				C28377F52799A41000151297 /* LoginViewModel.swift in Sources */,
 				C242CDB62796BE7000905287 /* AppDelegate.swift in Sources */,
 				C242CDB82796BE7000905287 /* SceneDelegate.swift in Sources */,
 				C28377F027987D0A00151297 /* TextFieldState.swift in Sources */,
@@ -462,7 +474,7 @@
 				C28377EC279831F000151297 /* InputTextField.swift in Sources */,
 				C28377C627971D0300151297 /* OnBoardingViewController.swift in Sources */,
 				C28377BF2796F1C900151297 /* UIFont+Extension.swift in Sources */,
-				C28377E7279825D000151297 /* AuthViewModel.swift in Sources */,
+				C28377E7279825D000151297 /* RequestAuthViewModel.swift in Sources */,
 				C28377AF2796E36100151297 /* UIColor+Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -650,7 +662,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -677,7 +689,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

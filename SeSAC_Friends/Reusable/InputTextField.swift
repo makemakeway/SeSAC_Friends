@@ -16,7 +16,7 @@ class InputTextField: UIView, ViewRepresentable {
         willSet {
             switch newValue {
             case .inActive, .active:
-                changeBorder(layer: bottomLine, color: .systemBackground)
+                changeBorder(layer: bottomLine, color: .gray3)
             case .focus:
                 changeBorder(layer: bottomLine, color: .systemFocus)
             case .error:

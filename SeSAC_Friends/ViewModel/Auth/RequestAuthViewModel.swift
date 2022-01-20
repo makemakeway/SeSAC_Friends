@@ -10,7 +10,7 @@ import RxSwift
 import RxCocoa
 import RxRelay
 
-class AuthViewModel: ViewModelType {
+class RequestAuthViewModel: ViewModelType {
     
     var disposeBag = DisposeBag()
     
@@ -47,6 +47,7 @@ class AuthViewModel: ViewModelType {
         input.tapAuthRequestButton.withLatestFrom(input.phoneNumberText)
             .bind { [weak self](text) in
                 guard let self = self else { return }
+                // MARK: 핸드폰 번호 유효성 검사 && Auth 리퀘스트 여기서 구현하면 됨
                 if text.count > 9 && Int(text) != nil {
                     self.output.goToLoginView.accept(())
                 } else {
