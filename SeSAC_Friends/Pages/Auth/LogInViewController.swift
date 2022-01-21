@@ -25,7 +25,7 @@ class LogInViewController: UIViewController {
             .bind(to: viewModel.input.tapCheckValidationButton)
             .disposed(by: disposeBag)
         
-        mainView.phoneNumberTextField.textField.rx.text.orEmpty
+        mainView.inputTextField.textField.rx.text.orEmpty
             .bind(to: viewModel.input.validationNumberText)
             .disposed(by: disposeBag)
         
@@ -53,7 +53,7 @@ class LogInViewController: UIViewController {
             .observe(on: MainScheduler.instance)
             .bind(onNext: { [weak self](state) in
                 guard let self = self else { return }
-                self.mainView.phoneNumberTextField.textFieldState = state
+                self.mainView.inputTextField.textFieldState = state
             })
             .disposed(by: disposeBag)
             
@@ -69,10 +69,6 @@ class LogInViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         bind()
-        mainView.titleLabel.setTextWithLineHeight(text: "인증번호가 문자로 전송되었어요", lineHeight: 32, font: .display1_R20)
-        mainView.calloutLabel.text = "(최대 소모 20초)"
-        mainView.authRequestButton.buttonState = .disable
-        mainView.authRequestButton.setTitle("인증하고 시작하기", for: .normal)
     }
     
     override func viewWillAppear(_ animated: Bool) {

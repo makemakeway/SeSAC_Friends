@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C23BA6AA279AF7D400AD2EE3 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = C23BA6A9279AF7D400AD2EE3 /* FirebaseAuth */; };
+		C23BA6AC279AF7D400AD2EE3 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = C23BA6AB279AF7D400AD2EE3 /* FirebaseMessaging */; };
 		C242CDB62796BE7000905287 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C242CDB52796BE7000905287 /* AppDelegate.swift */; };
 		C242CDB82796BE7000905287 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C242CDB72796BE7000905287 /* SceneDelegate.swift */; };
 		C242CDBA2796BE7000905287 /* RequestAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C242CDB92796BE7000905287 /* RequestAuthViewController.swift */; };
@@ -97,6 +99,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C23BA6AC279AF7D400AD2EE3 /* FirebaseMessaging in Frameworks */,
 				C28377D12797209500151297 /* RxRelay in Frameworks */,
 				C28377CF2797209500151297 /* RxCocoa in Frameworks */,
 				C28377D32797209500151297 /* RxSwift in Frameworks */,
@@ -104,6 +107,7 @@
 				C28377D9279720CA00151297 /* Alamofire in Frameworks */,
 				C28377D6279720B900151297 /* Toast in Frameworks */,
 				C28377C32796F78200151297 /* SnapKit in Frameworks */,
+				C23BA6AA279AF7D400AD2EE3 /* FirebaseAuth in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -313,6 +317,8 @@
 				C28377D5279720B900151297 /* Toast */,
 				C28377D8279720CA00151297 /* Alamofire */,
 				C28377DB279720D800151297 /* Then */,
+				C23BA6A9279AF7D400AD2EE3 /* FirebaseAuth */,
+				C23BA6AB279AF7D400AD2EE3 /* FirebaseMessaging */,
 			);
 			productName = SeSAC_Friends;
 			productReference = C242CDB22796BE7000905287 /* SeSAC_Friends.app */;
@@ -392,6 +398,7 @@
 				C28377D4279720B900151297 /* XCRemoteSwiftPackageReference "Toast-Swift" */,
 				C28377D7279720CA00151297 /* XCRemoteSwiftPackageReference "Alamofire" */,
 				C28377DA279720D800151297 /* XCRemoteSwiftPackageReference "Then" */,
+				C23BA6A8279AF7D400AD2EE3 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = C242CDB32796BE7000905287 /* Products */;
 			projectDirPath = "";
@@ -831,6 +838,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		C23BA6A8279AF7D400AD2EE3 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 8.0.0;
+			};
+		};
 		C28377C12796F78200151297 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
@@ -874,6 +889,16 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		C23BA6A9279AF7D400AD2EE3 /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C23BA6A8279AF7D400AD2EE3 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		C23BA6AB279AF7D400AD2EE3 /* FirebaseMessaging */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C23BA6A8279AF7D400AD2EE3 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseMessaging;
+		};
 		C28377C22796F78200151297 /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = C28377C12796F78200151297 /* XCRemoteSwiftPackageReference "SnapKit" */;

@@ -25,21 +25,21 @@ class RequestAuthViewController: UIViewController {
             .bind(to: viewModel.input.tapAuthRequestButton)
             .disposed(by: disposeBag)
         
-        mainView.phoneNumberTextField.textField.rx.text.orEmpty
-            .bind(to: viewModel.input.phoneNumberText)
+        mainView.inputTextField.textField.rx.text.orEmpty
+            .bind(to: viewModel.input.textFieldText)
             .disposed(by: disposeBag)
         
-        mainView.phoneNumberTextField.textField.rx.controlEvent(.editingDidBegin)
+        mainView.inputTextField.textField.rx.controlEvent(.editingDidBegin)
             .bind(to: viewModel.input.tapPhoneNumberTextField)
             .disposed(by: disposeBag)
         
-        mainView.phoneNumberTextField.textField.rx.controlEvent(.editingDidEndOnExit)
+        mainView.inputTextField.textField.rx.controlEvent(.editingDidEndOnExit)
             .bind { [weak self] in
                 guard let self = self else { return }
-                guard let text = self.mainView.phoneNumberTextField.textField.text, text.isEmpty else {
+                guard let text = self.mainView.inputTextField.textField.text, text.isEmpty else {
                     return
                 }
-                self.mainView.phoneNumberTextField.textFieldState = .active
+                self.mainView.inputTextField.textFieldState = .active
             }
             .disposed(by: disposeBag)
         
@@ -72,14 +72,23 @@ class RequestAuthViewController: UIViewController {
             .observe(on: MainScheduler.instance)
             .bind(onNext: { [weak self](state) in
                 guard let self = self else { return }
-                self.mainView.phoneNumberTextField.textFieldState = state
+                self.mainView.inputTextField.textFieldState = state
             })
+            .disposed(by: disposeBag)
+        
+        viewModel.output.phoneNumberText
+            .observe(on: MainScheduler.instance)
+            .bind { [weak self](text) in
+                guard let self = self else { return }
+                self.mainView.inputTextField.textField.text = text
+            }
             .disposed(by: disposeBag)
     }
     
     func pushToLoginViewController() {
         print("push")
         let vc = LogInViewController()
+        self.view.makeToast("인증 번호를 보냈습니다.")
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -92,8 +101,7 @@ class RequestAuthViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        mainView.authRequestButton.setTitle("인증 문자 받기", for: .normal)
-        mainView.titleLabel.setTextWithLineHeight(text: "새싹 서비스 이용을 위해\n휴대폰 번호를 입력해주세요", lineHeight: 32, font: .display1_R20)
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
