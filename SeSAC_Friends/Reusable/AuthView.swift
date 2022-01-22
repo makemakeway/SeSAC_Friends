@@ -18,7 +18,7 @@ enum AuthViewState {
 class AuthView: UIView, ViewRepresentable {
     var authViewState: AuthViewState?
     let authRequestButton = H48Button()
-    var inputTextField: InputTextField!
+    var authInputView: InputView!
     
     let titleLabel = UILabel().then {
         $0.textColor = .defaultBlack
@@ -36,25 +36,25 @@ class AuthView: UIView, ViewRepresentable {
         switch state {
         case .request:
             titleLabel.setTextWithLineHeight(text: "새싹 서비스 이용을 위해\n휴대폰 번호를 입력해주세요", lineHeight: 32, font: .display1_R20)
-            inputTextField = InputTextField(color: .gray6, text: "휴대폰 번호(-없이 숫자만 입력)")
-            inputTextField.textField.keyboardType = .numberPad
+            authInputView = InputView(color: .gray6, text: "휴대폰 번호(-없이 숫자만 입력)", type: .defaults)
+            authInputView.textField.keyboardType = .numberPad
             authRequestButton.setTitle("인증 문자 받기", for: .normal)
         case .logIn:
             authRequestButton.buttonState = .disable
             titleLabel.setTextWithLineHeight(text: "인증번호가 문자로 전송되었어요", lineHeight: 32, font: .display1_R20)
-            inputTextField = InputTextField(color: .gray6, text: "인증 번호 입력")
-            inputTextField.textField.keyboardType = .numberPad
+            authInputView = InputView(color: .gray6, text: "인증번호 입력", type: .timer)
+            authInputView.textField.keyboardType = .numberPad
             calloutLabel.text = "(최대 소모 20초)"
             authRequestButton.setTitle("인증하고 시작하기", for: .normal)
         case .error:
-            inputTextField = InputTextField(color: .systemError, text: "에러")
+            authInputView = InputView(color: .systemError, text: "에러", type: .defaults)
         }
     }
     
     func setUp() {
         addSubview(titleLabel)
         addSubview(authRequestButton)
-        addSubview(inputTextField)
+        addSubview(authInputView)
         
         if authViewState != .request {
             addSubview(calloutLabel)
@@ -78,7 +78,7 @@ class AuthView: UIView, ViewRepresentable {
                 make.leading.equalToSuperview().offset(16)
                 make.trailing.equalToSuperview().offset(-16)
             }
-            inputTextField.snp.makeConstraints { make in
+            authInputView.snp.makeConstraints { make in
                 make.leading.equalTo(16)
                 make.trailing.equalTo(-16)
                 make.height.equalTo(22)
@@ -86,12 +86,12 @@ class AuthView: UIView, ViewRepresentable {
             }
             
             authRequestButton.snp.makeConstraints { make in
-                make.top.equalTo(inputTextField.snp.bottom).offset(height * 0.1)
+                make.top.equalTo(authInputView.snp.bottom).offset(height * 0.1)
                 make.leading.equalToSuperview().offset(16)
                 make.trailing.equalToSuperview().offset(-16)
             }
         } else {
-            inputTextField.snp.makeConstraints { make in
+            authInputView.snp.makeConstraints { make in
                 make.leading.equalTo(16)
                 make.trailing.equalTo(-16)
                 make.height.equalTo(22)
@@ -99,12 +99,14 @@ class AuthView: UIView, ViewRepresentable {
             }
             
             authRequestButton.snp.makeConstraints { make in
-                make.top.equalTo(inputTextField.snp.bottom).offset(height * 0.1)
+                make.top.equalTo(authInputView.snp.bottom).offset(height * 0.1)
                 make.leading.equalToSuperview().offset(16)
                 make.trailing.equalToSuperview().offset(-16)
             }
         }
     }
+    
+    
     
     override func draw(_ rect: CGRect) {
         super.draw(rect)

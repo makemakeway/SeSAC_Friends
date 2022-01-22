@@ -1,16 +1,13 @@
 //
-//  AuthViewButton.swift
+//  H40Button.swift
 //  SeSAC_Friends
 //
-//  Created by 박연배 on 2022/01/19.
+//  Created by 박연배 on 2022/01/22.
 //
 
 import UIKit
-import SnapKit
-import RxSwift
-import RxCocoa
 
-class H48Button: UIButton, ViewRepresentable {
+class H40Button: UIButton, ViewRepresentable {
     
     var buttonState: ButtonState = .disable {
         willSet {
@@ -28,14 +25,14 @@ class H48Button: UIButton, ViewRepresentable {
     }
     
     func setUp() {
-        self.layer.cornerRadius = 10
+        self.layer.cornerRadius = 8
         self.clipsToBounds = true
         self.titleLabel?.font = UIFont.body3_R14
     }
     
     func setConstraints() {
         self.snp.makeConstraints { make in
-            make.height.equalTo(48)
+            make.height.equalTo(40)
         }
     }
     

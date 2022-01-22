@@ -25,7 +25,7 @@ class LogInViewController: UIViewController {
             .bind(to: viewModel.input.tapCheckValidationButton)
             .disposed(by: disposeBag)
         
-        mainView.inputTextField.textField.rx.text.orEmpty
+        mainView.authInputView.textField.rx.text.orEmpty
             .bind(to: viewModel.input.validationNumberText)
             .disposed(by: disposeBag)
         
@@ -53,7 +53,7 @@ class LogInViewController: UIViewController {
             .observe(on: MainScheduler.instance)
             .bind(onNext: { [weak self](state) in
                 guard let self = self else { return }
-                self.mainView.inputTextField.textFieldState = state
+                self.mainView.authInputView.textFieldState = state
             })
             .disposed(by: disposeBag)
             
@@ -69,9 +69,5 @@ class LogInViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         bind()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
     }
 }

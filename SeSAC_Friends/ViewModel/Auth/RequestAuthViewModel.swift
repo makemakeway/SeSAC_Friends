@@ -9,6 +9,7 @@ import Foundation
 import RxSwift
 import RxCocoa
 import RxRelay
+import FirebaseAuth
 
 class RequestAuthViewModel: ViewModelType {
     
@@ -61,12 +62,26 @@ class RequestAuthViewModel: ViewModelType {
                 guard let self = self else { return }
                 // MARK: 핸드폰 번호 유효성 검사 && Auth 리퀘스트 여기서 구현하면 됨
                 if self.phoneNumberIsValid(text: text) {
+                    
+//                    self.requestAuthorizaionNumber(phoneNumber: "+82 " + text)
+                    
                     self.output.goToLoginView.accept(())
                 } else {
-                    self.output.errorMessage.accept("올바른 형식의 전화번호를 입력해주세요.")
+                    self.output.errorMessage.accept("잘못된 전화번호 형식입니다.")
                 }
             }
             .disposed(by: disposeBag)
+    }
+    
+    func requestAuthorizaionNumber(phoneNumber: String) {
+        PhoneAuthProvider.provider()
+          .verifyPhoneNumber(phoneNumber, uiDelegate: nil) { verificationID, error in
+              if let error = error {
+                print(error.localizedDescription)
+                return
+              }
+              print(verificationID)
+          }
     }
     
     func textToPhoneNumber(text: String) -> String {
@@ -95,9 +110,10 @@ class RequestAuthViewModel: ViewModelType {
             temp += numberText[...first]
             temp += "-"
             let second = numberText.index(first, offsetBy: 4)
+            let last = numberText.index(second, offsetBy: 4)
             temp += numberText[numberText.index(after: first)...second]
             temp += "-"
-            temp += numberText[numberText.index(after: second)...]
+            temp += numberText[numberText.index(after: second)...last]
             return temp
         }
     }

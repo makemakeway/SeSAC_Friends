@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		C23BA6AA279AF7D400AD2EE3 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = C23BA6A9279AF7D400AD2EE3 /* FirebaseAuth */; };
 		C23BA6AC279AF7D400AD2EE3 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = C23BA6AB279AF7D400AD2EE3 /* FirebaseMessaging */; };
+		C23BA6AE279BCF2300AD2EE3 /* H40Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23BA6AD279BCF2300AD2EE3 /* H40Button.swift */; };
+		C23BA6B5279C42EC00AD2EE3 /* InputViewContentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23BA6B4279C42EC00AD2EE3 /* InputViewContentType.swift */; };
 		C242CDB62796BE7000905287 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C242CDB52796BE7000905287 /* AppDelegate.swift */; };
 		C242CDB82796BE7000905287 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C242CDB72796BE7000905287 /* SceneDelegate.swift */; };
 		C242CDBA2796BE7000905287 /* RequestAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C242CDB92796BE7000905287 /* RequestAuthViewController.swift */; };
@@ -37,7 +39,7 @@
 		C28377E527980E1000151297 /* ButtonState.swift in Sources */ = {isa = PBXBuildFile; fileRef = C28377E427980E1000151297 /* ButtonState.swift */; };
 		C28377E7279825D000151297 /* RequestAuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C28377E6279825D000151297 /* RequestAuthViewModel.swift */; };
 		C28377E9279825EF00151297 /* ViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C28377E8279825EF00151297 /* ViewModelType.swift */; };
-		C28377EC279831F000151297 /* InputTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = C28377EB279831F000151297 /* InputTextField.swift */; };
+		C28377EC279831F000151297 /* InputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C28377EB279831F000151297 /* InputView.swift */; };
 		C28377EE2798674A00151297 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C28377ED2798674A00151297 /* GoogleService-Info.plist */; };
 		C28377F027987D0A00151297 /* TextFieldState.swift in Sources */ = {isa = PBXBuildFile; fileRef = C28377EF27987D0A00151297 /* TextFieldState.swift */; };
 		C28377F227988C0500151297 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C28377F127988C0500151297 /* LogInViewController.swift */; };
@@ -62,6 +64,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		C23BA6AD279BCF2300AD2EE3 /* H40Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = H40Button.swift; sourceTree = "<group>"; };
+		C23BA6B4279C42EC00AD2EE3 /* InputViewContentType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputViewContentType.swift; sourceTree = "<group>"; };
 		C242CDB22796BE7000905287 /* SeSAC_Friends.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SeSAC_Friends.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C242CDB52796BE7000905287 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C242CDB72796BE7000905287 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -87,7 +91,7 @@
 		C28377E427980E1000151297 /* ButtonState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonState.swift; sourceTree = "<group>"; };
 		C28377E6279825D000151297 /* RequestAuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestAuthViewModel.swift; sourceTree = "<group>"; };
 		C28377E8279825EF00151297 /* ViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelType.swift; sourceTree = "<group>"; };
-		C28377EB279831F000151297 /* InputTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputTextField.swift; sourceTree = "<group>"; };
+		C28377EB279831F000151297 /* InputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputView.swift; sourceTree = "<group>"; };
 		C28377ED2798674A00151297 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C28377EF27987D0A00151297 /* TextFieldState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldState.swift; sourceTree = "<group>"; };
 		C28377F127988C0500151297 /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
@@ -260,7 +264,8 @@
 			children = (
 				C28377C827971E5800151297 /* AuthView.swift */,
 				C28377E12797FE3F00151297 /* H48Button.swift */,
-				C28377EB279831F000151297 /* InputTextField.swift */,
+				C23BA6AD279BCF2300AD2EE3 /* H40Button.swift */,
+				C28377EB279831F000151297 /* InputView.swift */,
 			);
 			path = Reusable;
 			sourceTree = "<group>";
@@ -279,6 +284,7 @@
 			children = (
 				C28377E427980E1000151297 /* ButtonState.swift */,
 				C28377EF27987D0A00151297 /* TextFieldState.swift */,
+				C23BA6B4279C42EC00AD2EE3 /* InputViewContentType.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -477,12 +483,14 @@
 				C242CDB62796BE7000905287 /* AppDelegate.swift in Sources */,
 				C242CDB82796BE7000905287 /* SceneDelegate.swift in Sources */,
 				C28377F027987D0A00151297 /* TextFieldState.swift in Sources */,
+				C23BA6B5279C42EC00AD2EE3 /* InputViewContentType.swift in Sources */,
 				C28377DE279728E700151297 /* UIButton+Extension.swift in Sources */,
-				C28377EC279831F000151297 /* InputTextField.swift in Sources */,
+				C28377EC279831F000151297 /* InputView.swift in Sources */,
 				C28377C627971D0300151297 /* OnBoardingViewController.swift in Sources */,
 				C28377BF2796F1C900151297 /* UIFont+Extension.swift in Sources */,
 				C28377E7279825D000151297 /* RequestAuthViewModel.swift in Sources */,
 				C28377AF2796E36100151297 /* UIColor+Extension.swift in Sources */,
+				C23BA6AE279BCF2300AD2EE3 /* H40Button.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

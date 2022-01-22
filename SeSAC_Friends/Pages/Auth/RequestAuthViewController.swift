@@ -25,21 +25,21 @@ class RequestAuthViewController: UIViewController {
             .bind(to: viewModel.input.tapAuthRequestButton)
             .disposed(by: disposeBag)
         
-        mainView.inputTextField.textField.rx.text.orEmpty
+        mainView.authInputView.textField.rx.text.orEmpty
             .bind(to: viewModel.input.textFieldText)
             .disposed(by: disposeBag)
         
-        mainView.inputTextField.textField.rx.controlEvent(.editingDidBegin)
+        mainView.authInputView.textField.rx.controlEvent(.editingDidBegin)
             .bind(to: viewModel.input.tapPhoneNumberTextField)
             .disposed(by: disposeBag)
         
-        mainView.inputTextField.textField.rx.controlEvent(.editingDidEndOnExit)
+        mainView.authInputView.textField.rx.controlEvent(.editingDidEndOnExit)
             .bind { [weak self] in
                 guard let self = self else { return }
-                guard let text = self.mainView.inputTextField.textField.text, text.isEmpty else {
+                guard let text = self.mainView.authInputView.textField.text, text.isEmpty else {
                     return
                 }
-                self.mainView.inputTextField.textFieldState = .active
+                self.mainView.authInputView.textFieldState = .active
             }
             .disposed(by: disposeBag)
         
@@ -72,7 +72,7 @@ class RequestAuthViewController: UIViewController {
             .observe(on: MainScheduler.instance)
             .bind(onNext: { [weak self](state) in
                 guard let self = self else { return }
-                self.mainView.inputTextField.textFieldState = state
+                self.mainView.authInputView.textFieldState = state
             })
             .disposed(by: disposeBag)
         
@@ -80,7 +80,7 @@ class RequestAuthViewController: UIViewController {
             .observe(on: MainScheduler.instance)
             .bind { [weak self](text) in
                 guard let self = self else { return }
-                self.mainView.inputTextField.textField.text = text
+                self.mainView.authInputView.textField.text = text
             }
             .disposed(by: disposeBag)
     }

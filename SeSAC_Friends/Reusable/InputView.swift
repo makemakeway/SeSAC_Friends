@@ -8,9 +8,8 @@
 import UIKit
 import SnapKit
 import Then
-import SwiftUI
 
-class InputTextField: UIView, ViewRepresentable {
+class InputView: UIView, ViewRepresentable {
     
     var textFieldState: TextFieldState = .inActive {
         willSet {
@@ -29,13 +28,27 @@ class InputTextField: UIView, ViewRepresentable {
         }
     }
     
-    var placeHolderText: String = ""
+    var inputViewType: InputViewContentType?
     
     let containerView = UIView()
     let leadingPadding = UIView()
     let textField = UITextField()
     let bottomLine = CALayer()
     
+    
+    //MARK: For Case = .timer
+    let timerLabel = UILabel().then {
+        $0.font = UIFont.title3_M14
+        $0.textColor = .brandGreen
+        $0.text = "05:00"
+    }
+    
+    let confirmButton = H40Button().then {
+        $0.buttonState = .fill
+        $0.setTitle("재전송", for: .normal)
+    }
+    
+    //MARK: Methods
     func makeBorder(layer: CALayer, view: UIView, color: UIColor) {
         layer.frame = CGRect(x: 0, y: view.frame.height + 12, width: view.frame.width, height: 1)
         layer.backgroundColor = color.cgColor
@@ -55,13 +68,7 @@ class InputTextField: UIView, ViewRepresentable {
         textField.font = UIFont.title4_R14
     }
     
-    func setUp() {
-        self.addSubview(containerView)
-        containerView.addSubview(leadingPadding)
-        containerView.addSubview(textField)
-    }
-    
-    func setConstraints() {
+    func defaultsConstraints() {
         containerView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
@@ -75,18 +82,67 @@ class InputTextField: UIView, ViewRepresentable {
             make.leading.equalTo(leadingPadding.snp.trailing)
             make.trailing.equalToSuperview()
         }
-        
     }
     
-    convenience init(color: UIColor, text: String?) {
+    func timerConstraints() {
+        containerView.snp.makeConstraints { make in
+            make.top.leading.bottom.equalToSuperview()
+        }
+        
+        confirmButton.snp.makeConstraints { make in
+            make.leading.equalTo(containerView.snp.trailing).offset(20)
+            make.trailing.equalToSuperview()
+            make.centerY.equalTo(containerView)
+            make.width.equalTo(72)
+        }
+        
+        textField.snp.makeConstraints { make in
+            make.leading.equalTo(leadingPadding.snp.trailing).offset(20)
+            make.trailing.equalTo(timerLabel.snp.leading).offset(-20)
+        }
+        
+        
+        timerLabel.snp.makeConstraints { make in
+            make.trailing.equalToSuperview()
+            make.centerY.equalTo(textField)
+        }
+    }
+    
+    func setUp() {
+        self.addSubview(containerView)
+        containerView.addSubview(leadingPadding)
+        containerView.addSubview(textField)
+        
+        if inputViewType == .timer {
+            containerView.addSubview(timerLabel)
+            addSubview(confirmButton)
+        }
+    }
+    
+    func setConstraints() {
+        switch inputViewType {
+        case .defaults:
+            defaultsConstraints()
+        case .timer:
+            timerConstraints()
+        default:
+            print("error")
+        }
+    }
+    
+    
+    //MARK: init
+    convenience init(color: UIColor, text: String?, type: InputViewContentType) {
         self.init(frame: CGRect.zero)
+        self.inputViewType = type
         textFieldSetUp(color: color, text: text)
+        setUp()
+        setConstraints()
     }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setUp()
-        setConstraints()
+        
     }
     
     required init?(coder: NSCoder) {
