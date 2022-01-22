@@ -8,6 +8,7 @@
 import Foundation
 import RxSwift
 import RxRelay
+import FirebaseAuth
 
 class LoginViewModel: ViewModelType {
     var disposeBag = DisposeBag()
@@ -16,23 +17,50 @@ class LoginViewModel: ViewModelType {
         let validationNumberText = PublishSubject<String>()
         let tapCheckValidationButton = PublishSubject<Void>()
         let tapValidationNumberTextField = PublishSubject<Void>()
+        let timerStart = BehaviorSubject(value: 180)
     }
     
     struct Output {
         let isButtonEnable = BehaviorRelay(value: false)
         let textFieldState: BehaviorRelay<TextFieldState> = BehaviorRelay(value: .inActive)
-        let goToLoginView = PublishRelay<Void>()
+        let textFieldText = BehaviorRelay(value: "")
+        let goToNicknameView = PublishRelay<Void>()
+        let goToHomeView = PublishRelay<Void>()
         let errorMessage = PublishRelay<String>()
+        let timerLabelText = BehaviorRelay(value: "05:00")
     }
     
     var input = Input()
     var output = Output()
     
+    func restrictTextCount(text: String) -> String {
+        var temp = ""
+        
+        if text.count < 6 {
+            return text
+        } else {
+            
+//            let first = text.startIndex
+//            let last = text.index(first, offsetBy: 5)
+//            temp += text[first...last]
+//            return temp
+        }
+    }
+    
     func transForm() {
+        
         input.validationNumberText
             .asObservable()
-            .map { $0.count > 5 }
+            .map { $0.count == 6 }
             .bind(to: output.isButtonEnable)
+            .disposed(by: disposeBag)
+        
+        input.validationNumberText
+            .asObservable()
+            .map { [weak self] in
+                self?.restrictTextCount(text: $0) ?? ""
+            }
+            .bind(to: output.textFieldText)
             .disposed(by: disposeBag)
         
         input.tapCheckValidationButton.withLatestFrom(input.validationNumberText)
@@ -41,6 +69,14 @@ class LoginViewModel: ViewModelType {
                 // MARK: 여기서 인증코드 입력했을 때 코드 작성
                 if text.count == 6 && Int(text) != nil {
                     
+                    
+                    
+                    
+                    
+                    // 번호로 가입되어 있다면
+                    
+                    // 가입되어 있지 않다면
+//                    self.output.goToNicknameView.accept(())
                 } else {
                     self.output.errorMessage.accept("올바른 형식의 인증번호를 입력해주세요.")
                 }
@@ -53,6 +89,19 @@ class LoginViewModel: ViewModelType {
                 self.output.textFieldState.accept(.focus)
             }
             .disposed(by: disposeBag)
+    }
+    
+    func verificationUser(verificaitonCode: String) {
+        guard let verificationID = UserDefaults.standard.string(forKey: "verificationID") else { return }
+        
+        let credential = PhoneAuthProvider.provider().credential(
+          withVerificationID: verificationID,
+          verificationCode: verificaitonCode
+        )
+        
+        Auth.auth().signIn(with: credential) { result, error in
+            
+        }
     }
     
     init() {

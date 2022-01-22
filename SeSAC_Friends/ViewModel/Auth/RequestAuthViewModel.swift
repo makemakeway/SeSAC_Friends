@@ -80,7 +80,9 @@ class RequestAuthViewModel: ViewModelType {
                 print(error.localizedDescription)
                 return
               }
-              print(verificationID)
+              if let verificationID = verificationID {
+                  UserDefaults.standard.set(verificationID, forKey: "verificationID")
+              }
           }
     }
     

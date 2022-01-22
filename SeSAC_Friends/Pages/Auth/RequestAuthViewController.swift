@@ -30,6 +30,7 @@ class RequestAuthViewController: UIViewController {
             .disposed(by: disposeBag)
         
         mainView.authInputView.textField.rx.controlEvent(.editingDidBegin)
+            .observe(on: ConcurrentMainScheduler.instance)
             .bind(to: viewModel.input.tapPhoneNumberTextField)
             .disposed(by: disposeBag)
         

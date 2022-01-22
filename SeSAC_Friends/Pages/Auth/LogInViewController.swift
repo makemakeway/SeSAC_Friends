@@ -25,10 +25,21 @@ class LogInViewController: UIViewController {
             .bind(to: viewModel.input.tapCheckValidationButton)
             .disposed(by: disposeBag)
         
+        mainView.authInputView.textField.rx.controlEvent(.editingDidBegin)
+            .bind(to: viewModel.input.tapValidationNumberTextField)
+            .disposed(by: disposeBag)
+        
         mainView.authInputView.textField.rx.text.orEmpty
             .bind(to: viewModel.input.validationNumberText)
             .disposed(by: disposeBag)
         
+        viewModel.output.textFieldText
+            .bind(onNext: { [weak self](text) in
+                guard let self = self else { return }
+                self.mainView.authInputView.textField.text = text
+            })
+            .disposed(by: disposeBag)
+    
         viewModel.output.isButtonEnable
             .observe(on: MainScheduler.instance)
             .bind(onNext: { [weak self](bool) in
@@ -57,6 +68,17 @@ class LogInViewController: UIViewController {
             })
             .disposed(by: disposeBag)
             
+        viewModel.output.goToNicknameView
+            .observe(on: MainScheduler.instance)
+            .bind { [weak self] in
+                guard let self = self else { return }
+                let vc = NickNameViewController()
+                print("push Nickname")
+                self.navigationController?.pushViewController(vc, animated: true)
+            }
+            .disposed(by: disposeBag)
+        
+
     }
     
     

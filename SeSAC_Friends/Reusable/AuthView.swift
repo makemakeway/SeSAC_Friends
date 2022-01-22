@@ -13,6 +13,8 @@ enum AuthViewState {
     case request
     case logIn
     case error
+    case nickName
+    case birthDay
 }
 
 class AuthView: UIView, ViewRepresentable {
@@ -48,6 +50,16 @@ class AuthView: UIView, ViewRepresentable {
             authRequestButton.setTitle("인증하고 시작하기", for: .normal)
         case .error:
             authInputView = InputView(color: .systemError, text: "에러", type: .defaults)
+        case .nickName:
+            titleLabel.setTextWithLineHeight(text: "닉네임을 입력해주세요", lineHeight: 32, font: .display1_R20)
+            authInputView = InputView(color: .gray6, text: "10자 이내로 입력", type: .defaults)
+            authRequestButton.setTitle("다음", for: .normal)
+            authRequestButton.buttonState = .disable
+        case .birthDay:
+            titleLabel.setTextWithLineHeight(text: "생년월일을 알려주세요", lineHeight: 32, font: .display1_R20)
+            authInputView = InputView(color: .gray6, text: "10자 이내로 입력", type: .defaults)
+            authRequestButton.setTitle("다음", for: .normal)
+            authRequestButton.buttonState = .disable
         }
     }
     

@@ -13,6 +13,7 @@ class InputView: UIView, ViewRepresentable {
     
     var textFieldState: TextFieldState = .inActive {
         willSet {
+            print(newValue)
             switch newValue {
             case .inActive, .active:
                 changeBorder(layer: bottomLine, color: .gray3)
@@ -50,7 +51,7 @@ class InputView: UIView, ViewRepresentable {
     
     //MARK: Methods
     func makeBorder(layer: CALayer, view: UIView, color: UIColor) {
-        layer.frame = CGRect(x: 0, y: view.frame.height + 12, width: view.frame.width, height: 1)
+        layer.frame = CGRect(x: 0, y: view.frame.height + 12, width: view.frame.width + 12, height: 1)
         layer.backgroundColor = color.cgColor
         view.layer.addSublayer(layer)
     }
@@ -70,7 +71,8 @@ class InputView: UIView, ViewRepresentable {
     
     func defaultsConstraints() {
         containerView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
+            make.top.leading.bottom.equalToSuperview()
+            make.trailing.equalToSuperview().offset(-12)
         }
         
         leadingPadding.snp.makeConstraints { make in
@@ -97,10 +99,11 @@ class InputView: UIView, ViewRepresentable {
         }
         
         textField.snp.makeConstraints { make in
-            make.leading.equalTo(leadingPadding.snp.trailing).offset(20)
-            make.trailing.equalTo(timerLabel.snp.leading).offset(-20)
+            make.leading.equalToSuperview().offset(12)
+            make.trailing.equalTo(timerLabel.snp.leading)
+            make.top.equalToSuperview()
+            make.bottom.equalToSuperview()
         }
-        
         
         timerLabel.snp.makeConstraints { make in
             make.trailing.equalToSuperview()
