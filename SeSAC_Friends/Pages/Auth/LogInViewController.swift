@@ -34,47 +34,47 @@ class LogInViewController: UIViewController {
             .disposed(by: disposeBag)
         
         viewModel.output.textFieldText
-            .bind(onNext: { [weak self](text) in
-                guard let self = self else { return }
-                self.mainView.authInputView.textField.text = text
+            .withUnretained(self)
+            .bind(onNext: { owner, text in
+                owner.mainView.authInputView.textField.text = text
             })
             .disposed(by: disposeBag)
     
         viewModel.output.isButtonEnable
             .observe(on: MainScheduler.instance)
-            .bind(onNext: { [weak self](bool) in
-                guard let self = self else { return }
+            .withUnretained(self)
+            .bind(onNext: { owner, bool in
                 if bool {
-                    self.mainView.authRequestButton.buttonState = .fill
+                    owner.mainView.authRequestButton.buttonState = .fill
                 } else {
-                    self.mainView.authRequestButton.buttonState = .disable
+                    owner.mainView.authRequestButton.buttonState = .disable
                 }
             })
             .disposed(by: disposeBag)
         
         viewModel.output.errorMessage
             .observe(on: MainScheduler.instance)
-            .bind { [weak self](string) in
-                guard let self = self else { return }
-                self.view.makeToast(string)
+            .withUnretained(self)
+            .bind { owner, errorText in
+                owner.view.makeToast(errorText)
             }
             .disposed(by: disposeBag)
         
         viewModel.output.textFieldState
             .observe(on: MainScheduler.instance)
-            .bind(onNext: { [weak self](state) in
-                guard let self = self else { return }
-                self.mainView.authInputView.textFieldState = state
+            .withUnretained(self)
+            .bind(onNext: { owner, state in
+                owner.mainView.authInputView.textFieldState = state
             })
             .disposed(by: disposeBag)
             
         viewModel.output.goToNicknameView
             .observe(on: MainScheduler.instance)
-            .bind { [weak self] in
-                guard let self = self else { return }
+            .withUnretained(self)
+            .bind { owner, _ in
                 let vc = NickNameViewController()
                 print("push Nickname")
-                self.navigationController?.pushViewController(vc, animated: true)
+                owner.navigationController?.pushViewController(vc, animated: true)
             }
             .disposed(by: disposeBag)
         

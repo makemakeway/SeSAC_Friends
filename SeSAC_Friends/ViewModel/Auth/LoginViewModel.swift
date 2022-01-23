@@ -50,42 +50,39 @@ class LoginViewModel: ViewModelType {
     func transForm() {
         
         input.validationNumberText
-            .asObservable()
             .map { $0.count >= 6 }
             .bind(to: output.isButtonEnable)
             .disposed(by: disposeBag)
         
         input.validationNumberText
-            .asObservable()
-            .map { [weak self] in
-                self?.restrictTextCount(text: $0) ?? ""
+            .withUnretained(self)
+            .map { owner, text in
+                owner.restrictTextCount(text: text)
             }
             .bind(to: output.textFieldText)
             .disposed(by: disposeBag)
         
         input.tapCheckValidationButton.withLatestFrom(output.textFieldText)
-            .bind { [weak self](text) in
-                guard let self = self else { return }
+            .withUnretained(self)
+            .bind(onNext: { (owner, text) in
                 // MARK: 여기서 인증코드 입력했을 때 코드 작성
-                print(text)
-                
                 if text.count == 6 && Int(text) != nil {
                     
                     
                     // 번호로 가입되어 있다면
                     
                     // 가입되어 있지 않다면
-                    self.output.goToNicknameView.accept(())
+                    owner.output.goToNicknameView.accept(())
                 } else {
-                    self.output.errorMessage.accept("올바른 형식의 인증번호를 입력해주세요.")
+                    owner.output.errorMessage.accept("올바른 형식의 인증번호를 입력해주세요.")
                 }
-            }
+            })
             .disposed(by: disposeBag)
         
         input.tapValidationNumberTextField
-            .bind { [weak self] in
-                guard let self = self else { return }
-                self.output.textFieldState.accept(.focus)
+            .withUnretained(self)
+            .bind { (owner, _) in
+                owner.output.textFieldState.accept(.focus)
             }
             .disposed(by: disposeBag)
     }
