@@ -40,10 +40,10 @@ class LoginViewModel: ViewModelType {
             return text
         } else {
             
-//            let first = text.startIndex
-//            let last = text.index(first, offsetBy: 5)
-//            temp += text[first...last]
-//            return temp
+            let first = text.startIndex
+            let last = text.index(first, offsetBy: 5)
+            temp += text[first...last]
+            return temp
         }
     }
     
@@ -51,7 +51,7 @@ class LoginViewModel: ViewModelType {
         
         input.validationNumberText
             .asObservable()
-            .map { $0.count == 6 }
+            .map { $0.count >= 6 }
             .bind(to: output.isButtonEnable)
             .disposed(by: disposeBag)
         
@@ -63,20 +63,19 @@ class LoginViewModel: ViewModelType {
             .bind(to: output.textFieldText)
             .disposed(by: disposeBag)
         
-        input.tapCheckValidationButton.withLatestFrom(input.validationNumberText)
+        input.tapCheckValidationButton.withLatestFrom(output.textFieldText)
             .bind { [weak self](text) in
                 guard let self = self else { return }
                 // MARK: 여기서 인증코드 입력했을 때 코드 작성
+                print(text)
+                
                 if text.count == 6 && Int(text) != nil {
-                    
-                    
-                    
                     
                     
                     // 번호로 가입되어 있다면
                     
                     // 가입되어 있지 않다면
-//                    self.output.goToNicknameView.accept(())
+                    self.output.goToNicknameView.accept(())
                 } else {
                     self.output.errorMessage.accept("올바른 형식의 인증번호를 입력해주세요.")
                 }

@@ -57,7 +57,7 @@ class RequestAuthViewModel: ViewModelType {
             .bind(to: output.phoneNumberText)
             .disposed(by: disposeBag)
         
-        input.tapAuthRequestButton.withLatestFrom(input.textFieldText)
+        input.tapAuthRequestButton.withLatestFrom(output.phoneNumberText)
             .bind { [weak self](text) in
                 guard let self = self else { return }
                 // MARK: 핸드폰 번호 유효성 검사 && Auth 리퀘스트 여기서 구현하면 됨
