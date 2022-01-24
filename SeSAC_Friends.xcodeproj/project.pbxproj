@@ -13,6 +13,9 @@
 		C23BA6B5279C42EC00AD2EE3 /* InputViewContentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23BA6B4279C42EC00AD2EE3 /* InputViewContentType.swift */; };
 		C23BA6B7279C554900AD2EE3 /* NickNameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23BA6B6279C554900AD2EE3 /* NickNameViewController.swift */; };
 		C23BA6B9279C5AF100AD2EE3 /* BirthDayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23BA6B8279C5AF100AD2EE3 /* BirthDayViewController.swift */; };
+		C23BA6BD279D6CC200AD2EE3 /* UserDefaults+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23BA6BC279D6CC200AD2EE3 /* UserDefaults+Extension.swift */; };
+		C23BA6BF279D7C9C00AD2EE3 /* UserDefaultsWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23BA6BE279D7C9C00AD2EE3 /* UserDefaultsWrapper.swift */; };
+		C23BA6C2279D9C5400AD2EE3 /* FirebaseAuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23BA6C1279D9C5400AD2EE3 /* FirebaseAuthService.swift */; };
 		C242CDB62796BE7000905287 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C242CDB52796BE7000905287 /* AppDelegate.swift */; };
 		C242CDB82796BE7000905287 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C242CDB72796BE7000905287 /* SceneDelegate.swift */; };
 		C242CDBA2796BE7000905287 /* RequestAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C242CDB92796BE7000905287 /* RequestAuthViewController.swift */; };
@@ -70,6 +73,9 @@
 		C23BA6B4279C42EC00AD2EE3 /* InputViewContentType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputViewContentType.swift; sourceTree = "<group>"; };
 		C23BA6B6279C554900AD2EE3 /* NickNameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NickNameViewController.swift; sourceTree = "<group>"; };
 		C23BA6B8279C5AF100AD2EE3 /* BirthDayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirthDayViewController.swift; sourceTree = "<group>"; };
+		C23BA6BC279D6CC200AD2EE3 /* UserDefaults+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Extension.swift"; sourceTree = "<group>"; };
+		C23BA6BE279D7C9C00AD2EE3 /* UserDefaultsWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsWrapper.swift; sourceTree = "<group>"; };
+		C23BA6C1279D9C5400AD2EE3 /* FirebaseAuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAuthService.swift; sourceTree = "<group>"; };
 		C242CDB22796BE7000905287 /* SeSAC_Friends.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SeSAC_Friends.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C242CDB52796BE7000905287 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C242CDB72796BE7000905287 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -136,6 +142,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C23BA6C0279D9C3600AD2EE3 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				C23BA6C1279D9C5400AD2EE3 /* FirebaseAuthService.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
 		C242CDA92796BE7000905287 = {
 			isa = PBXGroup;
 			children = (
@@ -159,6 +173,7 @@
 		C242CDB42796BE7000905287 /* SeSAC_Friends */ = {
 			isa = PBXGroup;
 			children = (
+				C23BA6C0279D9C3600AD2EE3 /* Service */,
 				C28377E327980E0000151297 /* Util */,
 				C28377CA27971E5C00151297 /* Protocol */,
 				C28377C727971E3800151297 /* Reusable */,
@@ -233,6 +248,7 @@
 				C28377BE2796F1C900151297 /* UIFont+Extension.swift */,
 				C28377DD279728E700151297 /* UIButton+Extension.swift */,
 				C28377DF2797F1D400151297 /* UILabel+Extension.swift */,
+				C23BA6BC279D6CC200AD2EE3 /* UserDefaults+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -291,6 +307,7 @@
 				C28377E427980E1000151297 /* ButtonState.swift */,
 				C28377EF27987D0A00151297 /* TextFieldState.swift */,
 				C23BA6B4279C42EC00AD2EE3 /* InputViewContentType.swift */,
+				C23BA6BE279D7C9C00AD2EE3 /* UserDefaultsWrapper.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -481,6 +498,7 @@
 				C28377CC27971E7300151297 /* ViewRepresentable.swift in Sources */,
 				C28377E22797FE3F00151297 /* H48Button.swift in Sources */,
 				C28377E02797F1D400151297 /* UILabel+Extension.swift in Sources */,
+				C23BA6BF279D7C9C00AD2EE3 /* UserDefaultsWrapper.swift in Sources */,
 				C28377F227988C0500151297 /* LogInViewController.swift in Sources */,
 				C242CDBA2796BE7000905287 /* RequestAuthViewController.swift in Sources */,
 				C28377E527980E1000151297 /* ButtonState.swift in Sources */,
@@ -492,9 +510,11 @@
 				C28377F027987D0A00151297 /* TextFieldState.swift in Sources */,
 				C23BA6B5279C42EC00AD2EE3 /* InputViewContentType.swift in Sources */,
 				C28377DE279728E700151297 /* UIButton+Extension.swift in Sources */,
+				C23BA6BD279D6CC200AD2EE3 /* UserDefaults+Extension.swift in Sources */,
 				C28377EC279831F000151297 /* InputView.swift in Sources */,
 				C28377C627971D0300151297 /* OnBoardingViewController.swift in Sources */,
 				C23BA6B9279C5AF100AD2EE3 /* BirthDayViewController.swift in Sources */,
+				C23BA6C2279D9C5400AD2EE3 /* FirebaseAuthService.swift in Sources */,
 				C28377BF2796F1C900151297 /* UIFont+Extension.swift in Sources */,
 				C28377E7279825D000151297 /* RequestAuthViewModel.swift in Sources */,
 				C28377AF2796E36100151297 /* UIColor+Extension.swift in Sources */,

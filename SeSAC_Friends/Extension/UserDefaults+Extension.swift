@@ -6,3 +6,15 @@
 //
 
 import Foundation
+
+extension UserDefaults {
+    
+    public enum Keys {
+        static let validationToken = "validationToken"
+        static let userBirthday = "userBirthday"
+        static let userNickname = "userNickname"
+        static let userGender = "userGender"
+    }
+    
+    
+}

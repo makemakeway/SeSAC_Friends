@@ -41,10 +41,10 @@ class InputView: UIView, ViewRepresentable {
     let timerLabel = UILabel().then {
         $0.font = UIFont.title3_M14
         $0.textColor = .brandGreen
-        $0.text = "05:00"
+        $0.text = "01:00"
     }
     
-    let confirmButton = H40Button().then {
+    let reRequestButton = H40Button().then {
         $0.buttonState = .fill
         $0.setTitle("재전송", for: .normal)
     }
@@ -91,7 +91,7 @@ class InputView: UIView, ViewRepresentable {
             make.top.leading.bottom.equalToSuperview()
         }
         
-        confirmButton.snp.makeConstraints { make in
+        reRequestButton.snp.makeConstraints { make in
             make.leading.equalTo(containerView.snp.trailing).offset(20)
             make.trailing.equalToSuperview()
             make.centerY.equalTo(containerView)
@@ -118,7 +118,7 @@ class InputView: UIView, ViewRepresentable {
         
         if inputViewType == .timer {
             containerView.addSubview(timerLabel)
-            addSubview(confirmButton)
+            addSubview(reRequestButton)
         }
     }
     

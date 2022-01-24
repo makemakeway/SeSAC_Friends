@@ -8,6 +8,7 @@
 import UIKit
 import RxCocoa
 import RxSwift
+import Toast
 
 class LogInViewController: UIViewController {
     //MARK: Properties
@@ -33,6 +34,11 @@ class LogInViewController: UIViewController {
             .bind(to: viewModel.input.validationNumberText)
             .disposed(by: disposeBag)
         
+        mainView.authInputView.reRequestButton.rx.tap
+            .asDriver()
+            .drive(viewModel.input.tapReRequestButton, viewModel.input.timerStart)
+            .disposed(by: disposeBag)
+        
         viewModel.output.textFieldText
             .withUnretained(self)
             .bind(onNext: { owner, text in
@@ -41,24 +47,23 @@ class LogInViewController: UIViewController {
             .disposed(by: disposeBag)
     
         viewModel.output.isButtonEnable
-            .observe(on: MainScheduler.instance)
-            .withUnretained(self)
-            .bind(onNext: { owner, bool in
+            .asDriver(onErrorJustReturn: false)
+            .drive(with: self) { owner, bool in
                 if bool {
                     owner.mainView.authRequestButton.buttonState = .fill
                 } else {
                     owner.mainView.authRequestButton.buttonState = .disable
                 }
-            })
+            }
             .disposed(by: disposeBag)
         
         viewModel.output.errorMessage
-            .observe(on: MainScheduler.instance)
-            .withUnretained(self)
-            .bind { owner, errorText in
+            .asDriver(onErrorJustReturn: "")
+            .drive(with: self) { owner, errorText in
                 owner.view.makeToast(errorText)
             }
             .disposed(by: disposeBag)
+
         
         viewModel.output.textFieldState
             .observe(on: MainScheduler.instance)
@@ -78,6 +83,13 @@ class LogInViewController: UIViewController {
             }
             .disposed(by: disposeBag)
         
+        viewModel.output.timerLabelText
+            .asDriver()
+            .drive(with: self) { owner, text in
+                owner.mainView.authInputView.timerLabel.text = text
+            }
+            .disposed(by: disposeBag)
+
 
     }
     
@@ -91,5 +103,21 @@ class LogInViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         bind()
+        self.view.makeToast("인증 번호를 보냈습니다.")
+        
+        viewModel.input.timerStart.onNext(())
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        disposeBag = DisposeBag()
+    }
+    
+    deinit {
+        print("===LoginView Controller Deinit===")
     }
 }

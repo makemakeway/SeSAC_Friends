@@ -21,35 +21,38 @@ class RequestAuthViewController: UIViewController {
     
     //MARK: Method
     func bind() {
+        
+        let textFieldText = viewModel.output.phoneNumberText
+            .share()
+
         mainView.authRequestButton.rx.tap
-            .bind(to: viewModel.input.tapAuthRequestButton)
+            .asDriver()
+            .drive(viewModel.input.tapAuthRequestButton)
             .disposed(by: disposeBag)
-        
+
         mainView.authInputView.textField.rx.text.orEmpty
-            .bind(to: viewModel.input.textFieldText)
+            .asDriver()
+            .drive(viewModel.input.textFieldText)
             .disposed(by: disposeBag)
-        
-        mainView.authInputView.textField.rx.text.orEmpty
-            .bind { text in
-                print(text)
-            }
-            .disposed(by: disposeBag)
-        
+
         mainView.authInputView.textField.rx.controlEvent(.editingDidBegin)
-            .observe(on: ConcurrentMainScheduler.instance)
-            .bind(to: viewModel.input.tapPhoneNumberTextField)
+            .asDriver()
+            .drive(viewModel.input.tapPhoneNumberTextField)
             .disposed(by: disposeBag)
-        
+
         mainView.authInputView.textField.rx.controlEvent(.editingDidEndOnExit)
-            .withUnretained(self)
-            .bind { (owner, _) in
-                guard let text = owner.mainView.authInputView.textField.text, text.isEmpty else {
-                    return
+            .withLatestFrom(textFieldText)
+            .map { $0.isEmpty }
+            .asDriver(onErrorJustReturn: true)
+            .drive(with: self) { owner, empty in
+                if empty {
+                    owner.mainView.authInputView.textFieldState = .inActive
+                } else {
+                    owner.mainView.authInputView.textFieldState = .active
                 }
-                owner.mainView.authInputView.textFieldState = .active
             }
             .disposed(by: disposeBag)
-        
+
         viewModel.output.isButtonEnable
             .observe(on: MainScheduler.instance)
             .withUnretained(self)
@@ -61,41 +64,35 @@ class RequestAuthViewController: UIViewController {
                 }
             })
             .disposed(by: disposeBag)
-        
+
         viewModel.output.goToLoginView
-            .observe(on: MainScheduler.instance)
-            .bind(onNext: pushToLoginViewController)
+            .asDriver(onErrorJustReturn: ())
+            .drive(with: self) { owner, _ in
+                owner.pushToLoginViewController()
+            }
             .disposed(by: disposeBag)
-        
+
         viewModel.output.errorMessage
-            .observe(on: MainScheduler.instance)
-            .withUnretained(self)
-            .bind { (owner, errorText) in
+            .asDriver(onErrorJustReturn: "")
+            .drive(with: self) { owner, errorText in
                 owner.view.makeToast(errorText)
             }
             .disposed(by: disposeBag)
-        
+
         viewModel.output.textFieldState
-            .observe(on: MainScheduler.instance)
-            .withUnretained(self)
-            .bind(onNext: { (owner, state) in
-                owner.mainView.authInputView.textFieldState = state
-            })
+            .asDriver(onErrorJustReturn: .inActive)
+            .drive(mainView.authInputView.rx.textFieldState)
             .disposed(by: disposeBag)
-        
-        viewModel.output.phoneNumberText
-            .observe(on: MainScheduler.instance)
-            .withUnretained(self)
-            .bind { (owner, text) in
-                owner.mainView.authInputView.textField.text = text
-            }
+
+        textFieldText
+            .asDriver(onErrorJustReturn: "")
+            .drive(mainView.authInputView.textField.rx.text)
             .disposed(by: disposeBag)
     }
     
     func pushToLoginViewController() {
         print("push")
         let vc = LogInViewController()
-        self.view.makeToast("인증 번호를 보냈습니다.")
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -108,17 +105,20 @@ class RequestAuthViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        bind()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        bind()
+        
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        disposeBag = DisposeBag()
+    }
+    
+    deinit {
+        print("===RequestAuthViewController deinit===")
     }
 }
 

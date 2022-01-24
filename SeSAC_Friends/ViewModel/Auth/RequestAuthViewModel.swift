@@ -40,7 +40,10 @@ class RequestAuthViewModel: ViewModelType {
             }
             .disposed(by: disposeBag)
         
-        input.textFieldText
+        let textFieldText = input.textFieldText
+            .share()
+        
+        textFieldText
             .map {
                 let phoneNumber = $0.replacingOccurrences(of: "-", with: "")
                 return phoneNumber.count > 9
@@ -48,23 +51,32 @@ class RequestAuthViewModel: ViewModelType {
             .bind(to: output.isButtonEnable)
             .disposed(by: disposeBag)
         
-        input.textFieldText
+        textFieldText
             .withUnretained(self)
             .map { (owner, text) in
                 owner.textToPhoneNumber(text: text)
             }
             .bind(to: output.phoneNumberText)
             .disposed(by: disposeBag)
+            
         
         input.tapAuthRequestButton.withLatestFrom(output.phoneNumberText)
             .withUnretained(self)
             .bind { (owner, text) in
                 // MARK: 핸드폰 번호 유효성 검사 && Auth 리퀘스트 여기서 구현하면 됨
                 if owner.phoneNumberIsValid(text: text) {
+                    let phoneNumber = "+82 " + text
+                    UserInfo.phoneNumber = phoneNumber
                     
-//                    owner.requestAuthorizaionNumber(phoneNumber: "+82 " + text)
-                    
-                    owner.output.goToLoginView.accept(())
+                    FirebaseAuthService.shared.requestVerificationCode(phoneNumber: phoneNumber) { result in
+                        switch result {
+                        case .success(_):
+                            owner.output.goToLoginView.accept(())
+                        case .failure(let error):
+                            let errorMessage = FirebaseAuthService.shared.authErrorHandler(error: error)
+                            owner.output.errorMessage.accept(errorMessage)
+                        }
+                    }
                 } else {
                     owner.output.errorMessage.accept("잘못된 전화번호 형식입니다.")
                 }
@@ -72,18 +84,6 @@ class RequestAuthViewModel: ViewModelType {
             .disposed(by: disposeBag)
     }
     
-    func requestAuthorizaionNumber(phoneNumber: String) {
-        PhoneAuthProvider.provider()
-          .verifyPhoneNumber(phoneNumber, uiDelegate: nil) { verificationID, error in
-              if let error = error {
-                print(error.localizedDescription)
-                return
-              }
-              if let verificationID = verificationID {
-                  UserDefaults.standard.set(verificationID, forKey: "verificationID")
-              }
-          }
-    }
     
     func textToPhoneNumber(text: String) -> String {
         var temp = ""
