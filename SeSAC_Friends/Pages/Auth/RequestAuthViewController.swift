@@ -21,7 +21,6 @@ class RequestAuthViewController: UIViewController {
     
     //MARK: Method
     func bind() {
-        
         let textFieldText = viewModel.output.phoneNumberText
             .share()
 
@@ -110,7 +109,10 @@ class RequestAuthViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
     }
     
     override func viewDidDisappear(_ animated: Bool) {

@@ -7,12 +7,14 @@
 
 import Foundation
 import FirebaseAuth
+import RxSwift
 
 
 enum FirebaseAuthError: String, Error {
     case defaults = "에러가 발생했습니다. 잠시 후 다시 시도해주세요"
     case tooManyRequest = "과도한 인증 시도가 있었습니다. 나중에 다시 시도해 주세요."
     case inCorrectVerificationCode = "전화 번호 인증 실패"
+    case idTokenRequestFailed
 }
 
 class FirebaseAuthService {
@@ -22,18 +24,50 @@ class FirebaseAuthService {
         
     }
     
-    func requestVerificationCode(phoneNumber: String, handler: @escaping (Result<String,Error>) -> Void) {
-        PhoneAuthProvider.provider()
-          .verifyPhoneNumber(phoneNumber, uiDelegate: nil) { (verificationID, error) in
-              if let error = error {
-                  handler(.failure(error))
-                  return
+    func userVerificaiton(verificaitonCode: String) -> Single<String> {
+        return Single<String>.create { single in
+            let verificationID = UserInfo.verificationID
+            
+            let credential = PhoneAuthProvider.provider().credential(
+              withVerificationID: verificationID,
+              verificationCode: verificaitonCode
+            )
+            
+            Auth.auth().signIn(with: credential) { (_, error) in
+                if error != nil {
+                    single(.failure(FirebaseAuthError.inCorrectVerificationCode))
+                    return
+                }
+                
+                Auth.auth().currentUser?.getIDTokenForcingRefresh(true) { idToken, error in
+                    if error != nil {
+                        single(.failure(FirebaseAuthError.idTokenRequestFailed))
+                    }
+                    if let idToken = idToken {
+                        single(.success(idToken))
+                    }
+                }
+            }
+            
+            return Disposables.create()
+        }
+    }
+    
+    func requestVerificationCode(phoneNumber: String) -> Single<Void> {
+        return Single<Void>.create { single in
+            PhoneAuthProvider.provider()
+              .verifyPhoneNumber(phoneNumber, uiDelegate: nil) { (verificationID, error) in
+                  if let error = error {
+                      single(.failure(error))
+                      return
+                  }
+                  if let verificationID = verificationID {
+                      UserInfo.verificationID = verificationID
+                      single(.success(()))
+                  }
               }
-              if let verificationID = verificationID {
-                  UserInfo.verificationID = verificationID
-                  handler(.success(verificationID))
-              }
-          }
+            return Disposables.create()
+        }
     }
     
     func authErrorHandler(error: Error) -> String {
@@ -50,24 +84,25 @@ class FirebaseAuthService {
         }
     }
     
-    func verificationUser(verificaitonCode: String, handler: @escaping (Result<AuthDataResult,Error>) -> Void) {
-        let verificationID = UserInfo.verificationID
-        
-        let credential = PhoneAuthProvider.provider().credential(
-          withVerificationID: verificationID,
-          verificationCode: verificaitonCode
-        )
-
-        Auth.auth().signIn(with: credential) { (result, error) in
-            if let error = error {
-                let authError = error as NSError
-                print(authError.code)
-                print(error.localizedDescription)
-                handler(.failure(error))
-            }
-            if let result = result {
-                handler(.success(result))
-            }
-        }
-    }
+//    func verificationUser(verificaitonCode: String) -> Single<AuthDataResult> {
+//
+//        return Single<AuthDataResult>.create { single in
+//            let verificationID = UserInfo.verificationID
+//            
+//            let credential = PhoneAuthProvider.provider().credential(
+//              withVerificationID: verificationID,
+//              verificationCode: verificaitonCode
+//            )
+//
+//            Auth.auth().signIn(with: credential) { (result, error) in
+//                if let error = error {
+//                    single(.failure(error))
+//                }
+//                if let result = result {
+//                    single(.success(result))
+//                }
+//            }
+//            return Disposables.create()
+//        }
+//    }
 }

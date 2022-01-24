@@ -34,15 +34,16 @@ class RequestAuthViewModel: ViewModelType {
     
     func transForm() {
         input.tapPhoneNumberTextField
-            .withUnretained(self)
-            .bind { (owner, _) in
+            .asDriver(onErrorJustReturn: ())
+            .drive(with: self) { owner, _ in
                 owner.output.textFieldState.accept(.focus)
             }
             .disposed(by: disposeBag)
+
         
         let textFieldText = input.textFieldText
             .share()
-        
+
         textFieldText
             .map {
                 let phoneNumber = $0.replacingOccurrences(of: "-", with: "")
@@ -50,7 +51,7 @@ class RequestAuthViewModel: ViewModelType {
             }
             .bind(to: output.isButtonEnable)
             .disposed(by: disposeBag)
-        
+
         textFieldText
             .withUnretained(self)
             .map { (owner, text) in
@@ -58,25 +59,26 @@ class RequestAuthViewModel: ViewModelType {
             }
             .bind(to: output.phoneNumberText)
             .disposed(by: disposeBag)
-            
         
         input.tapAuthRequestButton.withLatestFrom(output.phoneNumberText)
             .withUnretained(self)
             .bind { (owner, text) in
                 // MARK: 핸드폰 번호 유효성 검사 && Auth 리퀘스트 여기서 구현하면 됨
                 if owner.phoneNumberIsValid(text: text) {
-                    let phoneNumber = "+82 " + text
+                    let phoneNumber = "+82" + text
                     UserInfo.phoneNumber = phoneNumber
-                    
-                    FirebaseAuthService.shared.requestVerificationCode(phoneNumber: phoneNumber) { result in
-                        switch result {
-                        case .success(_):
-                            owner.output.goToLoginView.accept(())
-                        case .failure(let error):
+
+                    FirebaseAuthService.shared.requestVerificationCode(phoneNumber: phoneNumber)
+                        .asDriver { error in
                             let errorMessage = FirebaseAuthService.shared.authErrorHandler(error: error)
                             owner.output.errorMessage.accept(errorMessage)
+                            return Driver.just(())
                         }
-                    }
+                        .drive(onNext: { _ in
+                            owner.output.goToLoginView.accept(())
+                        })
+                        .disposed(by: owner.disposeBag)
+                        
                 } else {
                     owner.output.errorMessage.accept("잘못된 전화번호 형식입니다.")
                 }
@@ -131,6 +133,11 @@ class RequestAuthViewModel: ViewModelType {
     }
     
     init() {
+        print("===RequestAuthViewModel Init===")
         transForm()
+    }
+    
+    deinit {
+        print("===RequestAuthViewModel Deinit===")
     }
 }

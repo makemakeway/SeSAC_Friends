@@ -98,15 +98,16 @@ class LoginViewModel: ViewModelType {
         input.tapReRequestButton
             .withUnretained(self)
             .bind(onNext: { (owner, _) in
-                FirebaseAuthService.shared.requestVerificationCode(phoneNumber: UserInfo.phoneNumber) { result in
-                    switch result {
-                    case .success(_):
-                        owner.output.errorMessage.accept("인증번호를 보냈습니다.")
-                    case .failure(let error):
+                FirebaseAuthService.shared.requestVerificationCode(phoneNumber: UserInfo.phoneNumber)
+                    .asDriver { error in
                         let errorMessage = FirebaseAuthService.shared.authErrorHandler(error: error)
                         owner.output.errorMessage.accept(errorMessage)
+                        return Driver.just(())
                     }
-                }
+                    .drive(onNext: { _ in
+                        owner.output.errorMessage.accept("인증번호를 보냈습니다.")
+                    })
+                    .disposed(by: owner.disposeBag)
             })
             .disposed(by: disposeBag)
         
@@ -118,8 +119,19 @@ class LoginViewModel: ViewModelType {
                 if text.count == 6 && Int(text) != nil {
                     // 번호로 가입되어 있다면
                     // 가입되어 있지 않다면
-//                    owner.verificationUser(verificaitonCode: text)
-                    owner.output.goToNicknameView.accept(())
+                    FirebaseAuthService.shared.userVerificaiton(verificaitonCode: text)
+                        .asDriver { error in
+                            let errorMessage = FirebaseAuthService.shared.authErrorHandler(error: error)
+                            owner.output.errorMessage.accept(errorMessage)
+                            return Driver.just("")
+                        }
+                        .drive { idToken in
+                            UserInfo.idToken = idToken
+                            APIService.shared.getUser(idToken: idToken)
+                        }
+                        .disposed(by: owner.disposeBag)
+                    
+//                    owner.output.goToNicknameView.accept(())
                     
                 } else {
                     owner.output.errorMessage.accept("올바른 형식의 인증번호를 입력해주세요.")

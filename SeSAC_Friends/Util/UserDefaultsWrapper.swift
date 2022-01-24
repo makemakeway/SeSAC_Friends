@@ -31,6 +31,7 @@ struct UserDefault<Value> {
 
 class UserInfo {
     @UserDefault(key: "verificationID", defaultValue: "")static var verificationID: String
+    @UserDefault(key: "idToken", defaultValue: "")static var idToken: String
     @UserDefault(key: "nickname", defaultValue: "")static var nickname: String
     @UserDefault(key: "birthday", defaultValue: "")static var birthday: String
     @UserDefault(key: "gender", defaultValue: "")static var gender: String
