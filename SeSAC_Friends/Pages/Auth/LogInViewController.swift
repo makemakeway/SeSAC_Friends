@@ -112,11 +112,6 @@ class LogInViewController: UIViewController {
         super.viewWillAppear(animated)
     }
     
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        disposeBag = DisposeBag()
-    }
-    
     deinit {
         print("===LoginView Controller Deinit===")
     }

@@ -24,23 +24,24 @@ class FirebaseAuthService {
         
     }
     
-    func userVerificaiton(verificaitonCode: String) -> Single<String> {
+    func userVerification(verificationCode: String) -> Single<String> {
         return Single<String>.create { single in
             let verificationID = UserInfo.verificationID
             
             let credential = PhoneAuthProvider.provider().credential(
-              withVerificationID: verificationID,
-              verificationCode: verificaitonCode
+                withVerificationID: verificationID,
+                verificationCode: verificationCode
             )
             
             Auth.auth().signIn(with: credential) { (_, error) in
                 if error != nil {
+                    print("userVerificationError!")
                     single(.failure(FirebaseAuthError.inCorrectVerificationCode))
-                    return
                 }
                 
                 Auth.auth().currentUser?.getIDTokenForcingRefresh(true) { idToken, error in
                     if error != nil {
+                        print("getIDTokenForcingRefreshError!")
                         single(.failure(FirebaseAuthError.idTokenRequestFailed))
                     }
                     if let idToken = idToken {
@@ -54,10 +55,12 @@ class FirebaseAuthService {
     }
     
     func requestVerificationCode(phoneNumber: String) -> Single<Void> {
+        UserInfo.phoneNumber = phoneNumber
         return Single<Void>.create { single in
             PhoneAuthProvider.provider()
               .verifyPhoneNumber(phoneNumber, uiDelegate: nil) { (verificationID, error) in
                   if let error = error {
+                      print("requestVerificationCodeError!")
                       single(.failure(error))
                       return
                   }
@@ -70,39 +73,16 @@ class FirebaseAuthService {
         }
     }
     
-    func authErrorHandler(error: Error) -> String {
-        let authError = error as NSError
-        switch authError.code {
-        case 17010:  // 너무 많은 요청
+    func authErrorHandler(error: FirebaseAuthError) -> String {
+        switch error {
+        case .defaults:
+            return FirebaseAuthError.defaults.rawValue
+        case .tooManyRequest:
             return FirebaseAuthError.tooManyRequest.rawValue
-        case 17044:  // 잘못된 코드 입력
-            return FirebaseAuthError.inCorrectVerificationCode.rawValue
-        case 17051:  // 코드 유효기간 만료
+        case .inCorrectVerificationCode:
             return FirebaseAuthError.inCorrectVerificationCode.rawValue
         default:
-            return FirebaseAuthError.defaults.rawValue
+            return FirebaseAuthError.inCorrectVerificationCode.rawValue
         }
     }
-    
-//    func verificationUser(verificaitonCode: String) -> Single<AuthDataResult> {
-//
-//        return Single<AuthDataResult>.create { single in
-//            let verificationID = UserInfo.verificationID
-//            
-//            let credential = PhoneAuthProvider.provider().credential(
-//              withVerificationID: verificationID,
-//              verificationCode: verificaitonCode
-//            )
-//
-//            Auth.auth().signIn(with: credential) { (result, error) in
-//                if let error = error {
-//                    single(.failure(error))
-//                }
-//                if let result = result {
-//                    single(.success(result))
-//                }
-//            }
-//            return Disposables.create()
-//        }
-//    }
 }

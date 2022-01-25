@@ -18,6 +18,7 @@
 		C23BA6C2279D9C5400AD2EE3 /* FirebaseAuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23BA6C1279D9C5400AD2EE3 /* FirebaseAuthService.swift */; };
 		C23BA6C4279ECF0800AD2EE3 /* EndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23BA6C3279ECF0800AD2EE3 /* EndPoint.swift */; };
 		C23BA6C6279EDB0E00AD2EE3 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23BA6C5279EDB0E00AD2EE3 /* APIService.swift */; };
+		C23BA6C8279FF34600AD2EE3 /* NickNameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23BA6C7279FF34600AD2EE3 /* NickNameViewModel.swift */; };
 		C242CDB62796BE7000905287 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C242CDB52796BE7000905287 /* AppDelegate.swift */; };
 		C242CDB82796BE7000905287 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C242CDB72796BE7000905287 /* SceneDelegate.swift */; };
 		C242CDBA2796BE7000905287 /* RequestAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C242CDB92796BE7000905287 /* RequestAuthViewController.swift */; };
@@ -80,6 +81,7 @@
 		C23BA6C1279D9C5400AD2EE3 /* FirebaseAuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAuthService.swift; sourceTree = "<group>"; };
 		C23BA6C3279ECF0800AD2EE3 /* EndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPoint.swift; sourceTree = "<group>"; };
 		C23BA6C5279EDB0E00AD2EE3 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
+		C23BA6C7279FF34600AD2EE3 /* NickNameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NickNameViewModel.swift; sourceTree = "<group>"; };
 		C242CDB22796BE7000905287 /* SeSAC_Friends.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SeSAC_Friends.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C242CDB52796BE7000905287 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C242CDB72796BE7000905287 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -323,6 +325,7 @@
 			children = (
 				C28377E6279825D000151297 /* RequestAuthViewModel.swift */,
 				C28377F42799A41000151297 /* LoginViewModel.swift */,
+				C23BA6C7279FF34600AD2EE3 /* NickNameViewModel.swift */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -516,6 +519,7 @@
 				C23BA6B7279C554900AD2EE3 /* NickNameViewController.swift in Sources */,
 				C242CDB82796BE7000905287 /* SceneDelegate.swift in Sources */,
 				C28377F027987D0A00151297 /* TextFieldState.swift in Sources */,
+				C23BA6C8279FF34600AD2EE3 /* NickNameViewModel.swift in Sources */,
 				C23BA6B5279C42EC00AD2EE3 /* InputViewContentType.swift in Sources */,
 				C28377DE279728E700151297 /* UIButton+Extension.swift in Sources */,
 				C23BA6BD279D6CC200AD2EE3 /* UserDefaults+Extension.swift in Sources */,

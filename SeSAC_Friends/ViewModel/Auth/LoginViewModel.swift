@@ -16,7 +16,7 @@ class LoginViewModel: ViewModelType {
     
     struct Input {
         let validationNumberText = PublishSubject<String>()
-        let tapCheckValidationButton = PublishSubject<Void>()
+        let tapCheckValidationButton = PublishRelay<Void>()
         let tapValidationNumberTextField = PublishSubject<Void>()
         let tapReRequestButton = PublishSubject<Void>()
         let timerStart = PublishSubject<Void>()
@@ -95,79 +95,62 @@ class LoginViewModel: ViewModelType {
             .bind(to: output.textFieldText)
             .disposed(by: disposeBag)
         
-        input.tapReRequestButton
-            .withUnretained(self)
-            .bind(onNext: { (owner, _) in
-                FirebaseAuthService.shared.requestVerificationCode(phoneNumber: UserInfo.phoneNumber)
-                    .asDriver { error in
-                        let errorMessage = FirebaseAuthService.shared.authErrorHandler(error: error)
-                        owner.output.errorMessage.accept(errorMessage)
-                        return Driver.just(())
-                    }
-                    .drive(onNext: { _ in
-                        owner.output.errorMessage.accept("인증번호를 보냈습니다.")
-                    })
-                    .disposed(by: owner.disposeBag)
-            })
-            .disposed(by: disposeBag)
         
-        input.tapCheckValidationButton
+        input.tapReRequestButton
+            .flatMap { _ in
+                FirebaseAuthService.shared.requestVerificationCode(phoneNumber: UserInfo.phoneNumber)
+                    .catch { [weak self](error) in
+                        guard let error = error as? FirebaseAuthError else { return .just(()) }
+                        let errorMessage = FirebaseAuthService.shared.authErrorHandler(error: error)
+                        self?.output.errorMessage.accept(errorMessage)
+                        return .just(())
+                    }
+            }
+            .bind(with: self) { owner, _ in
+                owner.output.errorMessage.accept("인증번호를 보냈습니다.")
+            }
+            .disposed(by: disposeBag)
+
+        
+        let idToken = input.tapCheckValidationButton
             .withLatestFrom(output.textFieldText)
-            .withUnretained(self)
-            .bind(onNext: { (owner, text) in
-                // MARK: 여기서 인증코드 입력했을 때 코드 작성
-                if text.count == 6 && Int(text) != nil {
-                    // 번호로 가입되어 있다면
-                    // 가입되어 있지 않다면
-                    FirebaseAuthService.shared.userVerificaiton(verificaitonCode: text)
-                        .asDriver { error in
+            .filter { $0.count == 6 && Int($0) != nil }
+            .flatMap {
+                FirebaseAuthService.shared.userVerification(verificationCode: $0)
+                    .catch { [weak self](error) in
+                        if let error = error as? FirebaseAuthError {
                             let errorMessage = FirebaseAuthService.shared.authErrorHandler(error: error)
-                            owner.output.errorMessage.accept(errorMessage)
-                            return Driver.just("")
+                            self?.output.errorMessage.accept(errorMessage)
                         }
-                        .drive { idToken in
-                            UserInfo.idToken = idToken
-                            APIService.shared.getUser(idToken: idToken)
-                        }
-                        .disposed(by: owner.disposeBag)
-                    
-//                    owner.output.goToNicknameView.accept(())
-                    
-                } else {
-                    owner.output.errorMessage.accept("올바른 형식의 인증번호를 입력해주세요.")
+                        return .just("")
+                    }
+            }
+            .asObservable()
+            
+        idToken
+            .filter { !($0.isEmpty) }
+            .flatMap {
+                APIService.shared.getUser(idToken: $0)
+                    .catchAndReturn(0)
+            }
+            .bind(with: self, onNext: { owner, statusCode in
+                switch statusCode {
+                case 200: // 가입 유저일 경우, 홈 화면 이동
+                    owner.output.goToHomeView.accept(())
+                case 201: // 미가입 유저일 경우, 닉네임 화면 이동
+                    owner.output.goToNicknameView.accept(())
+                default:
+                    owner.output.errorMessage.accept("에러가 발생했습니다. 잠시 후 다시 시도해주세요.")
                 }
             })
             .disposed(by: disposeBag)
-        
+
         input.tapValidationNumberTextField
             .withUnretained(self)
             .bind { (owner, _) in
                 owner.output.textFieldState.accept(.focus)
             }
             .disposed(by: disposeBag)
-    }
-    
-    func verificationUser(verificaitonCode: String) {
-        let verificationID = UserInfo.verificationID
-        print(verificationID)
-        
-        let credential = PhoneAuthProvider.provider().credential(
-          withVerificationID: verificationID,
-          verificationCode: verificaitonCode
-        )
-
-        Auth.auth().signIn(with: credential) { [weak self](result, error) in
-            guard let self = self else { return }
-            if let error = error {
-                let authError = error as NSError
-                print(authError.code)
-                print(error.localizedDescription)
-                self.output.errorMessage.accept(error.localizedDescription)
-            }
-            if let result = result {
-                print(result)
-            }
-        }
     }
     
     init() {

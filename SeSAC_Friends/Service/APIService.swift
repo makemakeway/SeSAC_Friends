@@ -9,7 +9,7 @@ import Foundation
 import RxSwift
 import Alamofire
 
-enum APIError: Error {
+enum APIError: String, Error {
     case tokenExpired
     case serverError
     case clientError

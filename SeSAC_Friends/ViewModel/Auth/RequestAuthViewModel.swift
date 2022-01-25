@@ -9,7 +9,6 @@ import Foundation
 import RxSwift
 import RxCocoa
 import RxRelay
-import FirebaseAuth
 
 class RequestAuthViewModel: ViewModelType {
     
@@ -60,30 +59,42 @@ class RequestAuthViewModel: ViewModelType {
             .bind(to: output.phoneNumberText)
             .disposed(by: disposeBag)
         
-        input.tapAuthRequestButton.withLatestFrom(output.phoneNumberText)
-            .withUnretained(self)
-            .bind { (owner, text) in
-                // MARK: 핸드폰 번호 유효성 검사 && Auth 리퀘스트 여기서 구현하면 됨
-                if owner.phoneNumberIsValid(text: text) {
-                    let phoneNumber = "+82" + text
-                    UserInfo.phoneNumber = phoneNumber
-
-                    FirebaseAuthService.shared.requestVerificationCode(phoneNumber: phoneNumber)
-                        .asDriver { error in
-                            let errorMessage = FirebaseAuthService.shared.authErrorHandler(error: error)
-                            owner.output.errorMessage.accept(errorMessage)
-                            return Driver.just(())
-                        }
-                        .drive(onNext: { _ in
-                            owner.output.goToLoginView.accept(())
-                        })
-                        .disposed(by: owner.disposeBag)
-                        
-                } else {
+        let tapRequestButton = input.tapAuthRequestButton
+            .withLatestFrom(output.phoneNumberText)
+            .share()
+        
+        let validPhoneNumber = tapRequestButton
+            .filter { [weak self] in
+                self?.phoneNumberIsValid(text: $0) ?? false
+            }
+            .map { "+82" + $0 }
+            .asObservable()
+        
+        tapRequestButton
+            .bind(with: self) { owner, text in
+                if !(owner.phoneNumberIsValid(text: text)) {
                     owner.output.errorMessage.accept("잘못된 전화번호 형식입니다.")
                 }
             }
             .disposed(by: disposeBag)
+        
+        validPhoneNumber
+            .flatMap {
+                FirebaseAuthService.shared.requestVerificationCode(phoneNumber: $0)
+                    .catch { [weak self](error) in
+                        if let error = error as? FirebaseAuthError {
+                            let errorMessage = FirebaseAuthService.shared.authErrorHandler(error: error)
+                            self?.output.errorMessage.accept(errorMessage)
+                        }
+                        return .just(())
+                    }
+            }
+            .bind(with: self) { owner, _ in
+                owner.output.goToLoginView.accept(())
+            }
+            .disposed(by: disposeBag)
+
+            
     }
     
     
