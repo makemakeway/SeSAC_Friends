@@ -15,6 +15,7 @@ enum APIError: String, Error {
     case clientError
     case invalidNickname
     case unKnowned
+    case disConnect = "네트워크 연결이 원활하지 않습니다. 연결상태 확인 후 다시 시도해 주세요!"
 }
 
 class APIService {
@@ -26,6 +27,9 @@ class APIService {
     
     func getUser(idToken: String) -> Single<Int> {
         return Single<Int>.create { single in
+            if !(Connectivity.isConnectedToInternet) {
+                single(.failure(APIError.disConnect))
+            }
             let url = EndPoint.user.url
             let headers: HTTPHeaders = [
                 "Content-Type": "application/x-www-form-urlencoded",
@@ -53,6 +57,13 @@ class APIService {
                     }
                 }
             return Disposables.create()
+        }
+    }
+    
+    func apiErrorHandler(error: APIError) -> String {
+        switch error {
+        default:
+            return APIError.disConnect.rawValue
         }
     }
 }

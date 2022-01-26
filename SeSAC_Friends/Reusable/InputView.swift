@@ -10,7 +10,6 @@ import SnapKit
 import Then
 
 class InputView: UIView, ViewRepresentable {
-    
     var textFieldState: TextFieldState = .inActive {
         willSet {
             print(newValue)
@@ -49,9 +48,58 @@ class InputView: UIView, ViewRepresentable {
         $0.setTitle("재전송", for: .normal)
     }
     
+    //MARK: For Case = .datePicker
+    let yearLabel = UILabel().then {
+        $0.font = UIFont.title2_R16
+        $0.textColor = UIColor.defaultBlack
+        $0.text = "년"
+        $0.setContentHuggingPriority(.required, for: .horizontal)
+    }
+    
+    let yearTextField = UITextField().then {
+        $0.isUserInteractionEnabled = false
+    }
+    
+    let monthLabel = UILabel().then {
+        $0.font = UIFont.title2_R16
+        $0.textColor = UIColor.defaultBlack
+        $0.text = "월"
+        $0.setContentHuggingPriority(.required, for: .horizontal)
+    }
+    
+    let monthTextField = UITextField().then {
+        $0.isUserInteractionEnabled = false
+    }
+    
+    let dayLabel = UILabel().then {
+        $0.font = UIFont.title2_R16
+        $0.textColor = UIColor.defaultBlack
+        $0.text = "일"
+        $0.setContentHuggingPriority(.required, for: .horizontal)
+    }
+    
+    let dayTextField = UITextField().then {
+        $0.isUserInteractionEnabled = false
+    }
+    
+    let dateStackView = UIStackView().then {
+        $0.axis = .horizontal
+        $0.distribution = .fillEqually
+        $0.alignment = .fill
+        $0.spacing = UIScreen.main.bounds.width * 0.06
+    }
+    
+    
     //MARK: Methods
-    func makeBorder(layer: CALayer, view: UIView, color: UIColor) {
-        layer.frame = CGRect(x: 0, y: view.frame.height + 12, width: view.frame.width + 12, height: 1)
+    func makeBorder(layer: CALayer, view: UIView, color: UIColor, x: Double = 0, y: Double = 12, width: Double = 12) {
+        layer.frame = CGRect(x: x, y: view.frame.height + y, width: view.frame.width + width, height: 1)
+        layer.backgroundColor = color.cgColor
+        view.layer.addSublayer(layer)
+    }
+    
+    func makeBorder(view: UIView, color: UIColor, x: Double = 0, y: Double = 12, width: Double = 12) {
+        let layer = CALayer()
+        layer.frame = CGRect(x: x, y: view.frame.height + y, width: view.frame.width + width, height: 1)
         layer.backgroundColor = color.cgColor
         view.layer.addSublayer(layer)
     }
@@ -60,13 +108,14 @@ class InputView: UIView, ViewRepresentable {
         layer.backgroundColor = color.cgColor
     }
     
-    func textFieldSetUp(color: UIColor, text: String?) {
+    func textFieldSetUp(textField: UITextField, color: UIColor = .gray7, text: String?) {
         guard let text = text else { return }
         let placeholderAttr = NSAttributedString(string: text, attributes: [NSAttributedString.Key.foregroundColor : color,
                                                                  NSAttributedString.Key.font : UIFont.title4_R14])
         
         textField.attributedPlaceholder = placeholderAttr
         textField.font = UIFont.title4_R14
+        textField.textColor = UIColor.defaultBlack
     }
     
     func defaultsConstraints() {
@@ -84,6 +133,66 @@ class InputView: UIView, ViewRepresentable {
             make.leading.equalTo(leadingPadding.snp.trailing)
             make.trailing.equalToSuperview()
         }
+    }
+    
+    func birthConstraints() {
+        containerView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+        
+        dateStackView.snp.makeConstraints { make in
+            make.height.equalToSuperview()
+            make.leading.trailing.equalToSuperview()
+        }
+        
+        let yearView = UIView()
+        let monthView = UIView()
+        let dayView = UIView()
+        
+        yearView.addSubview(yearTextField)
+        yearView.addSubview(yearLabel)
+        monthView.addSubview(monthTextField)
+        monthView.addSubview(monthLabel)
+        dayView.addSubview(dayTextField)
+        dayView.addSubview(dayLabel)
+        
+        dateStackView.addArrangedSubview(yearView)
+        dateStackView.addArrangedSubview(monthView)
+        dateStackView.addArrangedSubview(dayView)
+        
+        yearTextField.snp.makeConstraints { make in
+            make.leading.equalToSuperview().offset(12)
+            make.trailing.equalTo(yearLabel.snp.leading)
+            make.top.equalToSuperview()
+        }
+        
+        yearLabel.snp.makeConstraints { make in
+            make.trailing.equalToSuperview()
+            make.centerY.equalTo(yearTextField)
+        }
+        
+        monthTextField.snp.makeConstraints { make in
+            make.leading.equalToSuperview().offset(12)
+            make.trailing.equalTo(monthLabel.snp.leading)
+            make.top.equalToSuperview()
+        }
+        
+        monthLabel.snp.makeConstraints { make in
+            make.trailing.equalToSuperview()
+            make.centerY.equalTo(yearTextField)
+        }
+        
+        dayTextField.snp.makeConstraints { make in
+            make.leading.equalToSuperview().offset(12)
+            make.trailing.equalTo(dayLabel.snp.leading)
+            make.top.equalToSuperview()
+        }
+        
+        dayLabel.snp.makeConstraints { make in
+            make.trailing.equalToSuperview()
+            make.centerY.equalTo(yearTextField)
+        }
+        
     }
     
     func timerConstraints() {
@@ -113,12 +222,16 @@ class InputView: UIView, ViewRepresentable {
     
     func setUp() {
         self.addSubview(containerView)
-        containerView.addSubview(leadingPadding)
-        containerView.addSubview(textField)
         
-        if inputViewType == .timer {
+        switch inputViewType {
+        case .timer:
             containerView.addSubview(timerLabel)
             addSubview(reRequestButton)
+        case .datePicker:
+            containerView.addSubview(dateStackView)
+        default:
+            containerView.addSubview(leadingPadding)
+            containerView.addSubview(textField)
         }
     }
     
@@ -128,6 +241,8 @@ class InputView: UIView, ViewRepresentable {
             defaultsConstraints()
         case .timer:
             timerConstraints()
+        case .datePicker:
+            birthConstraints()
         default:
             print("error")
         }
@@ -138,7 +253,12 @@ class InputView: UIView, ViewRepresentable {
     convenience init(color: UIColor, text: String?, type: InputViewContentType) {
         self.init(frame: CGRect.zero)
         self.inputViewType = type
-        textFieldSetUp(color: color, text: text)
+        textFieldSetUp(textField: textField, color: color, text: text)
+        if type == .datePicker {
+            textFieldSetUp(textField: yearTextField, text: "1990")
+            textFieldSetUp(textField: monthTextField, text: "1")
+            textFieldSetUp(textField: dayTextField, text: "1")
+        }
         setUp()
         setConstraints()
     }
@@ -154,6 +274,12 @@ class InputView: UIView, ViewRepresentable {
     
     override func draw(_ rect: CGRect) {
         super.draw(rect)
-        makeBorder(layer: bottomLine, view: containerView, color: .systemBackground)
+        if inputViewType == .datePicker {
+            makeBorder(view: yearTextField, color: .gray3, x: -12)
+            makeBorder(view: monthTextField, color: .gray3, x: -12)
+            makeBorder(view: dayTextField, color: .gray3, x: -12)
+        } else {
+            makeBorder(layer: bottomLine, view: containerView, color: .systemBackground)
+        }
     }
 }

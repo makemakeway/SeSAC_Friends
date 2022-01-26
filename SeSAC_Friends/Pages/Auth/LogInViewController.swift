@@ -22,6 +22,9 @@ class LogInViewController: UIViewController {
     
     //MARK: Method
     func bind() {
+        let textFieldText = mainView.authInputView.textField.rx.text.orEmpty
+            .share()
+        
         mainView.authRequestButton.rx.tap
             .bind(to: viewModel.input.tapCheckValidationButton)
             .disposed(by: disposeBag)
@@ -30,7 +33,20 @@ class LogInViewController: UIViewController {
             .bind(to: viewModel.input.tapValidationNumberTextField)
             .disposed(by: disposeBag)
         
-        mainView.authInputView.textField.rx.text.orEmpty
+        mainView.authInputView.textField.rx.controlEvent(.editingDidEndOnExit)
+            .withLatestFrom(textFieldText)
+            .map { $0.isEmpty }
+            .asDriver(onErrorJustReturn: true)
+            .drive(with: self) { owner, empty in
+                if empty {
+                    owner.mainView.authInputView.textFieldState = .inActive
+                } else {
+                    owner.mainView.authInputView.textFieldState = .active
+                }
+            }
+            .disposed(by: disposeBag)
+        
+        textFieldText
             .bind(to: viewModel.input.validationNumberText)
             .disposed(by: disposeBag)
         

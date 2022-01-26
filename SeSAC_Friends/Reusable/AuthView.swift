@@ -15,12 +15,15 @@ enum AuthViewState {
     case error
     case nickName
     case birthDay
+    case email
+    case gender
 }
 
 class AuthView: UIView, ViewRepresentable {
     var authViewState: AuthViewState?
     let authRequestButton = H48Button()
     var authInputView: InputView!
+    let height = UIScreen.main.bounds.height
     
     let titleLabel = UILabel().then {
         $0.textColor = .defaultBlack
@@ -34,32 +37,84 @@ class AuthView: UIView, ViewRepresentable {
         $0.font = .title2_R16
     }
     
+    let datePicker = UIDatePicker().then {
+        $0.datePickerMode = .date
+        $0.preferredDatePickerStyle = .wheels
+        $0.locale = Locale(identifier: "ko-KR")
+        $0.maximumDate = Date()
+        
+        var calendar = Calendar(identifier: .gregorian)
+        calendar.locale = Locale(identifier: Locale.current.identifier)
+        calendar.timeZone = TimeZone(identifier: TimeZone.current.identifier)!
+        var components = DateComponents()
+        components.year = 1990
+        components.month = 1
+        components.day = 1
+        let defaultDate = calendar.date(from: components)
+        $0.date = defaultDate ?? Date()
+    }
+    
+    func makeUI(title: String, placeholder: String, buttonTitle: String, type: InputViewContentType) {
+        titleLabel.setTextWithLineHeight(text: title, lineHeight: 32, font: .display1_R20)
+        authInputView = InputView(color: .gray6, text: placeholder, type: type)
+        authRequestButton.setTitle(buttonTitle, for: .normal)
+        authRequestButton.buttonState = .disable
+    }
+    
+    func makeUI(title: String, placeholder: String, buttonTitle: String, type: InputViewContentType, callout: String) {
+        authRequestButton.buttonState = .disable
+        addSubview(calloutLabel)
+        calloutLabel.text = callout
+        titleLabel.setTextWithLineHeight(text: title, lineHeight: 32, font: .display1_R20)
+        authInputView = InputView(color: .gray6, text: placeholder, type: type)
+        authRequestButton.setTitle(buttonTitle, for: .normal)
+    }
+    
+    func birthUI(title: String, buttonTitle: String) {
+        titleLabel.setTextWithLineHeight(text: title, lineHeight: 32, font: .display1_R20)
+        authInputView = InputView(color: .gray6, text: "1990", type: .datePicker)
+        authRequestButton.setTitle(buttonTitle, for: .normal)
+        authRequestButton.buttonState = .disable
+    }
+    
     func setUI(state: AuthViewState) {
         switch state {
         case .request:
-            titleLabel.setTextWithLineHeight(text: "새싹 서비스 이용을 위해\n휴대폰 번호를 입력해주세요", lineHeight: 32, font: .display1_R20)
-            authInputView = InputView(color: .gray6, text: "휴대폰 번호(-없이 숫자만 입력)", type: .defaults)
+            makeUI(title: "새싹 서비스 이용을 위해\n휴대폰 번호를 입력해주세요",
+                   placeholder: "휴대폰 번호(-없이 숫자만 입력)",
+                   buttonTitle: "인증 문자 받기",
+                   type: .defaults)
             authInputView.textField.keyboardType = .numberPad
-            authRequestButton.setTitle("인증 문자 받기", for: .normal)
         case .logIn:
-            authRequestButton.buttonState = .disable
-            titleLabel.setTextWithLineHeight(text: "인증번호가 문자로 전송되었어요", lineHeight: 32, font: .display1_R20)
-            authInputView = InputView(color: .gray6, text: "인증번호 입력", type: .timer)
+            makeUI(title: "인증번호가 문자로 전송되었어요",
+                   placeholder: "인증번호 입력",
+                   buttonTitle: "인증하고 시작하기",
+                   type: .timer,
+                   callout: "인증번호 입력")
             authInputView.textField.keyboardType = .numberPad
-            calloutLabel.text = "(최대 소모 20초)"
-            authRequestButton.setTitle("인증하고 시작하기", for: .normal)
+        case .nickName:
+            makeUI(title: "닉네임을 입력해주세요",
+                   placeholder: "10자 이내로 입력",
+                   buttonTitle: "다음",
+                   type: .defaults)
+        case .birthDay:
+            addSubview(datePicker)
+            birthUI(title: "생년월일을 알려주세요", buttonTitle: "다음")
+        case .email:
+            makeUI(title: "이메일을 입력해주세요",
+                   placeholder: "SeSAC@email.com",
+                   buttonTitle: "다음",
+                   type: .defaults,
+                   callout: "휴대폰 번호 변경 시 인증을 위해 사용해요")
+        case .gender:
+            authRequestButton.buttonState = .disable
+            titleLabel.setTextWithLineHeight(text: "성별을 선택해주세요", lineHeight: 32, font: .display1_R20)
+            authInputView = InputView(color: .gray6, text: "", type: .timer)
+            addSubview(calloutLabel)
+            calloutLabel.text = "새싹 찾기 기능을 이용하기 위해서 필요해요"
+            authRequestButton.setTitle("다음", for: .normal)
         case .error:
             authInputView = InputView(color: .systemError, text: "에러", type: .defaults)
-        case .nickName:
-            titleLabel.setTextWithLineHeight(text: "닉네임을 입력해주세요", lineHeight: 32, font: .display1_R20)
-            authInputView = InputView(color: .gray6, text: "10자 이내로 입력", type: .defaults)
-            authRequestButton.setTitle("다음", for: .normal)
-            authRequestButton.buttonState = .disable
-        case .birthDay:
-            titleLabel.setTextWithLineHeight(text: "생년월일을 알려주세요", lineHeight: 32, font: .display1_R20)
-            authInputView = InputView(color: .gray6, text: "10자 이내로 입력", type: .defaults)
-            authRequestButton.setTitle("다음", for: .normal)
-            authRequestButton.buttonState = .disable
         }
     }
     
@@ -68,54 +123,70 @@ class AuthView: UIView, ViewRepresentable {
         addSubview(authRequestButton)
         addSubview(authInputView)
         
-        if authViewState != .request {
-            addSubview(calloutLabel)
-        }
-        
         self.backgroundColor = .systemBackground
     }
     
-    func setConstraints() {
-        let height = UIScreen.main.bounds.height
+    func setLoginConstraints() {
+        calloutLabel.snp.makeConstraints { make in
+            make.top.equalTo(titleLabel.snp.bottom).offset(8)
+            make.leading.equalToSuperview().offset(16)
+            make.trailing.equalToSuperview().offset(-16)
+        }
+        authInputView.snp.makeConstraints { make in
+            make.leading.equalTo(16)
+            make.trailing.equalTo(-16)
+            make.height.equalTo(22)
+            make.top.equalTo(calloutLabel.snp.bottom).offset(height * 0.09)
+        }
         
+        authRequestButton.snp.makeConstraints { make in
+            make.top.equalTo(authInputView.snp.bottom).offset(height * 0.1)
+            make.leading.equalToSuperview().offset(16)
+            make.trailing.equalToSuperview().offset(-16)
+        }
+    }
+    
+    func setBirthdayConstraints() {
+        datePicker.snp.makeConstraints { make in
+            make.height.equalTo(height * 0.266)
+            make.bottom.leading.trailing.equalToSuperview()
+        }
+    }
+    
+    func setCommonConstraints() {
+        
+    }
+    
+    func setConstraints() {
         titleLabel.snp.makeConstraints { make in
             make.top.equalTo(height * 0.2)
             make.leading.equalToSuperview().offset(16)
             make.trailing.equalToSuperview().offset(-16)
         }
         
-        if authViewState == .logIn {
-            calloutLabel.snp.makeConstraints { make in
-                make.top.equalTo(titleLabel.snp.bottom).offset(8)
-                make.leading.equalToSuperview().offset(16)
-                make.trailing.equalToSuperview().offset(-16)
-            }
-            authInputView.snp.makeConstraints { make in
-                make.leading.equalTo(16)
-                make.trailing.equalTo(-16)
-                make.height.equalTo(22)
-                make.top.equalTo(calloutLabel.snp.bottom).offset(height * 0.09)
-            }
-            
-            authRequestButton.snp.makeConstraints { make in
-                make.top.equalTo(authInputView.snp.bottom).offset(height * 0.1)
-                make.leading.equalToSuperview().offset(16)
-                make.trailing.equalToSuperview().offset(-16)
-            }
-        } else {
-            authInputView.snp.makeConstraints { make in
-                make.leading.equalTo(16)
-                make.trailing.equalTo(-16)
-                make.height.equalTo(22)
-                make.top.equalTo(titleLabel.snp.bottom).offset(height * 0.09)
-            }
-            
-            authRequestButton.snp.makeConstraints { make in
-                make.top.equalTo(authInputView.snp.bottom).offset(height * 0.1)
-                make.leading.equalToSuperview().offset(16)
-                make.trailing.equalToSuperview().offset(-16)
-            }
+        authInputView.snp.makeConstraints { make in
+            make.leading.equalTo(16)
+            make.trailing.equalTo(-16)
+            make.height.equalTo(22)
+            make.top.equalTo(titleLabel.snp.bottom).offset(height * 0.09)
         }
+        
+        authRequestButton.snp.makeConstraints { make in
+            make.top.equalTo(authInputView.snp.bottom).offset(height * 0.1)
+            make.leading.equalToSuperview().offset(16)
+            make.trailing.equalToSuperview().offset(-16)
+        }
+        
+        switch authViewState {
+        case .logIn:
+            setLoginConstraints()
+        case .birthDay:
+            setBirthdayConstraints()
+            print("Birthday")
+        default:
+            print("DEFAULTS!")
+        }
+        
     }
     
     

@@ -15,6 +15,7 @@ enum FirebaseAuthError: String, Error {
     case tooManyRequest = "과도한 인증 시도가 있었습니다. 나중에 다시 시도해 주세요."
     case inCorrectVerificationCode = "전화 번호 인증 실패"
     case idTokenRequestFailed
+    case disConnect = "네트워크 연결이 원활하지 않습니다. 연결상태 확인 후 다시 시도해 주세요!"
 }
 
 class FirebaseAuthService {
@@ -24,8 +25,12 @@ class FirebaseAuthService {
         
     }
     
-    func userVerification(verificationCode: String) -> Single<String> {
-        return Single<String>.create { single in
+    func userVerification(verificationCode: String) -> Single<Bool> {
+        return Single<Bool>.create { single in
+            if !(Connectivity.isConnectedToInternet) {
+                single(.failure(FirebaseAuthError.disConnect))
+            }
+            
             let verificationID = UserInfo.verificationID
             
             let credential = PhoneAuthProvider.provider().credential(
@@ -33,23 +38,35 @@ class FirebaseAuthService {
                 verificationCode: verificationCode
             )
             
-            Auth.auth().signIn(with: credential) { (_, error) in
+            Auth.auth().signIn(with: credential) { (result, error) in
                 if error != nil {
                     print("userVerificationError!")
                     single(.failure(FirebaseAuthError.inCorrectVerificationCode))
                 }
                 
-                Auth.auth().currentUser?.getIDTokenForcingRefresh(true) { idToken, error in
-                    if error != nil {
-                        print("getIDTokenForcingRefreshError!")
-                        single(.failure(FirebaseAuthError.idTokenRequestFailed))
-                    }
-                    if let idToken = idToken {
-                        single(.success(idToken))
-                    }
+                if result != nil {
+                    single(.success(true))
                 }
             }
-            
+            return Disposables.create()
+        }
+    }
+    
+    func getIdToken() -> Single<String> {
+        return Single<String>.create { single in
+            if !(Connectivity.isConnectedToInternet) {
+                single(.failure(FirebaseAuthError.disConnect))
+            }
+            Auth.auth().currentUser?.getIDTokenForcingRefresh(true) { idToken, error in
+                if error != nil {
+                    print("getIDTokenForcingRefreshError!")
+                    single(.failure(FirebaseAuthError.idTokenRequestFailed))
+                }
+                if let idToken = idToken {
+                    print(idToken)
+                    single(.success(idToken))
+                }
+            }
             return Disposables.create()
         }
     }
@@ -57,6 +74,9 @@ class FirebaseAuthService {
     func requestVerificationCode(phoneNumber: String) -> Single<Void> {
         UserInfo.phoneNumber = phoneNumber
         return Single<Void>.create { single in
+            if !(Connectivity.isConnectedToInternet) {
+                single(.failure(FirebaseAuthError.disConnect))
+            }
             PhoneAuthProvider.provider()
               .verifyPhoneNumber(phoneNumber, uiDelegate: nil) { (verificationID, error) in
                   if let error = error {
@@ -81,6 +101,8 @@ class FirebaseAuthService {
             return FirebaseAuthError.tooManyRequest.rawValue
         case .inCorrectVerificationCode:
             return FirebaseAuthError.inCorrectVerificationCode.rawValue
+        case .disConnect:
+            return FirebaseAuthError.disConnect.rawValue
         default:
             return FirebaseAuthError.inCorrectVerificationCode.rawValue
         }

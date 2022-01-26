@@ -90,7 +90,12 @@ class RequestAuthViewModel: ViewModelType {
                     }
             }
             .bind(with: self) { owner, _ in
-                owner.output.goToLoginView.accept(())
+                if Connectivity.isConnectedToInternet {
+                    owner.output.goToLoginView.accept(())
+                } else {
+                    owner.output.errorMessage.accept(APIError.disConnect.rawValue)
+                }
+                
             }
             .disposed(by: disposeBag)
 

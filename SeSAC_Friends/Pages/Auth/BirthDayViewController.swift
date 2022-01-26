@@ -6,19 +6,26 @@
 //
 
 import UIKit
-
+import RxSwift
 
 class BirthDayViewController: UIViewController {
     //MARK: Properties
-    
-    
+    var disposeBag = DisposeBag()
     
     //MARK: UI
-    
+    let mainView = AuthView(state: .birthDay)
     
     
     //MARK: Method
-    let mainView = AuthView(state: .birthDay)
+    
+    func bind() {
+        mainView.datePicker.rx.controlEvent(.valueChanged)
+            .subscribe { _ in
+                print(self.mainView.datePicker.date)
+            }
+            .disposed(by: disposeBag)
+
+    }
     
     //MARK: LifeCycle
     override func loadView() {
@@ -28,5 +35,6 @@ class BirthDayViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        bind()
     }
 }

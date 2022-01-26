@@ -112,7 +112,7 @@ class LoginViewModel: ViewModelType {
             .disposed(by: disposeBag)
 
         
-        let idToken = input.tapCheckValidationButton
+        let signIn = input.tapCheckValidationButton
             .withLatestFrom(output.textFieldText)
             .filter { $0.count == 6 && Int($0) != nil }
             .flatMap {
@@ -122,23 +122,51 @@ class LoginViewModel: ViewModelType {
                             let errorMessage = FirebaseAuthService.shared.authErrorHandler(error: error)
                             self?.output.errorMessage.accept(errorMessage)
                         }
-                        return .just("")
+                        return .just(false)
                     }
             }
             .asObservable()
             
+        let idToken = signIn
+            .filter { $0 == true }
+            .flatMap { _ in
+                FirebaseAuthService.shared.getIdToken()
+                    .catch { [weak self](error) in
+                        if let error = error as? FirebaseAuthError {
+                            let errorMessage = FirebaseAuthService.shared.authErrorHandler(error: error)
+                            self?.output.errorMessage.accept(errorMessage)
+                        }
+                        return .just("")
+                    }
+            }
+            .asObservable()
+        
         idToken
             .filter { !($0.isEmpty) }
             .flatMap {
                 APIService.shared.getUser(idToken: $0)
-                    .catchAndReturn(0)
+                    .catch { [weak self](error) in
+                        if let error = error as? APIError {
+                            let errorMessage = APIService.shared.apiErrorHandler(error: error)
+                            self?.output.errorMessage.accept(errorMessage)
+                        }
+                        return .just(0)
+                    }
             }
             .bind(with: self, onNext: { owner, statusCode in
                 switch statusCode {
                 case 200: // 가입 유저일 경우, 홈 화면 이동
-                    owner.output.goToHomeView.accept(())
+                    if Connectivity.isConnectedToInternet {
+                        owner.output.goToHomeView.accept(())
+                    } else {
+                        owner.output.errorMessage.accept(APIError.disConnect.rawValue)
+                    }
                 case 201: // 미가입 유저일 경우, 닉네임 화면 이동
-                    owner.output.goToNicknameView.accept(())
+                    if Connectivity.isConnectedToInternet {
+                        owner.output.goToNicknameView.accept(())
+                    } else {
+                        owner.output.errorMessage.accept(APIError.disConnect.rawValue)
+                    }
                 default:
                     owner.output.errorMessage.accept("에러가 발생했습니다. 잠시 후 다시 시도해주세요.")
                 }

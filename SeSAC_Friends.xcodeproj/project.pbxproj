@@ -19,6 +19,8 @@
 		C23BA6C4279ECF0800AD2EE3 /* EndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23BA6C3279ECF0800AD2EE3 /* EndPoint.swift */; };
 		C23BA6C6279EDB0E00AD2EE3 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23BA6C5279EDB0E00AD2EE3 /* APIService.swift */; };
 		C23BA6C8279FF34600AD2EE3 /* NickNameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23BA6C7279FF34600AD2EE3 /* NickNameViewModel.swift */; };
+		C23BA6CA27A02A7900AD2EE3 /* Connectivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23BA6C927A02A7900AD2EE3 /* Connectivity.swift */; };
+		C23BA6CC27A16B3A00AD2EE3 /* BirthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23BA6CB27A16B3A00AD2EE3 /* BirthViewModel.swift */; };
 		C242CDB62796BE7000905287 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C242CDB52796BE7000905287 /* AppDelegate.swift */; };
 		C242CDB82796BE7000905287 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C242CDB72796BE7000905287 /* SceneDelegate.swift */; };
 		C242CDBA2796BE7000905287 /* RequestAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C242CDB92796BE7000905287 /* RequestAuthViewController.swift */; };
@@ -82,6 +84,8 @@
 		C23BA6C3279ECF0800AD2EE3 /* EndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPoint.swift; sourceTree = "<group>"; };
 		C23BA6C5279EDB0E00AD2EE3 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
 		C23BA6C7279FF34600AD2EE3 /* NickNameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NickNameViewModel.swift; sourceTree = "<group>"; };
+		C23BA6C927A02A7900AD2EE3 /* Connectivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Connectivity.swift; sourceTree = "<group>"; };
+		C23BA6CB27A16B3A00AD2EE3 /* BirthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirthViewModel.swift; sourceTree = "<group>"; };
 		C242CDB22796BE7000905287 /* SeSAC_Friends.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SeSAC_Friends.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C242CDB52796BE7000905287 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C242CDB72796BE7000905287 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -315,6 +319,7 @@
 				C28377EF27987D0A00151297 /* TextFieldState.swift */,
 				C23BA6B4279C42EC00AD2EE3 /* InputViewContentType.swift */,
 				C23BA6BE279D7C9C00AD2EE3 /* UserDefaultsWrapper.swift */,
+				C23BA6C927A02A7900AD2EE3 /* Connectivity.swift */,
 				C23BA6C3279ECF0800AD2EE3 /* EndPoint.swift */,
 			);
 			path = Util;
@@ -326,6 +331,7 @@
 				C28377E6279825D000151297 /* RequestAuthViewModel.swift */,
 				C28377F42799A41000151297 /* LoginViewModel.swift */,
 				C23BA6C7279FF34600AD2EE3 /* NickNameViewModel.swift */,
+				C23BA6CB27A16B3A00AD2EE3 /* BirthViewModel.swift */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -503,6 +509,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C23BA6CC27A16B3A00AD2EE3 /* BirthViewModel.swift in Sources */,
 				C23BA6C4279ECF0800AD2EE3 /* EndPoint.swift in Sources */,
 				C28377C927971E5800151297 /* AuthView.swift in Sources */,
 				C28377CC27971E7300151297 /* ViewRepresentable.swift in Sources */,
@@ -513,6 +520,7 @@
 				C23BA6C6279EDB0E00AD2EE3 /* APIService.swift in Sources */,
 				C242CDBA2796BE7000905287 /* RequestAuthViewController.swift in Sources */,
 				C28377E527980E1000151297 /* ButtonState.swift in Sources */,
+				C23BA6CA27A02A7900AD2EE3 /* Connectivity.swift in Sources */,
 				C28377E9279825EF00151297 /* ViewModelType.swift in Sources */,
 				C28377F52799A41000151297 /* LoginViewModel.swift in Sources */,
 				C242CDB62796BE7000905287 /* AppDelegate.swift in Sources */,
