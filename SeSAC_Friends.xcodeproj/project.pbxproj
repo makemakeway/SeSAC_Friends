@@ -21,6 +21,8 @@
 		C23BA6C8279FF34600AD2EE3 /* NickNameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23BA6C7279FF34600AD2EE3 /* NickNameViewModel.swift */; };
 		C23BA6CA27A02A7900AD2EE3 /* Connectivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23BA6C927A02A7900AD2EE3 /* Connectivity.swift */; };
 		C23BA6CC27A16B3A00AD2EE3 /* BirthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23BA6CB27A16B3A00AD2EE3 /* BirthViewModel.swift */; };
+		C23BA6CE27A1A97600AD2EE3 /* EmailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23BA6CD27A1A97600AD2EE3 /* EmailViewController.swift */; };
+		C23BA6D027A1AA5900AD2EE3 /* DateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23BA6CF27A1AA5900AD2EE3 /* DateManager.swift */; };
 		C242CDB62796BE7000905287 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C242CDB52796BE7000905287 /* AppDelegate.swift */; };
 		C242CDB82796BE7000905287 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C242CDB72796BE7000905287 /* SceneDelegate.swift */; };
 		C242CDBA2796BE7000905287 /* RequestAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C242CDB92796BE7000905287 /* RequestAuthViewController.swift */; };
@@ -86,6 +88,8 @@
 		C23BA6C7279FF34600AD2EE3 /* NickNameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NickNameViewModel.swift; sourceTree = "<group>"; };
 		C23BA6C927A02A7900AD2EE3 /* Connectivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Connectivity.swift; sourceTree = "<group>"; };
 		C23BA6CB27A16B3A00AD2EE3 /* BirthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirthViewModel.swift; sourceTree = "<group>"; };
+		C23BA6CD27A1A97600AD2EE3 /* EmailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailViewController.swift; sourceTree = "<group>"; };
+		C23BA6CF27A1AA5900AD2EE3 /* DateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateManager.swift; sourceTree = "<group>"; };
 		C242CDB22796BE7000905287 /* SeSAC_Friends.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SeSAC_Friends.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C242CDB52796BE7000905287 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C242CDB72796BE7000905287 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -280,6 +284,7 @@
 				C28377F127988C0500151297 /* LogInViewController.swift */,
 				C23BA6B6279C554900AD2EE3 /* NickNameViewController.swift */,
 				C23BA6B8279C5AF100AD2EE3 /* BirthDayViewController.swift */,
+				C23BA6CD27A1A97600AD2EE3 /* EmailViewController.swift */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -321,6 +326,7 @@
 				C23BA6BE279D7C9C00AD2EE3 /* UserDefaultsWrapper.swift */,
 				C23BA6C927A02A7900AD2EE3 /* Connectivity.swift */,
 				C23BA6C3279ECF0800AD2EE3 /* EndPoint.swift */,
+				C23BA6CF27A1AA5900AD2EE3 /* DateManager.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -514,6 +520,7 @@
 				C28377C927971E5800151297 /* AuthView.swift in Sources */,
 				C28377CC27971E7300151297 /* ViewRepresentable.swift in Sources */,
 				C28377E22797FE3F00151297 /* H48Button.swift in Sources */,
+				C23BA6D027A1AA5900AD2EE3 /* DateManager.swift in Sources */,
 				C28377E02797F1D400151297 /* UILabel+Extension.swift in Sources */,
 				C23BA6BF279D7C9C00AD2EE3 /* UserDefaultsWrapper.swift in Sources */,
 				C28377F227988C0500151297 /* LogInViewController.swift in Sources */,
@@ -534,6 +541,7 @@
 				C28377EC279831F000151297 /* InputView.swift in Sources */,
 				C28377C627971D0300151297 /* OnBoardingViewController.swift in Sources */,
 				C23BA6B9279C5AF100AD2EE3 /* BirthDayViewController.swift in Sources */,
+				C23BA6CE27A1A97600AD2EE3 /* EmailViewController.swift in Sources */,
 				C23BA6C2279D9C5400AD2EE3 /* FirebaseAuthService.swift in Sources */,
 				C28377BF2796F1C900151297 /* UIFont+Extension.swift in Sources */,
 				C28377E7279825D000151297 /* RequestAuthViewModel.swift in Sources */,
