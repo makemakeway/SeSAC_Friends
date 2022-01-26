@@ -11,4 +11,5 @@ enum InputViewContentType {
     case defaults
     case timer
     case datePicker
+    case gender
 }

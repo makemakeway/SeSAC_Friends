@@ -37,4 +37,5 @@ class UserInfo {
     @UserDefault(key: "gender", defaultValue: "")static var gender: String
     @UserDefault(key: "firstRun", defaultValue: true)static var firstRun: Bool
     @UserDefault(key: "phoneNumber", defaultValue: "")static var phoneNumber: String
+    @UserDefault(key: "email", defaultValue: "")static var email: String
 }

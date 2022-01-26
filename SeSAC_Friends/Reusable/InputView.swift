@@ -229,6 +229,9 @@ class InputView: UIView, ViewRepresentable {
             addSubview(reRequestButton)
         case .datePicker:
             containerView.addSubview(dateStackView)
+        case .gender:
+            //MARK: 여기서부터 하면 됨
+            print("gender")
         default:
             containerView.addSubview(leadingPadding)
             containerView.addSubview(textField)
