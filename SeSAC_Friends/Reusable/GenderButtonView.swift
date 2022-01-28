@@ -17,16 +17,20 @@ class GenderButtonView: UIButton, ViewRepresentable {
         $0.font = UIFont.title2_R16
         $0.textColor = UIColor.defaultBlack
     }
+    let containerView = UIView()
     
     func setUp() {
         guard let gender = gender else {
             print("gender Missing")
             return
         }
+        addSubview(containerView)
         
-        addSubview(markImageView)
-        addSubview(genderLabel)
+        containerView.addSubview(markImageView)
+        containerView.addSubview(genderLabel)
 
+        markImageView.setContentHuggingPriority(.required, for: .vertical)
+        
         if gender {
             let markImage = UIImage(asset: Asset.man)
             markImageView.image = markImage
@@ -39,19 +43,25 @@ class GenderButtonView: UIButton, ViewRepresentable {
         
         self.layer.cornerRadius = 10
         self.clipsToBounds = true
-        markImageView.backgroundColor = .defaultWhite
-        self.backgroundColor = .brandYellowGreen
+        self.layer.borderColor = UIColor.gray3.cgColor
+        self.layer.borderWidth = 1
     }
     
     func setConstraints() {
-        markImageView.snp.makeConstraints { make in
+        containerView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.top.equalToSuperview().offset(14)
+            make.edges.equalToSuperview()
+        }
+        
+        markImageView.snp.makeConstraints { make in
+            make.centerY.equalToSuperview().offset(-14)
+            make.centerX.equalToSuperview()
         }
         
         genderLabel.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.top.equalTo(markImageView.snp.bottom).offset(2)
+            make.bottom.lessThanOrEqualTo(-14)
         }
     }
     

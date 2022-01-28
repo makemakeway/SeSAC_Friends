@@ -54,6 +54,8 @@ class AuthView: UIView, ViewRepresentable {
         $0.date = defaultDate ?? Date()
     }
     
+    let spacing = UIView()
+    
     func makeUI(title: String, placeholder: String, buttonTitle: String, type: InputViewContentType) {
         titleLabel.setTextWithLineHeight(text: title, lineHeight: 32, font: .display1_R20)
         authInputView = InputView(color: .gray6, text: placeholder, type: type)
@@ -94,7 +96,7 @@ class AuthView: UIView, ViewRepresentable {
             authInputView.textField.keyboardType = .numberPad
         case .logIn:
             makeUI(title: "인증번호가 문자로 전송되었어요",
-                   placeholder: "인증번호 입력",
+                   placeholder: "(최대 20초 소요)",
                    buttonTitle: "인증하고 시작하기",
                    type: .timer,
                    callout: "인증번호 입력")
@@ -128,26 +130,28 @@ class AuthView: UIView, ViewRepresentable {
         addSubview(titleLabel)
         addSubview(authRequestButton)
         addSubview(authInputView)
+        addSubview(spacing)
         
+        titleLabel.setContentHuggingPriority(.required, for: .vertical)
+        calloutLabel.setContentHuggingPriority(.required, for: .vertical)
         self.backgroundColor = .systemBackground
     }
     
     func setCalloutConstraints() {
+        titleLabel.snp.remakeConstraints { make in
+            make.top.lessThanOrEqualTo(height * 0.206)
+            make.leading.equalToSuperview().offset(16)
+            make.trailing.equalToSuperview().offset(-16)
+        }
+        
         calloutLabel.snp.makeConstraints { make in
-            make.top.equalTo(titleLabel.snp.bottom).offset(8)
+            make.top.equalTo(titleLabel.snp.bottom).offset(8).priority(.required)
             make.leading.equalToSuperview().offset(16)
             make.trailing.equalToSuperview().offset(-16)
         }
     }
     
     func setLoginConstraints() {
-//        authInputView.snp.makeConstraints { make in
-//            make.leading.equalTo(16)
-//            make.trailing.equalTo(-16)
-//            make.height.equalTo(22)
-//            make.top.equalTo(calloutLabel.snp.bottom).offset(height * 0.09)
-//        }
-        
         authRequestButton.snp.makeConstraints { make in
             make.top.equalTo(authInputView.snp.bottom).offset(height * 0.1)
             make.leading.equalToSuperview().offset(16)
@@ -156,39 +160,56 @@ class AuthView: UIView, ViewRepresentable {
     }
     
     func setBirthdayConstraints() {
+        titleLabel.snp.remakeConstraints { make in
+            make.top.equalTo(height * 0.206)
+            make.leading.equalToSuperview().offset(16)
+            make.trailing.equalToSuperview().offset(-16)
+        }
+        
         datePicker.snp.makeConstraints { make in
             make.height.equalTo(height * 0.266)
             make.bottom.leading.trailing.equalToSuperview()
+        }
+        
+    }
+    
+    func setNicknameConstraints() {
+        titleLabel.snp.remakeConstraints { make in
+            make.top.equalTo(height * 0.206)
+            make.leading.equalToSuperview().offset(16)
+            make.trailing.equalToSuperview().offset(-16)
         }
     }
     
     func setCommonConstraints() {
         titleLabel.snp.makeConstraints { make in
-            make.top.equalTo(height * 0.2)
             make.leading.equalToSuperview().offset(16)
             make.trailing.equalToSuperview().offset(-16)
+            make.bottom.equalTo(authRequestButton.snp.top).offset(-height * 0.226)
         }
         
         authInputView.snp.makeConstraints { make in
             make.leading.equalTo(16)
             make.trailing.equalTo(-16)
-            make.height.equalTo(22)
             make.top.equalTo(titleLabel.snp.bottom).offset(height * 0.09)
+            make.height.equalTo(48)
         }
         
+        //MARK: 버튼이 기준점
         authRequestButton.snp.makeConstraints { make in
-            make.top.equalTo(authInputView.snp.bottom).offset(height * 0.1)
+            make.top.equalToSuperview().offset(height * 0.513).priority(.required)
             make.leading.equalToSuperview().offset(16)
             make.trailing.equalToSuperview().offset(-16)
         }
     }
     
     func setGenderConstraints() {
-        authInputView.backgroundColor = .brandWhiteGreen
         authInputView.snp.remakeConstraints { make in
             make.leading.equalToSuperview().offset(16)
             make.trailing.equalToSuperview().offset(-16)
-            make.top.equalTo(titleLabel.snp.bottom).offset(height * 0.09)
+            
+            make.bottom.equalTo(authRequestButton.snp.top).offset(-32)
+            make.top.equalTo(calloutLabel.snp.bottom).offset(32)
         }
     }
     
@@ -203,6 +224,7 @@ class AuthView: UIView, ViewRepresentable {
             setBirthdayConstraints()
             print("Birthday")
         case .nickName:
+            setNicknameConstraints()
             print("nickname")
         case .email:
             print("email")

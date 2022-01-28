@@ -31,7 +31,6 @@ class InputView: UIView, ViewRepresentable {
     var inputViewType: InputViewContentType?
     
     let containerView = UIView()
-    let leadingPadding = UIView()
     let textField = UITextField()
     let bottomLine = CALayer()
     
@@ -130,16 +129,12 @@ class InputView: UIView, ViewRepresentable {
     func defaultsConstraints() {
         containerView.snp.makeConstraints { make in
             make.top.leading.bottom.equalToSuperview()
-            make.trailing.equalToSuperview().offset(-12)
-        }
-        
-        leadingPadding.snp.makeConstraints { make in
-            make.width.equalTo(12)
-            make.leading.top.bottom.equalToSuperview()
+            make.trailing.equalToSuperview().offset(12)
         }
         
         textField.snp.makeConstraints { make in
-            make.leading.equalTo(leadingPadding.snp.trailing)
+            make.leading.equalToSuperview().offset(12)
+            make.centerY.equalToSuperview()
             make.trailing.equalToSuperview()
         }
     }
@@ -150,8 +145,7 @@ class InputView: UIView, ViewRepresentable {
         }
         
         dateStackView.snp.makeConstraints { make in
-            make.height.equalToSuperview()
-            make.leading.trailing.equalToSuperview()
+            make.edges.equalToSuperview()
         }
         
         let yearView = UIView()
@@ -215,14 +209,13 @@ class InputView: UIView, ViewRepresentable {
             make.centerY.equalTo(containerView)
             make.width.equalTo(72)
         }
-        
+
         textField.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(12)
             make.trailing.equalTo(timerLabel.snp.leading)
-            make.top.equalToSuperview()
-            make.bottom.equalToSuperview()
+            make.centerY.equalToSuperview()
         }
-        
+
         timerLabel.snp.makeConstraints { make in
             make.trailing.equalToSuperview()
             make.centerY.equalTo(textField)
@@ -239,9 +232,8 @@ class InputView: UIView, ViewRepresentable {
         
         genderStackView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
-            make.height.equalTo(120)
-        }
-        
+            
+        }        
         manButton.snp.makeConstraints { make in
             make.height.equalToSuperview()
         }
@@ -249,8 +241,6 @@ class InputView: UIView, ViewRepresentable {
         womanButton.snp.makeConstraints { make in
             make.height.equalToSuperview()
         }
-        
-        genderStackView.backgroundColor = .brandGreen
     }
     
     func setUp() {
@@ -258,8 +248,9 @@ class InputView: UIView, ViewRepresentable {
         
         switch inputViewType {
         case .timer:
-            containerView.addSubview(timerLabel)
             addSubview(reRequestButton)
+            containerView.addSubview(textField)
+            containerView.addSubview(timerLabel)
         case .datePicker:
             containerView.addSubview(dateStackView)
         case .gender:
@@ -267,7 +258,6 @@ class InputView: UIView, ViewRepresentable {
             containerView.addSubview(genderStackView)
             print("gender")
         default:
-            containerView.addSubview(leadingPadding)
             containerView.addSubview(textField)
         }
     }
@@ -317,8 +307,8 @@ class InputView: UIView, ViewRepresentable {
             makeBorder(view: yearTextField, color: .gray3, x: -12)
             makeBorder(view: monthTextField, color: .gray3, x: -12)
             makeBorder(view: dayTextField, color: .gray3, x: -12)
-        } else {
-            makeBorder(layer: bottomLine, view: containerView, color: .systemBackground)
+        } else if inputViewType == .defaults {
+            makeBorder(layer: bottomLine, view: containerView, color: .systemBackground, y: 0, width: -12)
         }
     }
 }

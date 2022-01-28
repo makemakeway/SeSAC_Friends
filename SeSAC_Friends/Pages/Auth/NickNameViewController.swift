@@ -115,8 +115,16 @@ class NickNameViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         bind()
-        mainView.authInputView.textField.becomeFirstResponder()
         whenNicknameIsError()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        mainView.authInputView.textField.becomeFirstResponder()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
