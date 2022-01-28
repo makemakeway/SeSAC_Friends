@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C21A001627A3DF8600222045 /* GenderButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C21A001527A3DF8600222045 /* GenderButtonView.swift */; };
+		C21A001827A3E02800222045 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C21A001727A3E02800222045 /* Images.xcassets */; };
 		C23BA6AA279AF7D400AD2EE3 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = C23BA6A9279AF7D400AD2EE3 /* FirebaseAuth */; };
 		C23BA6AC279AF7D400AD2EE3 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = C23BA6AB279AF7D400AD2EE3 /* FirebaseMessaging */; };
 		C23BA6AE279BCF2300AD2EE3 /* H40Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23BA6AD279BCF2300AD2EE3 /* H40Button.swift */; };
@@ -58,6 +60,7 @@
 		C28377F027987D0A00151297 /* TextFieldState.swift in Sources */ = {isa = PBXBuildFile; fileRef = C28377EF27987D0A00151297 /* TextFieldState.swift */; };
 		C28377F227988C0500151297 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C28377F127988C0500151297 /* LogInViewController.swift */; };
 		C28377F52799A41000151297 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C28377F42799A41000151297 /* LoginViewModel.swift */; };
+		C2E20D2127A3E93500AB9BC0 /* Images+Generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2E20D2027A3E93500AB9BC0 /* Images+Generated.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -78,6 +81,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		C21A001527A3DF8600222045 /* GenderButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenderButtonView.swift; sourceTree = "<group>"; };
+		C21A001727A3E02800222045 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		C23BA6AD279BCF2300AD2EE3 /* H40Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = H40Button.swift; sourceTree = "<group>"; };
 		C23BA6B4279C42EC00AD2EE3 /* InputViewContentType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputViewContentType.swift; sourceTree = "<group>"; };
 		C23BA6B6279C554900AD2EE3 /* NickNameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NickNameViewController.swift; sourceTree = "<group>"; };
@@ -124,6 +129,7 @@
 		C28377EF27987D0A00151297 /* TextFieldState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldState.swift; sourceTree = "<group>"; };
 		C28377F127988C0500151297 /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 		C28377F42799A41000151297 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		C2E20D2027A3E93500AB9BC0 /* Images+Generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Images+Generated.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -252,10 +258,12 @@
 		C28377AC2796DA0800151297 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				C2E20D2027A3E93500AB9BC0 /* Images+Generated.swift */,
 				C28377B12796EEDB00151297 /* Font */,
 				C242CDB52796BE7000905287 /* AppDelegate.swift */,
 				C242CDB72796BE7000905287 /* SceneDelegate.swift */,
 				C242CDBE2796BE7200905287 /* Assets.xcassets */,
+				C21A001727A3E02800222045 /* Images.xcassets */,
 			);
 			path = Resource;
 			sourceTree = "<group>";
@@ -309,6 +317,7 @@
 				C28377E12797FE3F00151297 /* H48Button.swift */,
 				C23BA6AD279BCF2300AD2EE3 /* H40Button.swift */,
 				C28377EB279831F000151297 /* InputView.swift */,
+				C21A001527A3DF8600222045 /* GenderButtonView.swift */,
 			);
 			path = Reusable;
 			sourceTree = "<group>";
@@ -473,6 +482,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C28377BA2796EEEE00151297 /* NotoSansKR-Medium.otf in Resources */,
+				C21A001827A3E02800222045 /* Images.xcassets in Resources */,
 				C242CDC22796BE7200905287 /* LaunchScreen.storyboard in Resources */,
 				C28377EE2798674A00151297 /* GoogleService-Info.plist in Resources */,
 				C242CDBF2796BE7200905287 /* Assets.xcassets in Resources */,
@@ -553,6 +563,8 @@
 				C28377BF2796F1C900151297 /* UIFont+Extension.swift in Sources */,
 				C28377E7279825D000151297 /* RequestAuthViewModel.swift in Sources */,
 				C28377AF2796E36100151297 /* UIColor+Extension.swift in Sources */,
+				C21A001627A3DF8600222045 /* GenderButtonView.swift in Sources */,
+				C2E20D2127A3E93500AB9BC0 /* Images+Generated.swift in Sources */,
 				C23BA6D227A1B0B000AD2EE3 /* EmailViewModel.swift in Sources */,
 				C23BA6AE279BCF2300AD2EE3 /* H40Button.swift in Sources */,
 			);

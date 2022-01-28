@@ -117,7 +117,7 @@ class AuthView: UIView, ViewRepresentable {
             makeUI(title: "성별을 선택해주세요",
                    placeholder: "",
                    buttonTitle: "다음",
-                   type: .defaults,
+                   type: .gender,
                    callout: "새싹 찾기 기능을 이용하기 위해서 필요해요")
         case .error:
             authInputView = InputView(color: .systemError, text: "에러", type: .defaults)
@@ -141,12 +141,12 @@ class AuthView: UIView, ViewRepresentable {
     }
     
     func setLoginConstraints() {
-        authInputView.snp.makeConstraints { make in
-            make.leading.equalTo(16)
-            make.trailing.equalTo(-16)
-            make.height.equalTo(22)
-            make.top.equalTo(calloutLabel.snp.bottom).offset(height * 0.09)
-        }
+//        authInputView.snp.makeConstraints { make in
+//            make.leading.equalTo(16)
+//            make.trailing.equalTo(-16)
+//            make.height.equalTo(22)
+//            make.top.equalTo(calloutLabel.snp.bottom).offset(height * 0.09)
+//        }
         
         authRequestButton.snp.makeConstraints { make in
             make.top.equalTo(authInputView.snp.bottom).offset(height * 0.1)
@@ -183,6 +183,15 @@ class AuthView: UIView, ViewRepresentable {
         }
     }
     
+    func setGenderConstraints() {
+        authInputView.backgroundColor = .brandWhiteGreen
+        authInputView.snp.remakeConstraints { make in
+            make.leading.equalToSuperview().offset(16)
+            make.trailing.equalToSuperview().offset(-16)
+            make.top.equalTo(titleLabel.snp.bottom).offset(height * 0.09)
+        }
+    }
+    
     func setConstraints() {
         setCommonConstraints()
         
@@ -200,6 +209,7 @@ class AuthView: UIView, ViewRepresentable {
             setCalloutConstraints()
         case .gender:
             setCalloutConstraints()
+            setGenderConstraints()
             print("gender")
         default:
             return

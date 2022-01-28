@@ -89,6 +89,15 @@ class InputView: UIView, ViewRepresentable {
         $0.spacing = UIScreen.main.bounds.width * 0.06
     }
     
+    //MARK: For Case = .gender
+    let manButton = GenderButtonView(gender: true)
+    let womanButton = GenderButtonView(gender: false)
+    let genderStackView = UIStackView().then {
+        $0.axis = .horizontal
+        $0.distribution = .fillEqually
+        $0.alignment = .center
+        $0.spacing = 12
+    }
     
     //MARK: Methods
     func makeBorder(layer: CALayer, view: UIView, color: UIColor, x: Double = 0, y: Double = 12, width: Double = 12) {
@@ -220,6 +229,30 @@ class InputView: UIView, ViewRepresentable {
         }
     }
     
+    func genderConstraints() {
+        genderStackView.addArrangedSubview(manButton)
+        genderStackView.addArrangedSubview(womanButton)
+        
+        containerView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+        
+        genderStackView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+            make.height.equalTo(120)
+        }
+        
+        manButton.snp.makeConstraints { make in
+            make.height.equalToSuperview()
+        }
+        
+        womanButton.snp.makeConstraints { make in
+            make.height.equalToSuperview()
+        }
+        
+        genderStackView.backgroundColor = .brandGreen
+    }
+    
     func setUp() {
         self.addSubview(containerView)
         
@@ -231,6 +264,7 @@ class InputView: UIView, ViewRepresentable {
             containerView.addSubview(dateStackView)
         case .gender:
             //MARK: 여기서부터 하면 됨
+            containerView.addSubview(genderStackView)
             print("gender")
         default:
             containerView.addSubview(leadingPadding)
@@ -246,6 +280,8 @@ class InputView: UIView, ViewRepresentable {
             timerConstraints()
         case .datePicker:
             birthConstraints()
+        case .gender:
+            genderConstraints()
         default:
             print("error")
         }

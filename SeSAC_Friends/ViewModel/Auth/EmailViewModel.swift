@@ -64,7 +64,7 @@ class EmailViewModel: ViewModelType {
     }
     
     func emailIsValid(email: String) -> Bool {
-        let pattern = "^[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,20}$"
+        let pattern = "^[A-Z0-9a-z.]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,20}$"
         let regex = try? NSRegularExpression(pattern: pattern)
         if let _ = regex?.firstMatch(in: email, options: [], range: NSRange(location: 0, length: email.count)) {
             return true
