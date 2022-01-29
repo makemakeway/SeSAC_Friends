@@ -14,7 +14,7 @@ enum APIError: String, Error {
     case tokenExpired = "토큰 갱신에 실패했습니다. 잠시 후 다시 시도해주세요."
     case serverError
     case clientError
-    case invalidNickname
+    case invalidNickname = "해당 닉네임은 사용할 수 없습니다."
     case unKnowned
     case disConnect = "네트워크 연결이 원활하지 않습니다. 연결상태 확인 후 다시 시도해 주세요!"
 }

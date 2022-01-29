@@ -63,6 +63,7 @@
 		C2E20D2127A3E93500AB9BC0 /* Images+Generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2E20D2027A3E93500AB9BC0 /* Images+Generated.swift */; };
 		C2E20D2327A44A6800AB9BC0 /* GenderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2E20D2227A44A6800AB9BC0 /* GenderViewModel.swift */; };
 		C2E20D2527A4603400AB9BC0 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2E20D2427A4603400AB9BC0 /* UIViewController+Extension.swift */; };
+		C2E20D2827A5751400AB9BC0 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2E20D2727A5751400AB9BC0 /* HomeViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -134,6 +135,7 @@
 		C2E20D2027A3E93500AB9BC0 /* Images+Generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Images+Generated.swift"; sourceTree = "<group>"; };
 		C2E20D2227A44A6800AB9BC0 /* GenderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenderViewModel.swift; sourceTree = "<group>"; };
 		C2E20D2427A4603400AB9BC0 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
+		C2E20D2727A5751400AB9BC0 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -367,6 +369,7 @@
 		C2E20D2627A56E4C00AB9BC0 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				C2E20D2727A5751400AB9BC0 /* HomeViewController.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -556,6 +559,7 @@
 				C2E20D2527A4603400AB9BC0 /* UIViewController+Extension.swift in Sources */,
 				C23BA6BF279D7C9C00AD2EE3 /* UserDefaultsWrapper.swift in Sources */,
 				C28377F227988C0500151297 /* LogInViewController.swift in Sources */,
+				C2E20D2827A5751400AB9BC0 /* HomeViewController.swift in Sources */,
 				C23BA6C6279EDB0E00AD2EE3 /* APIService.swift in Sources */,
 				C242CDBA2796BE7000905287 /* RequestAuthViewController.swift in Sources */,
 				C28377E527980E1000151297 /* ButtonState.swift in Sources */,

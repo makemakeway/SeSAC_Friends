@@ -16,4 +16,14 @@ extension UIViewController {
         print("email: \(UserInfo.email)")
         print("nickname: \(UserInfo.nickname)")
     }
+    
+    func changeRootView(viewController: UIViewController) {
+        DispatchQueue.main.async {
+            guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene else {
+                return
+            }
+            windowScene.windows.first?.rootViewController = UINavigationController(rootViewController: viewController)
+            windowScene.windows.first?.makeKeyAndVisible()
+        }
+    }
 }

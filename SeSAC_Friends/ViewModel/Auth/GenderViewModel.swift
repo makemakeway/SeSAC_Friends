@@ -34,7 +34,6 @@ class GenderViewModel: ViewModelType {
     
     func transform() {
         input.manButtonClicked
-            .debug()
             .asDriver(onErrorJustReturn: ())
             .drive(with: self) { owner, _ in
                 if owner.manButtonFocused {
@@ -52,7 +51,6 @@ class GenderViewModel: ViewModelType {
             
         
         input.womanButtonClicked
-            .debug()
             .asDriver(onErrorJustReturn: ())
             .drive(with: self) { owner, _ in
                 if owner.womanButtonFocused {

@@ -98,8 +98,9 @@ class NickNameViewController: UIViewController {
     
     func whenNicknameIsError() {
         if state == .error {
-            mainView.authInputView.textFieldState = .error
-            view.makeToast("해당 닉네임은 사용할 수 없습니다.")
+            viewModel.output.textFieldState.accept(.error)
+            view.makeToast(APIError.invalidNickname.rawValue, duration: 3, position: .center)
+            mainView.authInputView.errorLabel.text = APIError.invalidNickname.rawValue
         }
     }
     
@@ -116,7 +117,6 @@ class NickNameViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         bind()
-        whenNicknameIsError()
         if !(UserInfo.nickname.isEmpty) {
             mainView.authInputView.textField.text = UserInfo.nickname
         }
@@ -125,14 +125,7 @@ class NickNameViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         mainView.authInputView.textField.becomeFirstResponder()
-        if state == .error {
-            viewModel.output.textFieldState.accept(.error)
-            view.makeToast("해당 닉네임은 사용할 수 없습니다.", duration: 3, position: .center)
-        }
-    }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
+        whenNicknameIsError()
     }
     
     override func viewDidDisappear(_ animated: Bool) {

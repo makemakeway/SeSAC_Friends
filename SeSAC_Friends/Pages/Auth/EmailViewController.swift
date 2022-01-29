@@ -19,8 +19,11 @@ class EmailViewController: UIViewController {
     
     //MARK: Method
     private func bind() {
-        mainView.authInputView.textField.rx.text.orEmpty
-            .asDriver()
+        let textFieldText = mainView.authInputView.textField.rx.text.orEmpty
+            .share()
+        
+        textFieldText
+            .asDriver(onErrorJustReturn: "")
             .drive(viewModel.input.emailText)
             .disposed(by: disposeBag)
         
@@ -32,6 +35,19 @@ class EmailViewController: UIViewController {
         mainView.authInputView.textField.rx.controlEvent(.editingDidBegin)
             .asDriver()
             .drive(viewModel.input.tapTextField)
+            .disposed(by: disposeBag)
+        
+        mainView.authInputView.textField.rx.controlEvent(.editingDidEndOnExit)
+            .withLatestFrom(textFieldText)
+            .map { $0.isEmpty }
+            .asDriver(onErrorJustReturn: true)
+            .drive(with: self) { owner, empty in
+                if empty {
+                    owner.mainView.authInputView.textFieldState = .inActive
+                } else {
+                    owner.mainView.authInputView.textFieldState = .active
+                }
+            }
             .disposed(by: disposeBag)
         
         viewModel.output.errorMessage
@@ -81,7 +97,13 @@ class EmailViewController: UIViewController {
         bind()
         if !(UserInfo.email.isEmpty) {
             mainView.authInputView.textField.text = UserInfo.email
+            viewModel.output.isButtonEnable.accept(true)
         }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        mainView.authInputView.textField.becomeFirstResponder()
     }
     
     override func viewDidDisappear(_ animated: Bool) {

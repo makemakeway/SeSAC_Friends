@@ -91,6 +91,8 @@ class BirthDayViewController: UIViewController {
         bind()
         if !(UserInfo.birthday.isEmpty) {
             mainView.datePicker.date = DateManager.shared.stringToDate(dateFormat: UserInfo.birthday)
+            viewModel.input.selectedDate.onNext(mainView.datePicker.date)
+            viewModel.input.valueChanged.onNext(())
         }
     }
     

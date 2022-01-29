@@ -19,7 +19,13 @@ class InputView: UIView, ViewRepresentable {
             case .focus:
                 changeBorder(layer: bottomLine, color: .systemFocus)
             case .error:
+                print("ERROR Received")
                 changeBorder(layer: bottomLine, color: .systemError)
+                addSubview(errorLabel)
+                errorLabel.snp.makeConstraints { make in
+                    make.top.equalTo(containerView.snp.bottom).offset(4)
+                    make.leading.equalToSuperview().offset(12)
+                }
             case .success:
                 changeBorder(layer: bottomLine, color: .systemSuccess)
             default:
@@ -33,7 +39,12 @@ class InputView: UIView, ViewRepresentable {
     let containerView = UIView()
     let textField = UITextField()
     let bottomLine = CALayer()
+    var bottomLineAdded = false
     
+    let errorLabel = UILabel().then {
+        $0.textColor = .systemError
+        $0.font = UIFont.body4_R12
+    }
     
     //MARK: For Case = .timer
     let timerLabel = UILabel().then {
@@ -292,6 +303,8 @@ class InputView: UIView, ViewRepresentable {
         }
         setUp()
         setConstraints()
+        
+        
     }
     
     override init(frame: CGRect) {
@@ -305,14 +318,22 @@ class InputView: UIView, ViewRepresentable {
     
     override func draw(_ rect: CGRect) {
         super.draw(rect)
-        if inputViewType == .datePicker {
-            makeBorder(view: yearTextField, color: .gray3, x: -12)
-            makeBorder(view: monthTextField, color: .gray3, x: -12)
-            makeBorder(view: dayTextField, color: .gray3, x: -12)
-        } else if inputViewType == .defaults {
-            makeBorder(layer: bottomLine, view: containerView, color: .systemBackground, y: 0, width: -12)
-        } else if inputViewType == .timer {
-            makeBorder(layer: bottomLine, view: containerView, color: .systemBackground, y: 0)
+        print(#function)
+        if !bottomLineAdded {
+            CATransaction.begin()
+            CATransaction.setDisableActions(true)
+            if inputViewType == .datePicker {
+                makeBorder(view: yearTextField, color: .gray3, x: -12)
+                makeBorder(view: monthTextField, color: .gray3, x: -12)
+                makeBorder(view: dayTextField, color: .gray3, x: -12)
+            } else if inputViewType == .defaults {
+                print("DEfaults")
+                makeBorder(layer: bottomLine, view: containerView, color: .systemBackground, y: 0, width: -12)
+            } else if inputViewType == .timer {
+                makeBorder(layer: bottomLine, view: containerView, color: .systemBackground, y: 0)
+            }
+            CATransaction.commit()
+            bottomLineAdded = true
         }
     }
 }

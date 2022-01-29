@@ -99,6 +99,14 @@ class LogInViewController: UIViewController {
             }
             .disposed(by: disposeBag)
         
+        viewModel.output.goToHomeView
+            .asDriver(onErrorJustReturn: ())
+            .drive(with: self) { owner, _ in
+                let vc = HomeViewController()
+                owner.changeRootView(viewController: vc)
+            }
+            .disposed(by: disposeBag)
+        
         viewModel.output.timerLabelText
             .asDriver()
             .drive(with: self) { owner, text in
@@ -118,14 +126,18 @@ class LogInViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        bind()
         self.view.makeToast("인증 번호를 보냈습니다.")
-        
         viewModel.input.timerStart.onNext(())
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        bind()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        disposeBag = DisposeBag()
     }
     
     deinit {

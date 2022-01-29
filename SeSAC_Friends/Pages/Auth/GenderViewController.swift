@@ -60,16 +60,21 @@ class GenderViewController: UIViewController {
         viewModel.output.goToHome
             .asDriver(onErrorJustReturn: ())
             .drive(with: self) { owner, _ in
-                owner.printUserInfo()
+                let vc = HomeViewController()
+                owner.changeRootView(viewController: vc)
             }
             .disposed(by: disposeBag)
 
         viewModel.output.goToNickName
             .asDriver(onErrorJustReturn: ())
             .drive(with: self) { owner, _ in
-                let vc = NickNameViewController()
-                vc.state = .error
-                self.navigationController?.popToViewController(vc, animated: true)
+                guard let vcs = owner.navigationController?.viewControllers else { return }
+                for vc in vcs {
+                    if let nickVC = vc as? NickNameViewController {
+                        nickVC.state = .error
+                        owner.navigationController?.popToViewController(nickVC, animated: true)
+                    }
+                }
             }
             .disposed(by: disposeBag)
     }
@@ -83,6 +88,7 @@ class GenderViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.printUserInfo()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -90,8 +96,10 @@ class GenderViewController: UIViewController {
         bind()
         if UserInfo.gender == 1 {
             viewModel.input.manButtonClicked.onNext(())
+            viewModel.output.isButtonEnable.accept(true)
         } else if UserInfo.gender == 0 {
             viewModel.input.womanButtonClicked.onNext(())
+            viewModel.output.isButtonEnable.accept(true)
         }
     }
     
