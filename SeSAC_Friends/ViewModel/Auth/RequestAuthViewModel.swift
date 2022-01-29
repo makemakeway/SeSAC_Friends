@@ -28,7 +28,7 @@ class RequestAuthViewModel: ViewModelType {
         let textFieldState: BehaviorRelay<TextFieldState> = BehaviorRelay(value: .inActive)
         let goToLoginView = PublishRelay<Void>()
         let errorMessage = PublishRelay<String>()
-        let phoneNumberText = PublishRelay<String>()
+        let phoneNumberText = BehaviorRelay(value: "")
     }
     
     func transForm() {
@@ -91,11 +91,14 @@ class RequestAuthViewModel: ViewModelType {
             }
             .bind(with: self) { owner, _ in
                 if Connectivity.isConnectedToInternet {
+                    let text = owner.output.phoneNumberText.value
+                    let first = text.index(after: text.startIndex)
+                    let form = text[first...text.index(before: text.endIndex)]
+                    UserInfo.phoneNumber = "+82" + form.replacingOccurrences(of: "-", with: "")
                     owner.output.goToLoginView.accept(())
                 } else {
                     owner.output.errorMessage.accept(APIError.disConnect.rawValue)
                 }
-                
             }
             .disposed(by: disposeBag)
 

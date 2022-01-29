@@ -13,6 +13,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         FirebaseApp.configure()
+        // For Back button customization, setup the custom image for UINavigationBar inside CustomBackButtonNavController.
+        let backButtonBackgroundImage = UIImage(asset: Asset.arrow)
+        let barAppearance =
+            UINavigationBar.appearance()
+        barAppearance.backIndicatorImage = backButtonBackgroundImage
+        barAppearance.backIndicatorTransitionMaskImage = backButtonBackgroundImage
+        barAppearance.tintColor = .defaultBlack
+        
+        UIBarButtonItem.appearance().setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.clear], for: .normal)
+        UIBarButtonItem.appearance().setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.clear], for: .highlighted)
+        
         return true
     }
 

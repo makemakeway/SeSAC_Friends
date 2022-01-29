@@ -9,8 +9,19 @@ import UIKit
 import Then
 import SnapKit
 
-class GenderButtonView: UIButton, ViewRepresentable {
+class GenderButton: UIButton, ViewRepresentable {
     var gender: Bool?
+    
+    var isClicked: Bool = false {
+        willSet {
+            switch newValue {
+            case true:
+                self.backgroundColor = .brandWhiteGreen
+            case false:
+                self.backgroundColor = .systemBackground
+            }
+        }
+    }
     
     let markImageView = UIImageView()
     let genderLabel = UILabel().then {
@@ -28,6 +39,7 @@ class GenderButtonView: UIButton, ViewRepresentable {
         
         containerView.addSubview(markImageView)
         containerView.addSubview(genderLabel)
+        containerView.isUserInteractionEnabled = false
 
         markImageView.setContentHuggingPriority(.required, for: .vertical)
         
@@ -49,9 +61,9 @@ class GenderButtonView: UIButton, ViewRepresentable {
     
     func setConstraints() {
         containerView.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
             make.edges.equalToSuperview()
         }
+        
         
         markImageView.snp.makeConstraints { make in
             make.centerY.equalToSuperview().offset(-14)

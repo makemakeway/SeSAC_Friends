@@ -34,7 +34,7 @@ class UserInfo {
     @UserDefault(key: "idToken", defaultValue: "")static var idToken: String
     @UserDefault(key: "nickname", defaultValue: "")static var nickname: String
     @UserDefault(key: "birthday", defaultValue: "")static var birthday: String
-    @UserDefault(key: "gender", defaultValue: "")static var gender: String
+    @UserDefault(key: "gender", defaultValue: 100)static var gender: Int
     @UserDefault(key: "firstRun", defaultValue: true)static var firstRun: Bool
     @UserDefault(key: "phoneNumber", defaultValue: "")static var phoneNumber: String
     @UserDefault(key: "email", defaultValue: "")static var email: String

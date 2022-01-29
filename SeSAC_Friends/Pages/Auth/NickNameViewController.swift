@@ -106,6 +106,8 @@ class NickNameViewController: UIViewController {
     override func loadView() {
         super.loadView()
         self.view = mainView
+//        let backBarButton = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+//        self.navigationController?.navigationBar.topItem?.backBarButtonItem = backBarButton
     }
     
     override func viewDidLoad() {
@@ -121,6 +123,10 @@ class NickNameViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         mainView.authInputView.textField.becomeFirstResponder()
+        if state == .error {
+            viewModel.output.textFieldState.accept(.error)
+            view.makeToast("해당 닉네임은 사용할 수 없습니다.", duration: 3, position: .center)
+        }
     }
     
     override func viewDidLayoutSubviews() {

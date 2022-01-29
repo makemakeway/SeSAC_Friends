@@ -104,6 +104,7 @@ class RequestAuthViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.navigationBar.backIndicatorImage = UIImage(asset: Asset.arrow)
         bind()
     }
     

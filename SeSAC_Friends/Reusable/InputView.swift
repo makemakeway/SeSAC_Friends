@@ -89,8 +89,8 @@ class InputView: UIView, ViewRepresentable {
     }
     
     //MARK: For Case = .gender
-    let manButton = GenderButtonView(gender: true)
-    let womanButton = GenderButtonView(gender: false)
+    let manButton = GenderButton(gender: true)
+    let womanButton = GenderButton(gender: false)
     let genderStackView = UIStackView().then {
         $0.axis = .horizontal
         $0.distribution = .fillEqually

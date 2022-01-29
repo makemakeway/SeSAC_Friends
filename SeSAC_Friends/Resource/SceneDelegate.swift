@@ -20,10 +20,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         self.window = UIWindow(windowScene: windowScene)
 //        let vc = RequestAuthViewController()
-        let vc = GenderViewController()
+        let vc = NickNameViewController()
         let nav = UINavigationController(rootViewController: vc)
         self.window?.rootViewController = nav
         self.window?.makeKeyAndVisible()
+        self.window?.overrideUserInterfaceStyle = .light
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
