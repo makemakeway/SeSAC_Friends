@@ -64,6 +64,7 @@ class FirebaseAuthService {
                 }
                 if let idToken = idToken {
                     print(idToken)
+                    UserInfo.idToken = idToken
                     single(.success(idToken))
                 }
             }

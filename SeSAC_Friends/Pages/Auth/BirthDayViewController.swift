@@ -89,6 +89,9 @@ class BirthDayViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         bind()
+        if !(UserInfo.birthday.isEmpty) {
+            mainView.datePicker.date = DateManager.shared.stringToDate(dateFormat: UserInfo.birthday)
+        }
     }
     
     override func viewDidDisappear(_ animated: Bool) {

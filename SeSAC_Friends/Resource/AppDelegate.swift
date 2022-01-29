@@ -9,10 +9,20 @@ import UIKit
 import Firebase
 
 @main
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         FirebaseApp.configure()
+        Messaging.messaging().delegate = self
+        Messaging.messaging().token { token, error in
+            if let error = error {
+                print("Error fetching FCM registration token: \(error)")
+            } else if let token = token {
+                print("FCM registration token: \(token)")
+                UserInfo.fcmToken = token
+            }
+        }
+        
         // For Back button customization, setup the custom image for UINavigationBar inside CustomBackButtonNavController.
         let backButtonBackgroundImage = UIImage(asset: Asset.arrow)
         let barAppearance =

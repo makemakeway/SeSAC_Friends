@@ -238,6 +238,7 @@
 		C28377A92796D9F800151297 /* Pages */ = {
 			isa = PBXGroup;
 			children = (
+				C2E20D2627A56E4C00AB9BC0 /* Home */,
 				C28377C427971CC400151297 /* OnBoarding */,
 				C28377C02796F64C00151297 /* Auth */,
 			);
@@ -361,6 +362,13 @@
 				C2E20D2227A44A6800AB9BC0 /* GenderViewModel.swift */,
 			);
 			path = Auth;
+			sourceTree = "<group>";
+		};
+		C2E20D2627A56E4C00AB9BC0 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Home;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

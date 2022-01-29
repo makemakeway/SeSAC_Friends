@@ -124,6 +124,8 @@ class InputView: UIView, ViewRepresentable {
         textField.attributedPlaceholder = placeholderAttr
         textField.font = UIFont.title4_R14
         textField.textColor = UIColor.defaultBlack
+        textField.autocorrectionType = .no
+        textField.autocapitalizationType = .none
     }
     
     func defaultsConstraints() {
@@ -309,6 +311,8 @@ class InputView: UIView, ViewRepresentable {
             makeBorder(view: dayTextField, color: .gray3, x: -12)
         } else if inputViewType == .defaults {
             makeBorder(layer: bottomLine, view: containerView, color: .systemBackground, y: 0, width: -12)
+        } else if inputViewType == .timer {
+            makeBorder(layer: bottomLine, view: containerView, color: .systemBackground, y: 0)
         }
     }
 }

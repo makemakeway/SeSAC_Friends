@@ -96,10 +96,10 @@ class AuthView: UIView, ViewRepresentable {
             authInputView.textField.keyboardType = .numberPad
         case .logIn:
             makeUI(title: "인증번호가 문자로 전송되었어요",
-                   placeholder: "(최대 20초 소요)",
+                   placeholder: "인증번호 입력",
                    buttonTitle: "인증하고 시작하기",
                    type: .timer,
-                   callout: "인증번호 입력")
+                   callout: "(최대 20초 소요)")
             authInputView.textField.keyboardType = .numberPad
         case .nickName:
             makeUI(title: "닉네임을 입력해주세요",

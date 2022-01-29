@@ -9,6 +9,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 import Toast
+import Firebase
 
 
 enum NickNameViewState {
@@ -106,8 +107,6 @@ class NickNameViewController: UIViewController {
     override func loadView() {
         super.loadView()
         self.view = mainView
-//        let backBarButton = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-//        self.navigationController?.navigationBar.topItem?.backBarButtonItem = backBarButton
     }
     
     override func viewDidLoad() {
@@ -118,6 +117,9 @@ class NickNameViewController: UIViewController {
         super.viewWillAppear(animated)
         bind()
         whenNicknameIsError()
+        if !(UserInfo.nickname.isEmpty) {
+            mainView.authInputView.textField.text = UserInfo.nickname
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {

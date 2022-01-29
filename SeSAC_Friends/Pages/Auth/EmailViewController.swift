@@ -79,6 +79,9 @@ class EmailViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         bind()
+        if !(UserInfo.email.isEmpty) {
+            mainView.authInputView.textField.text = UserInfo.email
+        }
     }
     
     override func viewDidDisappear(_ animated: Bool) {

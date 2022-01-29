@@ -83,11 +83,35 @@ class GenderViewModel: ViewModelType {
             .disposed(by: disposeBag)
 
         input.confirmButtonClicked
-            .subscribe { _ in
-                self.output.goToHome.accept(())
+            .flatMap {
+                APIService.shared.postUser()
+                    .catch { [weak self](error) in
+                        guard let self = self, let error = error as? APIError else { return .just(0) }
+                        switch error {
+                        case .tokenExpired:
+                            self.output.errorMessage.accept(APIError.tokenExpired.rawValue)
+                        case .invalidNickname:
+                            self.output.goToNickName.accept(())
+                        case .disConnect:
+                            self.output.errorMessage.accept(APIError.disConnect.rawValue)
+                        default:
+                            self.output.errorMessage.accept("그냥 에러")
+                        }
+                        return .just(0)
+                    }
+            }
+            .asDriver(onErrorJustReturn: 0)
+            .drive(with: self) { owner, status in
+                switch status {
+                case 200:
+                    owner.output.goToHome.accept(())
+                case 201:
+                    owner.output.errorMessage.accept("이미 가입한 유저입니다.")
+                default:
+                    owner.output.errorMessage.accept("\(status)번 에러")
+                }
             }
             .disposed(by: disposeBag)
-
     }
     
     init() {
