@@ -11,7 +11,7 @@ import RxRelay
 import FirebaseAuth
 import RxCocoa
 
-class LoginViewModel: ViewModelType {
+final class LoginViewModel: ViewModelType {
     var disposeBag = DisposeBag()
     
     struct Input {
@@ -157,6 +157,7 @@ class LoginViewModel: ViewModelType {
                 switch statusCode {
                 case 200: // 가입 유저일 경우, 홈 화면 이동
                     if Connectivity.isConnectedToInternet {
+                        UserInfo.signUpCompleted = true
                         owner.output.goToHomeView.accept(())
                     } else {
                         owner.output.errorMessage.accept(APIError.disConnect.rawValue)

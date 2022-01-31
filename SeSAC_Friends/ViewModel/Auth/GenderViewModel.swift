@@ -9,7 +9,7 @@ import Foundation
 import RxSwift
 import RxRelay
 
-class GenderViewModel: ViewModelType {
+final class GenderViewModel: ViewModelType {
     struct Input {
         let confirmButtonClicked = PublishSubject<Void>()
         let manButtonClicked = PublishSubject<Void>()

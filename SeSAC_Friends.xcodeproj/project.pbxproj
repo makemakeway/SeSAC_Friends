@@ -64,6 +64,11 @@
 		C2E20D2327A44A6800AB9BC0 /* GenderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2E20D2227A44A6800AB9BC0 /* GenderViewModel.swift */; };
 		C2E20D2527A4603400AB9BC0 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2E20D2427A4603400AB9BC0 /* UIViewController+Extension.swift */; };
 		C2E20D2827A5751400AB9BC0 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2E20D2727A5751400AB9BC0 /* HomeViewController.swift */; };
+		C2E20D2A27A599C700AB9BC0 /* TabbarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2E20D2927A599C700AB9BC0 /* TabbarController.swift */; };
+		C2E20D2F27A59A4E00AB9BC0 /* ShopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2E20D2E27A59A4E00AB9BC0 /* ShopViewController.swift */; };
+		C2E20D3127A59A7800AB9BC0 /* FriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2E20D3027A59A7800AB9BC0 /* FriendsViewController.swift */; };
+		C2E20D3327A59AA500AB9BC0 /* MyInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2E20D3227A59AA500AB9BC0 /* MyInfoViewController.swift */; };
+		C2E20D3627A6FD9400AB9BC0 /* SeSACUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2E20D3527A6FD9400AB9BC0 /* SeSACUser.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -136,6 +141,11 @@
 		C2E20D2227A44A6800AB9BC0 /* GenderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenderViewModel.swift; sourceTree = "<group>"; };
 		C2E20D2427A4603400AB9BC0 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		C2E20D2727A5751400AB9BC0 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		C2E20D2927A599C700AB9BC0 /* TabbarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabbarController.swift; sourceTree = "<group>"; };
+		C2E20D2E27A59A4E00AB9BC0 /* ShopViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopViewController.swift; sourceTree = "<group>"; };
+		C2E20D3027A59A7800AB9BC0 /* FriendsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsViewController.swift; sourceTree = "<group>"; };
+		C2E20D3227A59AA500AB9BC0 /* MyInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInfoViewController.swift; sourceTree = "<group>"; };
+		C2E20D3527A6FD9400AB9BC0 /* SeSACUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeSACUser.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -240,9 +250,13 @@
 		C28377A92796D9F800151297 /* Pages */ = {
 			isa = PBXGroup;
 			children = (
+				C2E20D2D27A59A3900AB9BC0 /* MyInfo */,
+				C2E20D2C27A59A2A00AB9BC0 /* Friends */,
+				C2E20D2B27A59A1C00AB9BC0 /* Shop */,
 				C2E20D2627A56E4C00AB9BC0 /* Home */,
 				C28377C427971CC400151297 /* OnBoarding */,
 				C28377C02796F64C00151297 /* Auth */,
+				C2E20D2927A599C700AB9BC0 /* TabbarController.swift */,
 			);
 			path = Pages;
 			sourceTree = "<group>";
@@ -258,6 +272,7 @@
 		C28377AB2796DA0100151297 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				C2E20D3527A6FD9400AB9BC0 /* SeSACUser.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -372,6 +387,30 @@
 				C2E20D2727A5751400AB9BC0 /* HomeViewController.swift */,
 			);
 			path = Home;
+			sourceTree = "<group>";
+		};
+		C2E20D2B27A59A1C00AB9BC0 /* Shop */ = {
+			isa = PBXGroup;
+			children = (
+				C2E20D2E27A59A4E00AB9BC0 /* ShopViewController.swift */,
+			);
+			path = Shop;
+			sourceTree = "<group>";
+		};
+		C2E20D2C27A59A2A00AB9BC0 /* Friends */ = {
+			isa = PBXGroup;
+			children = (
+				C2E20D3027A59A7800AB9BC0 /* FriendsViewController.swift */,
+			);
+			path = Friends;
+			sourceTree = "<group>";
+		};
+		C2E20D2D27A59A3900AB9BC0 /* MyInfo */ = {
+			isa = PBXGroup;
+			children = (
+				C2E20D3227A59AA500AB9BC0 /* MyInfoViewController.swift */,
+			);
+			path = MyInfo;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -548,15 +587,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C2E20D2F27A59A4E00AB9BC0 /* ShopViewController.swift in Sources */,
 				C23BA6CC27A16B3A00AD2EE3 /* BirthViewModel.swift in Sources */,
 				C23BA6C4279ECF0800AD2EE3 /* EndPoint.swift in Sources */,
 				C28377C927971E5800151297 /* AuthView.swift in Sources */,
+				C2E20D3127A59A7800AB9BC0 /* FriendsViewController.swift in Sources */,
 				C28377CC27971E7300151297 /* ViewRepresentable.swift in Sources */,
 				C28377E22797FE3F00151297 /* H48Button.swift in Sources */,
 				C23BA6D427A1BFCE00AD2EE3 /* GenderViewController.swift in Sources */,
 				C23BA6D027A1AA5900AD2EE3 /* DateManager.swift in Sources */,
 				C28377E02797F1D400151297 /* UILabel+Extension.swift in Sources */,
+				C2E20D3327A59AA500AB9BC0 /* MyInfoViewController.swift in Sources */,
 				C2E20D2527A4603400AB9BC0 /* UIViewController+Extension.swift in Sources */,
+				C2E20D3627A6FD9400AB9BC0 /* SeSACUser.swift in Sources */,
 				C23BA6BF279D7C9C00AD2EE3 /* UserDefaultsWrapper.swift in Sources */,
 				C28377F227988C0500151297 /* LogInViewController.swift in Sources */,
 				C2E20D2827A5751400AB9BC0 /* HomeViewController.swift in Sources */,
@@ -581,6 +624,7 @@
 				C23BA6CE27A1A97600AD2EE3 /* EmailViewController.swift in Sources */,
 				C23BA6C2279D9C5400AD2EE3 /* FirebaseAuthService.swift in Sources */,
 				C28377BF2796F1C900151297 /* UIFont+Extension.swift in Sources */,
+				C2E20D2A27A599C700AB9BC0 /* TabbarController.swift in Sources */,
 				C28377E7279825D000151297 /* RequestAuthViewModel.swift in Sources */,
 				C28377AF2796E36100151297 /* UIColor+Extension.swift in Sources */,
 				C21A001627A3DF8600222045 /* GenderButton.swift in Sources */,

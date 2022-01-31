@@ -9,7 +9,7 @@ import Foundation
 import RxSwift
 import RxRelay
 
-class BirthViewModel: ViewModelType {
+final class BirthViewModel: ViewModelType {
     struct Input {
         let tapConfirmButton = PublishSubject<Void>()
         let selectedDate = PublishSubject<Date>()

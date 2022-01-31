@@ -13,4 +13,5 @@ protocol ViewModelType {
     associatedtype Output
     
     var disposeBag: DisposeBag { get set }
+    
 }

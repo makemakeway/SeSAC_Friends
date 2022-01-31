@@ -12,7 +12,6 @@ struct UserDefault<Value> {
     private let key: String
     private let defaultValue: Value
     
-    
     init(key: String, defaultValue: Value) {
         self.key = key
         self.defaultValue = defaultValue
@@ -35,7 +34,7 @@ class UserInfo {
     @UserDefault(key: "nickname", defaultValue: "")static var nickname: String
     @UserDefault(key: "birthday", defaultValue: "")static var birthday: String
     @UserDefault(key: "gender", defaultValue: 100)static var gender: Int
-    @UserDefault(key: "firstRun", defaultValue: true)static var firstRun: Bool
+    @UserDefault(key: "signUpCompleted", defaultValue: false)static var signUpCompleted: Bool
     @UserDefault(key: "phoneNumber", defaultValue: "")static var phoneNumber: String
     @UserDefault(key: "email", defaultValue: "")static var email: String
     @UserDefault(key: "FCMToken", defaultValue: "")static var fcmToken: String

@@ -93,7 +93,11 @@ class NickNameViewController: UIViewController {
                 owner.navigationController?.pushViewController(vc, animated: true)
             }
             .disposed(by: disposeBag)
-
+        
+        viewModel.output.textFieldText
+            .asDriver()
+            .drive(mainView.authInputView.textField.rx.text)
+            .disposed(by: disposeBag)
     }
     
     func whenNicknameIsError() {
@@ -117,9 +121,6 @@ class NickNameViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         bind()
-        if !(UserInfo.nickname.isEmpty) {
-            mainView.authInputView.textField.text = UserInfo.nickname
-        }
     }
     
     override func viewDidAppear(_ animated: Bool) {

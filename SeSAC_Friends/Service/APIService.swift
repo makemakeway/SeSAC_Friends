@@ -8,7 +8,6 @@
 import Foundation
 import RxSwift
 import Alamofire
-import FirebaseAuth
 
 enum APIError: String, Error {
     case tokenExpired = "토큰 갱신에 실패했습니다. 잠시 후 다시 시도해주세요."
@@ -19,7 +18,7 @@ enum APIError: String, Error {
     case disConnect = "네트워크 연결이 원활하지 않습니다. 연결상태 확인 후 다시 시도해 주세요!"
 }
 
-class APIService {
+final class APIService {
     static let shared = APIService()
     
     private let disposeBag = DisposeBag()
@@ -40,17 +39,31 @@ class APIService {
             ]
             AF.request(url, method: .get, headers: headers)
                 .validate()
-                .response { response in
+                .responseDecodable { response, error in
+                    
+                }
+            
+            
+            AF.request(url, method: .get, headers: headers)
+                .validate()
+                .response { [weak self](response) in
+                    guard let self = self else { return }
                     switch response.response?.statusCode {
-                    case 201:
-                        //미가입 유저
-                        single(.success(201))
                     case 200:
                         //가입 유저
                         single(.success(200))
+                    case 201:
+                        //미가입 유저
+                        single(.success(201))
                     case 401:
                         //토큰 만료
-                        single(.failure(APIError.tokenExpired))
+                        FirebaseAuthService.shared.getIdToken()
+                            .subscribe { _ in
+                                _ = self.getUser(idToken: idToken)
+                            } onFailure: { error in
+                                single(.failure(APIError.tokenExpired))
+                            }
+                            .disposed(by: self.disposeBag)
                     case 500:
                         single(.failure(APIError.serverError))
                     case 501:
@@ -94,6 +107,7 @@ class APIService {
                     case 200:
                         //회원가입 성공
                         print("회원가입 성공!")
+                        UserInfo.signUpCompleted = true
                         single(.success(200))
                     case 201:
                         //이미 가입한 유저

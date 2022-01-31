@@ -9,7 +9,7 @@ import Foundation
 import RxSwift
 import RxRelay
 
-class EmailViewModel: ViewModelType {
+final class EmailViewModel: ViewModelType {
     struct Input {
         let emailText = BehaviorRelay(value: UserInfo.email)
         let tapConfirmButton = PublishSubject<Void>()

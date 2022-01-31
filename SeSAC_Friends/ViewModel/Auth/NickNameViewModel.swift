@@ -9,9 +9,9 @@ import Foundation
 import RxSwift
 import RxRelay
 
-class NickNameViewModel: ViewModelType {
+final class NickNameViewModel: ViewModelType {
     struct Input {
-        let textFieldText = BehaviorRelay(value: "")
+        let textFieldText = BehaviorSubject(value: UserInfo.nickname)
         let tapConfirmButton = PublishSubject<Void>()
         let tapTextField = PublishSubject<Void>()
     }
@@ -21,7 +21,7 @@ class NickNameViewModel: ViewModelType {
         let textFieldState: BehaviorRelay<TextFieldState> = BehaviorRelay(value: .inActive)
         let goToBirthdayView = PublishRelay<Void>()
         let errorMessage = PublishRelay<String>()
-        let textFieldText = PublishRelay<String>()
+        let textFieldText = BehaviorRelay(value: "")
     }
     
     let input = Input()
@@ -29,7 +29,15 @@ class NickNameViewModel: ViewModelType {
     var disposeBag: DisposeBag = DisposeBag()
     
     func transForm() {
-        let textIsValid = input.textFieldText
+        let textFieldText = input.textFieldText
+            .share()
+        
+        textFieldText
+            .asDriver(onErrorJustReturn: "")
+            .drive(output.textFieldText)
+            .disposed(by: disposeBag)
+        
+        let textIsValid = textFieldText
             .map { $0.count >= 1 && $0.count <= 10 }
             .share()
             .debug("validText")
@@ -45,7 +53,7 @@ class NickNameViewModel: ViewModelType {
             .drive(with: self) { owner, valid in
                 if valid {
                     // 생년월일로
-                    UserInfo.nickname = owner.input.textFieldText.value
+                    UserInfo.nickname = owner.output.textFieldText.value
                     if Connectivity.isConnectedToInternet {
                         owner.output.goToBirthdayView.accept(())
                     } else {
@@ -65,6 +73,13 @@ class NickNameViewModel: ViewModelType {
             }
             .disposed(by: disposeBag)
 
+        textFieldText
+            .debug()
+            .asDriver(onErrorJustReturn: "")
+            .drive(with: self, onNext: { owner, text in
+                owner.output.textFieldText.accept(text)
+            })
+            .disposed(by: disposeBag)
     }
     
     init() {

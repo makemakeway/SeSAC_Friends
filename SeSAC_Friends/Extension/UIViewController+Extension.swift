@@ -22,7 +22,8 @@ extension UIViewController {
             guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene else {
                 return
             }
-            windowScene.windows.first?.rootViewController = UINavigationController(rootViewController: viewController)
+            let tabbar = TabBarController()
+            windowScene.windows.first?.rootViewController = tabbar
             windowScene.windows.first?.makeKeyAndVisible()
         }
     }

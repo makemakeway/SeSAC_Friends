@@ -19,7 +19,7 @@ enum AuthViewState {
     case gender
 }
 
-class AuthView: UIView, ViewRepresentable {
+final class AuthView: UIView, ViewRepresentable {
     var authViewState: AuthViewState?
     let authRequestButton = H48Button()
     var authInputView: InputView!

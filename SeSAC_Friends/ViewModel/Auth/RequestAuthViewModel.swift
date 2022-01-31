@@ -10,7 +10,7 @@ import RxSwift
 import RxCocoa
 import RxRelay
 
-class RequestAuthViewModel: ViewModelType {
+final class RequestAuthViewModel: ViewModelType {
     
     var disposeBag = DisposeBag()
     
