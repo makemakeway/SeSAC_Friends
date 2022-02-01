@@ -24,19 +24,19 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         self.window = UIWindow(windowScene: windowScene)
         
-        self.window?.rootViewController = OnBoardingViewController()
-        self.window?.makeKeyAndVisible()
-        
-//        if UserInfo.idToken.isEmpty {
-//            setRootView(vc: OnBoardingViewController())
-//        } else if UserInfo.signUpCompleted {
-//            // 홈화면
-//            let tabbar = UITabBarController()
-//            self.window?.rootViewController = tabbar
-//            self.window?.makeKeyAndVisible()
-//        } else {
-//            setRootView(vc: NickNameViewController())
-//        }
+        if UserInfo.idToken.isEmpty {
+            setRootView(vc: OnBoardingViewController())
+            print("onboarding")
+        } else if UserInfo.signUpCompleted {
+            // 홈화면
+            let tabbar = UITabBarController()
+            self.window?.rootViewController = tabbar
+            self.window?.makeKeyAndVisible()
+            print("home")
+        } else {
+            setRootView(vc: NickNameViewController())
+            print("nickname")
+        }
         
     }
 
