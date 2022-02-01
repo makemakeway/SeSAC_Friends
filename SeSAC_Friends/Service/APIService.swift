@@ -37,11 +37,6 @@ final class APIService {
                 "Content-Type": "application/x-www-form-urlencoded",
                 "idtoken": idToken
             ]
-            AF.request(url, method: .get, headers: headers)
-                .validate()
-                .responseDecodable { response, error in
-                    
-                }
             
             
             AF.request(url, method: .get, headers: headers)

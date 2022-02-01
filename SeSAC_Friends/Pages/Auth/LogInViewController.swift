@@ -102,8 +102,7 @@ class LogInViewController: UIViewController {
         viewModel.output.goToHomeView
             .asDriver(onErrorJustReturn: ())
             .drive(with: self) { owner, _ in
-                let vc = HomeViewController()
-                owner.changeRootView(viewController: vc)
+                owner.changeRootViewToHome()
             }
             .disposed(by: disposeBag)
         

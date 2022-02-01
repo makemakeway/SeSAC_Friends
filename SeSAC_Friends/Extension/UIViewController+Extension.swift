@@ -17,13 +17,24 @@ extension UIViewController {
         print("nickname: \(UserInfo.nickname)")
     }
     
-    func changeRootView(viewController: UIViewController) {
+    func changeRootViewToHome() {
         DispatchQueue.main.async {
             guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene else {
                 return
             }
             let tabbar = TabBarController()
             windowScene.windows.first?.rootViewController = tabbar
+            windowScene.windows.first?.makeKeyAndVisible()
+        }
+    }
+    
+    func changeRootView(viewController: UIViewController) {
+        DispatchQueue.main.async {
+            guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene else {
+                return
+            }
+            let nav = UINavigationController(rootViewController: viewController)
+            windowScene.windows.first?.rootViewController = nav
             windowScene.windows.first?.makeKeyAndVisible()
         }
     }

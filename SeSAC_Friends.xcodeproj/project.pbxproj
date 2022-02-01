@@ -69,6 +69,9 @@
 		C2E20D3127A59A7800AB9BC0 /* FriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2E20D3027A59A7800AB9BC0 /* FriendsViewController.swift */; };
 		C2E20D3327A59AA500AB9BC0 /* MyInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2E20D3227A59AA500AB9BC0 /* MyInfoViewController.swift */; };
 		C2E20D3627A6FD9400AB9BC0 /* SeSACUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2E20D3527A6FD9400AB9BC0 /* SeSACUser.swift */; };
+		C2E20D3827A908F200AB9BC0 /* OnBoardingCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2E20D3727A908F200AB9BC0 /* OnBoardingCollectionViewCell.swift */; };
+		C2E20D3A27A90F4000AB9BC0 /* OnBoardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2E20D3927A90F4000AB9BC0 /* OnBoardingView.swift */; };
+		C2E20D3C27A91E1900AB9BC0 /* OnboardingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2E20D3B27A91E1900AB9BC0 /* OnboardingModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -146,6 +149,9 @@
 		C2E20D3027A59A7800AB9BC0 /* FriendsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsViewController.swift; sourceTree = "<group>"; };
 		C2E20D3227A59AA500AB9BC0 /* MyInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInfoViewController.swift; sourceTree = "<group>"; };
 		C2E20D3527A6FD9400AB9BC0 /* SeSACUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeSACUser.swift; sourceTree = "<group>"; };
+		C2E20D3727A908F200AB9BC0 /* OnBoardingCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingCollectionViewCell.swift; sourceTree = "<group>"; };
+		C2E20D3927A90F4000AB9BC0 /* OnBoardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingView.swift; sourceTree = "<group>"; };
+		C2E20D3B27A91E1900AB9BC0 /* OnboardingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -273,6 +279,7 @@
 			isa = PBXGroup;
 			children = (
 				C2E20D3527A6FD9400AB9BC0 /* SeSACUser.swift */,
+				C2E20D3B27A91E1900AB9BC0 /* OnboardingModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -329,6 +336,8 @@
 			isa = PBXGroup;
 			children = (
 				C28377C527971D0200151297 /* OnBoardingViewController.swift */,
+				C2E20D3727A908F200AB9BC0 /* OnBoardingCollectionViewCell.swift */,
+				C2E20D3927A90F4000AB9BC0 /* OnBoardingView.swift */,
 			);
 			path = OnBoarding;
 			sourceTree = "<group>";
@@ -599,18 +608,21 @@
 				C28377E02797F1D400151297 /* UILabel+Extension.swift in Sources */,
 				C2E20D3327A59AA500AB9BC0 /* MyInfoViewController.swift in Sources */,
 				C2E20D2527A4603400AB9BC0 /* UIViewController+Extension.swift in Sources */,
+				C2E20D3C27A91E1900AB9BC0 /* OnboardingModel.swift in Sources */,
 				C2E20D3627A6FD9400AB9BC0 /* SeSACUser.swift in Sources */,
 				C23BA6BF279D7C9C00AD2EE3 /* UserDefaultsWrapper.swift in Sources */,
 				C28377F227988C0500151297 /* LogInViewController.swift in Sources */,
 				C2E20D2827A5751400AB9BC0 /* HomeViewController.swift in Sources */,
 				C23BA6C6279EDB0E00AD2EE3 /* APIService.swift in Sources */,
 				C242CDBA2796BE7000905287 /* RequestAuthViewController.swift in Sources */,
+				C2E20D3827A908F200AB9BC0 /* OnBoardingCollectionViewCell.swift in Sources */,
 				C28377E527980E1000151297 /* ButtonState.swift in Sources */,
 				C2E20D2327A44A6800AB9BC0 /* GenderViewModel.swift in Sources */,
 				C23BA6CA27A02A7900AD2EE3 /* Connectivity.swift in Sources */,
 				C28377E9279825EF00151297 /* ViewModelType.swift in Sources */,
 				C28377F52799A41000151297 /* LoginViewModel.swift in Sources */,
 				C242CDB62796BE7000905287 /* AppDelegate.swift in Sources */,
+				C2E20D3A27A90F4000AB9BC0 /* OnBoardingView.swift in Sources */,
 				C23BA6B7279C554900AD2EE3 /* NickNameViewController.swift in Sources */,
 				C242CDB82796BE7000905287 /* SceneDelegate.swift in Sources */,
 				C28377F027987D0A00151297 /* TextFieldState.swift in Sources */,
