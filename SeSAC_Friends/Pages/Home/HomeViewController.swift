@@ -14,7 +14,7 @@ class HomeViewController: UIViewController {
     
     //MARK: UI
     
-    
+    let mainView = HomeView()
     
     //MARK: Method
     
@@ -23,9 +23,12 @@ class HomeViewController: UIViewController {
     //MARK: LifeCycle
     override func loadView() {
         super.loadView()
+        self.view = mainView
+        self.navigationController?.navigationBar.isHidden = true
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
     }
 }

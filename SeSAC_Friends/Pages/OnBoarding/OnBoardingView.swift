@@ -25,7 +25,6 @@ class OnBoardingView: UIView, ViewRepresentable {
         addSubview(indicator)
         startButton.backgroundColor = .brandGreen
         startButton.setTitle("시작하기", for: .normal)
-        
     }
     
     func setConstraints() {

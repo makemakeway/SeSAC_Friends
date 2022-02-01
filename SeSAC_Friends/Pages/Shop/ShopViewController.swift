@@ -28,5 +28,6 @@ class ShopViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "새싹샵"
+        self.view.backgroundColor = .systemBackground
     }
 }

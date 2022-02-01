@@ -35,7 +35,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate {
         UIBarButtonItem.appearance().setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.clear], for: .normal)
         UIBarButtonItem.appearance().setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.clear], for: .highlighted)
         
-        NMFAuthManager.shared().clientId = ""
+        NMFAuthManager.shared().clientId = API.NAVER_CLIENT_ID
         
         return true
     }

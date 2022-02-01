@@ -6,6 +6,8 @@ target 'SeSAC_Friends' do
   use_frameworks!
 
   pod 'NMapsMap'
+  pod 'RxSwift', '6.5.0'
+  pod 'RxCocoa', '6.5.0'
 
   # Pods for SeSAC_Friends
 

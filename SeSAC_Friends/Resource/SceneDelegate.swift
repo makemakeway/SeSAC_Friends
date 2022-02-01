@@ -19,7 +19,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        self.window?.overrideUserInterfaceStyle = .light
         
         guard let windowScene = (scene as? UIWindowScene) else { return }
         self.window = UIWindow(windowScene: windowScene)
@@ -29,7 +28,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             print("onboarding")
         } else if UserInfo.signUpCompleted {
             // 홈화면
-            let tabbar = UITabBarController()
+            let tabbar = TabBarController()
             self.window?.rootViewController = tabbar
             self.window?.makeKeyAndVisible()
             print("home")

@@ -21,7 +21,7 @@ extension UIColor {
     class var defaultBlack: UIColor { return UIColor(named: "black")! }
     
     // #FFFFFF
-    class var defaultWhite: UIColor { return UIColor(named: "brand_green")! }
+    class var defaultWhite: UIColor { return UIColor(named: "white")! }
     
     // #628FE5
     class var systemSuccess: UIColor { return UIColor(named: "success")! }
