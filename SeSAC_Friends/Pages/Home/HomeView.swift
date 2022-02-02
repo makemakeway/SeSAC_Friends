@@ -25,14 +25,13 @@ class HomeView: UIView, ViewRepresentable {
         $0.selectedSegmentIndex = 0
         $0.selectedSegmentTintColor = .brandGreen
         $0.tintColor = .defaultWhite
-        $0.setTitleTextAttributes([NSAttributedString.Key.font : UIFont.title3_M14], for: .normal)
         $0.backgroundColor = .defaultWhite
-        $0.isOpaque = false
+        $0.setTitleTextAttributes([NSAttributedString.Key.font : UIFont.title3_M14], for: .normal)
         $0.layer.cornerRadius = 10
         $0.setTitleTextAttributes([NSAttributedString.Key.foregroundColor : UIColor.defaultWhite], for: .selected)
-        $0.layer.shadowOffset = .zero
-        $0.layer.shadowOpacity = 0.6
-        $0.layer.shadowRadius = 2
+        
+        //MARK: SegmentedControl 배경색 투명하게 못바꾼다고 하는데 어떻게 처리하나
+        //MARK: 그림자도 적용이 안되는 것 같다
         
         for segment in $0.subviews {
             segment.transform = CGAffineTransform(rotationAngle: -.pi / 2)
@@ -61,7 +60,7 @@ class HomeView: UIView, ViewRepresentable {
         floatingButton.setImage(UIImage(asset: Asset.antenna), for: .normal)
         floatingButton.contentMode = .scaleAspectFill
         
-        
+        self.backgroundColor = .defaultWhite
     }
     
     func setConstraints() {
