@@ -20,6 +20,11 @@ class MyInfoViewController: UIViewController {
     
     //MARK: Method
     
+    func tableViewConfig() {
+        mainView.tableView.delegate = self
+        mainView.tableView.dataSource = self
+        mainView.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+    }
     
     
     //MARK: LifeCycle
@@ -32,10 +37,7 @@ class MyInfoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "내정보"
-        mainView.tableView.delegate = self
-        mainView.tableView.dataSource = self
-        mainView.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
-        mainView.backgroundColor = .systemBackground
+        tableViewConfig()
     }
 }
 
@@ -82,8 +84,12 @@ extension MyInfoViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.row == 0 {
-            print("정보 화면으로")
+        switch indexPath.row {
+        case 0:
+            let vc = InfoManageViewController()
+            self.navigationController?.pushViewController(vc, animated: true)
+        default:
+            print("기능 없음")
         }
     }
 }

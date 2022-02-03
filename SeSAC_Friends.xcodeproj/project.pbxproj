@@ -38,6 +38,18 @@
 		C242CDD72796BE7300905287 /* SeSAC_FriendsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C242CDD62796BE7300905287 /* SeSAC_FriendsUITests.swift */; };
 		C242CDD92796BE7300905287 /* SeSAC_FriendsUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C242CDD82796BE7300905287 /* SeSAC_FriendsUITestsLaunchTests.swift */; };
 		C26E99D527AA9C9200E00E15 /* MyInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26E99D427AA9C9200E00E15 /* MyInfoView.swift */; };
+		C26E99D727AAC9C100E00E15 /* InfoManageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26E99D627AAC9C100E00E15 /* InfoManageViewController.swift */; };
+		C26E99D927AAC9CA00E00E15 /* InfoManageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26E99D827AAC9CA00E00E15 /* InfoManageView.swift */; };
+		C26E99DB27AAD58000E00E15 /* CardImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26E99DA27AAD58000E00E15 /* CardImageView.swift */; };
+		C26E99DD27AB787300E00E15 /* Expandable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26E99DC27AB787300E00E15 /* Expandable.swift */; };
+		C26E99DF27AB79AA00E00E15 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26E99DE27AB79AA00E00E15 /* CardView.swift */; };
+		C26E99E127AB98DE00E00E15 /* InfoStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26E99E027AB98DE00E00E15 /* InfoStackView.swift */; };
+		C26E99E327AB9B7A00E00E15 /* InfoGenderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26E99E227AB9B7A00E00E15 /* InfoGenderView.swift */; };
+		C26E99E527ABAC3700E00E15 /* H32Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26E99E427ABAC3700E00E15 /* H32Button.swift */; };
+		C26E99E727ABB25600E00E15 /* CardStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26E99E627ABB25600E00E15 /* CardStackView.swift */; };
+		C26E99E927ABB30C00E00E15 /* TitleStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26E99E827ABB30C00E00E15 /* TitleStackView.swift */; };
+		C26E99EB27ABD16B00E00E15 /* InfoHobbyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26E99EA27ABD16B00E00E15 /* InfoHobbyView.swift */; };
+		C26E99ED27ABD1CC00E00E15 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26E99EC27ABD1CC00E00E15 /* CustomTextField.swift */; };
 		C28377AF2796E36100151297 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C28377AE2796E36100151297 /* UIColor+Extension.swift */; };
 		C28377BA2796EEEE00151297 /* NotoSansKR-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = C28377B42796EEEE00151297 /* NotoSansKR-Medium.otf */; };
 		C28377BC2796EEEE00151297 /* NotoSansKR-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = C28377B62796EEEE00151297 /* NotoSansKR-Regular.otf */; };
@@ -133,6 +145,18 @@
 		C242CDD62796BE7300905287 /* SeSAC_FriendsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeSAC_FriendsUITests.swift; sourceTree = "<group>"; };
 		C242CDD82796BE7300905287 /* SeSAC_FriendsUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeSAC_FriendsUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		C26E99D427AA9C9200E00E15 /* MyInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInfoView.swift; sourceTree = "<group>"; };
+		C26E99D627AAC9C100E00E15 /* InfoManageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoManageViewController.swift; sourceTree = "<group>"; };
+		C26E99D827AAC9CA00E00E15 /* InfoManageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoManageView.swift; sourceTree = "<group>"; };
+		C26E99DA27AAD58000E00E15 /* CardImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardImageView.swift; sourceTree = "<group>"; };
+		C26E99DC27AB787300E00E15 /* Expandable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Expandable.swift; sourceTree = "<group>"; };
+		C26E99DE27AB79AA00E00E15 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
+		C26E99E027AB98DE00E00E15 /* InfoStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoStackView.swift; sourceTree = "<group>"; };
+		C26E99E227AB9B7A00E00E15 /* InfoGenderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoGenderView.swift; sourceTree = "<group>"; };
+		C26E99E427ABAC3700E00E15 /* H32Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = H32Button.swift; sourceTree = "<group>"; };
+		C26E99E627ABB25600E00E15 /* CardStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardStackView.swift; sourceTree = "<group>"; };
+		C26E99E827ABB30C00E00E15 /* TitleStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleStackView.swift; sourceTree = "<group>"; };
+		C26E99EA27ABD16B00E00E15 /* InfoHobbyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoHobbyView.swift; sourceTree = "<group>"; };
+		C26E99EC27ABD1CC00E00E15 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		C28377AE2796E36100151297 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		C28377B42796EEEE00151297 /* NotoSansKR-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansKR-Medium.otf"; sourceTree = "<group>"; };
 		C28377B62796EEEE00151297 /* NotoSansKR-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansKR-Regular.otf"; sourceTree = "<group>"; };
@@ -391,6 +415,12 @@
 				C23BA6AD279BCF2300AD2EE3 /* H40Button.swift */,
 				C28377EB279831F000151297 /* InputView.swift */,
 				C21A001527A3DF8600222045 /* GenderButton.swift */,
+				C26E99DA27AAD58000E00E15 /* CardImageView.swift */,
+				C26E99DE27AB79AA00E00E15 /* CardView.swift */,
+				C26E99E427ABAC3700E00E15 /* H32Button.swift */,
+				C26E99E627ABB25600E00E15 /* CardStackView.swift */,
+				C26E99E827ABB30C00E00E15 /* TitleStackView.swift */,
+				C26E99EC27ABD1CC00E00E15 /* CustomTextField.swift */,
 			);
 			path = Reusable;
 			sourceTree = "<group>";
@@ -400,6 +430,7 @@
 			children = (
 				C28377CB27971E7300151297 /* ViewRepresentable.swift */,
 				C28377E8279825EF00151297 /* ViewModelType.swift */,
+				C26E99DC27AB787300E00E15 /* Expandable.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -469,6 +500,11 @@
 			children = (
 				C2E20D3227A59AA500AB9BC0 /* MyInfoViewController.swift */,
 				C26E99D427AA9C9200E00E15 /* MyInfoView.swift */,
+				C26E99D627AAC9C100E00E15 /* InfoManageViewController.swift */,
+				C26E99D827AAC9CA00E00E15 /* InfoManageView.swift */,
+				C26E99E027AB98DE00E00E15 /* InfoStackView.swift */,
+				C26E99E227AB9B7A00E00E15 /* InfoGenderView.swift */,
+				C26E99EA27ABD16B00E00E15 /* InfoHobbyView.swift */,
 			);
 			path = MyInfo;
 			sourceTree = "<group>";
@@ -757,27 +793,36 @@
 				C28377E22797FE3F00151297 /* H48Button.swift in Sources */,
 				C23BA6D427A1BFCE00AD2EE3 /* GenderViewController.swift in Sources */,
 				C23BA6D027A1AA5900AD2EE3 /* DateManager.swift in Sources */,
+				C26E99DF27AB79AA00E00E15 /* CardView.swift in Sources */,
 				C28377E02797F1D400151297 /* UILabel+Extension.swift in Sources */,
+				C26E99E527ABAC3700E00E15 /* H32Button.swift in Sources */,
 				C2E20D3327A59AA500AB9BC0 /* MyInfoViewController.swift in Sources */,
 				C2E20D2527A4603400AB9BC0 /* UIViewController+Extension.swift in Sources */,
 				C2E20D3C27A91E1900AB9BC0 /* OnboardingModel.swift in Sources */,
 				C2E20D3627A6FD9400AB9BC0 /* SeSACUser.swift in Sources */,
 				C23BA6BF279D7C9C00AD2EE3 /* UserDefaultsWrapper.swift in Sources */,
 				C28377F227988C0500151297 /* LogInViewController.swift in Sources */,
+				C26E99ED27ABD1CC00E00E15 /* CustomTextField.swift in Sources */,
 				C2E20D2827A5751400AB9BC0 /* HomeViewController.swift in Sources */,
 				C23BA6C6279EDB0E00AD2EE3 /* APIService.swift in Sources */,
 				C242CDBA2796BE7000905287 /* RequestAuthViewController.swift in Sources */,
 				C2E20D3827A908F200AB9BC0 /* OnBoardingCollectionViewCell.swift in Sources */,
+				C26E99E927ABB30C00E00E15 /* TitleStackView.swift in Sources */,
 				C28377E527980E1000151297 /* ButtonState.swift in Sources */,
 				C2E20D2327A44A6800AB9BC0 /* GenderViewModel.swift in Sources */,
 				C26E99D527AA9C9200E00E15 /* MyInfoView.swift in Sources */,
+				C26E99D927AAC9CA00E00E15 /* InfoManageView.swift in Sources */,
 				C23BA6CA27A02A7900AD2EE3 /* Connectivity.swift in Sources */,
 				C28377E9279825EF00151297 /* ViewModelType.swift in Sources */,
+				C26E99E127AB98DE00E00E15 /* InfoStackView.swift in Sources */,
 				C28377F52799A41000151297 /* LoginViewModel.swift in Sources */,
 				C242CDB62796BE7000905287 /* AppDelegate.swift in Sources */,
 				C2E20D3A27A90F4000AB9BC0 /* OnBoardingView.swift in Sources */,
+				C26E99DD27AB787300E00E15 /* Expandable.swift in Sources */,
+				C26E99E727ABB25600E00E15 /* CardStackView.swift in Sources */,
 				C23BA6B7279C554900AD2EE3 /* NickNameViewController.swift in Sources */,
 				C242CDB82796BE7000905287 /* SceneDelegate.swift in Sources */,
+				C26E99D727AAC9C100E00E15 /* InfoManageViewController.swift in Sources */,
 				C28377F027987D0A00151297 /* TextFieldState.swift in Sources */,
 				C23BA6C8279FF34600AD2EE3 /* NickNameViewModel.swift in Sources */,
 				C23BA6B5279C42EC00AD2EE3 /* InputViewContentType.swift in Sources */,
@@ -786,10 +831,13 @@
 				C28377EC279831F000151297 /* InputView.swift in Sources */,
 				C28377C627971D0300151297 /* OnBoardingViewController.swift in Sources */,
 				C23BA6B9279C5AF100AD2EE3 /* BirthDayViewController.swift in Sources */,
+				C26E99DB27AAD58000E00E15 /* CardImageView.swift in Sources */,
 				C23BA6CE27A1A97600AD2EE3 /* EmailViewController.swift in Sources */,
 				C23BA6C2279D9C5400AD2EE3 /* FirebaseAuthService.swift in Sources */,
+				C26E99EB27ABD16B00E00E15 /* InfoHobbyView.swift in Sources */,
 				C28377BF2796F1C900151297 /* UIFont+Extension.swift in Sources */,
 				C2E20D2A27A599C700AB9BC0 /* TabbarController.swift in Sources */,
+				C26E99E327AB9B7A00E00E15 /* InfoGenderView.swift in Sources */,
 				C28377E7279825D000151297 /* RequestAuthViewModel.swift in Sources */,
 				C28377AF2796E36100151297 /* UIColor+Extension.swift in Sources */,
 				C21A001627A3DF8600222045 /* GenderButton.swift in Sources */,

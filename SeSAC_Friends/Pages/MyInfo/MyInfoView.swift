@@ -14,6 +14,7 @@ class MyInfoView: UIView, ViewRepresentable {
     
     func setUp() {
         addSubview(tableView)
+        self.backgroundColor = .systemBackground
     }
     
     func setConstraints() {
