@@ -50,6 +50,9 @@
 		C26E99E927ABB30C00E00E15 /* TitleStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26E99E827ABB30C00E00E15 /* TitleStackView.swift */; };
 		C26E99EB27ABD16B00E00E15 /* InfoHobbyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26E99EA27ABD16B00E00E15 /* InfoHobbyView.swift */; };
 		C26E99ED27ABD1CC00E00E15 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26E99EC27ABD1CC00E00E15 /* CustomTextField.swift */; };
+		C26E99EF27ABD30500E00E15 /* InfoAllowPhoneNumberSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26E99EE27ABD30500E00E15 /* InfoAllowPhoneNumberSearchView.swift */; };
+		C26E99F127ABD35F00E00E15 /* InfoAgeRestrictView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26E99F027ABD35F00E00E15 /* InfoAgeRestrictView.swift */; };
+		C26E99F327ABD38800E00E15 /* InfoWithdrawView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26E99F227ABD38800E00E15 /* InfoWithdrawView.swift */; };
 		C28377AF2796E36100151297 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C28377AE2796E36100151297 /* UIColor+Extension.swift */; };
 		C28377BA2796EEEE00151297 /* NotoSansKR-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = C28377B42796EEEE00151297 /* NotoSansKR-Medium.otf */; };
 		C28377BC2796EEEE00151297 /* NotoSansKR-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = C28377B62796EEEE00151297 /* NotoSansKR-Regular.otf */; };
@@ -73,6 +76,7 @@
 		C28377F227988C0500151297 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C28377F127988C0500151297 /* LogInViewController.swift */; };
 		C28377F52799A41000151297 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C28377F42799A41000151297 /* LoginViewModel.swift */; };
 		C283FB6B27A963C9001ED1DC /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = C283FB6A27A963C9001ED1DC /* API.swift */; };
+		C2A6E5DC27ABF41700829EE0 /* MultiSlider in Frameworks */ = {isa = PBXBuildFile; productRef = C2A6E5DB27ABF41700829EE0 /* MultiSlider */; };
 		C2E20D2127A3E93500AB9BC0 /* Images+Generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2E20D2027A3E93500AB9BC0 /* Images+Generated.swift */; };
 		C2E20D2327A44A6800AB9BC0 /* GenderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2E20D2227A44A6800AB9BC0 /* GenderViewModel.swift */; };
 		C2E20D2527A4603400AB9BC0 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2E20D2427A4603400AB9BC0 /* UIViewController+Extension.swift */; };
@@ -157,6 +161,9 @@
 		C26E99E827ABB30C00E00E15 /* TitleStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleStackView.swift; sourceTree = "<group>"; };
 		C26E99EA27ABD16B00E00E15 /* InfoHobbyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoHobbyView.swift; sourceTree = "<group>"; };
 		C26E99EC27ABD1CC00E00E15 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
+		C26E99EE27ABD30500E00E15 /* InfoAllowPhoneNumberSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoAllowPhoneNumberSearchView.swift; sourceTree = "<group>"; };
+		C26E99F027ABD35F00E00E15 /* InfoAgeRestrictView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoAgeRestrictView.swift; sourceTree = "<group>"; };
+		C26E99F227ABD38800E00E15 /* InfoWithdrawView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoWithdrawView.swift; sourceTree = "<group>"; };
 		C28377AE2796E36100151297 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		C28377B42796EEEE00151297 /* NotoSansKR-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansKR-Medium.otf"; sourceTree = "<group>"; };
 		C28377B62796EEEE00151297 /* NotoSansKR-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansKR-Regular.otf"; sourceTree = "<group>"; };
@@ -199,6 +206,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C23BA6AC279AF7D400AD2EE3 /* FirebaseMessaging in Frameworks */,
+				C2A6E5DC27ABF41700829EE0 /* MultiSlider in Frameworks */,
 				C28377DC279720D800151297 /* Then in Frameworks */,
 				C28377D9279720CA00151297 /* Alamofire in Frameworks */,
 				C28377D6279720B900151297 /* Toast in Frameworks */,
@@ -411,16 +419,16 @@
 			isa = PBXGroup;
 			children = (
 				C28377C827971E5800151297 /* AuthView.swift */,
+				C28377EB279831F000151297 /* InputView.swift */,
+				C26E99EC27ABD1CC00E00E15 /* CustomTextField.swift */,
 				C28377E12797FE3F00151297 /* H48Button.swift */,
 				C23BA6AD279BCF2300AD2EE3 /* H40Button.swift */,
-				C28377EB279831F000151297 /* InputView.swift */,
+				C26E99E427ABAC3700E00E15 /* H32Button.swift */,
 				C21A001527A3DF8600222045 /* GenderButton.swift */,
 				C26E99DA27AAD58000E00E15 /* CardImageView.swift */,
 				C26E99DE27AB79AA00E00E15 /* CardView.swift */,
-				C26E99E427ABAC3700E00E15 /* H32Button.swift */,
 				C26E99E627ABB25600E00E15 /* CardStackView.swift */,
 				C26E99E827ABB30C00E00E15 /* TitleStackView.swift */,
-				C26E99EC27ABD1CC00E00E15 /* CustomTextField.swift */,
 			);
 			path = Reusable;
 			sourceTree = "<group>";
@@ -505,6 +513,9 @@
 				C26E99E027AB98DE00E00E15 /* InfoStackView.swift */,
 				C26E99E227AB9B7A00E00E15 /* InfoGenderView.swift */,
 				C26E99EA27ABD16B00E00E15 /* InfoHobbyView.swift */,
+				C26E99EE27ABD30500E00E15 /* InfoAllowPhoneNumberSearchView.swift */,
+				C26E99F027ABD35F00E00E15 /* InfoAgeRestrictView.swift */,
+				C26E99F227ABD38800E00E15 /* InfoWithdrawView.swift */,
 			);
 			path = MyInfo;
 			sourceTree = "<group>";
@@ -535,6 +546,7 @@
 				C28377DB279720D800151297 /* Then */,
 				C23BA6A9279AF7D400AD2EE3 /* FirebaseAuth */,
 				C23BA6AB279AF7D400AD2EE3 /* FirebaseMessaging */,
+				C2A6E5DB27ABF41700829EE0 /* MultiSlider */,
 			);
 			productName = SeSAC_Friends;
 			productReference = C242CDB22796BE7000905287 /* SeSAC_Friends.app */;
@@ -617,6 +629,7 @@
 				C28377D7279720CA00151297 /* XCRemoteSwiftPackageReference "Alamofire" */,
 				C28377DA279720D800151297 /* XCRemoteSwiftPackageReference "Then" */,
 				C23BA6A8279AF7D400AD2EE3 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				C2A6E5DA27ABF41600829EE0 /* XCRemoteSwiftPackageReference "MultiSlider" */,
 			);
 			productRefGroup = C242CDB32796BE7000905287 /* Products */;
 			projectDirPath = "";
@@ -791,6 +804,7 @@
 				C2E20D3127A59A7800AB9BC0 /* FriendsViewController.swift in Sources */,
 				C28377CC27971E7300151297 /* ViewRepresentable.swift in Sources */,
 				C28377E22797FE3F00151297 /* H48Button.swift in Sources */,
+				C26E99F327ABD38800E00E15 /* InfoWithdrawView.swift in Sources */,
 				C23BA6D427A1BFCE00AD2EE3 /* GenderViewController.swift in Sources */,
 				C23BA6D027A1AA5900AD2EE3 /* DateManager.swift in Sources */,
 				C26E99DF27AB79AA00E00E15 /* CardView.swift in Sources */,
@@ -830,6 +844,7 @@
 				C23BA6BD279D6CC200AD2EE3 /* UserDefaults+Extension.swift in Sources */,
 				C28377EC279831F000151297 /* InputView.swift in Sources */,
 				C28377C627971D0300151297 /* OnBoardingViewController.swift in Sources */,
+				C26E99EF27ABD30500E00E15 /* InfoAllowPhoneNumberSearchView.swift in Sources */,
 				C23BA6B9279C5AF100AD2EE3 /* BirthDayViewController.swift in Sources */,
 				C26E99DB27AAD58000E00E15 /* CardImageView.swift in Sources */,
 				C23BA6CE27A1A97600AD2EE3 /* EmailViewController.swift in Sources */,
@@ -839,6 +854,7 @@
 				C2E20D2A27A599C700AB9BC0 /* TabbarController.swift in Sources */,
 				C26E99E327AB9B7A00E00E15 /* InfoGenderView.swift in Sources */,
 				C28377E7279825D000151297 /* RequestAuthViewModel.swift in Sources */,
+				C26E99F127ABD35F00E00E15 /* InfoAgeRestrictView.swift in Sources */,
 				C28377AF2796E36100151297 /* UIColor+Extension.swift in Sources */,
 				C21A001627A3DF8600222045 /* GenderButton.swift in Sources */,
 				C2E20D2127A3E93500AB9BC0 /* Images+Generated.swift in Sources */,
@@ -1254,6 +1270,14 @@
 				minimumVersion = 2.0.0;
 			};
 		};
+		C2A6E5DA27ABF41600829EE0 /* XCRemoteSwiftPackageReference "MultiSlider" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/yonat/MultiSlider";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1286,6 +1310,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = C28377DA279720D800151297 /* XCRemoteSwiftPackageReference "Then" */;
 			productName = Then;
+		};
+		C2A6E5DB27ABF41700829EE0 /* MultiSlider */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C2A6E5DA27ABF41600829EE0 /* XCRemoteSwiftPackageReference "MultiSlider" */;
+			productName = MultiSlider;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

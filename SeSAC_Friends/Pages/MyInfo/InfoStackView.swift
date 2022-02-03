@@ -11,13 +11,17 @@ import Then
 
 class InfoStackView: UIStackView, ViewRepresentable {
     let genderView = InfoGenderView()
+    let hobbyView = InfoHobbyView()
+    let allowView = InfoAllowPhoneNumberSearchView()
+    let ageRestrictView = InfoAgeRestrictView()
+    let withdrawView = InfoWithdrawView()
     
     func setUp() {
         self.axis = .vertical
         self.alignment = .center
-        self.spacing = 10
+        self.spacing = 24
         
-        [genderView].forEach {
+        [genderView, hobbyView, allowView, ageRestrictView, withdrawView].forEach {
             addArrangedSubview($0)
         }
     }
@@ -25,6 +29,26 @@ class InfoStackView: UIStackView, ViewRepresentable {
     func setConstraints() {
         genderView.snp.makeConstraints { make in
             make.top.leading.trailing.equalToSuperview()
+            make.height.equalTo(48)
+        }
+        
+        hobbyView.snp.makeConstraints { make in
+            make.leading.trailing.equalToSuperview()
+            make.height.equalTo(48)
+        }
+        
+        allowView.snp.makeConstraints { make in
+            make.leading.trailing.equalToSuperview()
+            make.height.equalTo(48)
+        }
+        
+        ageRestrictView.snp.makeConstraints { make in
+            make.leading.trailing.equalToSuperview()
+            make.height.equalTo(80)
+        }
+        
+        withdrawView.snp.makeConstraints { make in
+            make.leading.trailing.bottom.equalToSuperview()
         }
     }
     

@@ -44,7 +44,7 @@ class InfoManageView: UIView, ViewRepresentable {
             make.top.equalTo(cardView.snp.bottom)
             make.leading.equalToSuperview().offset(16)
             make.trailing.equalToSuperview().offset(-16)
-            make.bottom.equalToSuperview().offset(-16)
+            make.bottom.equalToSuperview().offset(-54)
         }
         
     }

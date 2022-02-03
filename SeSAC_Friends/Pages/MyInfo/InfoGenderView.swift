@@ -25,7 +25,7 @@ class InfoGenderView: UIView, ViewRepresentable {
     
     let manButton = H48Button().then {
         $0.setTitle("남자", for: .normal)
-        $0.buttonState = .inactive
+        $0.buttonState = .fill
     }
     
     let womanButton = H48Button().then {
@@ -51,7 +51,7 @@ class InfoGenderView: UIView, ViewRepresentable {
         buttonStack.snp.makeConstraints { make in
             make.top.bottom.equalToSuperview()
             make.trailing.equalToSuperview()
-            make.width.equalTo(104)
+            make.width.equalToSuperview().multipliedBy(104.0/343.0)
         }
     }
     
