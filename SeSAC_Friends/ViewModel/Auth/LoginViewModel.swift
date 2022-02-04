@@ -143,8 +143,8 @@ final class LoginViewModel: ViewModelType {
         
         idToken
             .filter { !($0.isEmpty) }
-            .flatMap {
-                APIService.shared.getUser(idToken: $0)
+            .flatMap { _ in
+                APIService.shared.logIn()
                     .catch { [weak self](error) in
                         if let error = error as? APIError {
                             let errorMessage = APIService.shared.apiErrorHandler(error: error)

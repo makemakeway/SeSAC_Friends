@@ -78,6 +78,8 @@
 		C283FB6B27A963C9001ED1DC /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = C283FB6A27A963C9001ED1DC /* API.swift */; };
 		C2A6E5DC27ABF41700829EE0 /* MultiSlider in Frameworks */ = {isa = PBXBuildFile; productRef = C2A6E5DB27ABF41700829EE0 /* MultiSlider */; };
 		C2A6E5DF27ABFC5800829EE0 /* InfoManageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2A6E5DE27ABFC5800829EE0 /* InfoManageViewModel.swift */; };
+		C2A6E5E327AD371600829EE0 /* APIRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2A6E5E227AD371600829EE0 /* APIRouter.swift */; };
+		C2A6E5E527AD40D300829EE0 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2A6E5E427AD40D200829EE0 /* Constants.swift */; };
 		C2E20D2127A3E93500AB9BC0 /* Images+Generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2E20D2027A3E93500AB9BC0 /* Images+Generated.swift */; };
 		C2E20D2327A44A6800AB9BC0 /* GenderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2E20D2227A44A6800AB9BC0 /* GenderViewModel.swift */; };
 		C2E20D2527A4603400AB9BC0 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2E20D2427A4603400AB9BC0 /* UIViewController+Extension.swift */; };
@@ -185,6 +187,8 @@
 		C28377F42799A41000151297 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		C283FB6A27A963C9001ED1DC /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		C2A6E5DE27ABFC5800829EE0 /* InfoManageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoManageViewModel.swift; sourceTree = "<group>"; };
+		C2A6E5E227AD371600829EE0 /* APIRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRouter.swift; sourceTree = "<group>"; };
+		C2A6E5E427AD40D200829EE0 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		C2E20D2027A3E93500AB9BC0 /* Images+Generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Images+Generated.swift"; sourceTree = "<group>"; };
 		C2E20D2227A44A6800AB9BC0 /* GenderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenderViewModel.swift; sourceTree = "<group>"; };
 		C2E20D2427A4603400AB9BC0 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
@@ -294,6 +298,7 @@
 		C242CDB42796BE7000905287 /* SeSAC_Friends */ = {
 			isa = PBXGroup;
 			children = (
+				C283FB6927A96228001ED1DC /* Constants */,
 				C2A6E5E127AD233000829EE0 /* Networking */,
 				C28377E327980E0000151297 /* Util */,
 				C28377CA27971E5C00151297 /* Protocol */,
@@ -470,12 +475,13 @@
 			path = Auth;
 			sourceTree = "<group>";
 		};
-		C283FB6927A96228001ED1DC /* API */ = {
+		C283FB6927A96228001ED1DC /* Constants */ = {
 			isa = PBXGroup;
 			children = (
 				C283FB6A27A963C9001ED1DC /* API.swift */,
+				C2A6E5E427AD40D200829EE0 /* Constants.swift */,
 			);
-			path = API;
+			path = Constants;
 			sourceTree = "<group>";
 		};
 		C2A6E5DD27ABFC4D00829EE0 /* MyInfo */ = {
@@ -507,7 +513,7 @@
 				C23BA6C3279ECF0800AD2EE3 /* EndPoint.swift */,
 				C23BA6C927A02A7900AD2EE3 /* Connectivity.swift */,
 				C23BA6C0279D9C3600AD2EE3 /* Service */,
-				C283FB6927A96228001ED1DC /* API */,
+				C2A6E5E227AD371600829EE0 /* APIRouter.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -851,6 +857,7 @@
 				C2E20D3827A908F200AB9BC0 /* OnBoardingCollectionViewCell.swift in Sources */,
 				C26E99E927ABB30C00E00E15 /* TitleStackView.swift in Sources */,
 				C28377E527980E1000151297 /* ButtonState.swift in Sources */,
+				C2A6E5E327AD371600829EE0 /* APIRouter.swift in Sources */,
 				C2E20D2327A44A6800AB9BC0 /* GenderViewModel.swift in Sources */,
 				C26E99D527AA9C9200E00E15 /* MyInfoView.swift in Sources */,
 				C26E99D927AAC9CA00E00E15 /* InfoManageView.swift in Sources */,
@@ -858,6 +865,7 @@
 				C28377E9279825EF00151297 /* ViewModelType.swift in Sources */,
 				C26E99E127AB98DE00E00E15 /* InfoStackView.swift in Sources */,
 				C28377F52799A41000151297 /* LoginViewModel.swift in Sources */,
+				C2A6E5E527AD40D300829EE0 /* Constants.swift in Sources */,
 				C242CDB62796BE7000905287 /* AppDelegate.swift in Sources */,
 				C2E20D3A27A90F4000AB9BC0 /* OnBoardingView.swift in Sources */,
 				C26E99DD27AB787300E00E15 /* Expandable.swift in Sources */,

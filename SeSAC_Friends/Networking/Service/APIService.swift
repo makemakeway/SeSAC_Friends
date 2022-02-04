@@ -14,7 +14,7 @@ enum APIError: String, Error {
     case serverError
     case clientError
     case invalidNickname = "해당 닉네임은 사용할 수 없습니다."
-    case unKnowned
+    case unKnownedUser
     case disConnect = "네트워크 연결이 원활하지 않습니다. 연결상태 확인 후 다시 시도해 주세요!"
 }
 
@@ -27,19 +27,12 @@ final class APIService {
         
     }
     
-    func getUser(idToken: String) -> Single<Int> {
+    func logIn() -> Single<Int> {
         return Single<Int>.create { single in
             if !(Connectivity.isConnectedToInternet) {
                 single(.failure(APIError.disConnect))
             }
-            let url = EndPoint.user.url
-            let headers: HTTPHeaders = [
-                "Content-Type": "application/x-www-form-urlencoded",
-                "idtoken": idToken
-            ]
-            
-            
-            AF.request(url, method: .get, headers: headers)
+            AF.request(APIRouter.login)
                 .validate()
                 .responseDecodable(of: SeSACUser.self) { [weak self](response) in
                     guard let self = self else { return }
@@ -60,7 +53,7 @@ final class APIService {
                         //토큰 만료
                         FirebaseAuthService.shared.getIdToken()
                             .subscribe { _ in
-                                _ = self.getUser(idToken: idToken)
+                                _ = self.logIn()
                             } onFailure: { error in
                                 single(.failure(APIError.tokenExpired))
                             }
@@ -70,37 +63,25 @@ final class APIService {
                     case 501:
                         single(.failure(APIError.clientError))
                     default:
-                        single(.failure(APIError.unKnowned))
+                        single(.failure(APIError.unKnownedUser))
                     }
                 }
             return Disposables.create()
         }
     }
     
-    func postUser() -> Single<Int> {
+    func signUp() -> Single<Int> {
         return Single<Int>.create { single in
             if !(Connectivity.isConnectedToInternet) {
                 single(.failure(APIError.disConnect))
             }
-            let url = EndPoint.user.url
-            let headers: HTTPHeaders = [
-                "Content-Type": "application/x-www-form-urlencoded",
-                "idtoken": UserInfo.idToken
-            ]
             
-            let params: Parameters = [
-                "phoneNumber" : UserInfo.phoneNumber,
-                "FCMtoken": UserInfo.fcmToken,
-                "nick": UserInfo.nickname,
-                "birth": UserInfo.birthday,
-                "email": UserInfo.email,
-                "gender" : UserInfo.gender
-            ]
-            AF.request(url,
-                       method: .post,
-                       parameters: params,
-                       encoding: URLEncoding(destination: .httpBody),
-                       headers: headers)
+            AF.request(APIRouter.signUp(phoneNumber: UserInfo.phoneNumber,
+                                        fcmToken: UserInfo.fcmToken,
+                                        nickname: UserInfo.nickname,
+                                        birth: UserInfo.birthday,
+                                        email: UserInfo.email,
+                                        gender: UserInfo.gender))
                 .validate()
                 .response { [weak self](response) in
                     guard let self = self else { return }
@@ -122,7 +103,7 @@ final class APIService {
                         //토큰 만료
                         FirebaseAuthService.shared.getIdToken()
                             .subscribe { _ in
-                                _ = self.postUser()
+                                _ = self.signUp()
                                 return
                             } onFailure: { error in
                                 single(.failure(APIError.tokenExpired))
@@ -133,7 +114,7 @@ final class APIService {
                     case 501:
                         single(.failure(APIError.clientError))
                     default:
-                        single(.failure(APIError.unKnowned))
+                        single(.failure(APIError.unKnownedUser))
                     }
                 }
             return Disposables.create()
@@ -145,29 +126,21 @@ final class APIService {
             if !(Connectivity.isConnectedToInternet) {
                 single(.failure(APIError.disConnect))
             }
-            let url = EndPoint.user.url
-            let headers: HTTPHeaders = [
-                "Content-Type": "application/x-www-form-urlencoded",
-                "idtoken": idToken
-            ]
             
-            AF.request(url, method: .get, headers: headers)
+            AF.request(APIRouter.login)
                 .validate()
                 .responseDecodable(of: SeSACUser.self) { [weak self](response) in
                     guard let self = self else { return }
                     switch response.result {
                     case .success(let value):
+                        print(value)
                         single(.success(value))
                     case .failure(let error):
                         switch response.response?.statusCode {
                         case 401:
                             FirebaseAuthService.shared.getIdToken()
                                 .subscribe { _ in
-                                    self.getUserData(idToken: idToken)
-                                        .subscribe { user in
-                                            single(.success(user))
-                                        }
-                                        .disposed(by: self.disposeBag)
+                                    _ = self.getUserData(idToken: idToken)
                                     return
                                 } onFailure: { error in
                                     single(.failure(APIError.tokenExpired))
@@ -183,7 +156,73 @@ final class APIService {
         }
     }
     
+    func updateMypage(searchable: Int, ageMin: Int, ageMax: Int, gender: Int, hobby: String) -> Single<Int> {
+        return Single<Int>.create { [weak self](single) in
+            if !(Connectivity.isConnectedToInternet) {
+                single(.failure(APIError.disConnect))
+            }
+            print("searchable: \(searchable)")
+            print("ageMin: \(ageMin)")
+            print("ageMax: \(ageMax)")
+            print("gender: \(gender)")
+            print("hobby: \(hobby)")
+            
+            AF.request(APIRouter.updateMyPage(searchable: searchable,
+                                              ageMin: ageMin,
+                                              ageMax: ageMax,
+                                              gender: gender,
+                                              hobby: hobby))
+                .validate()
+                .response { response in
+                    guard let self = self else { return }
+                    switch response.response?.statusCode {
+                    case 200:
+                        single(.success(200))
+                    case 401:
+                        FirebaseAuthService.shared.getIdToken()
+                            .subscribe { _ in
+                                _ = self.updateMypage(searchable: searchable,
+                                                      ageMin: ageMin,
+                                                      ageMax: ageMax,
+                                                      gender: gender,
+                                                      hobby: hobby)
+                            }
+                            .disposed(by: self.disposeBag)
+                    case 406:
+                        single(.failure(APIError.unKnownedUser))
+                    case 500:
+                        single(.failure(APIError.serverError))
+                    default:
+                        single(.failure(APIError.clientError))
+                    }
+                }
+            return Disposables.create()
+        }
+    }
     
+    func withdraw() -> Single<Int> {
+        return Single<Int>.create { single in
+            if !(Connectivity.isConnectedToInternet) {
+                single(.failure(APIError.disConnect))
+            }
+            
+            AF.request(APIRouter.withdraw)
+                .validate()
+                .response { response in
+                    switch response.response?.statusCode {
+                    case 200:
+                        single(.success(200))
+                    case 401:
+                        single(.failure(APIError.tokenExpired))
+                    case 406:
+                        single(.failure(APIError.unKnownedUser))
+                    default:
+                        single(.failure(APIError.serverError))
+                    }
+                }
+            return Disposables.create()
+        }
+    }
     
     func apiErrorHandler(error: APIError) -> String {
         switch error {

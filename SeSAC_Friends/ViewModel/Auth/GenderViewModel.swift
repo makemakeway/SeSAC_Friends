@@ -82,7 +82,7 @@ final class GenderViewModel: ViewModelType {
 
         input.confirmButtonClicked
             .flatMap {
-                APIService.shared.postUser()
+                APIService.shared.signUp()
                     .catch { [weak self](error) in
                         guard let self = self, let error = error as? APIError else { return .just(0) }
                         switch error {

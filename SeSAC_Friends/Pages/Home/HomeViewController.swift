@@ -6,10 +6,11 @@
 //
 
 import UIKit
+import RxSwift
 
 class HomeViewController: UIViewController {
     //MARK: Properties
-    
+    var disposeBag = DisposeBag()
     
     
     //MARK: UI

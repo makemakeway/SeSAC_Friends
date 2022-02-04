@@ -38,6 +38,11 @@ final class InfoManageViewController: UIViewController {
             .drive(viewModel.input.saveButtonClicked)
             .disposed(by: disposeBag)
         
+        mainView.infoStackView.hobbyView.hobbyTextField.textField.rx.text.orEmpty
+            .asDriver()
+            .drive(viewModel.input.hobbyTextFieldText)
+            .disposed(by: disposeBag)
+        
         mainView.infoStackView.withdrawView.rx.tapGesture()
             .when(.recognized)
             .asDriver { _ in .never() }
@@ -88,6 +93,10 @@ final class InfoManageViewController: UIViewController {
             .drive(viewModel.input.endEditTextField)
             .disposed(by: disposeBag)
         
+        mainView.infoStackView.allowView.allowSwitch.rx.value
+            .asDriver()
+            .drive(viewModel.input.allowSearchPhoneNumber)
+            .disposed(by: disposeBag)
         
         //MARK: Output Binding
         viewModel.output.sesacImage
@@ -179,7 +188,6 @@ final class InfoManageViewController: UIViewController {
         viewModel.output.sesacTitles
             .asDriver()
             .drive(with: self) { owner, titles in
-                let titles = [1, 0, 1, 0, 1, 0]
                 let view = owner.mainView.cardView.cardStackView.titleStackView
                 for (index, title) in titles.enumerated() {
                     if title != 0 {
@@ -209,7 +217,19 @@ final class InfoManageViewController: UIViewController {
             .drive(mainView.infoStackView.hobbyView.hobbyTextField.rx.textFieldState)
             .disposed(by: disposeBag)
         
+        viewModel.output.goToPrevious
+            .asDriver(onErrorJustReturn: ())
+            .drive(with: self) { owner, _ in
+                print("저장 버튼 클릭")
+                owner.navigationController?.popViewController(animated: true)
+            }
+            .disposed(by: disposeBag)
         
+        viewModel.output.textFieldText
+            .asDriver()
+            .drive(mainView.infoStackView.hobbyView.hobbyTextField.textField.rx.text)
+            .disposed(by: disposeBag)
+
     }
     
     //MARK: LifeCycle
