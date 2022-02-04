@@ -25,12 +25,12 @@ class InfoGenderView: UIView, ViewRepresentable {
     
     let manButton = H48Button().then {
         $0.setTitle("남자", for: .normal)
-        $0.buttonState = .fill
+        $0.buttonState = .inactive
     }
     
     let womanButton = H48Button().then {
         $0.setTitle("여자", for: .normal)
-        $0.buttonState = .fill
+        $0.buttonState = .inactive
     }
     
     func setUp() {

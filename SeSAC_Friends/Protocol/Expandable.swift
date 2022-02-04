@@ -8,6 +8,5 @@
 import Foundation
 
 protocol Expandable {
-    func open()
-    func close()
+    func openOrClose(opened: Bool)
 }

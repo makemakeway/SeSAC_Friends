@@ -77,6 +77,7 @@
 		C28377F52799A41000151297 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C28377F42799A41000151297 /* LoginViewModel.swift */; };
 		C283FB6B27A963C9001ED1DC /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = C283FB6A27A963C9001ED1DC /* API.swift */; };
 		C2A6E5DC27ABF41700829EE0 /* MultiSlider in Frameworks */ = {isa = PBXBuildFile; productRef = C2A6E5DB27ABF41700829EE0 /* MultiSlider */; };
+		C2A6E5DF27ABFC5800829EE0 /* InfoManageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2A6E5DE27ABFC5800829EE0 /* InfoManageViewModel.swift */; };
 		C2E20D2127A3E93500AB9BC0 /* Images+Generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2E20D2027A3E93500AB9BC0 /* Images+Generated.swift */; };
 		C2E20D2327A44A6800AB9BC0 /* GenderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2E20D2227A44A6800AB9BC0 /* GenderViewModel.swift */; };
 		C2E20D2527A4603400AB9BC0 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2E20D2427A4603400AB9BC0 /* UIViewController+Extension.swift */; };
@@ -183,6 +184,7 @@
 		C28377F127988C0500151297 /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 		C28377F42799A41000151297 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		C283FB6A27A963C9001ED1DC /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
+		C2A6E5DE27ABFC5800829EE0 /* InfoManageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoManageViewModel.swift; sourceTree = "<group>"; };
 		C2E20D2027A3E93500AB9BC0 /* Images+Generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Images+Generated.swift"; sourceTree = "<group>"; };
 		C2E20D2227A44A6800AB9BC0 /* GenderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenderViewModel.swift; sourceTree = "<group>"; };
 		C2E20D2427A4603400AB9BC0 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
@@ -292,8 +294,7 @@
 		C242CDB42796BE7000905287 /* SeSAC_Friends */ = {
 			isa = PBXGroup;
 			children = (
-				C283FB6927A96228001ED1DC /* API */,
-				C23BA6C0279D9C3600AD2EE3 /* Service */,
+				C2A6E5E127AD233000829EE0 /* Networking */,
 				C28377E327980E0000151297 /* Util */,
 				C28377CA27971E5C00151297 /* Protocol */,
 				C28377C727971E3800151297 /* Reusable */,
@@ -343,6 +344,7 @@
 		C28377AA2796D9FC00151297 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				C2A6E5DD27ABFC4D00829EE0 /* MyInfo */,
 				C28377F32799A3EF00151297 /* Auth */,
 			);
 			path = ViewModel;
@@ -450,8 +452,6 @@
 				C28377EF27987D0A00151297 /* TextFieldState.swift */,
 				C23BA6B4279C42EC00AD2EE3 /* InputViewContentType.swift */,
 				C23BA6BE279D7C9C00AD2EE3 /* UserDefaultsWrapper.swift */,
-				C23BA6C927A02A7900AD2EE3 /* Connectivity.swift */,
-				C23BA6C3279ECF0800AD2EE3 /* EndPoint.swift */,
 				C23BA6CF27A1AA5900AD2EE3 /* DateManager.swift */,
 			);
 			path = Util;
@@ -476,6 +476,40 @@
 				C283FB6A27A963C9001ED1DC /* API.swift */,
 			);
 			path = API;
+			sourceTree = "<group>";
+		};
+		C2A6E5DD27ABFC4D00829EE0 /* MyInfo */ = {
+			isa = PBXGroup;
+			children = (
+				C2A6E5DE27ABFC5800829EE0 /* InfoManageViewModel.swift */,
+			);
+			path = MyInfo;
+			sourceTree = "<group>";
+		};
+		C2A6E5E027ABFDF700829EE0 /* InfoMange */ = {
+			isa = PBXGroup;
+			children = (
+				C26E99D627AAC9C100E00E15 /* InfoManageViewController.swift */,
+				C26E99D827AAC9CA00E00E15 /* InfoManageView.swift */,
+				C26E99E027AB98DE00E00E15 /* InfoStackView.swift */,
+				C26E99E227AB9B7A00E00E15 /* InfoGenderView.swift */,
+				C26E99EA27ABD16B00E00E15 /* InfoHobbyView.swift */,
+				C26E99EE27ABD30500E00E15 /* InfoAllowPhoneNumberSearchView.swift */,
+				C26E99F027ABD35F00E00E15 /* InfoAgeRestrictView.swift */,
+				C26E99F227ABD38800E00E15 /* InfoWithdrawView.swift */,
+			);
+			path = InfoMange;
+			sourceTree = "<group>";
+		};
+		C2A6E5E127AD233000829EE0 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				C23BA6C3279ECF0800AD2EE3 /* EndPoint.swift */,
+				C23BA6C927A02A7900AD2EE3 /* Connectivity.swift */,
+				C23BA6C0279D9C3600AD2EE3 /* Service */,
+				C283FB6927A96228001ED1DC /* API */,
+			);
+			path = Networking;
 			sourceTree = "<group>";
 		};
 		C2E20D2627A56E4C00AB9BC0 /* Home */ = {
@@ -506,16 +540,9 @@
 		C2E20D2D27A59A3900AB9BC0 /* MyInfo */ = {
 			isa = PBXGroup;
 			children = (
+				C2A6E5E027ABFDF700829EE0 /* InfoMange */,
 				C2E20D3227A59AA500AB9BC0 /* MyInfoViewController.swift */,
 				C26E99D427AA9C9200E00E15 /* MyInfoView.swift */,
-				C26E99D627AAC9C100E00E15 /* InfoManageViewController.swift */,
-				C26E99D827AAC9CA00E00E15 /* InfoManageView.swift */,
-				C26E99E027AB98DE00E00E15 /* InfoStackView.swift */,
-				C26E99E227AB9B7A00E00E15 /* InfoGenderView.swift */,
-				C26E99EA27ABD16B00E00E15 /* InfoHobbyView.swift */,
-				C26E99EE27ABD30500E00E15 /* InfoAllowPhoneNumberSearchView.swift */,
-				C26E99F027ABD35F00E00E15 /* InfoAgeRestrictView.swift */,
-				C26E99F227ABD38800E00E15 /* InfoWithdrawView.swift */,
 			);
 			path = MyInfo;
 			sourceTree = "<group>";
@@ -817,6 +844,7 @@
 				C23BA6BF279D7C9C00AD2EE3 /* UserDefaultsWrapper.swift in Sources */,
 				C28377F227988C0500151297 /* LogInViewController.swift in Sources */,
 				C26E99ED27ABD1CC00E00E15 /* CustomTextField.swift in Sources */,
+				C2A6E5DF27ABFC5800829EE0 /* InfoManageViewModel.swift in Sources */,
 				C2E20D2827A5751400AB9BC0 /* HomeViewController.swift in Sources */,
 				C23BA6C6279EDB0E00AD2EE3 /* APIService.swift in Sources */,
 				C242CDBA2796BE7000905287 /* RequestAuthViewController.swift in Sources */,

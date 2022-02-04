@@ -14,7 +14,7 @@ class H32Button: UIButton, ViewRepresentable {
         willSet {
             switch newValue {
             case .fill:
-                self.tintColor = .defaultWhite
+                self.setTitleColor(.defaultWhite, for: .normal)
                 self.backgroundColor = .brandGreen
                 self.layer.borderWidth = 0
             case .disable:
@@ -23,6 +23,7 @@ class H32Button: UIButton, ViewRepresentable {
                 self.layer.borderWidth = 0
             case .inactive:
                 self.setTitleColor(.defaultBlack, for: .normal)
+                self.backgroundColor = .systemBackground
                 self.layer.borderWidth = 1
                 self.layer.borderColor = UIColor.gray4.cgColor
             default:

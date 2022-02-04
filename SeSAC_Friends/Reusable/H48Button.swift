@@ -16,15 +16,16 @@ class H48Button: UIButton, ViewRepresentable {
         willSet {
             switch newValue {
             case .fill:
-                self.tintColor = .defaultWhite
+                self.setTitleColor(.defaultWhite, for: .normal)
                 self.backgroundColor = .brandGreen
                 self.layer.borderWidth = 0
             case .disable:
-                self.tintColor = .gray3
+                self.setTitleColor(.gray3, for: .normal)
                 self.backgroundColor = .gray6
                 self.layer.borderWidth = 0
             case .inactive:
-                self.tintColor = .defaultBlack
+                self.setTitleColor(.defaultBlack, for: .normal)
+                self.backgroundColor = .systemBackground
                 self.layer.borderWidth = 1
                 self.layer.borderColor = UIColor.gray4.cgColor
             default:

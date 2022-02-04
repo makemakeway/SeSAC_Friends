@@ -23,24 +23,29 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         self.window = UIWindow(windowScene: windowScene)
         
-//        if UserInfo.idToken.isEmpty {
-//            setRootView(vc: OnBoardingViewController())
-//            print("onboarding")
-//        } else if UserInfo.signUpCompleted {
-//            // 홈화면
-//            let tabbar = TabBarController()
-//            self.window?.rootViewController = tabbar
-//            self.window?.makeKeyAndVisible()
-//            print("home")
-//        } else {
-//            setRootView(vc: NickNameViewController())
-//            print("nickname")
-//        }
+        //가입한 유저가 지우고 다시 받았을 때,
+        //인증하고나면 idToken 나와서 로그인 처리가 되는데,
+        //닉네임이 UserInfo에 저장이 되지 않는다.
+        //이 부분에 대한 처리가 필요할 것 같다.
+        
+        if UserInfo.idToken.isEmpty {
+            setRootView(vc: OnBoardingViewController())
+            print("onboarding")
+        } else if UserInfo.signUpCompleted {
+            // 홈화면
+            let tabbar = TabBarController()
+            self.window?.rootViewController = tabbar
+            self.window?.makeKeyAndVisible()
+            print("home")
+        } else {
+            setRootView(vc: NickNameViewController())
+            print("nickname")
+        }
 //        let vc = RequestAuthViewController()
-        let vc = InfoManageViewController()
-        let nav = UINavigationController(rootViewController: vc)
-        self.window?.rootViewController = nav
-        self.window?.makeKeyAndVisible()
+//        let vc = InfoManageViewController()
+//        let nav = UINavigationController(rootViewController: vc)
+//        self.window?.rootViewController = nav
+//        self.window?.makeKeyAndVisible()
         
     }
 

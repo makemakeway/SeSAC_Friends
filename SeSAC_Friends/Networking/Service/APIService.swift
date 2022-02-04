@@ -41,15 +41,21 @@ final class APIService {
             
             AF.request(url, method: .get, headers: headers)
                 .validate()
-                .response { [weak self](response) in
+                .responseDecodable(of: SeSACUser.self) { [weak self](response) in
                     guard let self = self else { return }
                     switch response.response?.statusCode {
                     case 200:
                         //가입 유저
+                        switch response.result {
+                        case .success(let user):
+                            UserInfo.nickname = user.nick
+                        default:
+                            print("디코딩 실패??")
+                        }
                         single(.success(200))
-                    case 201:
+                    case 406:
                         //미가입 유저
-                        single(.success(201))
+                        single(.success(406))
                     case 401:
                         //토큰 만료
                         FirebaseAuthService.shared.getIdToken()
@@ -117,6 +123,7 @@ final class APIService {
                         FirebaseAuthService.shared.getIdToken()
                             .subscribe { _ in
                                 _ = self.postUser()
+                                return
                             } onFailure: { error in
                                 single(.failure(APIError.tokenExpired))
                             }
@@ -132,6 +139,51 @@ final class APIService {
             return Disposables.create()
         }
     }
+    
+    func getUserData(idToken: String) -> Single<SeSACUser> {
+        return Single<SeSACUser>.create { single in
+            if !(Connectivity.isConnectedToInternet) {
+                single(.failure(APIError.disConnect))
+            }
+            let url = EndPoint.user.url
+            let headers: HTTPHeaders = [
+                "Content-Type": "application/x-www-form-urlencoded",
+                "idtoken": idToken
+            ]
+            
+            AF.request(url, method: .get, headers: headers)
+                .validate()
+                .responseDecodable(of: SeSACUser.self) { [weak self](response) in
+                    guard let self = self else { return }
+                    switch response.result {
+                    case .success(let value):
+                        single(.success(value))
+                    case .failure(let error):
+                        switch response.response?.statusCode {
+                        case 401:
+                            FirebaseAuthService.shared.getIdToken()
+                                .subscribe { _ in
+                                    self.getUserData(idToken: idToken)
+                                        .subscribe { user in
+                                            single(.success(user))
+                                        }
+                                        .disposed(by: self.disposeBag)
+                                    return
+                                } onFailure: { error in
+                                    single(.failure(APIError.tokenExpired))
+                                }
+                                .disposed(by: self.disposeBag)
+                        default:
+                            print(error)
+                            single(.failure(APIError.clientError))
+                        }
+                    }
+                }
+            return Disposables.create()
+        }
+    }
+    
+    
     
     func apiErrorHandler(error: APIError) -> String {
         switch error {

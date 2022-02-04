@@ -29,7 +29,9 @@ class CardStackView: UIStackView, ViewRepresentable {
         $0.font = .body3_R14
         $0.textColor = .gray6
         $0.text = "첫 리뷰를 기다리는 중이에요!"
+        $0.numberOfLines = 0
     }
+    let sesacReviewChevronImage = UIImageView(image: UIImage(asset: Asset.moreArrow))
     
     func setUp() {
         self.axis = .vertical
@@ -42,6 +44,7 @@ class CardStackView: UIStackView, ViewRepresentable {
         
         sesacReviewView.addSubview(sesacReviewLabel)
         sesacReviewView.addSubview(sesacReviewContentLabel)
+        sesacReviewView.addSubview(sesacReviewChevronImage)
         
         [sesacTitleView, sesacReviewView].forEach {
             addArrangedSubview($0)
@@ -73,6 +76,11 @@ class CardStackView: UIStackView, ViewRepresentable {
             make.leading.top.equalToSuperview()
         }
         
+        sesacReviewChevronImage.snp.makeConstraints { make in
+            make.trailing.equalToSuperview().offset(-3)
+            make.centerY.equalTo(sesacReviewLabel.snp.centerY)
+        }
+        
         sesacReviewContentLabel.snp.makeConstraints { make in
             make.top.equalTo(sesacReviewLabel.snp.bottom).offset(16)
             make.leading.trailing.equalToSuperview()
@@ -84,6 +92,8 @@ class CardStackView: UIStackView, ViewRepresentable {
         super.init(frame: frame)
         setUp()
         setConstraints()
+        sesacTitleView.isHidden = true
+        sesacReviewView.isHidden = true
     }
     
     required init(coder: NSCoder) {

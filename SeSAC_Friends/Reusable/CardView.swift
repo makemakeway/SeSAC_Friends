@@ -16,9 +16,10 @@ class CardView: UIView, ViewRepresentable {
     let nicknameLabel = UILabel().then {
         $0.font = .title1_M16
         $0.textColor = .defaultBlack
+        $0.text = UserInfo.nickname
     }
     let chevronImageView = UIImageView(image: UIImage(asset: Asset.moreArrow)).then {
-        $0.transform = CGAffineTransform(rotationAngle: .pi / 2)
+        $0.transform = CGAffineTransform(rotationAngle: -.pi / 2)
     }
     
     let cardStackView = CardStackView()
@@ -79,5 +80,26 @@ class CardView: UIView, ViewRepresentable {
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
+    }
+}
+
+extension CardView: Expandable {
+    func openOrClose(opened: Bool) {
+        if opened {
+            UIView.animate(withDuration: 0.2) { [weak self] in
+                guard let self = self else { return }
+                self.cardStackView.sesacTitleView.isHidden = false
+                self.cardStackView.sesacReviewView.isHidden = false
+                self.chevronImageView.transform = CGAffineTransform(rotationAngle: .pi / 2)
+            }
+            
+        } else {
+            UIView.animate(withDuration: 0.2) { [weak self] in
+                guard let self = self else { return }
+                self.cardStackView.sesacTitleView.isHidden = true
+                self.cardStackView.sesacReviewView.isHidden = true
+                self.chevronImageView.transform = CGAffineTransform(rotationAngle: -.pi / 2)
+            }
+        }
     }
 }

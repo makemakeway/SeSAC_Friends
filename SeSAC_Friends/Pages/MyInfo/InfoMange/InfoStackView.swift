@@ -48,6 +48,7 @@ class InfoStackView: UIStackView, ViewRepresentable {
         }
         
         withdrawView.snp.makeConstraints { make in
+            make.height.equalTo(48)
             make.leading.trailing.bottom.equalToSuperview()
         }
     }

@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import RxSwift
 
 enum EndPoint {
     case user

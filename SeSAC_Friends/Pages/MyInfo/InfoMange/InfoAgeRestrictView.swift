@@ -27,7 +27,7 @@ class InfoAgeRestrictView: UIView, ViewRepresentable {
     let slider = MultiSlider().then {
         $0.minimumValue = 18
         $0.maximumValue = 65
-        $0.value = [18, 35]
+        $0.value = [18, 65]
         $0.outerTrackColor = .gray2
         $0.tintColor = .brandGreen
         $0.isVertical = false
