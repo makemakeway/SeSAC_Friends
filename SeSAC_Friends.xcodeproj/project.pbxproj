@@ -53,6 +53,7 @@
 		C26E99EF27ABD30500E00E15 /* InfoAllowPhoneNumberSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26E99EE27ABD30500E00E15 /* InfoAllowPhoneNumberSearchView.swift */; };
 		C26E99F127ABD35F00E00E15 /* InfoAgeRestrictView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26E99F027ABD35F00E00E15 /* InfoAgeRestrictView.swift */; };
 		C26E99F327ABD38800E00E15 /* InfoWithdrawView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26E99F227ABD38800E00E15 /* InfoWithdrawView.swift */; };
+		C2826B3F27B0325600C1CA23 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2826B3E27B0325600C1CA23 /* HomeViewModel.swift */; };
 		C28377AF2796E36100151297 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C28377AE2796E36100151297 /* UIColor+Extension.swift */; };
 		C28377BA2796EEEE00151297 /* NotoSansKR-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = C28377B42796EEEE00151297 /* NotoSansKR-Medium.otf */; };
 		C28377BC2796EEEE00151297 /* NotoSansKR-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = C28377B62796EEEE00151297 /* NotoSansKR-Regular.otf */; };
@@ -169,6 +170,7 @@
 		C26E99EE27ABD30500E00E15 /* InfoAllowPhoneNumberSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoAllowPhoneNumberSearchView.swift; sourceTree = "<group>"; };
 		C26E99F027ABD35F00E00E15 /* InfoAgeRestrictView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoAgeRestrictView.swift; sourceTree = "<group>"; };
 		C26E99F227ABD38800E00E15 /* InfoWithdrawView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoWithdrawView.swift; sourceTree = "<group>"; };
+		C2826B3E27B0325600C1CA23 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		C28377AE2796E36100151297 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		C28377B42796EEEE00151297 /* NotoSansKR-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansKR-Medium.otf"; sourceTree = "<group>"; };
 		C28377B62796EEEE00151297 /* NotoSansKR-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansKR-Regular.otf"; sourceTree = "<group>"; };
@@ -336,6 +338,14 @@
 			path = SeSAC_FriendsUITests;
 			sourceTree = "<group>";
 		};
+		C2826B3D27B0324C00C1CA23 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				C2826B3E27B0325600C1CA23 /* HomeViewModel.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
 		C28377A92796D9F800151297 /* Pages */ = {
 			isa = PBXGroup;
 			children = (
@@ -353,6 +363,7 @@
 		C28377AA2796D9FC00151297 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				C2826B3D27B0324C00C1CA23 /* Home */,
 				C2A6E5DD27ABFC4D00829EE0 /* MyInfo */,
 				C28377F32799A3EF00151297 /* Auth */,
 			);
@@ -905,6 +916,7 @@
 				C2E20D2A27A599C700AB9BC0 /* TabbarController.swift in Sources */,
 				C26E99E327AB9B7A00E00E15 /* InfoGenderView.swift in Sources */,
 				C28377E7279825D000151297 /* RequestAuthViewModel.swift in Sources */,
+				C2826B3F27B0325600C1CA23 /* HomeViewModel.swift in Sources */,
 				C26E99F127ABD35F00E00E15 /* InfoAgeRestrictView.swift in Sources */,
 				C28377AF2796E36100151297 /* UIColor+Extension.swift in Sources */,
 				C21A001627A3DF8600222045 /* GenderButton.swift in Sources */,

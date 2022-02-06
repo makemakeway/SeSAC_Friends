@@ -20,22 +20,45 @@ class HomeView: UIView, ViewRepresentable {
         $0.tintColor = .defaultWhite
     }
     
-    let filterSeg = UISegmentedControl(items: ["전체", "남자", "여자"]).then {
-        $0.transform = CGAffineTransform(rotationAngle: .pi / 2)
-        $0.selectedSegmentIndex = 0
-        $0.selectedSegmentTintColor = .brandGreen
-        $0.tintColor = .defaultWhite
+    let entireButton = UIButton().then {
+        let attr = NSAttributedString(string: "전체",
+                                      attributes: [NSAttributedString.Key.font: UIFont.title3_M14,
+                                                   NSAttributedString.Key.foregroundColor: UIColor.defaultBlack])
+        $0.setAttributedTitle(attr, for: .normal)
         $0.backgroundColor = .defaultWhite
-        $0.setTitleTextAttributes([NSAttributedString.Key.font : UIFont.title3_M14], for: .normal)
-        $0.layer.cornerRadius = 10
-        $0.setTitleTextAttributes([NSAttributedString.Key.foregroundColor : UIColor.defaultWhite], for: .selected)
-        
-        //MARK: SegmentedControl 배경색 투명하게 못바꾼다고 하는데 어떻게 처리하나
-        //MARK: 그림자도 적용이 안되는 것 같다
-        
-        for segment in $0.subviews {
-            segment.transform = CGAffineTransform(rotationAngle: -.pi / 2)
-        }
+        $0.clipsToBounds = true
+    }
+    
+    let manButton = UIButton().then {
+        let attr = NSAttributedString(string: "남자",
+                                      attributes: [NSAttributedString.Key.font: UIFont.title3_M14,
+                                                   NSAttributedString.Key.foregroundColor: UIColor.defaultBlack])
+        $0.setAttributedTitle(attr, for: .normal)
+        $0.backgroundColor = .defaultWhite
+        $0.clipsToBounds = true
+    }
+    
+    let womanButton = UIButton().then {
+        let attr = NSAttributedString(string: "여자",
+                                      attributes: [NSAttributedString.Key.font: UIFont.title3_M14,
+                                                   NSAttributedString.Key.foregroundColor: UIColor.defaultBlack])
+        $0.setAttributedTitle(attr, for: .normal)
+        $0.backgroundColor = .defaultWhite
+        $0.clipsToBounds = true
+    }
+    
+    let filterStack = UIStackView().then {
+        $0.axis = .vertical
+        $0.spacing = 0
+        $0.distribution = .fillEqually
+        $0.layer.cornerRadius = 8
+        $0.clipsToBounds = true
+    }
+    
+    let stackContainerView = UIView().then {
+        $0.layer.shadowOffset = CGSize(width: 0, height: 2)
+        $0.layer.shadowOpacity = 0.6
+        $0.layer.shadowRadius = 2
     }
     
     let locationButton = UIButton().then {
@@ -53,8 +76,13 @@ class HomeView: UIView, ViewRepresentable {
     func setUp() {
         addSubview(mapView)
         addSubview(floatingButton)
-        addSubview(filterSeg)
         addSubview(locationButton)
+        addSubview(stackContainerView)
+        stackContainerView.addSubview(filterStack)
+        
+        [entireButton, manButton, womanButton].forEach {
+            filterStack.addArrangedSubview($0)
+        }
         
         //MARK: 버튼 이미지 색 확인
         floatingButton.setImage(UIImage(asset: Asset.antenna), for: .normal)
@@ -74,19 +102,20 @@ class HomeView: UIView, ViewRepresentable {
             make.size.equalTo(64)
         }
         
-        filterSeg.snp.makeConstraints { make in
-            let size = 48
-            make.top.equalToSuperview().offset(size + 52)
-            make.leading.equalToSuperview().offset(-size + 16)
-            make.width.equalTo(size * 3)
-            make.height.equalTo(size)
+        stackContainerView.snp.makeConstraints { make in
+            make.top.equalTo(safeAreaLayoutGuide).offset(8)
+            make.leading.equalToSuperview().offset(16)
+            make.height.equalTo(144)
+            make.width.equalTo(48)
+        }
+        
+        filterStack.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
         }
         
         locationButton.snp.makeConstraints { make in
-            let size = 48
-            
-            make.size.equalTo(size)
-            make.top.equalTo(filterSeg.snp.bottom).offset(size + 16)
+            make.size.equalTo(48)
+            make.top.equalTo(filterStack.snp.bottom).offset(16)
             make.leading.equalToSuperview().offset(16)
         }
     }
@@ -95,7 +124,6 @@ class HomeView: UIView, ViewRepresentable {
         super.init(frame: frame)
         setUp()
         setConstraints()
-        
     }
     
     required init?(coder: NSCoder) {

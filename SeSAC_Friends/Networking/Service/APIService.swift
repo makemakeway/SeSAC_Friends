@@ -129,25 +129,19 @@ final class APIService {
             
             AF.request(APIRouter.login)
                 .validate()
-                .responseDecodable(of: SeSACUser.self) { [weak self](response) in
-                    guard let self = self else { return }
+                .responseDecodable(of: SeSACUser.self) { (response) in
                     switch response.result {
                     case .success(let value):
-                        print(value)
                         single(.success(value))
-                    case .failure(let error):
+                    case .failure(_):
                         switch response.response?.statusCode {
                         case 401:
-                            FirebaseAuthService.shared.getIdToken()
-                                .subscribe { _ in
-                                    _ = self.getUserData(idToken: idToken)
-                                    return
-                                } onFailure: { error in
-                                    single(.failure(APIError.tokenExpired))
-                                }
-                                .disposed(by: self.disposeBag)
+                            single(.failure(APIError.tokenExpired))
+                        case 406:
+                            single(.failure(APIError.unKnownedUser))
+                        case 500:
+                            single(.failure(APIError.serverError))
                         default:
-                            print(error)
                             single(.failure(APIError.clientError))
                         }
                     }

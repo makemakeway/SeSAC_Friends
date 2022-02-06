@@ -131,7 +131,34 @@ final class InfoManageViewModel: ViewModelType {
         
         input.infoManageViewWillAppear
             .debug("UserData")
-            .flatMap { APIService.shared.getUserData(idToken: UserInfo.idToken) }
+            .withUnretained(self)
+            .flatMap { owner, _ in
+                APIService.shared.getUserData(idToken: UserInfo.idToken)
+                    .retry { (error: Observable<Error>) in
+                        error.filter { error in
+                            if let error = error as? APIError, error == .tokenExpired {
+                                return true
+                            }
+                            return false
+                        }
+                        .flatMap { _ in FirebaseAuthService.shared.getIdToken() }
+                    }
+                    .catch { error in
+                        if let error = error as? APIError {
+                            switch error {
+                            case .unKnownedUser:
+                                owner.output.goToOnboarding.accept(())
+                            case .disConnect:
+                                owner.output.errorMessage.accept(APIError.disConnect.rawValue)
+                            case .serverError:
+                                owner.output.errorMessage.accept(APIError.serverError.rawValue)
+                            default:
+                                print("회원 정보 받아오기 에러")
+                            }
+                        }
+                        return .never()
+                    }
+            }
             .bind(with: self, onNext: { owner, user in
                 owner.userDataFetched = true
                 let ageMin = CGFloat(user.ageMin)
