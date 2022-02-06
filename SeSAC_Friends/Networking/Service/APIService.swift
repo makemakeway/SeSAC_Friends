@@ -161,11 +161,6 @@ final class APIService {
             if !(Connectivity.isConnectedToInternet) {
                 single(.failure(APIError.disConnect))
             }
-            print("searchable: \(searchable)")
-            print("ageMin: \(ageMin)")
-            print("ageMax: \(ageMax)")
-            print("gender: \(gender)")
-            print("hobby: \(hobby)")
             
             AF.request(APIRouter.updateMyPage(searchable: searchable,
                                               ageMin: ageMin,
@@ -211,6 +206,15 @@ final class APIService {
                 .response { response in
                     switch response.response?.statusCode {
                     case 200:
+                        UserInfo.idToken = ""
+                        UserInfo.fcmToken = ""
+                        UserInfo.nickname = ""
+                        UserInfo.gender = -1
+                        UserInfo.birthday = ""
+                        UserInfo.email = ""
+                        UserInfo.phoneNumber = ""
+                        UserInfo.signUpCompleted = false
+                        UserInfo.verificationID = ""
                         single(.success(200))
                     case 401:
                         single(.failure(APIError.tokenExpired))

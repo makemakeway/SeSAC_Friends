@@ -26,6 +26,7 @@ final class InfoManageViewModel: ViewModelType {
         let tapNicknameView = PublishSubject<UITapGestureRecognizer>()
         let ageValueChanged = PublishRelay<[CGFloat]>()
         let hobbyTextFieldText = BehaviorRelay(value: "")
+        let withdrawButtonClicked = PublishSubject<Void>()
     }
     
     struct Output {
@@ -88,6 +89,34 @@ final class InfoManageViewModel: ViewModelType {
             }
             .disposed(by: disposeBag)
 
+        input.withdrawButtonClicked
+            .withUnretained(self)
+            .flatMap { owner, _ in
+                APIService.shared.withdraw()
+                    .catch { error in
+                        if let error = error as? APIError {
+                            switch error {
+                            case .tokenExpired:
+                                print("토큰 만료")
+                            case .unKnownedUser:
+                                owner.output.goToOnboarding.accept(())
+                            case .disConnect:
+                                owner.output.errorMessage.accept(APIError.disConnect.rawValue)
+                            default:
+                                print("회원 탈퇴 에러")
+                            }
+                        }
+                        return .just(0)
+                    }
+            }
+            .asDriver(onErrorJustReturn: 0)
+            .filter { $0 == 200 }
+            .drive(with: self) { owner, status in
+                owner.output.goToOnboarding.accept(())
+            }
+            .disposed(by: disposeBag)
+
+        
         input.hobbyTextFieldText
             .asDriver()
             .drive(output.textFieldText)

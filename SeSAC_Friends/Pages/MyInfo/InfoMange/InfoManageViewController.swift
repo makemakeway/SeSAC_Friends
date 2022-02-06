@@ -9,6 +9,8 @@ import UIKit
 import RxSwift
 import RxCocoa
 import RxGesture
+import Toast
+import Then
 
 final class InfoManageViewController: UIViewController {
     //MARK: Properties
@@ -24,6 +26,30 @@ final class InfoManageViewController: UIViewController {
         let attr = NSAttributedString(string: "저장", attributes: [NSAttributedString.Key.font: UIFont.title3_M14])
         $0.setAttributedTitle(attr, for: .normal)
         $0.setTitleColor(.defaultBlack, for: .normal)
+    }
+    
+    private func popupConfig() {
+        let vc = CustomAlertViewController()
+        vc.modalPresentationStyle = .overCurrentContext
+        vc.mainView.mainTitleLabel.text = "정말 탈퇴하시겠습니까?"
+        vc.mainView.subtextLabel.text = "탈퇴하시면 새싹 프렌즈를 이용할 수 없어요ㅠ"
+        
+        vc.mainView.cancelButton.rx.tap
+            .asDriver()
+            .drive { _ in
+                vc.dismiss(animated: false, completion: nil)
+            }
+            .disposed(by: disposeBag)
+
+        vc.mainView.okButton.rx.tap
+            .asDriver()
+            .drive(with: self) { owner, _ in
+                owner.viewModel.input.withdrawButtonClicked.onNext(())
+                vc.dismiss(animated: false, completion: nil)
+            }
+            .disposed(by: disposeBag)
+        
+        self.present(vc, animated: false, completion: nil)
     }
     
     //MARK: Method
@@ -150,6 +176,7 @@ final class InfoManageViewController: UIViewController {
             .asDriver(onErrorJustReturn: ())
             .drive(with: self) { owner, _ in
                 print("pop Up")
+                owner.popupConfig()
             }
             .disposed(by: disposeBag)
         
@@ -229,7 +256,22 @@ final class InfoManageViewController: UIViewController {
             .asDriver()
             .drive(mainView.infoStackView.hobbyView.hobbyTextField.textField.rx.text)
             .disposed(by: disposeBag)
+        
+        viewModel.output.goToOnboarding
+            .asDriver(onErrorJustReturn: ())
+            .drive(with: self) { owner, _ in
+                let vc = OnBoardingViewController()
+                owner.changeRootView(viewController: vc)
+            }
+            .disposed(by: disposeBag)
 
+        viewModel.output.errorMessage
+            .asDriver(onErrorJustReturn: "")
+            .filter { !($0.isEmpty) }
+            .drive(with: self) { owner, message in
+                owner.view.makeToast(message, duration: 3.0, position: .center)
+            }
+            .disposed(by: disposeBag)
     }
     
     //MARK: LifeCycle

@@ -80,6 +80,8 @@
 		C2A6E5DF27ABFC5800829EE0 /* InfoManageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2A6E5DE27ABFC5800829EE0 /* InfoManageViewModel.swift */; };
 		C2A6E5E327AD371600829EE0 /* APIRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2A6E5E227AD371600829EE0 /* APIRouter.swift */; };
 		C2A6E5E527AD40D300829EE0 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2A6E5E427AD40D200829EE0 /* Constants.swift */; };
+		C2A6E5E727AD84F700829EE0 /* CustomAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2A6E5E627AD84F700829EE0 /* CustomAlertViewController.swift */; };
+		C2A6E5EA27AD853B00829EE0 /* AlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2A6E5E927AD853B00829EE0 /* AlertView.swift */; };
 		C2E20D2127A3E93500AB9BC0 /* Images+Generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2E20D2027A3E93500AB9BC0 /* Images+Generated.swift */; };
 		C2E20D2327A44A6800AB9BC0 /* GenderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2E20D2227A44A6800AB9BC0 /* GenderViewModel.swift */; };
 		C2E20D2527A4603400AB9BC0 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2E20D2427A4603400AB9BC0 /* UIViewController+Extension.swift */; };
@@ -189,6 +191,8 @@
 		C2A6E5DE27ABFC5800829EE0 /* InfoManageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoManageViewModel.swift; sourceTree = "<group>"; };
 		C2A6E5E227AD371600829EE0 /* APIRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRouter.swift; sourceTree = "<group>"; };
 		C2A6E5E427AD40D200829EE0 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		C2A6E5E627AD84F700829EE0 /* CustomAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlertViewController.swift; sourceTree = "<group>"; };
+		C2A6E5E927AD853B00829EE0 /* AlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertView.swift; sourceTree = "<group>"; };
 		C2E20D2027A3E93500AB9BC0 /* Images+Generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Images+Generated.swift"; sourceTree = "<group>"; };
 		C2E20D2227A44A6800AB9BC0 /* GenderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenderViewModel.swift; sourceTree = "<group>"; };
 		C2E20D2427A4603400AB9BC0 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
@@ -335,7 +339,7 @@
 		C28377A92796D9F800151297 /* Pages */ = {
 			isa = PBXGroup;
 			children = (
-				C2E20D2927A599C700AB9BC0 /* TabbarController.swift */,
+				C2A6E5E827AD852B00829EE0 /* Common */,
 				C2E20D2D27A59A3900AB9BC0 /* MyInfo */,
 				C2E20D2C27A59A2A00AB9BC0 /* Friends */,
 				C2E20D2B27A59A1C00AB9BC0 /* Shop */,
@@ -436,6 +440,7 @@
 				C26E99DE27AB79AA00E00E15 /* CardView.swift */,
 				C26E99E627ABB25600E00E15 /* CardStackView.swift */,
 				C26E99E827ABB30C00E00E15 /* TitleStackView.swift */,
+				C2A6E5E927AD853B00829EE0 /* AlertView.swift */,
 			);
 			path = Reusable;
 			sourceTree = "<group>";
@@ -516,6 +521,15 @@
 				C2A6E5E227AD371600829EE0 /* APIRouter.swift */,
 			);
 			path = Networking;
+			sourceTree = "<group>";
+		};
+		C2A6E5E827AD852B00829EE0 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				C2A6E5E627AD84F700829EE0 /* CustomAlertViewController.swift */,
+				C2E20D2927A599C700AB9BC0 /* TabbarController.swift */,
+			);
+			path = Common;
 			sourceTree = "<group>";
 		};
 		C2E20D2627A56E4C00AB9BC0 /* Home */ = {
@@ -832,6 +846,7 @@
 			files = (
 				C2E20D2F27A59A4E00AB9BC0 /* ShopViewController.swift in Sources */,
 				C23BA6CC27A16B3A00AD2EE3 /* BirthViewModel.swift in Sources */,
+				C2A6E5E727AD84F700829EE0 /* CustomAlertViewController.swift in Sources */,
 				C23BA6C4279ECF0800AD2EE3 /* EndPoint.swift in Sources */,
 				C28377C927971E5800151297 /* AuthView.swift in Sources */,
 				C2E20D3127A59A7800AB9BC0 /* FriendsViewController.swift in Sources */,
@@ -894,6 +909,7 @@
 				C28377AF2796E36100151297 /* UIColor+Extension.swift in Sources */,
 				C21A001627A3DF8600222045 /* GenderButton.swift in Sources */,
 				C2E20D2127A3E93500AB9BC0 /* Images+Generated.swift in Sources */,
+				C2A6E5EA27AD853B00829EE0 /* AlertView.swift in Sources */,
 				C2E20D3E27A951E300AB9BC0 /* HomeView.swift in Sources */,
 				C23BA6D227A1B0B000AD2EE3 /* EmailViewModel.swift in Sources */,
 				C23BA6AE279BCF2300AD2EE3 /* H40Button.swift in Sources */,
