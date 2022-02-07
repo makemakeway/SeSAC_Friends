@@ -20,33 +20,21 @@ class HomeView: UIView, ViewRepresentable {
         $0.tintColor = .defaultWhite
     }
     
-    let entireButton = UIButton().then {
-        let attr = NSAttributedString(string: "전체",
-                                      attributes: [NSAttributedString.Key.font: UIFont.title3_M14,
-                                                   NSAttributedString.Key.foregroundColor: UIColor.defaultBlack])
-        $0.setAttributedTitle(attr, for: .normal)
-        $0.backgroundColor = .defaultWhite
-        $0.clipsToBounds = true
-    }
-    
     let homeMarker = UIImageView(image: UIImage(asset: Asset.mapMarker))
     
-    let manButton = UIButton().then {
-        let attr = NSAttributedString(string: "남자",
-                                      attributes: [NSAttributedString.Key.font: UIFont.title3_M14,
-                                                   NSAttributedString.Key.foregroundColor: UIColor.defaultBlack])
-        $0.setAttributedTitle(attr, for: .normal)
-        $0.backgroundColor = .defaultWhite
-        $0.clipsToBounds = true
+    let entireButton = FilterButton().then {
+        $0.buttonState = .fill
+        $0.setTitle("전체", for: .normal)
     }
     
-    let womanButton = UIButton().then {
-        let attr = NSAttributedString(string: "여자",
-                                      attributes: [NSAttributedString.Key.font: UIFont.title3_M14,
-                                                   NSAttributedString.Key.foregroundColor: UIColor.defaultBlack])
-        $0.setAttributedTitle(attr, for: .normal)
-        $0.backgroundColor = .defaultWhite
-        $0.clipsToBounds = true
+    let manButton = FilterButton().then {
+        $0.setTitle("남자", for: .normal)
+        $0.buttonState = .disable
+    }
+    
+    let womanButton = FilterButton().then {
+        $0.setTitle("여자", for: .normal)
+        $0.buttonState = .disable
     }
     
     let filterStack = UIStackView().then {

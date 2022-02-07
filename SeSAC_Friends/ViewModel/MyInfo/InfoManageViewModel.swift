@@ -171,6 +171,7 @@ final class InfoManageViewModel: ViewModelType {
                             }
                         }
                         return .never()
+                    }
                     .retry { (error: Observable<Error>) in
                         error.filter { error in
                             if let error = error as? APIError, error == .tokenExpired {
@@ -180,7 +181,6 @@ final class InfoManageViewModel: ViewModelType {
                         }
                         .flatMap { _ -> Single<String> in FirebaseAuthService.shared.getIdToken().debug("REFresh IDTOKEN") }
                     }
-                }
             }
             .bind(with: self, onNext: { owner, user in
                 owner.userDataFetched = true
