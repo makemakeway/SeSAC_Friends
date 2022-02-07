@@ -13,7 +13,7 @@ import NMapsMap
 
 final class HomeViewModel: ViewModelType {
     struct Input {
-        let entireButtonClicked = PublishSubject<Void>()
+        let entireButtonClicked = BehaviorSubject(value: ())
         let manButtonClicked = PublishSubject<Void>()
         let womanButtonClicked = PublishSubject<Void>()
         let locationDidChanged = PublishSubject<CLLocationCoordinate2D>()
@@ -28,49 +28,101 @@ final class HomeViewModel: ViewModelType {
         let currentMapViewCamera: BehaviorRelay<NMFCameraPosition> = BehaviorRelay(value: NMFCameraPosition())
         let errorMessage = PublishRelay<String>()
         let goToOnboarding = PublishRelay<Void>()
+        let friendsList = PublishRelay<Friends>()
+        let filteredQueueList = PublishRelay<[FromQueueDB]>()
+        let filteredRequiredQueueList = PublishRelay<[FromQueueDB]>()
+        let currentFilterValue = BehaviorRelay(value: -1)
     }
     
     var disposeBag = DisposeBag()
     let input = Input()
     let output = Output()
     
+
+    
     func transform() {
+        let friendsList = output.friendsList
+            .share()
+            .debug("friendsList")
+        
         input.entireButtonClicked
-            .asDriver(onErrorJustReturn: ())
-            .drive(with: self) { owner, _ in
+            .debug("entireButtonClicked")
+            .withUnretained(self)
+            .filter { owner, _ in owner.output.currentFilterValue.value != -1 }
+            .bind(with: self) { owner, friends in
                 owner.output.entireButtonState.accept(.fill)
                 owner.output.manButtonState.accept(.disable)
                 owner.output.womanButtonState.accept(.disable)
+                
+                owner.output.currentFilterValue.accept(-1)
             }
             .disposed(by: disposeBag)
         
         input.manButtonClicked
-            .asDriver(onErrorJustReturn: ())
-            .drive(with: self) { owner, _ in
+            .debug("manButtonClicked")
+            .withUnretained(self)
+            .filter { owner, _ in owner.output.currentFilterValue.value != 1 }
+            .bind(with: self) { owner, friends in
                 owner.output.entireButtonState.accept(.disable)
                 owner.output.manButtonState.accept(.fill)
                 owner.output.womanButtonState.accept(.disable)
+                
+                owner.output.currentFilterValue.accept(1)
             }
             .disposed(by: disposeBag)
-
+        
         input.womanButtonClicked
-            .asDriver(onErrorJustReturn: ())
-            .drive(with: self) { owner, _ in
+            .debug("womanButtonClicked")
+            .withUnretained(self)
+            .filter { owner, _ in owner.output.currentFilterValue.value != 0 }
+            .bind(with: self) { owner, friends in
                 owner.output.entireButtonState.accept(.disable)
                 owner.output.manButtonState.accept(.disable)
                 owner.output.womanButtonState.accept(.fill)
+                
+                owner.output.currentFilterValue.accept(0)
             }
             .disposed(by: disposeBag)
 
         input.mapViewCameraDidChanged
+            .debug("mapViewCameraDidChanged")
             .withUnretained(self)
             .flatMap { owner, position in
                 owner.fetchFriends(position: position)
             }
-            .bind { friends in
-                print("Friend Fetched: \(friends)")
+            .bind(with: self) { owner, friends in
+                owner.output.friendsList.accept(friends)
             }
             .disposed(by: disposeBag)
+        
+        
+        Observable.combineLatest(friendsList, output.currentFilterValue)
+            .debug("COMBINE")
+            .asObservable()
+            .bind(with: self) { (owner, arg1) in
+                let (friends, value) = arg1
+                switch value {
+                case -1:
+                    owner.output.filteredQueueList.accept(friends.fromQueueDB)
+                    owner.output.filteredRequiredQueueList.accept(friends.fromQueueDBRequested)
+                case 0:
+                    let filteredList = friends.fromQueueDB.filter { $0.gender == 0 }
+                    let filteredRequiredList = friends.fromQueueDBRequested.filter { $0.gender == 0 }
+                    
+                    owner.output.filteredQueueList.accept(filteredList)
+                    owner.output.filteredRequiredQueueList.accept(filteredRequiredList)
+                case 1:
+                    let filteredList = friends.fromQueueDB.filter { $0.gender == 1 }
+                    let filteredRequiredList = friends.fromQueueDBRequested.filter { $0.gender == 1 }
+                    
+                    owner.output.filteredQueueList.accept(filteredList)
+                    owner.output.filteredRequiredQueueList.accept(filteredRequiredList)
+                default:
+                    print("필터 에러")
+                }
+            }
+            .disposed(by: disposeBag)
+
     }
         
     func fetchFriends(position: NMFCameraPosition) -> Observable<Friends> {
@@ -117,8 +169,9 @@ final class HomeViewModel: ViewModelType {
         let targetY = y.index(y.startIndex, offsetBy: 4)
         let gridY = y[y.startIndex...targetY]
         
-        
-        let grid = (Int(gridX) ?? 0) + (Int(gridY) ?? 0)
+        let stringGrid = "\(gridX)\(gridY)"
+        print(stringGrid)
+        let grid = Int(stringGrid) ?? 0
         return grid
     }
     

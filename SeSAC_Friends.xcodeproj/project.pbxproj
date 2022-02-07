@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		2D98C1A8AC919DA6DF913E45 /* Pods_SeSAC_Friends_SeSAC_FriendsUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36ED77D7E7021A4A0D4D0DD3 /* Pods_SeSAC_Friends_SeSAC_FriendsUITests.framework */; };
 		4BACC195F65F70A00B683587 /* Pods_SeSAC_FriendsTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44C1B11FE9BE17E95044013C /* Pods_SeSAC_FriendsTests.framework */; };
+		C20EB13727B13211007B53B0 /* FloatingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20EB13627B13211007B53B0 /* FloatingButton.swift */; };
 		C21A001627A3DF8600222045 /* GenderButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C21A001527A3DF8600222045 /* GenderButton.swift */; };
 		C21A001827A3E02800222045 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C21A001727A3E02800222045 /* Images.xcassets */; };
 		C23BA6AA279AF7D400AD2EE3 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = C23BA6A9279AF7D400AD2EE3 /* FirebaseAuth */; };
@@ -125,6 +126,7 @@
 		44C1B11FE9BE17E95044013C /* Pods_SeSAC_FriendsTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SeSAC_FriendsTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8F18C36348877840835DCE51 /* Pods-SeSAC_Friends-SeSAC_FriendsUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SeSAC_Friends-SeSAC_FriendsUITests.release.xcconfig"; path = "Target Support Files/Pods-SeSAC_Friends-SeSAC_FriendsUITests/Pods-SeSAC_Friends-SeSAC_FriendsUITests.release.xcconfig"; sourceTree = "<group>"; };
 		97678CCAD2E32DC02D0ABE0C /* Pods-SeSAC_FriendsTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SeSAC_FriendsTests.release.xcconfig"; path = "Target Support Files/Pods-SeSAC_FriendsTests/Pods-SeSAC_FriendsTests.release.xcconfig"; sourceTree = "<group>"; };
+		C20EB13627B13211007B53B0 /* FloatingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingButton.swift; sourceTree = "<group>"; };
 		C21A001527A3DF8600222045 /* GenderButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenderButton.swift; sourceTree = "<group>"; };
 		C21A001727A3E02800222045 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		C23BA6AD279BCF2300AD2EE3 /* H40Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = H40Button.swift; sourceTree = "<group>"; };
@@ -456,6 +458,7 @@
 				C26E99E827ABB30C00E00E15 /* TitleStackView.swift */,
 				C2A6E5E927AD853B00829EE0 /* AlertView.swift */,
 				C2826B4027B0EA4500C1CA23 /* FilterButton.swift */,
+				C20EB13627B13211007B53B0 /* FloatingButton.swift */,
 			);
 			path = Reusable;
 			sourceTree = "<group>";
@@ -869,6 +872,7 @@
 				C23BA6D427A1BFCE00AD2EE3 /* GenderViewController.swift in Sources */,
 				C23BA6D027A1AA5900AD2EE3 /* DateManager.swift in Sources */,
 				C2826B4327B0F91D00C1CA23 /* Friends.swift in Sources */,
+				C20EB13727B13211007B53B0 /* FloatingButton.swift in Sources */,
 				C26E99DF27AB79AA00E00E15 /* CardView.swift in Sources */,
 				C28377E02797F1D400151297 /* UILabel+Extension.swift in Sources */,
 				C26E99E527ABAC3700E00E15 /* H32Button.swift in Sources */,

@@ -21,6 +21,7 @@ final class HomeViewController: UIViewController {
     //MARK: UI
     
     private let mainView = HomeView()
+    private var markers = Set<NMFMarker>()
     
     //MARK: Method
     
@@ -43,7 +44,6 @@ final class HomeViewController: UIViewController {
             .disposed(by: disposeBag)
         
         locationManager.rx.didUpdateLocations
-            .debug("UPDATE Location")
             .compactMap { $0.locations.last?.coordinate }
             .bind(to: viewModel.input.locationDidChanged)
             .disposed(by: disposeBag)
@@ -75,7 +75,76 @@ final class HomeViewController: UIViewController {
                 owner.mainView.mapView.moveCamera(update)
             }
             .disposed(by: disposeBag)
+        
+        viewModel.output.filteredQueueList
+            .debug("AddMarkers")
+            .filter { !($0.isEmpty) }
+            .asDriver(onErrorJustReturn: [])
+            .drive(with: self) { owner, friends in
+                owner.addMarker(friends: friends)
+            }
+            .disposed(by: disposeBag)
 
+        viewModel.output.filteredRequiredQueueList
+            .debug("AddMarkers")
+            .filter { !($0.isEmpty) }
+            .asDriver(onErrorJustReturn: [])
+            .drive(with: self) { owner, friends in
+                owner.addMarker(friends: friends)
+            }
+            .disposed(by: disposeBag)
+        
+        viewModel.output.currentFilterValue
+            .debug("RemoveMarkers")
+            .distinctUntilChanged()
+            .asDriver(onErrorJustReturn: -1)
+            .drive(with: self) { owner, value in
+                owner.removeMarkers()
+            }
+            .disposed(by: disposeBag)
+
+    }
+    
+    func removeMarkers() {
+        print(#function)
+        for marker in markers {
+            marker.mapView = nil
+        }
+    }
+    
+    func addMarker(friends: [FromQueueDB]) {
+        for friend in friends {
+            let marker = NMFMarker()
+            let friendPosition = NMGLatLng(lat: friend.lat, lng: friend.long)
+            let size = UIScreen.main.bounds.width * 0.2222
+            switch friend.sesac {
+            case 0:
+                let iconImage = NMFOverlayImage(image: UIImage(asset: Asset.sesacFace1)!)
+                marker.iconImage = iconImage
+            case 1:
+                let iconImage = NMFOverlayImage(image: UIImage(asset: Asset.sesacFace2)!)
+                marker.iconImage = iconImage
+            case 2:
+                let iconImage = NMFOverlayImage(image: UIImage(asset: Asset.sesacFace3)!)
+                marker.iconImage = iconImage
+            case 3:
+                let iconImage = NMFOverlayImage(image: UIImage(asset: Asset.sesacFace4)!)
+                marker.iconImage = iconImage
+            case 4:
+                let iconImage = NMFOverlayImage(image: UIImage(asset: Asset.sesacFace5)!)
+                marker.iconImage = iconImage
+            default:
+                let iconImage = NMFOverlayImage(image: UIImage(asset: Asset.sesacFace1)!)
+                marker.iconImage = iconImage
+            }
+            
+            marker.width = size
+            marker.height = size
+            marker.position = friendPosition
+            marker.mapView = mainView.mapView
+            markers.insert(marker)
+            print("MARKER: \(marker)")
+        }
     }
     
     //MARK: LifeCycle

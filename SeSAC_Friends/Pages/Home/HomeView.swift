@@ -10,13 +10,13 @@ import SnapKit
 import NMapsMap
 import Then
 
-class HomeView: UIView, ViewRepresentable {
+final class HomeView: UIView, ViewRepresentable {
     
     let mapView = NMFMapView()
-    let floatingButton = UIButton().then {
+    
+    let floatingButton = FloatingButton().then {
         $0.layer.cornerRadius = 32
         $0.backgroundColor = .defaultBlack
-        $0.setImage(UIImage(asset: Asset.search), for: .normal)
         $0.tintColor = .defaultWhite
     }
     
