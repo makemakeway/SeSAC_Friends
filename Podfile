@@ -1,5 +1,5 @@
 #Uncomment the next line to define a global platform for your project
-# platform :iOS, '14.0'
+ platform :iOS, '14.0'
 
 target 'SeSAC_Friends' do
   # Comment the next line if you don't want to use dynamic frameworks
@@ -9,6 +9,7 @@ target 'SeSAC_Friends' do
   pod 'RxSwift', '6.5.0'
   pod 'RxCocoa', '6.5.0'
   pod "RxGesture"
+  pod 'RxCoreLocation'
 
   # Pods for SeSAC_Friends
 

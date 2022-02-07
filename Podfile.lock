@@ -3,6 +3,11 @@ PODS:
   - RxCocoa (6.5.0):
     - RxRelay (= 6.5.0)
     - RxSwift (= 6.5.0)
+  - RxCoreLocation (1.5.1):
+    - RxCoreLocation/Core (= 1.5.1)
+  - RxCoreLocation/Core (1.5.1):
+    - RxCocoa (~> 6.0)
+    - RxSwift (~> 6.0)
   - RxGesture (4.0.3):
     - RxCocoa (~> 6.0)
     - RxSwift (~> 6.0)
@@ -13,6 +18,7 @@ PODS:
 DEPENDENCIES:
   - NMapsMap
   - RxCocoa (= 6.5.0)
+  - RxCoreLocation
   - RxGesture
   - RxSwift (= 6.5.0)
 
@@ -20,6 +26,7 @@ SPEC REPOS:
   trunk:
     - NMapsMap
     - RxCocoa
+    - RxCoreLocation
     - RxGesture
     - RxRelay
     - RxSwift
@@ -27,10 +34,11 @@ SPEC REPOS:
 SPEC CHECKSUMS:
   NMapsMap: 79bae4e0d7cc5214dd6dabdb95687a1356616556
   RxCocoa: 94f817b71c07517321eb4f9ad299112ca8af743b
+  RxCoreLocation: a78f4cbf32a4c6c47ecccbe22d41ff93b7e8c099
   RxGesture: abadd243fc36db74df43dfc893829ddde94f1a3d
   RxRelay: 1de1523e604c72b6c68feadedd1af3b1b4d0ecbd
   RxSwift: 5710a9e6b17f3c3d6e40d6e559b9fa1e813b2ef8
 
-PODFILE CHECKSUM: 2be193f9d765d1cfc9b975b2338aaf41e95d328d
+PODFILE CHECKSUM: de8f803bfb38fa1fc68d15eef24244031d758711
 
 COCOAPODS: 1.11.2

@@ -20,7 +20,6 @@
 		C23BA6BD279D6CC200AD2EE3 /* UserDefaults+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23BA6BC279D6CC200AD2EE3 /* UserDefaults+Extension.swift */; };
 		C23BA6BF279D7C9C00AD2EE3 /* UserDefaultsWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23BA6BE279D7C9C00AD2EE3 /* UserDefaultsWrapper.swift */; };
 		C23BA6C2279D9C5400AD2EE3 /* FirebaseAuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23BA6C1279D9C5400AD2EE3 /* FirebaseAuthService.swift */; };
-		C23BA6C4279ECF0800AD2EE3 /* EndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23BA6C3279ECF0800AD2EE3 /* EndPoint.swift */; };
 		C23BA6C6279EDB0E00AD2EE3 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23BA6C5279EDB0E00AD2EE3 /* APIService.swift */; };
 		C23BA6C8279FF34600AD2EE3 /* NickNameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23BA6C7279FF34600AD2EE3 /* NickNameViewModel.swift */; };
 		C23BA6CA27A02A7900AD2EE3 /* Connectivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23BA6C927A02A7900AD2EE3 /* Connectivity.swift */; };
@@ -55,6 +54,7 @@
 		C26E99F327ABD38800E00E15 /* InfoWithdrawView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26E99F227ABD38800E00E15 /* InfoWithdrawView.swift */; };
 		C2826B3F27B0325600C1CA23 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2826B3E27B0325600C1CA23 /* HomeViewModel.swift */; };
 		C2826B4127B0EA4600C1CA23 /* FilterButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2826B4027B0EA4500C1CA23 /* FilterButton.swift */; };
+		C2826B4327B0F91D00C1CA23 /* Friends.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2826B4227B0F91D00C1CA23 /* Friends.swift */; };
 		C28377AF2796E36100151297 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C28377AE2796E36100151297 /* UIColor+Extension.swift */; };
 		C28377BA2796EEEE00151297 /* NotoSansKR-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = C28377B42796EEEE00151297 /* NotoSansKR-Medium.otf */; };
 		C28377BC2796EEEE00151297 /* NotoSansKR-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = C28377B62796EEEE00151297 /* NotoSansKR-Regular.otf */; };
@@ -134,7 +134,6 @@
 		C23BA6BC279D6CC200AD2EE3 /* UserDefaults+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Extension.swift"; sourceTree = "<group>"; };
 		C23BA6BE279D7C9C00AD2EE3 /* UserDefaultsWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsWrapper.swift; sourceTree = "<group>"; };
 		C23BA6C1279D9C5400AD2EE3 /* FirebaseAuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAuthService.swift; sourceTree = "<group>"; };
-		C23BA6C3279ECF0800AD2EE3 /* EndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPoint.swift; sourceTree = "<group>"; };
 		C23BA6C5279EDB0E00AD2EE3 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
 		C23BA6C7279FF34600AD2EE3 /* NickNameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NickNameViewModel.swift; sourceTree = "<group>"; };
 		C23BA6C927A02A7900AD2EE3 /* Connectivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Connectivity.swift; sourceTree = "<group>"; };
@@ -173,6 +172,7 @@
 		C26E99F227ABD38800E00E15 /* InfoWithdrawView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoWithdrawView.swift; sourceTree = "<group>"; };
 		C2826B3E27B0325600C1CA23 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		C2826B4027B0EA4500C1CA23 /* FilterButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterButton.swift; sourceTree = "<group>"; };
+		C2826B4227B0F91D00C1CA23 /* Friends.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Friends.swift; sourceTree = "<group>"; };
 		C28377AE2796E36100151297 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		C28377B42796EEEE00151297 /* NotoSansKR-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansKR-Medium.otf"; sourceTree = "<group>"; };
 		C28377B62796EEEE00151297 /* NotoSansKR-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansKR-Regular.otf"; sourceTree = "<group>"; };
@@ -377,6 +377,7 @@
 			children = (
 				C2E20D3527A6FD9400AB9BC0 /* SeSACUser.swift */,
 				C2E20D3B27A91E1900AB9BC0 /* OnboardingModel.swift */,
+				C2826B4227B0F91D00C1CA23 /* Friends.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -529,7 +530,6 @@
 		C2A6E5E127AD233000829EE0 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
-				C23BA6C3279ECF0800AD2EE3 /* EndPoint.swift */,
 				C23BA6C927A02A7900AD2EE3 /* Connectivity.swift */,
 				C23BA6C0279D9C3600AD2EE3 /* Service */,
 				C2A6E5E227AD371600829EE0 /* APIRouter.swift */,
@@ -861,7 +861,6 @@
 				C2E20D2F27A59A4E00AB9BC0 /* ShopViewController.swift in Sources */,
 				C23BA6CC27A16B3A00AD2EE3 /* BirthViewModel.swift in Sources */,
 				C2A6E5E727AD84F700829EE0 /* CustomAlertViewController.swift in Sources */,
-				C23BA6C4279ECF0800AD2EE3 /* EndPoint.swift in Sources */,
 				C28377C927971E5800151297 /* AuthView.swift in Sources */,
 				C2E20D3127A59A7800AB9BC0 /* FriendsViewController.swift in Sources */,
 				C28377CC27971E7300151297 /* ViewRepresentable.swift in Sources */,
@@ -869,6 +868,7 @@
 				C26E99F327ABD38800E00E15 /* InfoWithdrawView.swift in Sources */,
 				C23BA6D427A1BFCE00AD2EE3 /* GenderViewController.swift in Sources */,
 				C23BA6D027A1AA5900AD2EE3 /* DateManager.swift in Sources */,
+				C2826B4327B0F91D00C1CA23 /* Friends.swift in Sources */,
 				C26E99DF27AB79AA00E00E15 /* CardView.swift in Sources */,
 				C28377E02797F1D400151297 /* UILabel+Extension.swift in Sources */,
 				C26E99E527ABAC3700E00E15 /* H32Button.swift in Sources */,

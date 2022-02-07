@@ -34,8 +34,7 @@ final class APIService {
             }
             AF.request(APIRouter.login)
                 .validate()
-                .responseDecodable(of: SeSACUser.self) { [weak self](response) in
-                    guard let self = self else { return }
+                .responseDecodable(of: SeSACUser.self) { (response) in
                     switch response.response?.statusCode {
                     case 200:
                         //가입 유저
@@ -77,8 +76,7 @@ final class APIService {
                                         email: UserInfo.email,
                                         gender: UserInfo.gender))
                 .validate()
-                .response { [weak self](response) in
-                    guard let self = self else { return }
+                .response { (response) in
                     switch response.response?.statusCode {
                     case 200:
                         //회원가입 성공
@@ -139,7 +137,7 @@ final class APIService {
     }
     
     func updateMypage(searchable: Int, ageMin: Int, ageMax: Int, gender: Int, hobby: String) -> Single<Int> {
-        return Single<Int>.create { [weak self](single) in
+        return Single<Int>.create { single in
             if !(Connectivity.isConnectedToInternet) {
                 single(.failure(APIError.disConnect))
             }
@@ -151,7 +149,6 @@ final class APIService {
                                               hobby: hobby))
                 .validate()
                 .response { response in
-                    guard let self = self else { return }
                     switch response.response?.statusCode {
                     case 200:
                         single(.success(200))
@@ -196,6 +193,35 @@ final class APIService {
                         single(.failure(APIError.unKnownedUser))
                     default:
                         single(.failure(APIError.serverError))
+                    }
+                }
+            return Disposables.create()
+        }
+    }
+    
+    func fetchFriends(region: Int, lat: Double, long: Double) -> Single<Friends> {
+        return Single.create { single in
+            if !(Connectivity.isConnectedToInternet) {
+                single(.failure(APIError.disConnect))
+            }
+            
+            AF.request(APIRouter.searchRequestFriends(region: region, lat: lat, long: long))
+                .validate()
+                .responseDecodable(of: Friends.self) { response in
+                    switch response.result {
+                    case .success(let value):
+                        single(.success(value))
+                    case .failure(_):
+                        switch response.response?.statusCode {
+                        case 401:
+                            single(.failure(APIError.tokenExpired))
+                        case 406:
+                            single(.failure(APIError.unKnownedUser))
+                        case 500:
+                            single(.failure(APIError.serverError))
+                        default:
+                            single(.failure(APIError.clientError))
+                        }
                     }
                 }
             return Disposables.create()
