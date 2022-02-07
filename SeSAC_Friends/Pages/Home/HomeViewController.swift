@@ -7,29 +7,42 @@
 
 import UIKit
 import RxSwift
+import RxCocoa
 
-class HomeViewController: UIViewController {
+final class HomeViewController: UIViewController {
     //MARK: Properties
-    var disposeBag = DisposeBag()
-    
+    private var disposeBag = DisposeBag()
+    private let viewModel = HomeViewModel()
     
     //MARK: UI
     
-    let mainView = HomeView()
+    private let mainView = HomeView()
     
     //MARK: Method
     
-    
+    private func bind() {
+        
+    }
     
     //MARK: LifeCycle
     override func loadView() {
         super.loadView()
         self.view = mainView
-        self.navigationController?.navigationBar.isHidden = true
+        
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        bind()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.navigationBar.isHidden = true
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.navigationController?.navigationBar.isHidden = false
     }
 }

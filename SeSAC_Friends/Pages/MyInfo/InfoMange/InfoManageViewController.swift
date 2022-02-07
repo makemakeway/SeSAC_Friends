@@ -258,6 +258,7 @@ final class InfoManageViewController: UIViewController {
             .disposed(by: disposeBag)
         
         viewModel.output.goToOnboarding
+            .debug("GoToOnboarding")
             .asDriver(onErrorJustReturn: ())
             .drive(with: self) { owner, _ in
                 let vc = OnBoardingViewController()
@@ -285,11 +286,13 @@ final class InfoManageViewController: UIViewController {
         self.title = "정보 관리"
         let barButton = UIBarButtonItem(customView: saveButton)
         self.navigationItem.rightBarButtonItem = barButton
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         bind()
+        viewModel.transform()
     }
     
     override func viewDidAppear(_ animated: Bool) {

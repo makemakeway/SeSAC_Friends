@@ -162,7 +162,7 @@ final class LoginViewModel: ViewModelType {
                     } else {
                         owner.output.errorMessage.accept(APIError.disConnect.rawValue)
                     }
-                case 201: // 미가입 유저일 경우, 닉네임 화면 이동
+                case 406: // 미가입 유저일 경우, 닉네임 화면 이동
                     if Connectivity.isConnectedToInternet {
                         owner.output.goToNicknameView.accept(())
                     } else {

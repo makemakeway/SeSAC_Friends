@@ -87,15 +87,24 @@ final class GenderViewModel: ViewModelType {
                         guard let self = self, let error = error as? APIError else { return .just(0) }
                         switch error {
                         case .tokenExpired:
-                            self.output.errorMessage.accept(APIError.tokenExpired.rawValue)
+                            return .error(APIError.tokenExpired)
                         case .invalidNickname:
                             self.output.goToNickName.accept(())
                         case .disConnect:
                             self.output.errorMessage.accept(APIError.disConnect.rawValue)
                         default:
-                            self.output.errorMessage.accept("그냥 에러")
+                            self.output.errorMessage.accept("회원 가입 에러")
                         }
                         return .just(0)
+                    }
+                    .retry { (error: Observable<Error>) in
+                        error.filter { error in
+                            if let error = error as? APIError, error == .tokenExpired {
+                                return true
+                            }
+                            return false
+                        }
+                        .flatMap { _ -> Single<String> in FirebaseAuthService.shared.getIdToken().debug("REFresh IDTOKEN") }
                     }
             }
             .asDriver(onErrorJustReturn: 0)
@@ -106,7 +115,7 @@ final class GenderViewModel: ViewModelType {
                 case 201:
                     owner.output.errorMessage.accept("이미 가입한 유저입니다.")
                 default:
-                    owner.output.errorMessage.accept("\(status)번 에러")
+                    print("회원 가입 에러")
                 }
             }
             .disposed(by: disposeBag)

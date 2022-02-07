@@ -86,7 +86,7 @@ class CardView: UIView, ViewRepresentable {
 extension CardView: Expandable {
     func openOrClose(opened: Bool) {
         if opened {
-            UIView.animate(withDuration: 0.2) { [weak self] in
+            UIView.animate(withDuration: 0.1) { [weak self] in
                 guard let self = self else { return }
                 self.cardStackView.sesacTitleView.isHidden = false
                 self.cardStackView.sesacReviewView.isHidden = false
@@ -94,7 +94,7 @@ extension CardView: Expandable {
             }
             
         } else {
-            UIView.animate(withDuration: 0.2) { [weak self] in
+            UIView.animate(withDuration: 0.1) { [weak self] in
                 guard let self = self else { return }
                 self.cardStackView.sesacTitleView.isHidden = true
                 self.cardStackView.sesacReviewView.isHidden = true

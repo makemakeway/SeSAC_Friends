@@ -29,6 +29,8 @@ class HomeView: UIView, ViewRepresentable {
         $0.clipsToBounds = true
     }
     
+    let homeMarker = UIImageView(image: UIImage(asset: Asset.mapMarker))
+    
     let manButton = UIButton().then {
         let attr = NSAttributedString(string: "남자",
                                       attributes: [NSAttributedString.Key.font: UIFont.title3_M14,
@@ -78,6 +80,7 @@ class HomeView: UIView, ViewRepresentable {
         addSubview(floatingButton)
         addSubview(locationButton)
         addSubview(stackContainerView)
+        addSubview(homeMarker)
         stackContainerView.addSubview(filterStack)
         
         [entireButton, manButton, womanButton].forEach {
@@ -117,6 +120,10 @@ class HomeView: UIView, ViewRepresentable {
             make.size.equalTo(48)
             make.top.equalTo(filterStack.snp.bottom).offset(16)
             make.leading.equalToSuperview().offset(16)
+        }
+        
+        homeMarker.snp.makeConstraints { make in
+            make.center.equalToSuperview()
         }
     }
     

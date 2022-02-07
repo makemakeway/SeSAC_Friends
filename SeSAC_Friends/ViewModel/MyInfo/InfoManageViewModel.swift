@@ -65,17 +65,27 @@ final class InfoManageViewModel: ViewModelType {
                                                hobby: owner.output.textFieldText.value)
                     .catch { error in
                         if let error = error as? APIError {
-                            print(error)
                             switch error {
                             case .unKnownedUser:
                                 owner.output.goToOnboarding.accept(())
                             case .disConnect:
                                 owner.output.errorMessage.accept(APIError.disConnect.rawValue)
+                            case .tokenExpired:
+                                return .error(APIError.tokenExpired)
                             default:
-                                print("그 외 에러")
+                                print("업데이트 페이지 에러")
                             }
                         }
                         return .just(0)
+                    }
+                    .retry { (error: Observable<Error>) in
+                        error.filter { error in
+                            if let error = error as? APIError, error == .tokenExpired {
+                                return true
+                            }
+                            return false
+                        }
+                        .flatMap { _ -> Single<String> in FirebaseAuthService.shared.getIdToken().debug("REFresh IDTOKEN") }
                     }
             }
             .asDriver(onErrorJustReturn: 0)
@@ -97,7 +107,7 @@ final class InfoManageViewModel: ViewModelType {
                         if let error = error as? APIError {
                             switch error {
                             case .tokenExpired:
-                                print("토큰 만료")
+                                return .error(APIError.tokenExpired)
                             case .unKnownedUser:
                                 owner.output.goToOnboarding.accept(())
                             case .disConnect:
@@ -107,6 +117,15 @@ final class InfoManageViewModel: ViewModelType {
                             }
                         }
                         return .just(0)
+                    }
+                    .retry { (error: Observable<Error>) in
+                        error.filter { error in
+                            if let error = error as? APIError, error == .tokenExpired {
+                                return true
+                            }
+                            return false
+                        }
+                        .flatMap { _ -> Single<String> in FirebaseAuthService.shared.getIdToken().debug("REFresh IDTOKEN") }
                     }
             }
             .asDriver(onErrorJustReturn: 0)
@@ -134,16 +153,9 @@ final class InfoManageViewModel: ViewModelType {
             .withUnretained(self)
             .flatMap { owner, _ in
                 APIService.shared.getUserData(idToken: UserInfo.idToken)
-                    .retry { (error: Observable<Error>) in
-                        error.filter { error in
-                            if let error = error as? APIError, error == .tokenExpired {
-                                return true
-                            }
-                            return false
-                        }
-                        .flatMap { _ in FirebaseAuthService.shared.getIdToken() }
-                    }
+                    .debug("GET USER")
                     .catch { error in
+                        print(error)
                         if let error = error as? APIError {
                             switch error {
                             case .unKnownedUser:
@@ -152,12 +164,23 @@ final class InfoManageViewModel: ViewModelType {
                                 owner.output.errorMessage.accept(APIError.disConnect.rawValue)
                             case .serverError:
                                 owner.output.errorMessage.accept(APIError.serverError.rawValue)
+                            case .tokenExpired:
+                                return .error(APIError.tokenExpired)
                             default:
                                 print("회원 정보 받아오기 에러")
                             }
                         }
                         return .never()
+                    .retry { (error: Observable<Error>) in
+                        error.filter { error in
+                            if let error = error as? APIError, error == .tokenExpired {
+                                return true
+                            }
+                            return false
+                        }
+                        .flatMap { _ -> Single<String> in FirebaseAuthService.shared.getIdToken().debug("REFresh IDTOKEN") }
                     }
+                }
             }
             .bind(with: self, onNext: { owner, user in
                 owner.userDataFetched = true
@@ -234,6 +257,6 @@ final class InfoManageViewModel: ViewModelType {
     }
     
     init() {
-        transform()
+        
     }
 }

@@ -40,7 +40,7 @@ final class FirebaseAuthService {
             
             Auth.auth().signIn(with: credential) { (result, error) in
                 if error != nil {
-                    print("userVerificationError!")
+                    print("ERROR: userVerificationError!")
                     single(.failure(FirebaseAuthError.inCorrectVerificationCode))
                 }
                 
@@ -59,7 +59,7 @@ final class FirebaseAuthService {
             }
             Auth.auth().currentUser?.getIDTokenForcingRefresh(true) { idToken, error in
                 if error != nil {
-                    print("getIDTokenForcingRefreshError!")
+                    print("ERROR: getIDTokenForcingRefreshError!")
                     single(.failure(FirebaseAuthError.idTokenRequestFailed))
                 }
                 if let idToken = idToken {
@@ -81,7 +81,7 @@ final class FirebaseAuthService {
             PhoneAuthProvider.provider()
               .verifyPhoneNumber(phoneNumber, uiDelegate: nil) { (verificationID, error) in
                   if let error = error {
-                      print("requestVerificationCodeError!")
+                      print("ERROR: requestVerificationCodeError!")
                       single(.failure(error))
                       return
                   }

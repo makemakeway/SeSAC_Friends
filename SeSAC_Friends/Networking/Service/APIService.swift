@@ -51,13 +51,7 @@ final class APIService {
                         single(.success(406))
                     case 401:
                         //토큰 만료
-                        FirebaseAuthService.shared.getIdToken()
-                            .subscribe { _ in
-                                _ = self.logIn()
-                            } onFailure: { error in
-                                single(.failure(APIError.tokenExpired))
-                            }
-                            .disposed(by: self.disposeBag)
+                        single(.failure(APIError.tokenExpired))
                     case 500:
                         single(.failure(APIError.serverError))
                     case 501:
@@ -101,14 +95,7 @@ final class APIService {
                         single(.failure(APIError.invalidNickname))
                     case 401:
                         //토큰 만료
-                        FirebaseAuthService.shared.getIdToken()
-                            .subscribe { _ in
-                                _ = self.signUp()
-                                return
-                            } onFailure: { error in
-                                single(.failure(APIError.tokenExpired))
-                            }
-                            .disposed(by: self.disposeBag)
+                        single(.failure(APIError.tokenExpired))
                     case 500:
                         single(.failure(APIError.serverError))
                     case 501:
@@ -132,6 +119,7 @@ final class APIService {
                 .responseDecodable(of: SeSACUser.self) { (response) in
                     switch response.result {
                     case .success(let value):
+                        print(value)
                         single(.success(value))
                     case .failure(_):
                         switch response.response?.statusCode {
@@ -168,15 +156,7 @@ final class APIService {
                     case 200:
                         single(.success(200))
                     case 401:
-                        FirebaseAuthService.shared.getIdToken()
-                            .subscribe { _ in
-                                _ = self.updateMypage(searchable: searchable,
-                                                      ageMin: ageMin,
-                                                      ageMax: ageMax,
-                                                      gender: gender,
-                                                      hobby: hobby)
-                            }
-                            .disposed(by: self.disposeBag)
+                        single(.failure(APIError.tokenExpired))
                     case 406:
                         single(.failure(APIError.unKnownedUser))
                     case 500:
