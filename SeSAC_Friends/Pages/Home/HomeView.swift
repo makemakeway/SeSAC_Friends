@@ -18,6 +18,7 @@ final class HomeView: UIView, ViewRepresentable {
         $0.layer.cornerRadius = 32
         $0.backgroundColor = .defaultBlack
         $0.tintColor = .defaultWhite
+        $0.imageView?.contentMode = .scaleAspectFill
     }
     
     let homeMarker = UIImageView(image: UIImage(asset: Asset.mapMarker))

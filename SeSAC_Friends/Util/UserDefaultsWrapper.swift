@@ -38,4 +38,5 @@ class UserInfo {
     @UserDefault(key: "phoneNumber", defaultValue: "")static var phoneNumber: String
     @UserDefault(key: "email", defaultValue: "")static var email: String
     @UserDefault(key: "FCMToken", defaultValue: "")static var fcmToken: String
+    @UserDefault(key: "userState", defaultValue: FloatingButtonState.normal)static var userState: FloatingButtonState
 }

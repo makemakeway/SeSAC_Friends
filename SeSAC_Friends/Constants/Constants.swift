@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import CoreLocation
 
 struct CustomKey {
     struct ProductionServer {
@@ -29,6 +30,10 @@ struct CustomKey {
         static let long = "long"
         static let hf = "hf"
     }
+}
+
+struct DefaultValue {
+    static let location = CLLocationCoordinate2D(latitude: 37.517819364682694, longitude: 126.88647317074734)
 }
 
 enum HTTPHeaderField: String {

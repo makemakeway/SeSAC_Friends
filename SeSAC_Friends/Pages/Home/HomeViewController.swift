@@ -9,7 +9,6 @@ import UIKit
 import RxSwift
 import RxCocoa
 import CoreLocation
-import RxCoreLocation
 import NMapsMap
 
 final class HomeViewController: UIViewController {
@@ -43,10 +42,11 @@ final class HomeViewController: UIViewController {
             .drive(viewModel.input.womanButtonClicked)
             .disposed(by: disposeBag)
         
-        locationManager.rx.didUpdateLocations
-            .compactMap { $0.locations.last?.coordinate }
-            .bind(to: viewModel.input.locationDidChanged)
+        mainView.locationButton.rx.tap
+            .asDriver()
+            .drive(viewModel.input.locationButtonClicked)
             .disposed(by: disposeBag)
+        
         
         //MARK: Output Binding
         
@@ -65,16 +65,6 @@ final class HomeViewController: UIViewController {
             .drive(mainView.womanButton.rx.buttonState)
             .disposed(by: disposeBag)
         
-        viewModel.output.currentLocation
-            .asDriver()
-            .drive(with: self) { owner, location in
-                let camera = NMFCameraPosition(NMGLatLng(lat: location.latitude,
-                                                         lng: location.longitude), zoom: 18)
-                let update = NMFCameraUpdate(position: camera)
-                
-                owner.mainView.mapView.moveCamera(update)
-            }
-            .disposed(by: disposeBag)
         
         viewModel.output.filteredQueueList
             .debug("AddMarkers")
@@ -103,6 +93,68 @@ final class HomeViewController: UIViewController {
             }
             .disposed(by: disposeBag)
 
+        viewModel.output.currentMapViewCamera
+            .asDriver(onErrorJustReturn: DefaultValue.location)
+            .drive(with: self) { owner, location in
+                owner.moveCamera(location: location)
+            }
+            .disposed(by: disposeBag)
+
+        viewModel.output.currentUserState
+            .debug("Current User State")
+            .asDriver(onErrorJustReturn: .normal)
+            .drive(mainView.floatingButton.rx.floatingButtonState)
+            .disposed(by: disposeBag)
+        
+        viewModel.output.currentAuthorization
+            .debug("현재 유저 권한")
+            .asDriver(onErrorJustReturn: .notDetermined)
+            .drive(with: self) { owner, status in
+                print(status)
+            }
+            .disposed(by: disposeBag)
+
+        viewModel.output.showAlert
+            .asDriver(onErrorJustReturn: ())
+            .drive(with: self) { owner, _ in
+                owner.alertConfig()
+            }
+            .disposed(by: disposeBag)
+
+    }
+    
+    func alertConfig() {
+        let vc = CustomAlertViewController()
+        vc.modalPresentationStyle = .overCurrentContext
+        vc.mainView.mainTitleLabel.text = "위치 서비스 사용불가"
+        vc.mainView.cancelButton.rx.tap
+            .asDriver()
+            .drive { _ in
+                vc.dismiss(animated: false, completion: nil)
+            }
+            .disposed(by: disposeBag)
+
+        vc.mainView.okButton.rx.tap
+            .asDriver()
+            .drive(with: self) { owner, _ in
+                print("아이폰 설정 화면으로 이동")
+                guard let url = URL(string: UIApplication.openSettingsURLString) else { return }
+                if UIApplication.shared.canOpenURL(url) {
+                    UIApplication.shared.open(url)
+                }
+                vc.dismiss(animated: false, completion: nil)
+            }
+            .disposed(by: disposeBag)
+        present(vc, animated: false, completion: nil)
+    }
+    
+    func moveCamera(location: CLLocationCoordinate2D) {
+        print("Location: \(location)")
+        let camera = NMFCameraPosition(NMGLatLng(lat: location.latitude,
+                                                 lng: location.longitude), zoom: 18)
+        let update = NMFCameraUpdate(position: camera)
+        
+        mainView.mapView.moveCamera(update)
     }
     
     func removeMarkers() {
@@ -158,10 +210,12 @@ final class HomeViewController: UIViewController {
         super.viewDidLoad()
         bind()
         viewModel.transform()
+        locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.requestWhenInUseAuthorization()
         locationManager.startUpdatingLocation()
-        
+        viewModel.input.currentAuthority.onNext(locationManager.authorizationStatus)
+        viewModel.input.userStateChanged.onNext(.normal)
         mainView.mapView.addCameraDelegate(delegate: self)
     }
     
@@ -178,7 +232,24 @@ final class HomeViewController: UIViewController {
 
 extension HomeViewController: NMFMapViewCameraDelegate {
     func mapViewCameraIdle(_ mapView: NMFMapView) {
+        let target = mapView.cameraPosition.target
+        
         viewModel.input.mapViewCameraDidChanged
-            .onNext(mapView.cameraPosition)
+            .onNext(CLLocationCoordinate2D(latitude: target.lat, longitude: target.lng))
+        mapView.isUserInteractionEnabled = false
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
+            mapView.isUserInteractionEnabled = true
+        }
+    }
+}
+
+extension HomeViewController: CLLocationManagerDelegate {
+    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
+        viewModel.input.currentAuthority.onNext(manager.authorizationStatus)
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        guard let location = locations.last?.coordinate else { return }
+        viewModel.input.locationDidChanged.onNext(location)
     }
 }

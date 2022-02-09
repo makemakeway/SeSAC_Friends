@@ -29,7 +29,7 @@ final class FloatingButton: UIButton, ViewRepresentable {
     }
     
     func setUp() {
-        
+        self.tintColor = .defaultWhite
     }
     
     func setConstraints() {
