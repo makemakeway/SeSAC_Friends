@@ -47,6 +47,11 @@ final class HomeViewController: UIViewController {
             .drive(viewModel.input.locationButtonClicked)
             .disposed(by: disposeBag)
         
+        mainView.floatingButton.rx.tap
+            .asDriver()
+            .drive(viewModel.input.floatingButtonClicked)
+            .disposed(by: disposeBag)
+        
         
         //MARK: Output Binding
         
@@ -121,6 +126,13 @@ final class HomeViewController: UIViewController {
             }
             .disposed(by: disposeBag)
 
+        viewModel.output.goToEnterHobby
+            .asDriver(onErrorJustReturn: ())
+            .drive(with: self) { owner, _ in
+                let vc = EnterHobbyViewController()
+                owner.navigationController?.pushViewController(vc, animated: true)
+            }
+            .disposed(by: disposeBag)
     }
     
     func alertConfig() {
@@ -222,6 +234,7 @@ final class HomeViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.isHidden = true
+        viewModel.input.homeWillAppear.onNext(())
     }
     
     override func viewWillDisappear(_ animated: Bool) {

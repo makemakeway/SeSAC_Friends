@@ -17,6 +17,7 @@ final class FloatingButton: UIButton, ViewRepresentable {
     
     var floatingButtonState: FloatingButtonState = .normal {
         willSet {
+            print("Floating State: \(newValue)")
             switch newValue {
             case .normal:
                 self.setImage(UIImage(asset: Asset.search), for: .normal)

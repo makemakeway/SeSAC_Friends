@@ -41,6 +41,12 @@ final class APIService {
                         switch response.result {
                         case .success(let user):
                             UserInfo.nickname = user.nick
+                            UserInfo.gender = user.gender
+                            UserInfo.birthday = user.birth
+                            UserInfo.email = user.email
+                            UserInfo.fcmToken = user.fcMtoken
+                            UserInfo.phoneNumber = user.phoneNumber
+                            UserInfo.signUpCompleted = true
                         default:
                             print("디코딩 실패??")
                         }
@@ -151,6 +157,7 @@ final class APIService {
                 .response { response in
                     switch response.response?.statusCode {
                     case 200:
+                        UserInfo.gender = gender
                         single(.success(200))
                     case 401:
                         single(.failure(APIError.tokenExpired))

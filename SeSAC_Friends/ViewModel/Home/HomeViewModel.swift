@@ -21,6 +21,7 @@ final class HomeViewModel: ViewModelType {
         let homeWillAppear = PublishSubject<Void>()
         let userStateChanged = PublishSubject<FloatingButtonState>()
         let currentAuthority = PublishSubject<CLAuthorizationStatus>()
+        let floatingButtonClicked = PublishSubject<Void>()
     }
     
     struct Output {
@@ -37,6 +38,10 @@ final class HomeViewModel: ViewModelType {
         let currentUserState = PublishRelay<FloatingButtonState>()
         let currentAuthorization = PublishRelay<CLAuthorizationStatus>()
         let showAlert = PublishRelay<Void>()
+        let goToInfoManage = PublishRelay<Void>()
+        let goToEnterHobby = PublishRelay<Void>()
+        let goToSearchSesac = PublishRelay<Void>()
+        let goToChat = PublishRelay<Void>()
     }
     
     var disposeBag = DisposeBag()
@@ -56,14 +61,20 @@ final class HomeViewModel: ViewModelType {
         let currentMapViewPosition = input.mapViewCameraDidChanged
             .share()
         
+        let currentLocation = input.locationDidChanged
+            .share()
+        
         homeWillAppear
             .withLatestFrom(input.userStateChanged)
+            .debug("홈윌어피어 + 유저스테이트")
             .asDriver(onErrorJustReturn: .normal)
             .drive(with: self) { owner, state in
                 owner.output.currentUserState.accept(state)
             }
             .disposed(by: disposeBag)
 
+        let currentUserState = input.userStateChanged
+            .share()
         
         let currentUserAuth = homeWillAppear
             .withLatestFrom(input.currentAuthority)
@@ -71,9 +82,50 @@ final class HomeViewModel: ViewModelType {
             .map { owner, state in owner.checkUserAuthorization(state: state) }
             .asObservable()
             .share()
+        
+        let floatingButtonClicked = input.floatingButtonClicked
+            .withLatestFrom(currentUserState)
+            .share()
+        
+        floatingButtonClicked
+            .filter { $0 == .normal }
+            .withLatestFrom(currentUserAuth)
+            .observe(on: MainScheduler.instance)
+            .bind(with: self) { owner, allowed in
+                if allowed {
+                    if UserInfo.gender == -1 {
+                        owner.output.errorMessage.accept("")
+                        owner.output.goToInfoManage.accept(())
+                    } else {
+                        owner.output.goToEnterHobby.accept(())
+                    }
+                } else {
+                    owner.output.showAlert.accept(())
+                }
+            }
+            .disposed(by: disposeBag)
+        
+        floatingButtonClicked
+            .filter { $0 == .matching }
+            .observe(on: MainScheduler.instance)
+            .bind(with: self) { owner, _ in
+                owner.output.goToSearchSesac.accept(())
+            }
+            .disposed(by: disposeBag)
+        
+        floatingButtonClicked
+            .filter { $0 == .matched }
+            .observe(on: MainScheduler.instance)
+            .bind(with: self) { owner, _ in
+                owner.output.goToChat.accept(())
+            }
+            .disposed(by: disposeBag)
+            
+        
 
         currentUserAuth
             .filter { $0 == false }
+            .debug("currentUserAuth: 유저 위치 권한 없음")
             .asDriver(onErrorJustReturn: false)
             .drive(with: self) { owner, _ in
                 owner.output.currentMapViewCamera.accept(DefaultValue.location)
@@ -82,6 +134,7 @@ final class HomeViewModel: ViewModelType {
 
         currentUserAuth
             .filter { $0 == true }
+            .debug("currentUserAuth: 유저 위치 권한 있음")
             .withLatestFrom(currentMapViewPosition)
             .withUnretained(self)
             .flatMap { owner, location in owner.fetchFriends(position: location) }
@@ -129,8 +182,11 @@ final class HomeViewModel: ViewModelType {
             .disposed(by: disposeBag)
 
         currentMapViewPosition
-            .debug("맵뷰 카메라 변경")
             .withUnretained(self)
+            .distinctUntilChanged { lh, rh in
+                (lh.1.latitude == rh.1.latitude) && (lh.1.longitude == rh.1.longitude)
+            }
+            .debug("맵뷰 카메라 변경")
             .flatMap { owner, position in
                 owner.fetchFriends(position: position)
             }
@@ -139,7 +195,7 @@ final class HomeViewModel: ViewModelType {
             }
             .disposed(by: disposeBag)
         
-        input.locationDidChanged
+        currentLocation
             .asDriver(onErrorJustReturn: DefaultValue.location)
             .drive(with: self) { owner, location in
                 owner.output.currentMapViewCamera.accept(location)
@@ -182,7 +238,7 @@ final class HomeViewModel: ViewModelType {
         gpsButtonClickedWithCurrentAuthorization
             .debug("위치 권한 있음")
             .filter { $0 == true }
-            .withLatestFrom(input.locationDidChanged)
+            .withLatestFrom(currentLocation)
             .observe(on: MainScheduler.instance)
             .bind(with: self) { owner, location in
                 print("권한 있어서 카메라 위치 현재위치로")
@@ -200,7 +256,7 @@ final class HomeViewModel: ViewModelType {
             }
             .disposed(by: disposeBag)
 
-        input.userStateChanged
+        currentUserState
             .debug("유저 상태 변경")
             .asDriver(onErrorJustReturn: .normal)
             .drive(with: self) { owner, state in

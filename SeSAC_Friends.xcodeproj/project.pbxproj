@@ -10,6 +10,8 @@
 		2D98C1A8AC919DA6DF913E45 /* Pods_SeSAC_Friends_SeSAC_FriendsUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36ED77D7E7021A4A0D4D0DD3 /* Pods_SeSAC_Friends_SeSAC_FriendsUITests.framework */; };
 		4BACC195F65F70A00B683587 /* Pods_SeSAC_FriendsTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44C1B11FE9BE17E95044013C /* Pods_SeSAC_FriendsTests.framework */; };
 		C20EB13727B13211007B53B0 /* FloatingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20EB13627B13211007B53B0 /* FloatingButton.swift */; };
+		C20EB13D27B411B6007B53B0 /* EnterHobbyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20EB13C27B411B6007B53B0 /* EnterHobbyViewController.swift */; };
+		C20EB13F27B413C6007B53B0 /* EnterHobbyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20EB13E27B413C6007B53B0 /* EnterHobbyView.swift */; };
 		C21A001627A3DF8600222045 /* GenderButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C21A001527A3DF8600222045 /* GenderButton.swift */; };
 		C21A001827A3E02800222045 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C21A001727A3E02800222045 /* Images.xcassets */; };
 		C23BA6AA279AF7D400AD2EE3 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = C23BA6A9279AF7D400AD2EE3 /* FirebaseAuth */; };
@@ -127,6 +129,8 @@
 		8F18C36348877840835DCE51 /* Pods-SeSAC_Friends-SeSAC_FriendsUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SeSAC_Friends-SeSAC_FriendsUITests.release.xcconfig"; path = "Target Support Files/Pods-SeSAC_Friends-SeSAC_FriendsUITests/Pods-SeSAC_Friends-SeSAC_FriendsUITests.release.xcconfig"; sourceTree = "<group>"; };
 		97678CCAD2E32DC02D0ABE0C /* Pods-SeSAC_FriendsTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SeSAC_FriendsTests.release.xcconfig"; path = "Target Support Files/Pods-SeSAC_FriendsTests/Pods-SeSAC_FriendsTests.release.xcconfig"; sourceTree = "<group>"; };
 		C20EB13627B13211007B53B0 /* FloatingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingButton.swift; sourceTree = "<group>"; };
+		C20EB13C27B411B6007B53B0 /* EnterHobbyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterHobbyViewController.swift; sourceTree = "<group>"; };
+		C20EB13E27B413C6007B53B0 /* EnterHobbyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterHobbyView.swift; sourceTree = "<group>"; };
 		C21A001527A3DF8600222045 /* GenderButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenderButton.swift; sourceTree = "<group>"; };
 		C21A001727A3E02800222045 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		C23BA6AD279BCF2300AD2EE3 /* H40Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = H40Button.swift; sourceTree = "<group>"; };
@@ -272,6 +276,38 @@
 				97678CCAD2E32DC02D0ABE0C /* Pods-SeSAC_FriendsTests.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		C20EB13827B41160007B53B0 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				C2E20D2727A5751400AB9BC0 /* HomeViewController.swift */,
+				C2E20D3D27A951E300AB9BC0 /* HomeView.swift */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		C20EB13927B4116D007B53B0 /* SearchSesac */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = SearchSesac;
+			sourceTree = "<group>";
+		};
+		C20EB13A27B4118A007B53B0 /* EnterHobby */ = {
+			isa = PBXGroup;
+			children = (
+				C20EB13C27B411B6007B53B0 /* EnterHobbyViewController.swift */,
+				C20EB13E27B413C6007B53B0 /* EnterHobbyView.swift */,
+			);
+			path = EnterHobby;
+			sourceTree = "<group>";
+		};
+		C20EB13B27B41197007B53B0 /* Chat */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Chat;
 			sourceTree = "<group>";
 		};
 		C23BA6C0279D9C3600AD2EE3 /* Service */ = {
@@ -533,9 +569,9 @@
 		C2A6E5E127AD233000829EE0 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
+				C2A6E5E227AD371600829EE0 /* APIRouter.swift */,
 				C23BA6C927A02A7900AD2EE3 /* Connectivity.swift */,
 				C23BA6C0279D9C3600AD2EE3 /* Service */,
-				C2A6E5E227AD371600829EE0 /* APIRouter.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -552,8 +588,10 @@
 		C2E20D2627A56E4C00AB9BC0 /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				C2E20D2727A5751400AB9BC0 /* HomeViewController.swift */,
-				C2E20D3D27A951E300AB9BC0 /* HomeView.swift */,
+				C20EB13B27B41197007B53B0 /* Chat */,
+				C20EB13A27B4118A007B53B0 /* EnterHobby */,
+				C20EB13927B4116D007B53B0 /* SearchSesac */,
+				C20EB13827B41160007B53B0 /* Main */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -887,6 +925,7 @@
 				C2E20D2827A5751400AB9BC0 /* HomeViewController.swift in Sources */,
 				C23BA6C6279EDB0E00AD2EE3 /* APIService.swift in Sources */,
 				C242CDBA2796BE7000905287 /* RequestAuthViewController.swift in Sources */,
+				C20EB13D27B411B6007B53B0 /* EnterHobbyViewController.swift in Sources */,
 				C2E20D3827A908F200AB9BC0 /* OnBoardingCollectionViewCell.swift in Sources */,
 				C26E99E927ABB30C00E00E15 /* TitleStackView.swift in Sources */,
 				C28377E527980E1000151297 /* ButtonState.swift in Sources */,
@@ -906,6 +945,7 @@
 				C23BA6B7279C554900AD2EE3 /* NickNameViewController.swift in Sources */,
 				C242CDB82796BE7000905287 /* SceneDelegate.swift in Sources */,
 				C26E99D727AAC9C100E00E15 /* InfoManageViewController.swift in Sources */,
+				C20EB13F27B413C6007B53B0 /* EnterHobbyView.swift in Sources */,
 				C28377F027987D0A00151297 /* TextFieldState.swift in Sources */,
 				C23BA6C8279FF34600AD2EE3 /* NickNameViewModel.swift in Sources */,
 				C23BA6B5279C42EC00AD2EE3 /* InputViewContentType.swift in Sources */,
