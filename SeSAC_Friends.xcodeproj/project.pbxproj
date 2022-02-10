@@ -39,6 +39,11 @@
 		C242CDCD2796BE7300905287 /* SeSAC_FriendsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C242CDCC2796BE7300905287 /* SeSAC_FriendsTests.swift */; };
 		C242CDD72796BE7300905287 /* SeSAC_FriendsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C242CDD62796BE7300905287 /* SeSAC_FriendsUITests.swift */; };
 		C242CDD92796BE7300905287 /* SeSAC_FriendsUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C242CDD82796BE7300905287 /* SeSAC_FriendsUITestsLaunchTests.swift */; };
+		C260F0A027B532D30087948F /* Hobbies.swift in Sources */ = {isa = PBXBuildFile; fileRef = C260F09F27B532D30087948F /* Hobbies.swift */; };
+		C260F0A227B550670087948F /* HobbySection.swift in Sources */ = {isa = PBXBuildFile; fileRef = C260F0A127B550670087948F /* HobbySection.swift */; };
+		C260F0A427B561360087948F /* EnterHobbyCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C260F0A327B561360087948F /* EnterHobbyCollectionViewCell.swift */; };
+		C260F0A627B561D30087948F /* UICollectionViewCell+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C260F0A527B561D30087948F /* UICollectionViewCell+Extension.swift */; };
+		C260F0A827B570390087948F /* EnterHobbyCollectionViewSectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = C260F0A727B570390087948F /* EnterHobbyCollectionViewSectionHeader.swift */; };
 		C26E99D527AA9C9200E00E15 /* MyInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26E99D427AA9C9200E00E15 /* MyInfoView.swift */; };
 		C26E99D727AAC9C100E00E15 /* InfoManageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26E99D627AAC9C100E00E15 /* InfoManageViewController.swift */; };
 		C26E99D927AAC9CA00E00E15 /* InfoManageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26E99D827AAC9CA00E00E15 /* InfoManageView.swift */; };
@@ -160,6 +165,11 @@
 		C242CDD22796BE7300905287 /* SeSAC_FriendsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SeSAC_FriendsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C242CDD62796BE7300905287 /* SeSAC_FriendsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeSAC_FriendsUITests.swift; sourceTree = "<group>"; };
 		C242CDD82796BE7300905287 /* SeSAC_FriendsUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeSAC_FriendsUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		C260F09F27B532D30087948F /* Hobbies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hobbies.swift; sourceTree = "<group>"; };
+		C260F0A127B550670087948F /* HobbySection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HobbySection.swift; sourceTree = "<group>"; };
+		C260F0A327B561360087948F /* EnterHobbyCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterHobbyCollectionViewCell.swift; sourceTree = "<group>"; };
+		C260F0A527B561D30087948F /* UICollectionViewCell+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionViewCell+Extension.swift"; sourceTree = "<group>"; };
+		C260F0A727B570390087948F /* EnterHobbyCollectionViewSectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterHobbyCollectionViewSectionHeader.swift; sourceTree = "<group>"; };
 		C26E99D427AA9C9200E00E15 /* MyInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInfoView.swift; sourceTree = "<group>"; };
 		C26E99D627AAC9C100E00E15 /* InfoManageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoManageViewController.swift; sourceTree = "<group>"; };
 		C26E99D827AAC9CA00E00E15 /* InfoManageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoManageView.swift; sourceTree = "<group>"; };
@@ -299,6 +309,8 @@
 			children = (
 				C20EB13C27B411B6007B53B0 /* EnterHobbyViewController.swift */,
 				C20EB13E27B413C6007B53B0 /* EnterHobbyView.swift */,
+				C260F0A327B561360087948F /* EnterHobbyCollectionViewCell.swift */,
+				C260F0A727B570390087948F /* EnterHobbyCollectionViewSectionHeader.swift */,
 			);
 			path = EnterHobby;
 			sourceTree = "<group>";
@@ -416,6 +428,8 @@
 				C2E20D3527A6FD9400AB9BC0 /* SeSACUser.swift */,
 				C2E20D3B27A91E1900AB9BC0 /* OnboardingModel.swift */,
 				C2826B4227B0F91D00C1CA23 /* Friends.swift */,
+				C260F09F27B532D30087948F /* Hobbies.swift */,
+				C260F0A127B550670087948F /* HobbySection.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -442,6 +456,7 @@
 				C28377DF2797F1D400151297 /* UILabel+Extension.swift */,
 				C23BA6BC279D6CC200AD2EE3 /* UserDefaults+Extension.swift */,
 				C2E20D2427A4603400AB9BC0 /* UIViewController+Extension.swift */,
+				C260F0A527B561D30087948F /* UICollectionViewCell+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -912,7 +927,9 @@
 				C2826B4327B0F91D00C1CA23 /* Friends.swift in Sources */,
 				C20EB13727B13211007B53B0 /* FloatingButton.swift in Sources */,
 				C26E99DF27AB79AA00E00E15 /* CardView.swift in Sources */,
+				C260F0A827B570390087948F /* EnterHobbyCollectionViewSectionHeader.swift in Sources */,
 				C28377E02797F1D400151297 /* UILabel+Extension.swift in Sources */,
+				C260F0A427B561360087948F /* EnterHobbyCollectionViewCell.swift in Sources */,
 				C26E99E527ABAC3700E00E15 /* H32Button.swift in Sources */,
 				C2E20D3327A59AA500AB9BC0 /* MyInfoViewController.swift in Sources */,
 				C2E20D2527A4603400AB9BC0 /* UIViewController+Extension.swift in Sources */,
@@ -922,9 +939,11 @@
 				C28377F227988C0500151297 /* LogInViewController.swift in Sources */,
 				C26E99ED27ABD1CC00E00E15 /* CustomTextField.swift in Sources */,
 				C2A6E5DF27ABFC5800829EE0 /* InfoManageViewModel.swift in Sources */,
+				C260F0A627B561D30087948F /* UICollectionViewCell+Extension.swift in Sources */,
 				C2E20D2827A5751400AB9BC0 /* HomeViewController.swift in Sources */,
 				C23BA6C6279EDB0E00AD2EE3 /* APIService.swift in Sources */,
 				C242CDBA2796BE7000905287 /* RequestAuthViewController.swift in Sources */,
+				C260F0A027B532D30087948F /* Hobbies.swift in Sources */,
 				C20EB13D27B411B6007B53B0 /* EnterHobbyViewController.swift in Sources */,
 				C2E20D3827A908F200AB9BC0 /* OnBoardingCollectionViewCell.swift in Sources */,
 				C26E99E927ABB30C00E00E15 /* TitleStackView.swift in Sources */,
@@ -943,6 +962,7 @@
 				C26E99DD27AB787300E00E15 /* Expandable.swift in Sources */,
 				C26E99E727ABB25600E00E15 /* CardStackView.swift in Sources */,
 				C23BA6B7279C554900AD2EE3 /* NickNameViewController.swift in Sources */,
+				C260F0A227B550670087948F /* HobbySection.swift in Sources */,
 				C242CDB82796BE7000905287 /* SceneDelegate.swift in Sources */,
 				C26E99D727AAC9C100E00E15 /* InfoManageViewController.swift in Sources */,
 				C20EB13F27B413C6007B53B0 /* EnterHobbyView.swift in Sources */,

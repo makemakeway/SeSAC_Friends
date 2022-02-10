@@ -8,7 +8,8 @@ target 'SeSAC_Friends' do
   pod 'NMapsMap'
   pod 'RxSwift', '6.5.0'
   pod 'RxCocoa', '6.5.0'
-  pod "RxGesture"
+  pod 'RxGesture'
+  pod 'RxDataSources'
 
   # Pods for SeSAC_Friends
 

@@ -31,11 +31,6 @@ class TabBarController: UITabBarController {
         shopViewController.tabBarItem.selectedImage = UIImage(asset: Asset.property1ShopProperty2Act)
         shopViewController.tabBarItem.title = "새싹샵"
         
-        let friendsViewController = UINavigationController(rootViewController: FriendsViewController())
-        friendsViewController.tabBarItem.image = UIImage(asset: Asset.property1FriendsProperty2Inact)
-        friendsViewController.tabBarItem.selectedImage = UIImage(asset: Asset.property1FriendsProperty2Act)
-        friendsViewController.tabBarItem.title = "새싹친구"
-        
         let myInfoViewController = UINavigationController(rootViewController: MyInfoViewController())
         myInfoViewController.tabBarItem.image = UIImage(asset: Asset.property1MyProperty2Inact)
         myInfoViewController.tabBarItem.selectedImage = UIImage(asset: Asset.property1MyProperty2Act)
@@ -43,7 +38,6 @@ class TabBarController: UITabBarController {
         
         viewControllers = [homeViewController,
                            shopViewController,
-                           friendsViewController,
                            myInfoViewController]
     }
 }

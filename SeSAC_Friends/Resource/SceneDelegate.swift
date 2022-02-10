@@ -28,24 +28,24 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         //닉네임이 UserInfo에 저장이 되지 않는다.
         //이 부분에 대한 처리가 필요할 것 같다.
         
-        if UserInfo.idToken.isEmpty {
-            setRootView(vc: OnBoardingViewController())
-            print("onboarding")
-        } else if UserInfo.signUpCompleted {
-            // 홈화면
-            let tabbar = TabBarController()
-            self.window?.rootViewController = tabbar
-            self.window?.makeKeyAndVisible()
-            print("home")
-        } else {
-            setRootView(vc: NickNameViewController())
-            print("nickname")
-        }
+//        if UserInfo.idToken.isEmpty {
+//            setRootView(vc: OnBoardingViewController())
+//            print("onboarding")
+//        } else if UserInfo.signUpCompleted {
+//            // 홈화면
+//            let tabbar = TabBarController()
+//            self.window?.rootViewController = tabbar
+//            self.window?.makeKeyAndVisible()
+//            print("home")
+//        } else {
+//            setRootView(vc: NickNameViewController())
+//            print("nickname")
+//        }
 //        let vc = RequestAuthViewController()
-//        let vc = InfoManageViewController()
-//        let nav = UINavigationController(rootViewController: vc)
-//        self.window?.rootViewController = nav
-//        self.window?.makeKeyAndVisible()
+        let vc = EnterHobbyViewController()
+        let nav = UINavigationController(rootViewController: vc)
+        self.window?.rootViewController = nav
+        self.window?.makeKeyAndVisible()
         
     }
 

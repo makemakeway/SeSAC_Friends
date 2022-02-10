@@ -8,8 +8,12 @@
 import UIKit
 import SnapKit
 
-class H32Button: UIButton, ViewRepresentable {
-    
+enum H32Icon {
+    case iconOn
+    case iconOff
+}
+
+final class H32Button: UIButton, ViewRepresentable {
     var buttonState: ButtonState = .inactive {
         willSet {
             switch newValue {
@@ -26,8 +30,25 @@ class H32Button: UIButton, ViewRepresentable {
                 self.backgroundColor = .systemBackground
                 self.layer.borderWidth = 1
                 self.layer.borderColor = UIColor.gray4.cgColor
+            case .outline:
+                self.setTitleColor(.brandGreen, for: .normal)
+                self.tintColor = .brandGreen
+                self.layer.borderWidth = 1
+                self.layer.borderColor = UIColor.brandGreen.cgColor
             default:
                 print("error")
+            }
+        }
+    }
+    
+    var iconState: H32Icon = .iconOff {
+        willSet {
+            switch newValue {
+            case .iconOff:
+                self.setImage(nil, for: .normal)
+            case .iconOn:
+                self.setImage(UIImage(asset: Asset.closeSmall), for: .normal)
+                self.semanticContentAttribute = .forceRightToLeft
             }
         }
     }

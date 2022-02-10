@@ -93,8 +93,9 @@ final class HomeViewModel: ViewModelType {
             .observe(on: MainScheduler.instance)
             .bind(with: self) { owner, allowed in
                 if allowed {
+                    // MARK: 토스트 메세지 실험 시 1로 설정할 것
                     if UserInfo.gender == -1 {
-                        owner.output.errorMessage.accept("")
+                        owner.output.errorMessage.accept("새싹 찾기 기능을 이용하기 위해서는 성별이 필요해요!")
                         owner.output.goToInfoManage.accept(())
                     } else {
                         owner.output.goToEnterHobby.accept(())
@@ -190,6 +191,7 @@ final class HomeViewModel: ViewModelType {
             .flatMap { owner, position in
                 owner.fetchFriends(position: position)
             }
+            .observe(on: MainScheduler.instance)
             .bind(with: self) { owner, friends in
                 owner.output.friendsList.accept(friends)
             }

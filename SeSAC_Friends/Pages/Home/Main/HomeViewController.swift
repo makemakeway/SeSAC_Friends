@@ -10,6 +10,7 @@ import RxSwift
 import RxCocoa
 import CoreLocation
 import NMapsMap
+import Toast
 
 final class HomeViewController: UIViewController {
     //MARK: Properties
@@ -133,6 +134,30 @@ final class HomeViewController: UIViewController {
                 owner.navigationController?.pushViewController(vc, animated: true)
             }
             .disposed(by: disposeBag)
+        
+        viewModel.output.goToInfoManage
+            .asDriver(onErrorJustReturn: ())
+            .drive(with: self) { owner, _ in
+                owner.tabBarController?.selectedIndex = 2
+                guard let nav = owner.tabBarController?.selectedViewController as? UINavigationController else { return }
+                let vc = InfoManageViewController()
+                nav.pushViewController(vc, animated: true)
+                
+                vc.view.makeToast("새싹 찾기를 이용하기 위해서는 성별이 필요해요!",
+                                  duration: 3.0,
+                                  position: .center)
+            }
+            .disposed(by: disposeBag)
+
+        viewModel.output.errorMessage
+            .asDriver(onErrorJustReturn: "")
+            .drive(with: self) { owner, message in
+                owner.view.makeToast(message,
+                                     duration: 3.0,
+                                     position: .center)
+            }
+            .disposed(by: disposeBag)
+
     }
     
     func alertConfig() {
