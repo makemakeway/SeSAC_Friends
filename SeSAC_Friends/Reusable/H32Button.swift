@@ -49,6 +49,7 @@ final class H32Button: UIButton, ViewRepresentable {
             case .iconOn:
                 self.setImage(UIImage(asset: Asset.closeSmall), for: .normal)
                 self.semanticContentAttribute = .forceRightToLeft
+                self.imageEdgeInsets = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 0)
             }
         }
     }
@@ -57,6 +58,7 @@ final class H32Button: UIButton, ViewRepresentable {
         self.layer.cornerRadius = 8
         self.clipsToBounds = true
         self.titleLabel?.font = UIFont.title4_R14
+        self.contentEdgeInsets = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
     }
     
     func setConstraints() {

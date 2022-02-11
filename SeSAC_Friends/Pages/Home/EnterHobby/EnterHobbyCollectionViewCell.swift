@@ -33,4 +33,13 @@ final class EnterHobbyCollectionViewCell: UICollectionViewCell, ViewRepresentabl
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        button.sizeToFit()
+        self.frame.size.width = button.frame.width + 32
+        button.buttonState = .outline
+        button.iconState = .iconOff
+    }
+    
 }

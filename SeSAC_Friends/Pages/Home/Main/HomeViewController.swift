@@ -196,8 +196,16 @@ final class HomeViewController: UIViewController {
     
     func removeMarkers() {
         print(#function)
+        let group = DispatchGroup()
+        
+        group.enter()
         for marker in markers {
             marker.mapView = nil
+            group.leave()
+        }
+        
+        group.notify(queue: DispatchQueue.global()) { [weak self] in
+            self?.markers.removeAll()
         }
     }
     
