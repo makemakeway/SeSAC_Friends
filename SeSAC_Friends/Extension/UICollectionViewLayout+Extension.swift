@@ -15,24 +15,33 @@ extension UICollectionViewLayout {
             heightDimension: .estimated(32)
         )
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
-
         
         let groupSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
             heightDimension: .estimated(100)
         )
+        
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
         group.interItemSpacing = NSCollectionLayoutSpacing.fixed(8)
         
         let section = NSCollectionLayoutSection(group: group)
-        section.boundarySupplementaryItems = [.init(layoutSize: .init(widthDimension: .fractionalWidth(1.0),
-                                                                      heightDimension: .absolute(18)),
-                                                    elementKind: UICollectionView.elementKindSectionHeader,
-                                                    alignment: .topLeading)]
         
-        section.contentInsets = NSDirectionalEdgeInsets(top: 16, leading: 16, bottom: 24, trailing: 16)
+        let sectionHeaderPadding: CGFloat = 32
+        
+        section.contentInsets = NSDirectionalEdgeInsets(top: 16 + sectionHeaderPadding,
+                                                        leading: 16,
+                                                        bottom: 8,
+                                                        trailing: 16)
         section.interGroupSpacing = 12
         
-        return UICollectionViewCompositionalLayout(section: section)
+        let header = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
+                                                                                                    heightDimension: .absolute(18)),
+                                                                 elementKind: UICollectionView.elementKindSectionHeader,
+                                                                 alignment: .topLeading,
+                                                                 absoluteOffset: CGPoint(x: 0, y: sectionHeaderPadding))
+        section.boundarySupplementaryItems = [header]
+        
+        let layout = UICollectionViewCompositionalLayout(section: section)
+        return layout
     }
 }
