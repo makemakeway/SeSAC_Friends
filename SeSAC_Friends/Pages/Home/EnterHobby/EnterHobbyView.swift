@@ -13,14 +13,7 @@ final class EnterHobbyView: UIView, ViewRepresentable {
     
     lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout)
     
-    let collectionViewLayout = EnterHobbyCollectionViewLayout().then {
-        $0.scrollDirection = .vertical
-        $0.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
-        $0.minimumInteritemSpacing = 8
-        $0.minimumLineSpacing = 12
-        $0.headerReferenceSize = CGSize(width: UIScreen.main.bounds.width, height: 18)
-        $0.sectionInset = UIEdgeInsets(top: 16, left: 16, bottom: 24, right: 16)
-    }
+    let collectionViewLayout = UICollectionViewLayout.fixedSpacedFlowLayout()
     
     let searchSesacButton = H48Button().then {
         $0.buttonState = .fill

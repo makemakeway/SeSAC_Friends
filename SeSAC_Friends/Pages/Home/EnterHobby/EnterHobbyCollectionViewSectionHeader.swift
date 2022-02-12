@@ -22,8 +22,8 @@ final class EnterHobbyCollectionViewSectionHeader: UICollectionReusableView, Vie
     
     func setConstraints() {
         headerLabel.snp.makeConstraints { make in
-            make.leading.equalToSuperview().offset(16)
-            make.trailing.equalToSuperview().offset(-16)
+            make.leading.equalToSuperview()
+            make.trailing.equalToSuperview()
             make.centerY.equalToSuperview()
         }
     }

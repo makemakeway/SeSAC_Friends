@@ -40,6 +40,7 @@
 		C242CDD72796BE7300905287 /* SeSAC_FriendsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C242CDD62796BE7300905287 /* SeSAC_FriendsUITests.swift */; };
 		C242CDD92796BE7300905287 /* SeSAC_FriendsUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C242CDD82796BE7300905287 /* SeSAC_FriendsUITestsLaunchTests.swift */; };
 		C253E1AD27B6332D009EC9F8 /* EnterHobbyCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = C253E1AC27B6332D009EC9F8 /* EnterHobbyCollectionViewLayout.swift */; };
+		C253E1B427B6A8DF009EC9F8 /* UICollectionViewLayout+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C253E1B327B6A8DF009EC9F8 /* UICollectionViewLayout+Extension.swift */; };
 		C260F0A027B532D30087948F /* Hobbies.swift in Sources */ = {isa = PBXBuildFile; fileRef = C260F09F27B532D30087948F /* Hobbies.swift */; };
 		C260F0A227B550670087948F /* HobbySection.swift in Sources */ = {isa = PBXBuildFile; fileRef = C260F0A127B550670087948F /* HobbySection.swift */; };
 		C260F0A427B561360087948F /* EnterHobbyCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C260F0A327B561360087948F /* EnterHobbyCollectionViewCell.swift */; };
@@ -167,6 +168,7 @@
 		C242CDD62796BE7300905287 /* SeSAC_FriendsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeSAC_FriendsUITests.swift; sourceTree = "<group>"; };
 		C242CDD82796BE7300905287 /* SeSAC_FriendsUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeSAC_FriendsUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		C253E1AC27B6332D009EC9F8 /* EnterHobbyCollectionViewLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterHobbyCollectionViewLayout.swift; sourceTree = "<group>"; };
+		C253E1B327B6A8DF009EC9F8 /* UICollectionViewLayout+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionViewLayout+Extension.swift"; sourceTree = "<group>"; };
 		C260F09F27B532D30087948F /* Hobbies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hobbies.swift; sourceTree = "<group>"; };
 		C260F0A127B550670087948F /* HobbySection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HobbySection.swift; sourceTree = "<group>"; };
 		C260F0A327B561360087948F /* EnterHobbyCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterHobbyCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -460,6 +462,7 @@
 				C23BA6BC279D6CC200AD2EE3 /* UserDefaults+Extension.swift */,
 				C2E20D2427A4603400AB9BC0 /* UIViewController+Extension.swift */,
 				C260F0A527B561D30087948F /* UICollectionViewCell+Extension.swift */,
+				C253E1B327B6A8DF009EC9F8 /* UICollectionViewLayout+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -937,6 +940,7 @@
 				C26E99E527ABAC3700E00E15 /* H32Button.swift in Sources */,
 				C2E20D3327A59AA500AB9BC0 /* MyInfoViewController.swift in Sources */,
 				C2E20D2527A4603400AB9BC0 /* UIViewController+Extension.swift in Sources */,
+				C253E1B427B6A8DF009EC9F8 /* UICollectionViewLayout+Extension.swift in Sources */,
 				C2E20D3C27A91E1900AB9BC0 /* OnboardingModel.swift in Sources */,
 				C2E20D3627A6FD9400AB9BC0 /* SeSACUser.swift in Sources */,
 				C23BA6BF279D7C9C00AD2EE3 /* UserDefaultsWrapper.swift in Sources */,
