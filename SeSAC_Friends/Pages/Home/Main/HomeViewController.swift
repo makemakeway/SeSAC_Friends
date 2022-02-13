@@ -138,14 +138,7 @@ final class HomeViewController: UIViewController {
         viewModel.output.goToInfoManage
             .asDriver(onErrorJustReturn: ())
             .drive(with: self) { owner, _ in
-                owner.tabBarController?.selectedIndex = 2
-                guard let nav = owner.tabBarController?.selectedViewController as? UINavigationController else { return }
-                let vc = InfoManageViewController()
-                nav.pushViewController(vc, animated: true)
-                
-                vc.view.makeToast("새싹 찾기를 이용하기 위해서는 성별이 필요해요!",
-                                  duration: 3.0,
-                                  position: .center)
+                owner.goToInfoManageView()
             }
             .disposed(by: disposeBag)
 

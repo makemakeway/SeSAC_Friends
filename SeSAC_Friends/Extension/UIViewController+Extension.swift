@@ -38,4 +38,12 @@ extension UIViewController {
             windowScene.windows.first?.makeKeyAndVisible()
         }
     }
+    
+    func goToInfoManageView() {
+        tabBarController?.selectedIndex = 2
+        guard let nav = tabBarController?.selectedViewController as? UINavigationController else { return }
+        let vc = InfoManageViewController()
+        vc.needSelectGender = true
+        nav.pushViewController(vc, animated: true)
+    }
 }

@@ -19,6 +19,8 @@ final class InfoManageViewController: UIViewController {
     
     private var disposeBag = DisposeBag()
     
+    var needSelectGender = false
+    
     //MARK: UI
     private let mainView = InfoManageView()
     
@@ -297,6 +299,10 @@ final class InfoManageViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        if needSelectGender {
+            view.makeToast("새싹 찾기를 이용하기 위해서는 성별이 필요해요!")
+            needSelectGender = false
+        }
     }
     
     override func viewDidDisappear(_ animated: Bool) {

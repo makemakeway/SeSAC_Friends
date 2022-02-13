@@ -9,6 +9,8 @@ import UIKit
 import RxSwift
 import RxCocoa
 import RxDataSources
+import RxKeyboard
+import SnapKit
 
 final class EnterHobbyViewController: UIViewController {
     //MARK: Properties
@@ -16,9 +18,10 @@ final class EnterHobbyViewController: UIViewController {
     
     private var disposeBag = DisposeBag()
     
-    private var sections: [UserHobbySection] = []
-    
     private lazy var dataSource = makeDataSources()
+    
+    private let window = UIApplication.shared.windows.first
+    private lazy var extra = window!.safeAreaInsets.bottom
     
     //MARK: UI
     
@@ -39,27 +42,73 @@ final class EnterHobbyViewController: UIViewController {
         self.navigationItem.titleView = searchBar
     }
     
+    func currentSearchBar() -> UISearchBar {
+        guard let searchBar = navigationItem.titleView as? UISearchBar else { return UISearchBar() }
+        return searchBar
+    }
+    
     func bind() {
         //MARK: input binding
+        
+        let searchBar = currentSearchBar()
+        
+        searchBar.rx.searchButtonClicked
+            .asDriver()
+            .drive(with: self) { owner, _ in
+                owner.viewModel.input.searchBarText.onNext(searchBar.text ?? "")
+                print(owner.extra)
+            }
+            .disposed(by: disposeBag)
+        
+        searchBar.rx.textDidEndEditing
+            .asDriver()
+            .drive(with: self) { owner, _ in
+                UIView.animate(withDuration: 0) {
+                    owner.mainView.searchSesacButton.layer.cornerRadius = 10
+                    owner.mainView.searchSesacButton.snp.updateConstraints { make in
+                        make.bottom.equalTo(owner.mainView.safeAreaLayoutGuide).offset(owner.extra == 0 ? -16 : 0)
+                        make.leading.equalToSuperview().offset(16)
+                        make.trailing.equalToSuperview().offset(-16)
+                    }
+                }
+                owner.mainView.layoutIfNeeded()
+            }
+            .disposed(by: disposeBag)
+
+
+        RxKeyboard.instance.willShowVisibleHeight
+            .drive(with: self) { owner, height in
+                UIView.animate(withDuration: 0) {
+                    owner.mainView.searchSesacButton.layer.cornerRadius = 0
+                    owner.mainView.searchSesacButton.snp.updateConstraints { make in
+                        make.bottom.equalTo(owner.mainView.safeAreaLayoutGuide).offset(-height + owner.extra)
+                        make.leading.equalToSuperview()
+                        make.trailing.equalToSuperview()
+                    }
+                }
+                owner.mainView.layoutIfNeeded()
+            }
+            .disposed(by: disposeBag)
+
+        
         mainView.searchSesacButton.rx.tap
             .asDriver()
             .drive(viewModel.input.searchSesacButtonClicked)
             .disposed(by: disposeBag)
+        
+        mainView.collectionView.rx.didScroll
+            .asDriver()
+            .drive(with: self) { owner, _ in
+                let searchBar = owner.currentSearchBar()
+                searchBar.resignFirstResponder()
+            }
+            .disposed(by: disposeBag)
                 
         //MARK: output binding
-        let nowAround = viewModel.output.nowAround
-            .share()
         
-        nowAround
+        viewModel.output.nowAround
             .observe(on: MainScheduler.instance)
             .bind(to: mainView.collectionView.rx.items(dataSource: dataSource))
-            .disposed(by: disposeBag)
-        
-        nowAround
-            .observe(on: MainScheduler.instance)
-            .bind(with: self) { owner, sections in
-                owner.sections = sections
-            }
             .disposed(by: disposeBag)
         
         viewModel.output.activating
@@ -76,7 +125,21 @@ final class EnterHobbyViewController: UIViewController {
                 owner.view.makeToast(message, duration: 2.0, position: .center)
             }
             .disposed(by: disposeBag)
+        
+        viewModel.output.goToNearUser
+            .asDriver(onErrorJustReturn: ())
+            .drive(with: self) { owner, _ in
+                let vc = NearUserViewController()
+                owner.navigationController?.pushViewController(vc, animated: true)
+            }
+            .disposed(by: disposeBag)
 
+        viewModel.output.goToInfoManage
+            .asDriver(onErrorJustReturn: ())
+            .drive(with: self) { owner, _ in
+                owner.goToInfoManageView()
+            }
+            .disposed(by: disposeBag)
     }
     
     //MARK: LifeCycle
@@ -127,8 +190,6 @@ extension EnterHobbyViewController {
                     }
                     .disposed(by: cell.disposeBag)
             }
-            
-            
             return cell
         }, configureSupplementaryView: { (dataSource, collectionView, kind, indexPath) in
             switch kind {

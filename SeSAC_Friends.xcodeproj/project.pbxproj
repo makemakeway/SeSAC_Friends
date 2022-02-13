@@ -39,7 +39,6 @@
 		C242CDCD2796BE7300905287 /* SeSAC_FriendsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C242CDCC2796BE7300905287 /* SeSAC_FriendsTests.swift */; };
 		C242CDD72796BE7300905287 /* SeSAC_FriendsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C242CDD62796BE7300905287 /* SeSAC_FriendsUITests.swift */; };
 		C242CDD92796BE7300905287 /* SeSAC_FriendsUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C242CDD82796BE7300905287 /* SeSAC_FriendsUITestsLaunchTests.swift */; };
-		C253E1AD27B6332D009EC9F8 /* EnterHobbyCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = C253E1AC27B6332D009EC9F8 /* EnterHobbyCollectionViewLayout.swift */; };
 		C253E1B427B6A8DF009EC9F8 /* UICollectionViewLayout+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C253E1B327B6A8DF009EC9F8 /* UICollectionViewLayout+Extension.swift */; };
 		C260F0A027B532D30087948F /* Hobbies.swift in Sources */ = {isa = PBXBuildFile; fileRef = C260F09F27B532D30087948F /* Hobbies.swift */; };
 		C260F0A227B550670087948F /* UserHobbySection.swift in Sources */ = {isa = PBXBuildFile; fileRef = C260F0A127B550670087948F /* UserHobbySection.swift */; };
@@ -94,6 +93,7 @@
 		C2A6E5E527AD40D300829EE0 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2A6E5E427AD40D200829EE0 /* Constants.swift */; };
 		C2A6E5E727AD84F700829EE0 /* CustomAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2A6E5E627AD84F700829EE0 /* CustomAlertViewController.swift */; };
 		C2A6E5EA27AD853B00829EE0 /* AlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2A6E5E927AD853B00829EE0 /* AlertView.swift */; };
+		C2D0928527B94AEF00FB4A14 /* NearUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2D0928427B94AEF00FB4A14 /* NearUserViewController.swift */; };
 		C2E20D2127A3E93500AB9BC0 /* Images+Generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2E20D2027A3E93500AB9BC0 /* Images+Generated.swift */; };
 		C2E20D2327A44A6800AB9BC0 /* GenderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2E20D2227A44A6800AB9BC0 /* GenderViewModel.swift */; };
 		C2E20D2527A4603400AB9BC0 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2E20D2427A4603400AB9BC0 /* UIViewController+Extension.swift */; };
@@ -168,7 +168,6 @@
 		C242CDD22796BE7300905287 /* SeSAC_FriendsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SeSAC_FriendsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C242CDD62796BE7300905287 /* SeSAC_FriendsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeSAC_FriendsUITests.swift; sourceTree = "<group>"; };
 		C242CDD82796BE7300905287 /* SeSAC_FriendsUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeSAC_FriendsUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		C253E1AC27B6332D009EC9F8 /* EnterHobbyCollectionViewLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterHobbyCollectionViewLayout.swift; sourceTree = "<group>"; };
 		C253E1B327B6A8DF009EC9F8 /* UICollectionViewLayout+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionViewLayout+Extension.swift"; sourceTree = "<group>"; };
 		C260F09F27B532D30087948F /* Hobbies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hobbies.swift; sourceTree = "<group>"; };
 		C260F0A127B550670087948F /* UserHobbySection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserHobbySection.swift; sourceTree = "<group>"; };
@@ -218,6 +217,7 @@
 		C2A6E5E427AD40D200829EE0 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		C2A6E5E627AD84F700829EE0 /* CustomAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlertViewController.swift; sourceTree = "<group>"; };
 		C2A6E5E927AD853B00829EE0 /* AlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertView.swift; sourceTree = "<group>"; };
+		C2D0928427B94AEF00FB4A14 /* NearUserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearUserViewController.swift; sourceTree = "<group>"; };
 		C2E20D2027A3E93500AB9BC0 /* Images+Generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Images+Generated.swift"; sourceTree = "<group>"; };
 		C2E20D2227A44A6800AB9BC0 /* GenderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenderViewModel.swift; sourceTree = "<group>"; };
 		C2E20D2427A4603400AB9BC0 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
@@ -303,13 +303,6 @@
 			path = Main;
 			sourceTree = "<group>";
 		};
-		C20EB13927B4116D007B53B0 /* SearchSesac */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = SearchSesac;
-			sourceTree = "<group>";
-		};
 		C20EB13A27B4118A007B53B0 /* EnterHobby */ = {
 			isa = PBXGroup;
 			children = (
@@ -317,7 +310,6 @@
 				C20EB13E27B413C6007B53B0 /* EnterHobbyView.swift */,
 				C260F0A327B561360087948F /* EnterHobbyCollectionViewCell.swift */,
 				C260F0A727B570390087948F /* EnterHobbyCollectionViewSectionHeader.swift */,
-				C253E1AC27B6332D009EC9F8 /* EnterHobbyCollectionViewLayout.swift */,
 			);
 			path = EnterHobby;
 			sourceTree = "<group>";
@@ -609,12 +601,20 @@
 			path = Common;
 			sourceTree = "<group>";
 		};
+		C2D0928327B94AD900FB4A14 /* NearUser */ = {
+			isa = PBXGroup;
+			children = (
+				C2D0928427B94AEF00FB4A14 /* NearUserViewController.swift */,
+			);
+			path = NearUser;
+			sourceTree = "<group>";
+		};
 		C2E20D2627A56E4C00AB9BC0 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				C2D0928327B94AD900FB4A14 /* NearUser */,
 				C20EB13B27B41197007B53B0 /* Chat */,
 				C20EB13A27B4118A007B53B0 /* EnterHobby */,
-				C20EB13927B4116D007B53B0 /* SearchSesac */,
 				C20EB13827B41160007B53B0 /* Main */,
 			);
 			path = Home;
@@ -942,7 +942,6 @@
 				C2E20D2F27A59A4E00AB9BC0 /* ShopViewController.swift in Sources */,
 				C23BA6CC27A16B3A00AD2EE3 /* BirthViewModel.swift in Sources */,
 				C2A6E5E727AD84F700829EE0 /* CustomAlertViewController.swift in Sources */,
-				C253E1AD27B6332D009EC9F8 /* EnterHobbyCollectionViewLayout.swift in Sources */,
 				C28377C927971E5800151297 /* AuthView.swift in Sources */,
 				C2E20D3127A59A7800AB9BC0 /* FriendsViewController.swift in Sources */,
 				C28377CC27971E7300151297 /* ViewRepresentable.swift in Sources */,
@@ -962,6 +961,7 @@
 				C253E1B427B6A8DF009EC9F8 /* UICollectionViewLayout+Extension.swift in Sources */,
 				C2E20D3C27A91E1900AB9BC0 /* OnboardingModel.swift in Sources */,
 				C2E20D3627A6FD9400AB9BC0 /* SeSACUser.swift in Sources */,
+				C2D0928527B94AEF00FB4A14 /* NearUserViewController.swift in Sources */,
 				C23BA6BF279D7C9C00AD2EE3 /* UserDefaultsWrapper.swift in Sources */,
 				C28377F227988C0500151297 /* LogInViewController.swift in Sources */,
 				C26E99ED27ABD1CC00E00E15 /* CustomTextField.swift in Sources */,

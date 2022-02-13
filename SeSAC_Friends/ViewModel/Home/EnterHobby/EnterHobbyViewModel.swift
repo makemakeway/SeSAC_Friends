@@ -16,15 +16,15 @@ final class EnterHobbyViewModel: ViewModelType {
         let searchSesacButtonClicked = PublishSubject<Void>()
         let errorOccurred = PublishSubject<APIError>()
         let cellItemClicked = PublishSubject<(IndexPath, String)>()
+        let searchBarText = PublishSubject<String>()
     }
     
     struct Output {
         let nowAround:BehaviorRelay<[UserHobbySection]> = BehaviorRelay(value: [])
         let goToNearUser = PublishRelay<Void>()
         let errorMessage = PublishRelay<String>()
-        let goToOnboarding = PublishRelay<Void>()
         let activating = PublishRelay<Bool>()
-        let clickedCellItem = BehaviorRelay(value: "")
+        let goToInfoManage = PublishRelay<Void>()
     }
     
     let input = Input()
@@ -34,6 +34,7 @@ final class EnterHobbyViewModel: ViewModelType {
     
     func transfrom() {
         let hobbies = input.willAppear
+            .debug("will Appear")
             .withUnretained(self)
             .do(onNext: { owner, _ in owner.output.activating.accept(true) })
             .flatMap { owner, _ in owner.fetchFriends(position: UserInfo.userPosition) }
@@ -63,8 +64,13 @@ final class EnterHobbyViewModel: ViewModelType {
                 
                 let items = serverHobbies + Array(otherUsersHobbies)
                 
-                return [UserHobbySection(header: "지금 주변에는", items: items),
-                        UserHobbySection(header: "내가 하고 싶은", items: [])]
+                if owner.output.nowAround.value.isEmpty {
+                    return [UserHobbySection(header: "지금 주변에는", items: items),
+                            UserHobbySection(header: "내가 하고 싶은", items: [])]
+                } else {
+                    return [UserHobbySection(header: "지금 주변에는", items: items),
+                            owner.output.nowAround.value[1]]
+                }
             }
             .do(onNext: { [weak self]_ in self?.output.activating.accept(false) })
             .bind(with: self) { owner, section in
@@ -73,11 +79,34 @@ final class EnterHobbyViewModel: ViewModelType {
             .disposed(by: disposeBag)
         
         input.searchSesacButtonClicked
-            .asDriver(onErrorJustReturn: ())
-            .drive(with: self) { owner, _ in
-                owner.output.goToNearUser.accept(())
+            .withUnretained(self)
+            .filter { owner, _ in owner.output.nowAround.value.isEmpty == false }
+            .do(onNext: { [weak self]_ in self?.output.activating.accept(true) })
+            .flatMap { (owner, _) in owner.startRequest() }
+            .do(onNext: { [weak self]_ in self?.output.activating.accept(false) })
+            .asDriver(onErrorJustReturn: 0)
+            .drive(with: self) { owner, status in
+                print("상태코드: \(status)")
+                switch status {
+                case 200:
+                    owner.output.goToNearUser.accept(())
+                case 201:
+                    owner.output.errorMessage.accept("신고가 누적되어 이용하실 수 없습니다")
+                case 203:
+                    owner.output.errorMessage.accept("약속 취소 패널티로, 1분동안 이용하실 수 없습니다")
+                case 204:
+                    owner.output.errorMessage.accept("약속 취소 패널티로, 2분동안 이용하실 수 없습니다")
+                case 205:
+                    owner.output.errorMessage.accept("약속 취소 패널티로, 3분동안 이용하실 수 없습니다")
+                case 206:
+                    owner.output.errorMessage.accept("새싹 찾기 기능을 이용하기 위해서는 성별이 필요해요!")
+                    owner.output.goToInfoManage.accept(())
+                default:
+                    owner.output.errorMessage.accept("알 수 없는 오류")
+                }
             }
             .disposed(by: disposeBag)
+
         
         input.cellItemClicked
             .debug("cell clicked")
@@ -88,6 +117,21 @@ final class EnterHobbyViewModel: ViewModelType {
                     owner.appendLogic(sections: owner.output.nowAround.value, new: hobby)
                 } else {
                     owner.removeLogic(sections: owner.output.nowAround.value, at: indexPath)
+                }
+            }
+            .disposed(by: disposeBag)
+        
+        input.searchBarText
+            .debug("search bar input")
+            .observe(on: MainScheduler.instance)
+            .bind(with: self) { owner, text in
+                let hobbies = text.split(separator: " ")
+                hobbies.forEach {
+                    if $0.count >= 1 && $0.count <= 8 {
+                        owner.appendLogic(sections: owner.output.nowAround.value, new: String($0))
+                    } else {
+                        owner.output.errorMessage.accept("최소 한 자 이상, 최대 8글자까지 작성 가능합니다")
+                    }
                 }
             }
             .disposed(by: disposeBag)
@@ -115,6 +159,45 @@ final class EnterHobbyViewModel: ViewModelType {
         output.nowAround.accept(currentSections)
     }
     
+    func startRequest() -> Observable<Int> {
+        let position = UserInfo.userPosition
+        var hf = output.nowAround.value[1].items.map { $0.hobby }
+        if hf.isEmpty {
+            hf.append("AnyThing")
+        }
+        return APIService.shared.startRequestFriends(type: 2,
+                                              region: locationToRegion(position: position),
+                                              lat: position.0,
+                                              long: position.1,
+                                              hf: hf)
+            .catch { [weak self](error) in
+                if let error = error as? APIError {
+                    switch error {
+                    case .tokenExpired:
+                        return .error(APIError.tokenExpired)
+                    case .serverError:
+                        self?.output.errorMessage.accept(APIError.serverError.rawValue)
+                    case .unKnownedUser:
+                        print("미가입 유저")
+                    case .disConnect:
+                        self?.output.errorMessage.accept(APIError.disConnect.rawValue)
+                    default:
+                        self?.output.errorMessage.accept(APIError.clientError.rawValue)
+                    }
+                }
+                return .never()
+            }
+            .retry { (error: Observable<Error>) in
+                error.filter { error in
+                    if let error = error as? APIError, error == .tokenExpired {
+                        return true
+                    }
+                    return false
+                }
+                .flatMap { _ -> Single<String> in FirebaseAuthService.shared.getIdToken().debug("REFresh IDTOKEN") }
+            }
+            .asObservable()
+    }
     
     func fetchFriends(position: (Double, Double)) -> Observable<Friends> {
         return APIService.shared.fetchFriends(region: locationToRegion(position: position),
@@ -128,7 +211,7 @@ final class EnterHobbyViewModel: ViewModelType {
                     case .serverError:
                         self?.output.errorMessage.accept(APIError.serverError.rawValue)
                     case .unKnownedUser:
-                        self?.output.goToOnboarding.accept(())
+                        print("미가입 유저")
                     case .disConnect:
                         self?.output.errorMessage.accept(APIError.disConnect.rawValue)
                     default:
