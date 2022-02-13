@@ -184,15 +184,7 @@ final class APIService {
                 .response { response in
                     switch response.response?.statusCode {
                     case 200:
-                        UserInfo.idToken = ""
-                        UserInfo.fcmToken = ""
-                        UserInfo.nickname = ""
-                        UserInfo.gender = -1
-                        UserInfo.birthday = ""
-                        UserInfo.email = ""
-                        UserInfo.phoneNumber = ""
-                        UserInfo.signUpCompleted = false
-                        UserInfo.verificationID = ""
+                        UserInfo.setToDefaults()
                         single(.success(200))
                     case 401:
                         single(.failure(APIError.tokenExpired))

@@ -35,6 +35,22 @@ final class H32Button: UIButton, ViewRepresentable {
                 self.tintColor = .brandGreen
                 self.layer.borderWidth = 1
                 self.layer.borderColor = UIColor.brandGreen.cgColor
+            case .fromUser:
+                self.iconState = .iconOn
+                self.setTitleColor(.brandGreen, for: .normal)
+                self.tintColor = .brandGreen
+                self.layer.borderWidth = 1
+                self.layer.borderColor = UIColor.brandGreen.cgColor
+            case .fromServer:
+                self.iconState = .iconOff
+                self.setTitleColor(.systemError, for: .normal)
+                self.layer.borderWidth = 1
+                self.layer.borderColor = UIColor.systemError.cgColor
+            case .fromOtherUser:
+                self.iconState = .iconOff
+                self.setTitleColor(.defaultBlack, for: .normal)
+                self.layer.borderWidth = 1
+                self.layer.borderColor = UIColor.gray4.cgColor
             default:
                 print("error")
             }
@@ -47,7 +63,9 @@ final class H32Button: UIButton, ViewRepresentable {
             case .iconOff:
                 self.setImage(nil, for: .normal)
             case .iconOn:
-                self.setImage(UIImage(asset: Asset.closeSmall), for: .normal)
+                let image = UIImage(asset: Asset.closeSmall)
+                let tintedImage = image?.withRenderingMode(.alwaysTemplate)
+                self.setImage(tintedImage, for: .normal)
                 self.semanticContentAttribute = .forceRightToLeft
                 self.imageEdgeInsets = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 0)
             }

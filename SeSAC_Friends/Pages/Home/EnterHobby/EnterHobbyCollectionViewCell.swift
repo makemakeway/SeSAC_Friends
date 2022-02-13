@@ -7,13 +7,14 @@
 
 import UIKit
 import SnapKit
+import RxSwift
 
 final class EnterHobbyCollectionViewCell: UICollectionViewCell, ViewRepresentable {
     
     var button = H32Button()
+    var disposeBag = DisposeBag()
     
     func setUp() {
-        self.backgroundColor = .magenta
         addSubview(button)
     }
     
@@ -40,6 +41,7 @@ final class EnterHobbyCollectionViewCell: UICollectionViewCell, ViewRepresentabl
         self.frame.size.width = button.frame.width + 32
         button.buttonState = .outline
         button.iconState = .iconOff
+        disposeBag = DisposeBag()
     }
     
 }

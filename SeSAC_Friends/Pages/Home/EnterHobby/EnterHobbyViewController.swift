@@ -12,43 +12,13 @@ import RxDataSources
 
 final class EnterHobbyViewController: UIViewController {
     //MARK: Properties
+    private let viewModel = EnterHobbyViewModel()
     
     private var disposeBag = DisposeBag()
     
-    private let mockSession = [
-        HobbySection(header: "첫번째 섹션", items: ["김치", "삼계탕", "불고기"]),
-        HobbySection(header: "두번째 섹션", items: ["짜장면", "탕수육", "마라탕", "마라샹궈마라샹궈", "팔보채", "짬뽕", "울면"]),
-        HobbySection(header: "세번째 섹션", items: ["스시", "우동", "텐동", "타코야끼"]),
-    ]
+    private var sections: [UserHobbySection] = []
     
-    private var dataSource = RxCollectionViewSectionedAnimatedDataSource<HobbySection>(configureCell: { (datasource, collectionView, indexPath, item) in
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EnterHobbyCollectionViewCell.reuseIdentifier, for: indexPath) as? EnterHobbyCollectionViewCell else { return UICollectionViewCell() }
-        print("셀 구현")
-        cell.button.setTitle("메뉴: \(item)", for: .normal)
-        
-        switch indexPath.section {
-        case 0:
-            cell.button.buttonState = .fill
-        case 1:
-            cell.button.buttonState = .outline
-            cell.button.iconState = .iconOn
-        default:
-            cell.button.buttonState = .inactive
-        }
-        return cell
-    }, configureSupplementaryView: { (dataSource, collectionView, kind, indexPath) in
-        switch kind {
-        case UICollectionView.elementKindSectionHeader:
-            guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: EnterHobbyCollectionViewSectionHeader.reuseIdentifier, for: indexPath) as? EnterHobbyCollectionViewSectionHeader else {
-                return UICollectionReusableView()
-            }
-            header.headerLabel.text = dataSource[indexPath.section].header
-            header.backgroundColor = .systemTeal
-            return header
-        default:
-            assert(false, "Unexpected element kind")
-        }
-    })
+    private lazy var dataSource = makeDataSources()
     
     //MARK: UI
     
@@ -69,6 +39,46 @@ final class EnterHobbyViewController: UIViewController {
         self.navigationItem.titleView = searchBar
     }
     
+    func bind() {
+        //MARK: input binding
+        mainView.searchSesacButton.rx.tap
+            .asDriver()
+            .drive(viewModel.input.searchSesacButtonClicked)
+            .disposed(by: disposeBag)
+                
+        //MARK: output binding
+        let nowAround = viewModel.output.nowAround
+            .share()
+        
+        nowAround
+            .observe(on: MainScheduler.instance)
+            .bind(to: mainView.collectionView.rx.items(dataSource: dataSource))
+            .disposed(by: disposeBag)
+        
+        nowAround
+            .observe(on: MainScheduler.instance)
+            .bind(with: self) { owner, sections in
+                owner.sections = sections
+            }
+            .disposed(by: disposeBag)
+        
+        viewModel.output.activating
+            .asDriver(onErrorJustReturn: false)
+            .drive(with: self) { owner, bool in
+                bool == true ? owner.view.makeToastActivity(.center) : owner.view.hideToastActivity()
+            }
+            .disposed(by: disposeBag)
+
+        viewModel.output.errorMessage
+            .asDriver(onErrorJustReturn: "")
+            .drive(with: self) { owner, message in
+                owner.view.hideAllToasts()
+                owner.view.makeToast(message, duration: 2.0, position: .center)
+            }
+            .disposed(by: disposeBag)
+
+    }
+    
     //MARK: LifeCycle
     override func loadView() {
         super.loadView()
@@ -78,19 +88,60 @@ final class EnterHobbyViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         searchBarConfig()
-        Observable.just(mockSession)
-            .bind(to: mainView.collectionView.rx.items(dataSource: dataSource))
-            .disposed(by: disposeBag)
+        bind()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        viewModel.input.willAppear.onNext(())
         
-        mainView.collectionView.delegate = self
     }
 }
 
 
 // MARK: RxDataSources Configuration
-extension EnterHobbyViewController: UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        
-        return 8
+extension EnterHobbyViewController {
+    func makeDataSources() -> RxCollectionViewSectionedAnimatedDataSource<UserHobbySection> {
+        return RxCollectionViewSectionedAnimatedDataSource<UserHobbySection>(configureCell: { (datasource, collectionView, indexPath, item) in
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EnterHobbyCollectionViewCell.reuseIdentifier, for: indexPath) as? EnterHobbyCollectionViewCell else { return UICollectionViewCell() }
+            cell.button.setTitle("\(item.hobby)", for: .normal)
+            
+            switch indexPath.section {
+            case 0:
+                switch item.type {
+                case .fromServer:
+                    cell.button.buttonState = .fromServer
+                default:
+                    cell.button.buttonState = .fromOtherUser
+                }
+                cell.button.rx.tap
+                    .bind(with: self) { owner, _ in
+                        owner.viewModel.input.cellItemClicked.onNext((indexPath, item.hobby))
+                    }
+                    .disposed(by: cell.disposeBag)
+            default:
+                cell.button.buttonState = .fromUser
+                cell.button.rx.tap
+                    .bind(with: self) { owner, _ in
+                        owner.viewModel.input.cellItemClicked.onNext((indexPath, item.hobby))
+                    }
+                    .disposed(by: cell.disposeBag)
+            }
+            
+            
+            return cell
+        }, configureSupplementaryView: { (dataSource, collectionView, kind, indexPath) in
+            switch kind {
+            case UICollectionView.elementKindSectionHeader:
+                guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: EnterHobbyCollectionViewSectionHeader.reuseIdentifier, for: indexPath) as? EnterHobbyCollectionViewSectionHeader else {
+                    return UICollectionReusableView()
+                }
+                header.headerLabel.text = dataSource[indexPath.section].header
+                
+                return header
+            default:
+                assert(false, "Unexpected element kind")
+            }
+        })
     }
 }

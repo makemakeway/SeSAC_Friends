@@ -39,4 +39,19 @@ class UserInfo {
     @UserDefault(key: "email", defaultValue: "")static var email: String
     @UserDefault(key: "FCMToken", defaultValue: "")static var fcmToken: String
     @UserDefault(key: "userState", defaultValue: FloatingButtonState.normal)static var userState: FloatingButtonState
+    @UserDefault(key: "position", defaultValue: (37.517819364682694, 126.88647317074734))static var userPosition: (Double, Double)
+    
+    static func setToDefaults() {
+        self.birthday = ""
+        self.email = ""
+        self.fcmToken = ""
+        self.gender = -1
+        self.idToken = ""
+        self.nickname = ""
+        self.phoneNumber = ""
+        self.signUpCompleted = false
+        self.userState = FloatingButtonState.normal
+        self.verificationID = ""
+        self.userPosition = (37.517819364682694, 126.88647317074734)
+    }
 }

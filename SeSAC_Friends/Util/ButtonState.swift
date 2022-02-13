@@ -13,4 +13,7 @@ enum ButtonState {
     case outline
     case cancel
     case disable
+    case fromOtherUser
+    case fromServer
+    case fromUser
 }

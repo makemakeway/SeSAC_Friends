@@ -42,7 +42,7 @@
 		C253E1AD27B6332D009EC9F8 /* EnterHobbyCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = C253E1AC27B6332D009EC9F8 /* EnterHobbyCollectionViewLayout.swift */; };
 		C253E1B427B6A8DF009EC9F8 /* UICollectionViewLayout+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C253E1B327B6A8DF009EC9F8 /* UICollectionViewLayout+Extension.swift */; };
 		C260F0A027B532D30087948F /* Hobbies.swift in Sources */ = {isa = PBXBuildFile; fileRef = C260F09F27B532D30087948F /* Hobbies.swift */; };
-		C260F0A227B550670087948F /* HobbySection.swift in Sources */ = {isa = PBXBuildFile; fileRef = C260F0A127B550670087948F /* HobbySection.swift */; };
+		C260F0A227B550670087948F /* UserHobbySection.swift in Sources */ = {isa = PBXBuildFile; fileRef = C260F0A127B550670087948F /* UserHobbySection.swift */; };
 		C260F0A427B561360087948F /* EnterHobbyCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C260F0A327B561360087948F /* EnterHobbyCollectionViewCell.swift */; };
 		C260F0A627B561D30087948F /* UICollectionViewCell+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C260F0A527B561D30087948F /* UICollectionViewCell+Extension.swift */; };
 		C260F0A827B570390087948F /* EnterHobbyCollectionViewSectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = C260F0A727B570390087948F /* EnterHobbyCollectionViewSectionHeader.swift */; };
@@ -107,6 +107,7 @@
 		C2E20D3A27A90F4000AB9BC0 /* OnBoardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2E20D3927A90F4000AB9BC0 /* OnBoardingView.swift */; };
 		C2E20D3C27A91E1900AB9BC0 /* OnboardingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2E20D3B27A91E1900AB9BC0 /* OnboardingModel.swift */; };
 		C2E20D3E27A951E300AB9BC0 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2E20D3D27A951E300AB9BC0 /* HomeView.swift */; };
+		C2FB2F1E27B7CE5400E1CA81 /* EnterHobbyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2FB2F1D27B7CE5300E1CA81 /* EnterHobbyViewModel.swift */; };
 		D43CDBE04D33BF8904DC5E0E /* Pods_SeSAC_Friends.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 396884C848647948AF3C3460 /* Pods_SeSAC_Friends.framework */; };
 /* End PBXBuildFile section */
 
@@ -170,7 +171,7 @@
 		C253E1AC27B6332D009EC9F8 /* EnterHobbyCollectionViewLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterHobbyCollectionViewLayout.swift; sourceTree = "<group>"; };
 		C253E1B327B6A8DF009EC9F8 /* UICollectionViewLayout+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionViewLayout+Extension.swift"; sourceTree = "<group>"; };
 		C260F09F27B532D30087948F /* Hobbies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hobbies.swift; sourceTree = "<group>"; };
-		C260F0A127B550670087948F /* HobbySection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HobbySection.swift; sourceTree = "<group>"; };
+		C260F0A127B550670087948F /* UserHobbySection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserHobbySection.swift; sourceTree = "<group>"; };
 		C260F0A327B561360087948F /* EnterHobbyCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterHobbyCollectionViewCell.swift; sourceTree = "<group>"; };
 		C260F0A527B561D30087948F /* UICollectionViewCell+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionViewCell+Extension.swift"; sourceTree = "<group>"; };
 		C260F0A727B570390087948F /* EnterHobbyCollectionViewSectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterHobbyCollectionViewSectionHeader.swift; sourceTree = "<group>"; };
@@ -230,6 +231,7 @@
 		C2E20D3927A90F4000AB9BC0 /* OnBoardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingView.swift; sourceTree = "<group>"; };
 		C2E20D3B27A91E1900AB9BC0 /* OnboardingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingModel.swift; sourceTree = "<group>"; };
 		C2E20D3D27A951E300AB9BC0 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		C2FB2F1D27B7CE5300E1CA81 /* EnterHobbyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterHobbyViewModel.swift; sourceTree = "<group>"; };
 		C322DC4EF323441105B75EA7 /* Pods-SeSAC_Friends-SeSAC_FriendsUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SeSAC_Friends-SeSAC_FriendsUITests.debug.xcconfig"; path = "Target Support Files/Pods-SeSAC_Friends-SeSAC_FriendsUITests/Pods-SeSAC_Friends-SeSAC_FriendsUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		FD471A98B753D7D92FC60545 /* Pods-SeSAC_Friends.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SeSAC_Friends.debug.xcconfig"; path = "Target Support Files/Pods-SeSAC_Friends/Pods-SeSAC_Friends.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -398,7 +400,8 @@
 		C2826B3D27B0324C00C1CA23 /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				C2826B3E27B0325600C1CA23 /* HomeViewModel.swift */,
+				C2FB2F1C27B7CE3400E1CA81 /* EnterHobby */,
+				C2FB2F1B27B7CE2C00E1CA81 /* Main */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -434,7 +437,7 @@
 				C2E20D3B27A91E1900AB9BC0 /* OnboardingModel.swift */,
 				C2826B4227B0F91D00C1CA23 /* Friends.swift */,
 				C260F09F27B532D30087948F /* Hobbies.swift */,
-				C260F0A127B550670087948F /* HobbySection.swift */,
+				C260F0A127B550670087948F /* UserHobbySection.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -641,6 +644,22 @@
 				C26E99D427AA9C9200E00E15 /* MyInfoView.swift */,
 			);
 			path = MyInfo;
+			sourceTree = "<group>";
+		};
+		C2FB2F1B27B7CE2C00E1CA81 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				C2826B3E27B0325600C1CA23 /* HomeViewModel.swift */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		C2FB2F1C27B7CE3400E1CA81 /* EnterHobby */ = {
+			isa = PBXGroup;
+			children = (
+				C2FB2F1D27B7CE5300E1CA81 /* EnterHobbyViewModel.swift */,
+			);
+			path = EnterHobby;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -970,7 +989,7 @@
 				C26E99DD27AB787300E00E15 /* Expandable.swift in Sources */,
 				C26E99E727ABB25600E00E15 /* CardStackView.swift in Sources */,
 				C23BA6B7279C554900AD2EE3 /* NickNameViewController.swift in Sources */,
-				C260F0A227B550670087948F /* HobbySection.swift in Sources */,
+				C260F0A227B550670087948F /* UserHobbySection.swift in Sources */,
 				C242CDB82796BE7000905287 /* SceneDelegate.swift in Sources */,
 				C26E99D727AAC9C100E00E15 /* InfoManageViewController.swift in Sources */,
 				C20EB13F27B413C6007B53B0 /* EnterHobbyView.swift in Sources */,
@@ -1000,6 +1019,7 @@
 				C2A6E5EA27AD853B00829EE0 /* AlertView.swift in Sources */,
 				C2E20D3E27A951E300AB9BC0 /* HomeView.swift in Sources */,
 				C23BA6D227A1B0B000AD2EE3 /* EmailViewModel.swift in Sources */,
+				C2FB2F1E27B7CE5400E1CA81 /* EnterHobbyViewModel.swift in Sources */,
 				C23BA6AE279BCF2300AD2EE3 /* H40Button.swift in Sources */,
 				C283FB6B27A963C9001ED1DC /* API.swift in Sources */,
 			);
