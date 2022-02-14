@@ -96,13 +96,7 @@ final class EnterHobbyViewController: UIViewController {
             .drive(viewModel.input.searchSesacButtonClicked)
             .disposed(by: disposeBag)
         
-        mainView.collectionView.rx.didScroll
-            .asDriver()
-            .drive(with: self) { owner, _ in
-                let searchBar = owner.currentSearchBar()
-                searchBar.resignFirstResponder()
-            }
-            .disposed(by: disposeBag)
+        mainView.collectionView.keyboardDismissMode = .onDrag
                 
         //MARK: output binding
         

@@ -37,6 +37,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate {
         
         NMFAuthManager.shared().clientId = API.NAVER_CLIENT_ID
         
+        let attrs = [
+            NSAttributedString.Key.foregroundColor: UIColor.defaultBlack,
+            NSAttributedString.Key.font: UIFont.title3_M14
+        ]
+
+        UINavigationBar.appearance().titleTextAttributes = attrs
+        
         return true
     }
 

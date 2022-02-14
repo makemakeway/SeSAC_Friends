@@ -31,6 +31,12 @@
 		C23BA6D027A1AA5900AD2EE3 /* DateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23BA6CF27A1AA5900AD2EE3 /* DateManager.swift */; };
 		C23BA6D227A1B0B000AD2EE3 /* EmailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23BA6D127A1B0B000AD2EE3 /* EmailViewModel.swift */; };
 		C23BA6D427A1BFCE00AD2EE3 /* GenderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23BA6D327A1BFCE00AD2EE3 /* GenderViewController.swift */; };
+		C23D867027BA5AEC00153655 /* Tabman in Frameworks */ = {isa = PBXBuildFile; productRef = C23D866F27BA5AEC00153655 /* Tabman */; };
+		C23D867227BA5B2D00153655 /* NearUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23D867127BA5B2D00153655 /* NearUserView.swift */; };
+		C23D867427BA5C0200153655 /* NearUserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23D867327BA5C0200153655 /* NearUserTableViewCell.swift */; };
+		C23D867627BA5C6C00153655 /* UITableViewCell+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23D867527BA5C6C00153655 /* UITableViewCell+Extension.swift */; };
+		C23D867B27BA67B900153655 /* RequestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23D867A27BA67B900153655 /* RequestViewController.swift */; };
+		C23D867E27BA67FA00153655 /* SearchSesacViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23D867D27BA67FA00153655 /* SearchSesacViewController.swift */; };
 		C242CDB62796BE7000905287 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C242CDB52796BE7000905287 /* AppDelegate.swift */; };
 		C242CDB82796BE7000905287 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C242CDB72796BE7000905287 /* SceneDelegate.swift */; };
 		C242CDBA2796BE7000905287 /* RequestAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C242CDB92796BE7000905287 /* RequestAuthViewController.swift */; };
@@ -156,6 +162,11 @@
 		C23BA6CF27A1AA5900AD2EE3 /* DateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateManager.swift; sourceTree = "<group>"; };
 		C23BA6D127A1B0B000AD2EE3 /* EmailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailViewModel.swift; sourceTree = "<group>"; };
 		C23BA6D327A1BFCE00AD2EE3 /* GenderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenderViewController.swift; sourceTree = "<group>"; };
+		C23D867127BA5B2D00153655 /* NearUserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearUserView.swift; sourceTree = "<group>"; };
+		C23D867327BA5C0200153655 /* NearUserTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearUserTableViewCell.swift; sourceTree = "<group>"; };
+		C23D867527BA5C6C00153655 /* UITableViewCell+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableViewCell+Extension.swift"; sourceTree = "<group>"; };
+		C23D867A27BA67B900153655 /* RequestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestViewController.swift; sourceTree = "<group>"; };
+		C23D867D27BA67FA00153655 /* SearchSesacViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchSesacViewController.swift; sourceTree = "<group>"; };
 		C242CDB22796BE7000905287 /* SeSAC_Friends.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SeSAC_Friends.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C242CDB52796BE7000905287 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C242CDB72796BE7000905287 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -246,6 +257,7 @@
 				C28377DC279720D800151297 /* Then in Frameworks */,
 				C28377D9279720CA00151297 /* Alamofire in Frameworks */,
 				C28377D6279720B900151297 /* Toast in Frameworks */,
+				C23D867027BA5AEC00153655 /* Tabman in Frameworks */,
 				C28377C32796F78200151297 /* SnapKit in Frameworks */,
 				C23BA6AA279AF7D400AD2EE3 /* FirebaseAuth in Frameworks */,
 				D43CDBE04D33BF8904DC5E0E /* Pods_SeSAC_Friends.framework in Frameworks */,
@@ -328,6 +340,24 @@
 				C23BA6C5279EDB0E00AD2EE3 /* APIService.swift */,
 			);
 			path = Service;
+			sourceTree = "<group>";
+		};
+		C23D867727BA673D00153655 /* SearchSesac */ = {
+			isa = PBXGroup;
+			children = (
+				C23D867827BA674C00153655 /* Request */,
+				C2D0928327B94AD900FB4A14 /* NearUser */,
+				C23D867D27BA67FA00153655 /* SearchSesacViewController.swift */,
+			);
+			path = SearchSesac;
+			sourceTree = "<group>";
+		};
+		C23D867827BA674C00153655 /* Request */ = {
+			isa = PBXGroup;
+			children = (
+				C23D867A27BA67B900153655 /* RequestViewController.swift */,
+			);
+			path = Request;
 			sourceTree = "<group>";
 		};
 		C242CDA92796BE7000905287 = {
@@ -458,6 +488,7 @@
 				C2E20D2427A4603400AB9BC0 /* UIViewController+Extension.swift */,
 				C260F0A527B561D30087948F /* UICollectionViewCell+Extension.swift */,
 				C253E1B327B6A8DF009EC9F8 /* UICollectionViewLayout+Extension.swift */,
+				C23D867527BA5C6C00153655 /* UITableViewCell+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -605,6 +636,8 @@
 			isa = PBXGroup;
 			children = (
 				C2D0928427B94AEF00FB4A14 /* NearUserViewController.swift */,
+				C23D867127BA5B2D00153655 /* NearUserView.swift */,
+				C23D867327BA5C0200153655 /* NearUserTableViewCell.swift */,
 			);
 			path = NearUser;
 			sourceTree = "<group>";
@@ -612,7 +645,7 @@
 		C2E20D2627A56E4C00AB9BC0 /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				C2D0928327B94AD900FB4A14 /* NearUser */,
+				C23D867727BA673D00153655 /* SearchSesac */,
 				C20EB13B27B41197007B53B0 /* Chat */,
 				C20EB13A27B4118A007B53B0 /* EnterHobby */,
 				C20EB13827B41160007B53B0 /* Main */,
@@ -689,6 +722,7 @@
 				C23BA6A9279AF7D400AD2EE3 /* FirebaseAuth */,
 				C23BA6AB279AF7D400AD2EE3 /* FirebaseMessaging */,
 				C2A6E5DB27ABF41700829EE0 /* MultiSlider */,
+				C23D866F27BA5AEC00153655 /* Tabman */,
 			);
 			productName = SeSAC_Friends;
 			productReference = C242CDB22796BE7000905287 /* SeSAC_Friends.app */;
@@ -772,6 +806,7 @@
 				C28377DA279720D800151297 /* XCRemoteSwiftPackageReference "Then" */,
 				C23BA6A8279AF7D400AD2EE3 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				C2A6E5DA27ABF41600829EE0 /* XCRemoteSwiftPackageReference "MultiSlider" */,
+				C23D866E27BA5AEB00153655 /* XCRemoteSwiftPackageReference "Tabman" */,
 			);
 			productRefGroup = C242CDB32796BE7000905287 /* Products */;
 			projectDirPath = "";
@@ -971,6 +1006,7 @@
 				C23BA6C6279EDB0E00AD2EE3 /* APIService.swift in Sources */,
 				C242CDBA2796BE7000905287 /* RequestAuthViewController.swift in Sources */,
 				C260F0A027B532D30087948F /* Hobbies.swift in Sources */,
+				C23D867B27BA67B900153655 /* RequestViewController.swift in Sources */,
 				C20EB13D27B411B6007B53B0 /* EnterHobbyViewController.swift in Sources */,
 				C2E20D3827A908F200AB9BC0 /* OnBoardingCollectionViewCell.swift in Sources */,
 				C26E99E927ABB30C00E00E15 /* TitleStackView.swift in Sources */,
@@ -1000,19 +1036,23 @@
 				C23BA6BD279D6CC200AD2EE3 /* UserDefaults+Extension.swift in Sources */,
 				C28377EC279831F000151297 /* InputView.swift in Sources */,
 				C28377C627971D0300151297 /* OnBoardingViewController.swift in Sources */,
+				C23D867227BA5B2D00153655 /* NearUserView.swift in Sources */,
 				C26E99EF27ABD30500E00E15 /* InfoAllowPhoneNumberSearchView.swift in Sources */,
+				C23D867627BA5C6C00153655 /* UITableViewCell+Extension.swift in Sources */,
 				C23BA6B9279C5AF100AD2EE3 /* BirthDayViewController.swift in Sources */,
 				C26E99DB27AAD58000E00E15 /* CardImageView.swift in Sources */,
 				C23BA6CE27A1A97600AD2EE3 /* EmailViewController.swift in Sources */,
 				C2826B4127B0EA4600C1CA23 /* FilterButton.swift in Sources */,
 				C23BA6C2279D9C5400AD2EE3 /* FirebaseAuthService.swift in Sources */,
 				C26E99EB27ABD16B00E00E15 /* InfoHobbyView.swift in Sources */,
+				C23D867427BA5C0200153655 /* NearUserTableViewCell.swift in Sources */,
 				C28377BF2796F1C900151297 /* UIFont+Extension.swift in Sources */,
 				C2E20D2A27A599C700AB9BC0 /* TabbarController.swift in Sources */,
 				C26E99E327AB9B7A00E00E15 /* InfoGenderView.swift in Sources */,
 				C28377E7279825D000151297 /* RequestAuthViewModel.swift in Sources */,
 				C2826B3F27B0325600C1CA23 /* HomeViewModel.swift in Sources */,
 				C26E99F127ABD35F00E00E15 /* InfoAgeRestrictView.swift in Sources */,
+				C23D867E27BA67FA00153655 /* SearchSesacViewController.swift in Sources */,
 				C28377AF2796E36100151297 /* UIColor+Extension.swift in Sources */,
 				C21A001627A3DF8600222045 /* GenderButton.swift in Sources */,
 				C2E20D2127A3E93500AB9BC0 /* Images+Generated.swift in Sources */,
@@ -1398,6 +1438,14 @@
 				minimumVersion = 8.0.0;
 			};
 		};
+		C23D866E27BA5AEB00153655 /* XCRemoteSwiftPackageReference "Tabman" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/uias/Tabman";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
 		C28377C12796F78200151297 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
@@ -1450,6 +1498,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = C23BA6A8279AF7D400AD2EE3 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseMessaging;
+		};
+		C23D866F27BA5AEC00153655 /* Tabman */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C23D866E27BA5AEB00153655 /* XCRemoteSwiftPackageReference "Tabman" */;
+			productName = Tabman;
 		};
 		C28377C22796F78200151297 /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;

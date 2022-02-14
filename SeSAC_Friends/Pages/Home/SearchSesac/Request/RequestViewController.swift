@@ -1,15 +1,14 @@
 //
-//  NearUserViewController.swift
+//  RequestViewController.swift
 //  SeSAC_Friends
 //
-//  Created by 박연배 on 2022/02/13.
+//  Created by 박연배 on 2022/02/14.
 //
 
 import UIKit
-import RxSwift
-import RxCocoa
 
-final class NearUserViewController: UIViewController {
+final class RequestViewController: UIViewController {
+    
     //MARK: Properties
     
     
@@ -19,18 +18,17 @@ final class NearUserViewController: UIViewController {
     
     
     //MARK: Method
-    func bind() {
-        
-    }
+    
     
     
     //MARK: LifeCycle
+    
     override func loadView() {
         super.loadView()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = .brandGreen
+        self.view.backgroundColor = .systemBackground
     }
 }
