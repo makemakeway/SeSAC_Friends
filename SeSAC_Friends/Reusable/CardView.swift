@@ -33,6 +33,9 @@ class CardView: UIView, ViewRepresentable {
         
         nicknameView.addSubview(nicknameLabel)
         nicknameView.addSubview(chevronImageView)
+        nicknameView.layer.cornerRadius = 10
+        nicknameView.layer.borderWidth = 1
+        nicknameView.layer.borderColor = UIColor.gray2.cgColor
     }
     
     func setConstraints() {

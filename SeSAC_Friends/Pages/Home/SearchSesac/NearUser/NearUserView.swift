@@ -15,12 +15,14 @@ final class NearUserView: UIView, ViewRepresentable {
     
     func setUp() {
         addSubview(tableView)
+        self.backgroundColor = .defaultWhite
         tableView.register(NearUserTableViewCell.self, forCellReuseIdentifier: NearUserTableViewCell.useIdentifier)
     }
     
     func setConstraints() {
         tableView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
+            make.top.equalTo(safeAreaLayoutGuide)
+            make.leading.bottom.trailing.equalToSuperview()
         }
     }
     

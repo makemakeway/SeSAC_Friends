@@ -31,12 +31,13 @@
 		C23BA6D027A1AA5900AD2EE3 /* DateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23BA6CF27A1AA5900AD2EE3 /* DateManager.swift */; };
 		C23BA6D227A1B0B000AD2EE3 /* EmailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23BA6D127A1B0B000AD2EE3 /* EmailViewModel.swift */; };
 		C23BA6D427A1BFCE00AD2EE3 /* GenderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23BA6D327A1BFCE00AD2EE3 /* GenderViewController.swift */; };
-		C23D867027BA5AEC00153655 /* Tabman in Frameworks */ = {isa = PBXBuildFile; productRef = C23D866F27BA5AEC00153655 /* Tabman */; };
 		C23D867227BA5B2D00153655 /* NearUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23D867127BA5B2D00153655 /* NearUserView.swift */; };
 		C23D867427BA5C0200153655 /* NearUserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23D867327BA5C0200153655 /* NearUserTableViewCell.swift */; };
 		C23D867627BA5C6C00153655 /* UITableViewCell+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23D867527BA5C6C00153655 /* UITableViewCell+Extension.swift */; };
 		C23D867B27BA67B900153655 /* RequestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23D867A27BA67B900153655 /* RequestViewController.swift */; };
 		C23D867E27BA67FA00153655 /* SearchSesacViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23D867D27BA67FA00153655 /* SearchSesacViewController.swift */; };
+		C23D868127BA82DC00153655 /* Tabman in Frameworks */ = {isa = PBXBuildFile; productRef = C23D868027BA82DC00153655 /* Tabman */; };
+		C23D868327BA8C3200153655 /* CardViewButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23D868227BA8C3200153655 /* CardViewButton.swift */; };
 		C242CDB62796BE7000905287 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C242CDB52796BE7000905287 /* AppDelegate.swift */; };
 		C242CDB82796BE7000905287 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C242CDB72796BE7000905287 /* SceneDelegate.swift */; };
 		C242CDBA2796BE7000905287 /* RequestAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C242CDB92796BE7000905287 /* RequestAuthViewController.swift */; };
@@ -167,6 +168,7 @@
 		C23D867527BA5C6C00153655 /* UITableViewCell+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableViewCell+Extension.swift"; sourceTree = "<group>"; };
 		C23D867A27BA67B900153655 /* RequestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestViewController.swift; sourceTree = "<group>"; };
 		C23D867D27BA67FA00153655 /* SearchSesacViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchSesacViewController.swift; sourceTree = "<group>"; };
+		C23D868227BA8C3200153655 /* CardViewButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewButton.swift; sourceTree = "<group>"; };
 		C242CDB22796BE7000905287 /* SeSAC_Friends.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SeSAC_Friends.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C242CDB52796BE7000905287 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C242CDB72796BE7000905287 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -257,7 +259,7 @@
 				C28377DC279720D800151297 /* Then in Frameworks */,
 				C28377D9279720CA00151297 /* Alamofire in Frameworks */,
 				C28377D6279720B900151297 /* Toast in Frameworks */,
-				C23D867027BA5AEC00153655 /* Tabman in Frameworks */,
+				C23D868127BA82DC00153655 /* Tabman in Frameworks */,
 				C28377C32796F78200151297 /* SnapKit in Frameworks */,
 				C23BA6AA279AF7D400AD2EE3 /* FirebaseAuth in Frameworks */,
 				D43CDBE04D33BF8904DC5E0E /* Pods_SeSAC_Friends.framework in Frameworks */,
@@ -542,6 +544,7 @@
 				C2A6E5E927AD853B00829EE0 /* AlertView.swift */,
 				C2826B4027B0EA4500C1CA23 /* FilterButton.swift */,
 				C20EB13627B13211007B53B0 /* FloatingButton.swift */,
+				C23D868227BA8C3200153655 /* CardViewButton.swift */,
 			);
 			path = Reusable;
 			sourceTree = "<group>";
@@ -722,7 +725,7 @@
 				C23BA6A9279AF7D400AD2EE3 /* FirebaseAuth */,
 				C23BA6AB279AF7D400AD2EE3 /* FirebaseMessaging */,
 				C2A6E5DB27ABF41700829EE0 /* MultiSlider */,
-				C23D866F27BA5AEC00153655 /* Tabman */,
+				C23D868027BA82DC00153655 /* Tabman */,
 			);
 			productName = SeSAC_Friends;
 			productReference = C242CDB22796BE7000905287 /* SeSAC_Friends.app */;
@@ -806,7 +809,7 @@
 				C28377DA279720D800151297 /* XCRemoteSwiftPackageReference "Then" */,
 				C23BA6A8279AF7D400AD2EE3 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				C2A6E5DA27ABF41600829EE0 /* XCRemoteSwiftPackageReference "MultiSlider" */,
-				C23D866E27BA5AEB00153655 /* XCRemoteSwiftPackageReference "Tabman" */,
+				C23D867F27BA82DC00153655 /* XCRemoteSwiftPackageReference "Tabman" */,
 			);
 			productRefGroup = C242CDB32796BE7000905287 /* Products */;
 			projectDirPath = "";
@@ -998,6 +1001,7 @@
 				C2E20D3627A6FD9400AB9BC0 /* SeSACUser.swift in Sources */,
 				C2D0928527B94AEF00FB4A14 /* NearUserViewController.swift in Sources */,
 				C23BA6BF279D7C9C00AD2EE3 /* UserDefaultsWrapper.swift in Sources */,
+				C23D868327BA8C3200153655 /* CardViewButton.swift in Sources */,
 				C28377F227988C0500151297 /* LogInViewController.swift in Sources */,
 				C26E99ED27ABD1CC00E00E15 /* CustomTextField.swift in Sources */,
 				C2A6E5DF27ABFC5800829EE0 /* InfoManageViewModel.swift in Sources */,
@@ -1438,12 +1442,12 @@
 				minimumVersion = 8.0.0;
 			};
 		};
-		C23D866E27BA5AEB00153655 /* XCRemoteSwiftPackageReference "Tabman" */ = {
+		C23D867F27BA82DC00153655 /* XCRemoteSwiftPackageReference "Tabman" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/uias/Tabman";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 2.0.0;
+				kind = exactVersion;
+				version = 2.12.0;
 			};
 		};
 		C28377C12796F78200151297 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
@@ -1499,9 +1503,9 @@
 			package = C23BA6A8279AF7D400AD2EE3 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseMessaging;
 		};
-		C23D866F27BA5AEC00153655 /* Tabman */ = {
+		C23D868027BA82DC00153655 /* Tabman */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = C23D866E27BA5AEB00153655 /* XCRemoteSwiftPackageReference "Tabman" */;
+			package = C23D867F27BA82DC00153655 /* XCRemoteSwiftPackageReference "Tabman" */;
 			productName = Tabman;
 		};
 		C28377C22796F78200151297 /* SnapKit */ = {

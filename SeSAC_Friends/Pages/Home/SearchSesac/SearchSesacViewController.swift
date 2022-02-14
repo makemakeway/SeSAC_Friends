@@ -17,7 +17,7 @@ final class SearchSesacViewController: TabmanViewController {
     
     
     //MARK: UI
-    let vcs: [UIViewController] = [
+    let vcs = [
         NearUserViewController(),
         RequestViewController()
     ]
@@ -36,20 +36,22 @@ final class SearchSesacViewController: TabmanViewController {
         bar.indicator.weight = .custom(value: 2)
         bar.indicator.tintColor = .brandGreen
         bar.indicator.overscrollBehavior = .compress
+        
+        bar.backgroundView.style = .flat(color: .defaultWhite)
     }
     
     
     //MARK: LifeCycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.dataSource = self
         self.title = "새싹 찾기"
         let bar = TMBar.ButtonBar()
-        let systemBar = bar.systemBar()
-        systemBar.backgroundStyle = .clear
         setTMBar(bar: bar)
-        addBar(systemBar, dataSource: self, at: .top)
+        addBar(bar, dataSource: self, at: .top)
         self.isScrollEnabled = false
+        
     }
 }
 

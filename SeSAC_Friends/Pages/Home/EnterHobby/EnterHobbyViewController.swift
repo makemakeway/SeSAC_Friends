@@ -123,7 +123,7 @@ final class EnterHobbyViewController: UIViewController {
         viewModel.output.goToNearUser
             .asDriver(onErrorJustReturn: ())
             .drive(with: self) { owner, _ in
-                let vc = NearUserViewController()
+                let vc = SearchSesacViewController()
                 owner.navigationController?.pushViewController(vc, animated: true)
             }
             .disposed(by: disposeBag)

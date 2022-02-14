@@ -41,7 +41,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 //            setRootView(vc: NickNameViewController())
 //            print("nickname")
 //        }
-//        let vc = RequestAuthViewController()
+//        let vc = EnterHobbyViewController()
         let vc = SearchSesacViewController()
         let nav = UINavigationController(rootViewController: vc)
         self.window?.rootViewController = nav
