@@ -8,11 +8,14 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import RxGesture
 
 final class NearUserViewController: UIViewController {
     //MARK: Properties
     
     private var disposeBag = DisposeBag()
+    
+    private let viewModel = NearUserViewModel()
     
     let mockData: [Friends] = [
         Friends(fromQueueDB: [FromQueueDB(uid: "x4r4tjQZ8Pf9mFYUgkfmC4REcvu2",
@@ -70,13 +73,37 @@ final class NearUserViewController: UIViewController {
     //MARK: Method
     func bind() {
         Observable.of(mockData)
-            .bind(to: mainView.tableView.rx.items(cellIdentifier: NearUserTableViewCell.useIdentifier,
-                                                  cellType: NearUserTableViewCell.self)) { index, element, cell in
+            .bind(to: mainView.tableView.rx.items(cellIdentifier: NearUserTableViewCell.useIdentifier, cellType: NearUserTableViewCell.self)) { [weak self](index, element, cell) in
+                guard let self = self else { return }
                 let data = element.fromQueueDB[0]
+                cell.cardView.nicknameView.backgroundColor = .systemSuccess
                 cell.cardView.nicknameLabel.text = data.nick
+                
+                cell.cardViewButtonClicked
+                    .debug("카드뷰 버튼 눌림")
+                    .bind(to: self.viewModel.input.requestButtonClicked)
+                    .disposed(by: cell.disposeBag)
+                
+                cell.nicknameViewClicked
+                    .debug("닉네임 뷰 눌림")
+                    .bind(with: self) { owner, _ in
+                        owner.viewModel.input.cardViewNicknameClicked.onNext(())
+                    }
+                    .disposed(by: cell.disposeBag)
+                
+                self.viewModel.output.openOrClose
+                    .asDriver()
+                    .drive(with: self) { owner, opened in
+                        owner.mainView.tableView.beginUpdates()
+                        cell.cardView.openOrClose(opened: opened)
+                        owner.mainView.tableView.endUpdates()
+                    }
+                    .disposed(by: cell.disposeBag)
+
             }
-                                                  .disposed(by: disposeBag)
-            
+            .disposed(by: disposeBag)
+        
+        
     }
     
     

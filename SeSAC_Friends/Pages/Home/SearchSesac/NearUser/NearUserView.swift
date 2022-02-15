@@ -22,7 +22,8 @@ final class NearUserView: UIView, ViewRepresentable {
     func setConstraints() {
         tableView.snp.makeConstraints { make in
             make.top.equalTo(safeAreaLayoutGuide)
-            make.leading.bottom.trailing.equalToSuperview()
+            make.bottom.equalTo(safeAreaLayoutGuide.snp.bottom)
+            make.leading.trailing.equalToSuperview()
         }
     }
     

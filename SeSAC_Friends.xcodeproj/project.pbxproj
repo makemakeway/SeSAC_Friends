@@ -38,6 +38,8 @@
 		C23D867E27BA67FA00153655 /* SearchSesacViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23D867D27BA67FA00153655 /* SearchSesacViewController.swift */; };
 		C23D868127BA82DC00153655 /* Tabman in Frameworks */ = {isa = PBXBuildFile; productRef = C23D868027BA82DC00153655 /* Tabman */; };
 		C23D868327BA8C3200153655 /* CardViewButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23D868227BA8C3200153655 /* CardViewButton.swift */; };
+		C23D868627BAD31200153655 /* NearUserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23D868527BAD31100153655 /* NearUserViewModel.swift */; };
+		C23D868827BADB3D00153655 /* CustomGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23D868727BADB3D00153655 /* CustomGesture.swift */; };
 		C242CDB62796BE7000905287 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C242CDB52796BE7000905287 /* AppDelegate.swift */; };
 		C242CDB82796BE7000905287 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C242CDB72796BE7000905287 /* SceneDelegate.swift */; };
 		C242CDBA2796BE7000905287 /* RequestAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C242CDB92796BE7000905287 /* RequestAuthViewController.swift */; };
@@ -169,6 +171,8 @@
 		C23D867A27BA67B900153655 /* RequestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestViewController.swift; sourceTree = "<group>"; };
 		C23D867D27BA67FA00153655 /* SearchSesacViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchSesacViewController.swift; sourceTree = "<group>"; };
 		C23D868227BA8C3200153655 /* CardViewButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewButton.swift; sourceTree = "<group>"; };
+		C23D868527BAD31100153655 /* NearUserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearUserViewModel.swift; sourceTree = "<group>"; };
+		C23D868727BADB3D00153655 /* CustomGesture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomGesture.swift; sourceTree = "<group>"; };
 		C242CDB22796BE7000905287 /* SeSAC_Friends.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SeSAC_Friends.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C242CDB52796BE7000905287 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C242CDB72796BE7000905287 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -362,6 +366,14 @@
 			path = Request;
 			sourceTree = "<group>";
 		};
+		C23D868427BAD2F400153655 /* SearchSesac */ = {
+			isa = PBXGroup;
+			children = (
+				C23D868527BAD31100153655 /* NearUserViewModel.swift */,
+			);
+			path = SearchSesac;
+			sourceTree = "<group>";
+		};
 		C242CDA92796BE7000905287 = {
 			isa = PBXGroup;
 			children = (
@@ -424,6 +436,7 @@
 		C2826B3D27B0324C00C1CA23 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				C23D868427BAD2F400153655 /* SearchSesac */,
 				C2FB2F1C27B7CE3400E1CA81 /* EnterHobby */,
 				C2FB2F1B27B7CE2C00E1CA81 /* Main */,
 			);
@@ -545,6 +558,7 @@
 				C2826B4027B0EA4500C1CA23 /* FilterButton.swift */,
 				C20EB13627B13211007B53B0 /* FloatingButton.swift */,
 				C23D868227BA8C3200153655 /* CardViewButton.swift */,
+				C23D868727BADB3D00153655 /* CustomGesture.swift */,
 			);
 			path = Reusable;
 			sourceTree = "<group>";
@@ -1000,6 +1014,7 @@
 				C2E20D3C27A91E1900AB9BC0 /* OnboardingModel.swift in Sources */,
 				C2E20D3627A6FD9400AB9BC0 /* SeSACUser.swift in Sources */,
 				C2D0928527B94AEF00FB4A14 /* NearUserViewController.swift in Sources */,
+				C23D868827BADB3D00153655 /* CustomGesture.swift in Sources */,
 				C23BA6BF279D7C9C00AD2EE3 /* UserDefaultsWrapper.swift in Sources */,
 				C23D868327BA8C3200153655 /* CardViewButton.swift in Sources */,
 				C28377F227988C0500151297 /* LogInViewController.swift in Sources */,
@@ -1052,6 +1067,7 @@
 				C23D867427BA5C0200153655 /* NearUserTableViewCell.swift in Sources */,
 				C28377BF2796F1C900151297 /* UIFont+Extension.swift in Sources */,
 				C2E20D2A27A599C700AB9BC0 /* TabbarController.swift in Sources */,
+				C23D868627BAD31200153655 /* NearUserViewModel.swift in Sources */,
 				C26E99E327AB9B7A00E00E15 /* InfoGenderView.swift in Sources */,
 				C28377E7279825D000151297 /* RequestAuthViewModel.swift in Sources */,
 				C2826B3F27B0325600C1CA23 /* HomeViewModel.swift in Sources */,

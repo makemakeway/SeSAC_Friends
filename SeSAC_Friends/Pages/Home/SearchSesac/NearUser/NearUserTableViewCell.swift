@@ -7,15 +7,27 @@
 
 import UIKit
 import SnapKit
+import RxSwift
+import RxCocoa
+import RxGesture
 
 final class NearUserTableViewCell: UITableViewCell, ViewRepresentable {
     
     let cardView = CardView()
     let cardViewButton = CardViewButton()
+    var disposeBag = DisposeBag()
+    
+    var cardViewButtonClicked : Observable<Void>{
+        return self.cardViewButton.rx.tap.asObservable()
+    }
+    
+    var nicknameViewClicked: Observable<UITapGestureRecognizer> {
+        return self.cardView.nicknameView.rx.tapGesture().when(.recognized).asObservable()
+    }
     
     func setUp() {
-        addSubview(cardView)
-        addSubview(cardViewButton)
+        contentView.addSubview(cardView)
+        contentView.addSubview(cardViewButton)
         self.selectionStyle = .none
         cardViewButton.setTitle("요청하기", for: .normal)
         cardViewButton.cardType = .require
@@ -43,5 +55,10 @@ final class NearUserTableViewCell: UITableViewCell, ViewRepresentable {
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        disposeBag = DisposeBag()
     }
 }
