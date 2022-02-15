@@ -186,6 +186,9 @@ final class InfoManageViewController: UIViewController {
             .asDriver(onErrorJustReturn: false)
             .drive(with: self) { owner, bool in
                 owner.mainView.cardView.openOrClose(opened: bool)
+                owner.mainView.infoStackView.snp.updateConstraints { make in
+                    make.top.equalTo(owner.mainView.cardView.snp.bottom)
+                }
             }
             .disposed(by: disposeBag)
         

@@ -31,6 +31,24 @@ class CardStackView: UIStackView, ViewRepresentable {
         $0.text = "첫 리뷰를 기다리는 중이에요!"
         $0.numberOfLines = 0
     }
+    
+    let sesacHobbyView = UIView()
+    let sesacHobbyLabel = UILabel().then {
+        $0.font = .title6_R12
+        $0.textColor = .defaultBlack
+        $0.text = "하고 싶은 취미"
+    }
+    let sesacHobbyStackView = UIStackView().then {
+        $0.axis = .horizontal
+        $0.spacing = 8
+    }
+    
+    let testButton = H32Button().then {
+        $0.setTitle("테스트", for: .normal)
+        $0.buttonState = .outline
+        $0.sizeToFit()
+    }
+    
     let sesacReviewChevronImage = UIImageView(image: UIImage(asset: Asset.moreArrow))
     
     func setUp() {
@@ -42,13 +60,18 @@ class CardStackView: UIStackView, ViewRepresentable {
         sesacTitleView.addSubview(sesacTitleLabel)
         sesacTitleView.addSubview(titleStackView)
         
+        sesacHobbyView.addSubview(sesacHobbyLabel)
+        sesacHobbyView.addSubview(sesacHobbyStackView)
+        
         sesacReviewView.addSubview(sesacReviewLabel)
         sesacReviewView.addSubview(sesacReviewContentLabel)
         sesacReviewView.addSubview(sesacReviewChevronImage)
         
-        [sesacTitleView, sesacReviewView].forEach {
+        [sesacTitleView, sesacHobbyView,sesacReviewView].forEach {
             addArrangedSubview($0)
         }
+        
+        sesacHobbyStackView.addArrangedSubview(testButton)
     }
     
     func setConstraints() {
@@ -62,10 +85,24 @@ class CardStackView: UIStackView, ViewRepresentable {
         }
         
         titleStackView.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview()
+            make.leading.trailing.bottom.equalToSuperview()
             make.top.equalTo(sesacTitleLabel.snp.bottom).offset(16)
+        }
+        
+        sesacHobbyView.snp.makeConstraints { make in
+            make.leading.trailing.equalToSuperview()
+        }
+        
+        sesacHobbyLabel.snp.makeConstraints { make in
+            make.leading.top.equalToSuperview()
+        }
+        
+        sesacHobbyStackView.snp.makeConstraints { make in
+            make.top.equalTo(sesacHobbyLabel.snp.bottom).offset(16)
+            make.leading.trailing.equalToSuperview()
             make.bottom.equalToSuperview()
         }
+        
         
         sesacReviewView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview()
@@ -93,6 +130,7 @@ class CardStackView: UIStackView, ViewRepresentable {
         setUp()
         setConstraints()
         sesacTitleView.isHidden = true
+        sesacHobbyView.isHidden = true
         sesacReviewView.isHidden = true
     }
     

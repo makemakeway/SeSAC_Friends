@@ -7,9 +7,16 @@
 
 import UIKit
 import SnapKit
+import Then
 
-class CardView: UIView, ViewRepresentable {
-    
+enum CardViewType {
+    case infoManage
+    case searchSesac
+}
+
+
+final class CardView: UIView, ViewRepresentable {
+    var cardViewType: CardViewType!
     let contentView = UIView()
     let cardImageView = CardImageView()
     let nicknameView = UIView()
@@ -33,9 +40,6 @@ class CardView: UIView, ViewRepresentable {
         
         nicknameView.addSubview(nicknameLabel)
         nicknameView.addSubview(chevronImageView)
-        nicknameView.layer.cornerRadius = 10
-        nicknameView.layer.borderWidth = 1
-        nicknameView.layer.borderColor = UIColor.gray2.cgColor
     }
     
     func setConstraints() {
@@ -72,13 +76,17 @@ class CardView: UIView, ViewRepresentable {
             make.trailing.equalToSuperview()
             make.bottom.equalToSuperview()
         }
-        
+    }
+    
+    convenience init(type: CardViewType) {
+        self.init(frame: .zero)
+        self.cardViewType = type
+        setUp()
+        setConstraints()
     }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setUp()
-        setConstraints()
     }
     
     required init?(coder: NSCoder) {
@@ -89,18 +97,21 @@ class CardView: UIView, ViewRepresentable {
 extension CardView: Expandable {
     func openOrClose(opened: Bool) {
         if opened {
-            UIView.animate(withDuration: 0.1) { [weak self] in
+            UIView.animate(withDuration: 0) { [weak self] in
                 guard let self = self else { return }
                 self.cardStackView.sesacTitleView.isHidden = false
                 self.cardStackView.sesacReviewView.isHidden = false
+                if self.cardViewType == .searchSesac {
+                    self.cardStackView.sesacHobbyView.isHidden = false
+                }
                 self.chevronImageView.transform = CGAffineTransform(rotationAngle: .pi / 2)
             }
-            
         } else {
-            UIView.animate(withDuration: 0.1) { [weak self] in
+            UIView.animate(withDuration: 0) { [weak self] in
                 guard let self = self else { return }
                 self.cardStackView.sesacTitleView.isHidden = true
                 self.cardStackView.sesacReviewView.isHidden = true
+                self.cardStackView.sesacHobbyView.isHidden = true
                 self.chevronImageView.transform = CGAffineTransform(rotationAngle: -.pi / 2)
             }
         }

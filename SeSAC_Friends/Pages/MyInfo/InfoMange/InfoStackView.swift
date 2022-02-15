@@ -28,7 +28,8 @@ class InfoStackView: UIStackView, ViewRepresentable {
     
     func setConstraints() {
         genderView.snp.makeConstraints { make in
-            make.top.leading.trailing.equalToSuperview()
+            make.top.equalToSuperview()
+            make.leading.trailing.equalToSuperview()
             make.height.equalTo(48)
         }
         

@@ -13,7 +13,7 @@ import RxGesture
 
 final class NearUserTableViewCell: UITableViewCell, ViewRepresentable {
     
-    let cardView = CardView()
+    let cardView = CardView(type: .searchSesac)
     let cardViewButton = CardViewButton()
     var disposeBag = DisposeBag()
     
