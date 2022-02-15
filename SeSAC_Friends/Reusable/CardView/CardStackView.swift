@@ -23,10 +23,6 @@ class CardStackView: UIStackView, ViewRepresentable {
         [sesacTitleView, sesacHobbyView, sesacReviewView].forEach {
             addArrangedSubview($0)
         }
-        
-        sesacTitleView.backgroundColor = .brandGreen
-        sesacHobbyView.backgroundColor = .brandWhiteGreen
-        sesacReviewView.backgroundColor = .brandYellowGreen
     }
     
     func setConstraints() {

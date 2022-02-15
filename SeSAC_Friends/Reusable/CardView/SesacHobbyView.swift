@@ -16,32 +16,28 @@ final class SesacHobbyView: UIView, ViewRepresentable {
         $0.textColor = .defaultBlack
         $0.text = "하고 싶은 취미"
     }
-    let sesacHobbyStackView = UIStackView().then {
-        $0.axis = .horizontal
-        $0.distribution = .fill
-        $0.spacing = 8
-    }
-    
-    let testButton = H32Button().then {
-        $0.setTitle("테스트", for: .normal)
-        $0.buttonState = .outline
-    }
+    lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout)
+    let collectionViewLayout = UICollectionViewLayout.searchSesacLayout()
     
     func setUp() {
         addSubview(sesacHobbyLabel)
-        addSubview(sesacHobbyStackView)
-        sesacHobbyStackView.addArrangedSubview(testButton)
+        addSubview(collectionView)
+        collectionView.register(EnterHobbyCollectionViewCell.self,
+                                forCellWithReuseIdentifier: EnterHobbyCollectionViewCell.useIdentifier)
+        
+        
     }
     
     func setConstraints() {
         sesacHobbyLabel.snp.makeConstraints { make in
             make.top.leading.equalToSuperview()
-            make.bottom.equalTo(sesacHobbyStackView.snp.top).offset(-16)
+            make.bottom.equalTo(collectionView.snp.top).offset(-16)
         }
         
-        sesacHobbyStackView.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview()
+        collectionView.snp.makeConstraints { make in
             make.top.equalTo(sesacHobbyLabel.snp.bottom).offset(16)
+            make.leading.trailing.equalToSuperview()
+            make.height.greaterThanOrEqualTo(32)
             make.bottom.equalToSuperview()
         }
     }

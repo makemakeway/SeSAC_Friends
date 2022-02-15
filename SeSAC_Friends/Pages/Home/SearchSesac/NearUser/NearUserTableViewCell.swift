@@ -16,13 +16,11 @@ final class NearUserTableViewCell: UITableViewCell, ViewRepresentable {
     let cardView = CardView(type: .searchSesac)
     let cardViewButton = CardViewButton()
     var disposeBag = DisposeBag()
+    var opened = false
     
     var cardViewButtonClicked : Observable<Void>{
-        return self.cardViewButton.rx.tap.asObservable()
-    }
-    
-    var nicknameViewClicked: Observable<UITapGestureRecognizer> {
-        return self.cardView.nicknameView.rx.tapGesture().when(.recognized).asObservable()
+        return self.cardViewButton.rx.tap
+            .asObservable()
     }
     
     func setUp() {
@@ -59,6 +57,8 @@ final class NearUserTableViewCell: UITableViewCell, ViewRepresentable {
     
     override func prepareForReuse() {
         super.prepareForReuse()
+        self.opened = false
+        
         disposeBag = DisposeBag()
     }
 }

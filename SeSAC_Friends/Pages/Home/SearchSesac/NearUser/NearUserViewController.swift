@@ -40,30 +40,30 @@ final class NearUserViewController: UIViewController {
                                                    type: 2,
                                                    sesac: 0,
                                                    background: 0)],
+                fromRecommend: ["요가", "독서모임", "SeSAC", "코딩"]),
+        Friends(fromQueueDB: [FromQueueDB(uid: "x4r4tjQZ8Pf9mFYUgkfmC4REcvu2",
+                                          nick: "케케케",
+                                          lat: 37.48511640269022,
+                                          long: 126.92947109241517,
+                                          reputation: [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                                          hf: ["암거나 ㅋㅋ", "coding", "앙큼퐉쓰!", "미이이이이이이", "캬아아아앙아악", "구아아아아아앙"],
+                                          reviews: ["친절해요", "재밌어요"],
+                                          gender: 0,
+                                          type: 2,
+                                          sesac: 0,
+                                          background: 0)],
+                fromQueueDBRequested: [FromQueueDB(uid: "x4r4tjQZ8Pf9mFYUgkfmC4REcvu2",
+                                                   nick: "커피의나라",
+                                                   lat: 37.48511640269022,
+                                                   long: 126.92947109241517,
+                                                   reputation: [4, 4, 4, 4, 4, 4, 4, 4, 4],
+                                                   hf: ["anything", "coding"],
+                                                   reviews: ["재밌어요", "약속을 잘지켜요"],
+                                                   gender: 0,
+                                                   type: 2,
+                                                   sesac: 0,
+                                                   background: 0)],
                 fromRecommend: ["요가", "독서모임", "SeSAC", "코딩"])
-//        Friends(fromQueueDB: [FromQueueDB(uid: "x4r4tjQZ8Pf9mFYUgkfmC4REcvu2",
-//                                          nick: "미묘한고래",
-//                                          lat: 37.48511640269022,
-//                                          long: 126.92947109241517,
-//                                          reputation: [0, 0, 0, 0, 0, 0, 0, 0, 0],
-//                                          hf: ["anything", "coding"],
-//                                          reviews: ["친절해요", "재밌어요"],
-//                                          gender: 0,
-//                                          type: 2,
-//                                          sesac: 0,
-//                                          background: 0)],
-//                fromQueueDBRequested: [FromQueueDB(uid: "x4r4tjQZ8Pf9mFYUgkfmC4REcvu2",
-//                                                   nick: "커피의나라",
-//                                                   lat: 37.48511640269022,
-//                                                   long: 126.92947109241517,
-//                                                   reputation: [4, 4, 4, 4, 4, 4, 4, 4, 4],
-//                                                   hf: ["anything", "coding"],
-//                                                   reviews: ["재밌어요", "약속을 잘지켜요"],
-//                                                   gender: 0,
-//                                                   type: 2,
-//                                                   sesac: 0,
-//                                                   background: 0)],
-//                fromRecommend: ["요가", "독서모임", "SeSAC", "코딩"])
     ]
     
     //MARK: UI
@@ -71,6 +71,7 @@ final class NearUserViewController: UIViewController {
     private let mainView = NearUserView()
     
     //MARK: Method
+    
     func bind() {
         Observable.of(mockData)
             .bind(to: mainView.tableView.rx.items(cellIdentifier: NearUserTableViewCell.useIdentifier, cellType: NearUserTableViewCell.self)) { [weak self](index, element, cell) in
@@ -83,26 +84,39 @@ final class NearUserViewController: UIViewController {
                     .bind(to: self.viewModel.input.requestButtonClicked)
                     .disposed(by: cell.disposeBag)
                 
-                cell.nicknameViewClicked
-                    .debug("닉네임 뷰 눌림")
-                    .bind(with: self) { owner, _ in
-                        owner.viewModel.input.cardViewNicknameClicked.onNext(())
-                    }
-                    .disposed(by: cell.disposeBag)
-                
-                self.viewModel.output.openOrClose
-                    .asDriver()
-                    .drive(with: self) { owner, opened in
-                        owner.mainView.tableView.beginUpdates()
-                        cell.cardView.openOrClose(opened: opened)
-                        owner.mainView.tableView.endUpdates()
-                    }
-                    .disposed(by: cell.disposeBag)
-
+                element.fromQueueDB.forEach {
+                    Observable.of($0.hf)
+                        .debug("HF")
+                        .bind(to: cell.cardView.cardStackView.sesacHobbyView.collectionView.rx.items(cellIdentifier: EnterHobbyCollectionViewCell.useIdentifier, cellType: EnterHobbyCollectionViewCell.self)) { index, hobby, item in
+                            item.button.setTitle(hobby, for: .normal)
+                            item.button.buttonState = .fromOtherUser
+                            
+                            let collectionView = cell.cardView.cardStackView.sesacHobbyView.collectionView
+                            DispatchQueue.main.async {
+                                let height = collectionView.collectionViewLayout.collectionViewContentSize.height
+                                collectionView.snp.updateConstraints { make in
+                                    make.height.greaterThanOrEqualTo(height)
+                                    make.bottom.equalToSuperview()
+                                }
+                            }
+                        }
+                        .disposed(by: cell.disposeBag)
+                }
             }
             .disposed(by: disposeBag)
         
         
+        mainView.tableView.rx.itemSelected
+            .observe(on: MainScheduler.instance)
+            .bind(with: self) { owner, indexPath in
+                guard let cell = owner.mainView.tableView.cellForRow(at: indexPath) as? NearUserTableViewCell else { return }
+                owner.mainView.tableView.beginUpdates()
+                cell.opened.toggle()
+                cell.cardView.openOrClose(opened: cell.opened)
+                owner.mainView.tableView.endUpdates()
+            }
+            .disposed(by: disposeBag)
+
     }
     
     

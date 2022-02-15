@@ -34,8 +34,6 @@ final class CardView: UIView, ViewRepresentable {
         [cardImageView, nicknameView, cardStackView].forEach {
             contentStackView.addArrangedSubview($0)
         }
-        
-        cardStackView.sesacTitleView.backgroundColor = .systemError
     }
     
     func setConstraints() {
@@ -56,6 +54,7 @@ final class CardView: UIView, ViewRepresentable {
         cardStackView.snp.makeConstraints { make in
             make.top.equalTo(nicknameView.snp.bottom)
             make.leading.trailing.equalToSuperview()
+            make.bottom.equalToSuperview()
         }
     }
     

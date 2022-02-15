@@ -15,7 +15,7 @@ final class NearUserViewModel: ViewModelType {
     
     struct Input {
         let requestButtonClicked = PublishSubject<Void>()
-        let cardViewNicknameClicked = PublishSubject<Void>()
+        let cellClicked = PublishSubject<Void>()
     }
     
     struct Output {
@@ -27,7 +27,7 @@ final class NearUserViewModel: ViewModelType {
     let output = Output()
     
     func transform() {
-        input.cardViewNicknameClicked
+        input.cellClicked
             .withLatestFrom(output.openOrClose)
             .asDriver(onErrorJustReturn: false)
             .drive(with: self) { owner, opened in

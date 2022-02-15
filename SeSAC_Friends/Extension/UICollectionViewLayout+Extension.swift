@@ -44,4 +44,28 @@ extension UICollectionViewLayout {
         let layout = UICollectionViewCompositionalLayout(section: section)
         return layout
     }
+    
+    
+    static func searchSesacLayout() -> UICollectionViewLayout {
+        let itemSize = NSCollectionLayoutSize(
+            widthDimension: .estimated(70),
+            heightDimension: .estimated(32)
+        )
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        
+        let groupSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1.0),
+            heightDimension: .estimated(200)
+        )
+        
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+        group.interItemSpacing = NSCollectionLayoutSpacing.fixed(8)
+        
+        let section = NSCollectionLayoutSection(group: group)
+        
+        section.interGroupSpacing = 12
+        
+        let layout = UICollectionViewCompositionalLayout(section: section)
+        return layout
+    }
 }
