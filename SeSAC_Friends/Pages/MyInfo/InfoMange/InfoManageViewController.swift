@@ -220,7 +220,7 @@ final class InfoManageViewController: UIViewController {
         viewModel.output.sesacTitles
             .asDriver()
             .drive(with: self) { owner, titles in
-                let view = owner.mainView.cardView.cardStackView.titleStackView
+                let view = owner.mainView.cardView.cardStackView.sesacTitleView.titleStackView
                 for (index, title) in titles.enumerated() {
                     if title != 0 {
                         switch index {

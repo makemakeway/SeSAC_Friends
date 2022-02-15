@@ -76,8 +76,7 @@ final class NearUserViewController: UIViewController {
             .bind(to: mainView.tableView.rx.items(cellIdentifier: NearUserTableViewCell.useIdentifier, cellType: NearUserTableViewCell.self)) { [weak self](index, element, cell) in
                 guard let self = self else { return }
                 let data = element.fromQueueDB[0]
-                cell.cardView.nicknameView.backgroundColor = .systemSuccess
-                cell.cardView.nicknameLabel.text = data.nick
+                cell.cardView.nicknameView.nicknameLabel.text = data.nick
                 
                 cell.cardViewButtonClicked
                     .debug("카드뷰 버튼 눌림")

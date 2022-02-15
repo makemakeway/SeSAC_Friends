@@ -31,6 +31,9 @@
 		C23BA6D027A1AA5900AD2EE3 /* DateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23BA6CF27A1AA5900AD2EE3 /* DateManager.swift */; };
 		C23BA6D227A1B0B000AD2EE3 /* EmailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23BA6D127A1B0B000AD2EE3 /* EmailViewModel.swift */; };
 		C23BA6D427A1BFCE00AD2EE3 /* GenderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23BA6D327A1BFCE00AD2EE3 /* GenderViewController.swift */; };
+		C23BAB0427BBDB220083BFCF /* SesacTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23BAB0327BBDB220083BFCF /* SesacTitleView.swift */; };
+		C23BAB0927BBDDB20083BFCF /* SesacHobbyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23BAB0827BBDDB20083BFCF /* SesacHobbyView.swift */; };
+		C23BAB0C27BBE23A0083BFCF /* CardNicknameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23BAB0B27BBE23A0083BFCF /* CardNicknameView.swift */; };
 		C23D867227BA5B2D00153655 /* NearUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23D867127BA5B2D00153655 /* NearUserView.swift */; };
 		C23D867427BA5C0200153655 /* NearUserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23D867327BA5C0200153655 /* NearUserTableViewCell.swift */; };
 		C23D867627BA5C6C00153655 /* UITableViewCell+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23D867527BA5C6C00153655 /* UITableViewCell+Extension.swift */; };
@@ -165,6 +168,9 @@
 		C23BA6CF27A1AA5900AD2EE3 /* DateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateManager.swift; sourceTree = "<group>"; };
 		C23BA6D127A1B0B000AD2EE3 /* EmailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailViewModel.swift; sourceTree = "<group>"; };
 		C23BA6D327A1BFCE00AD2EE3 /* GenderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenderViewController.swift; sourceTree = "<group>"; };
+		C23BAB0327BBDB220083BFCF /* SesacTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SesacTitleView.swift; sourceTree = "<group>"; };
+		C23BAB0827BBDDB20083BFCF /* SesacHobbyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SesacHobbyView.swift; sourceTree = "<group>"; };
+		C23BAB0B27BBE23A0083BFCF /* CardNicknameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardNicknameView.swift; sourceTree = "<group>"; };
 		C23D867127BA5B2D00153655 /* NearUserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearUserView.swift; sourceTree = "<group>"; };
 		C23D867327BA5C0200153655 /* NearUserTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearUserTableViewCell.swift; sourceTree = "<group>"; };
 		C23D867527BA5C6C00153655 /* UITableViewCell+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableViewCell+Extension.swift"; sourceTree = "<group>"; };
@@ -346,6 +352,34 @@
 				C23BA6C5279EDB0E00AD2EE3 /* APIService.swift */,
 			);
 			path = Service;
+			sourceTree = "<group>";
+		};
+		C23BAB0527BBDD0C0083BFCF /* CardView */ = {
+			isa = PBXGroup;
+			children = (
+				C26E99DE27AB79AA00E00E15 /* CardView.swift */,
+				C26E99DA27AAD58000E00E15 /* CardImageView.swift */,
+				C23BAB0B27BBE23A0083BFCF /* CardNicknameView.swift */,
+				C26E99E627ABB25600E00E15 /* CardStackView.swift */,
+				C23BAB0327BBDB220083BFCF /* SesacTitleView.swift */,
+				C26E99E827ABB30C00E00E15 /* TitleStackView.swift */,
+				C23BAB0827BBDDB20083BFCF /* SesacHobbyView.swift */,
+				C23D868227BA8C3200153655 /* CardViewButton.swift */,
+			);
+			path = CardView;
+			sourceTree = "<group>";
+		};
+		C23BAB0627BBDD270083BFCF /* Buttons */ = {
+			isa = PBXGroup;
+			children = (
+				C28377E12797FE3F00151297 /* H48Button.swift */,
+				C23BA6AD279BCF2300AD2EE3 /* H40Button.swift */,
+				C26E99E427ABAC3700E00E15 /* H32Button.swift */,
+				C20EB13627B13211007B53B0 /* FloatingButton.swift */,
+				C2826B4027B0EA4500C1CA23 /* FilterButton.swift */,
+				C21A001527A3DF8600222045 /* GenderButton.swift */,
+			);
+			path = Buttons;
 			sourceTree = "<group>";
 		};
 		C23D867727BA673D00153655 /* SearchSesac */ = {
@@ -543,21 +577,12 @@
 		C28377C727971E3800151297 /* Reusable */ = {
 			isa = PBXGroup;
 			children = (
+				C23BAB0627BBDD270083BFCF /* Buttons */,
+				C23BAB0527BBDD0C0083BFCF /* CardView */,
 				C28377C827971E5800151297 /* AuthView.swift */,
 				C28377EB279831F000151297 /* InputView.swift */,
 				C26E99EC27ABD1CC00E00E15 /* CustomTextField.swift */,
-				C28377E12797FE3F00151297 /* H48Button.swift */,
-				C23BA6AD279BCF2300AD2EE3 /* H40Button.swift */,
-				C26E99E427ABAC3700E00E15 /* H32Button.swift */,
-				C21A001527A3DF8600222045 /* GenderButton.swift */,
-				C26E99DA27AAD58000E00E15 /* CardImageView.swift */,
-				C26E99DE27AB79AA00E00E15 /* CardView.swift */,
-				C26E99E627ABB25600E00E15 /* CardStackView.swift */,
-				C26E99E827ABB30C00E00E15 /* TitleStackView.swift */,
 				C2A6E5E927AD853B00829EE0 /* AlertView.swift */,
-				C2826B4027B0EA4500C1CA23 /* FilterButton.swift */,
-				C20EB13627B13211007B53B0 /* FloatingButton.swift */,
-				C23D868227BA8C3200153655 /* CardViewButton.swift */,
 				C23D868727BADB3D00153655 /* CustomGesture.swift */,
 			);
 			path = Reusable;
@@ -1002,6 +1027,7 @@
 				C23BA6D427A1BFCE00AD2EE3 /* GenderViewController.swift in Sources */,
 				C23BA6D027A1AA5900AD2EE3 /* DateManager.swift in Sources */,
 				C2826B4327B0F91D00C1CA23 /* Friends.swift in Sources */,
+				C23BAB0427BBDB220083BFCF /* SesacTitleView.swift in Sources */,
 				C20EB13727B13211007B53B0 /* FloatingButton.swift in Sources */,
 				C26E99DF27AB79AA00E00E15 /* CardView.swift in Sources */,
 				C260F0A827B570390087948F /* EnterHobbyCollectionViewSectionHeader.swift in Sources */,
@@ -1026,6 +1052,7 @@
 				C242CDBA2796BE7000905287 /* RequestAuthViewController.swift in Sources */,
 				C260F0A027B532D30087948F /* Hobbies.swift in Sources */,
 				C23D867B27BA67B900153655 /* RequestViewController.swift in Sources */,
+				C23BAB0C27BBE23A0083BFCF /* CardNicknameView.swift in Sources */,
 				C20EB13D27B411B6007B53B0 /* EnterHobbyViewController.swift in Sources */,
 				C2E20D3827A908F200AB9BC0 /* OnBoardingCollectionViewCell.swift in Sources */,
 				C26E99E927ABB30C00E00E15 /* TitleStackView.swift in Sources */,
@@ -1064,6 +1091,7 @@
 				C2826B4127B0EA4600C1CA23 /* FilterButton.swift in Sources */,
 				C23BA6C2279D9C5400AD2EE3 /* FirebaseAuthService.swift in Sources */,
 				C26E99EB27ABD16B00E00E15 /* InfoHobbyView.swift in Sources */,
+				C23BAB0927BBDDB20083BFCF /* SesacHobbyView.swift in Sources */,
 				C23D867427BA5C0200153655 /* NearUserTableViewCell.swift in Sources */,
 				C28377BF2796F1C900151297 /* UIFont+Extension.swift in Sources */,
 				C2E20D2A27A599C700AB9BC0 /* TabbarController.swift in Sources */,
