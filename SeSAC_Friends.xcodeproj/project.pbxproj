@@ -35,6 +35,9 @@
 		C23BAB0927BBDDB20083BFCF /* SesacHobbyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23BAB0827BBDDB20083BFCF /* SesacHobbyView.swift */; };
 		C23BAB0C27BBE23A0083BFCF /* CardNicknameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23BAB0B27BBE23A0083BFCF /* CardNicknameView.swift */; };
 		C23BAB0E27BBEB9D0083BFCF /* SesacReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23BAB0D27BBEB9D0083BFCF /* SesacReviewView.swift */; };
+		C23BAB1127BC30A00083BFCF /* EmptyUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23BAB1027BC30A00083BFCF /* EmptyUserView.swift */; };
+		C23BAB1327BC39480083BFCF /* NotoSansKR-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = C23BAB1227BC39480083BFCF /* NotoSansKR-Regular.otf */; };
+		C23BAB1527BC39520083BFCF /* NotoSansKR-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = C23BAB1427BC39520083BFCF /* NotoSansKR-Medium.otf */; };
 		C23D867227BA5B2D00153655 /* NearUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23D867127BA5B2D00153655 /* NearUserView.swift */; };
 		C23D867427BA5C0200153655 /* NearUserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23D867327BA5C0200153655 /* NearUserTableViewCell.swift */; };
 		C23D867627BA5C6C00153655 /* UITableViewCell+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23D867527BA5C6C00153655 /* UITableViewCell+Extension.swift */; };
@@ -78,8 +81,6 @@
 		C2826B4127B0EA4600C1CA23 /* FilterButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2826B4027B0EA4500C1CA23 /* FilterButton.swift */; };
 		C2826B4327B0F91D00C1CA23 /* Friends.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2826B4227B0F91D00C1CA23 /* Friends.swift */; };
 		C28377AF2796E36100151297 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C28377AE2796E36100151297 /* UIColor+Extension.swift */; };
-		C28377BA2796EEEE00151297 /* NotoSansKR-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = C28377B42796EEEE00151297 /* NotoSansKR-Medium.otf */; };
-		C28377BC2796EEEE00151297 /* NotoSansKR-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = C28377B62796EEEE00151297 /* NotoSansKR-Regular.otf */; };
 		C28377BF2796F1C900151297 /* UIFont+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C28377BE2796F1C900151297 /* UIFont+Extension.swift */; };
 		C28377C32796F78200151297 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = C28377C22796F78200151297 /* SnapKit */; };
 		C28377C627971D0300151297 /* OnBoardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C28377C527971D0200151297 /* OnBoardingViewController.swift */; };
@@ -173,6 +174,9 @@
 		C23BAB0827BBDDB20083BFCF /* SesacHobbyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SesacHobbyView.swift; sourceTree = "<group>"; };
 		C23BAB0B27BBE23A0083BFCF /* CardNicknameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardNicknameView.swift; sourceTree = "<group>"; };
 		C23BAB0D27BBEB9D0083BFCF /* SesacReviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SesacReviewView.swift; sourceTree = "<group>"; };
+		C23BAB1027BC30A00083BFCF /* EmptyUserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyUserView.swift; sourceTree = "<group>"; };
+		C23BAB1227BC39480083BFCF /* NotoSansKR-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansKR-Regular.otf"; sourceTree = "<group>"; };
+		C23BAB1427BC39520083BFCF /* NotoSansKR-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansKR-Medium.otf"; sourceTree = "<group>"; };
 		C23D867127BA5B2D00153655 /* NearUserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearUserView.swift; sourceTree = "<group>"; };
 		C23D867327BA5C0200153655 /* NearUserTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearUserTableViewCell.swift; sourceTree = "<group>"; };
 		C23D867527BA5C6C00153655 /* UITableViewCell+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableViewCell+Extension.swift"; sourceTree = "<group>"; };
@@ -219,8 +223,6 @@
 		C2826B4027B0EA4500C1CA23 /* FilterButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterButton.swift; sourceTree = "<group>"; };
 		C2826B4227B0F91D00C1CA23 /* Friends.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Friends.swift; sourceTree = "<group>"; };
 		C28377AE2796E36100151297 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
-		C28377B42796EEEE00151297 /* NotoSansKR-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansKR-Medium.otf"; sourceTree = "<group>"; };
-		C28377B62796EEEE00151297 /* NotoSansKR-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansKR-Regular.otf"; sourceTree = "<group>"; };
 		C28377BE2796F1C900151297 /* UIFont+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extension.swift"; sourceTree = "<group>"; };
 		C28377C527971D0200151297 /* OnBoardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingViewController.swift; sourceTree = "<group>"; };
 		C28377C827971E5800151297 /* AuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthView.swift; sourceTree = "<group>"; };
@@ -548,8 +550,8 @@
 		C28377B12796EEDB00151297 /* Font */ = {
 			isa = PBXGroup;
 			children = (
-				C28377B42796EEEE00151297 /* NotoSansKR-Medium.otf */,
-				C28377B62796EEEE00151297 /* NotoSansKR-Regular.otf */,
+				C23BAB1227BC39480083BFCF /* NotoSansKR-Regular.otf */,
+				C23BAB1427BC39520083BFCF /* NotoSansKR-Medium.otf */,
 			);
 			path = Font;
 			sourceTree = "<group>";
@@ -683,6 +685,7 @@
 				C2D0928427B94AEF00FB4A14 /* NearUserViewController.swift */,
 				C23D867127BA5B2D00153655 /* NearUserView.swift */,
 				C23D867327BA5C0200153655 /* NearUserTableViewCell.swift */,
+				C23BAB1027BC30A00083BFCF /* EmptyUserView.swift */,
 			);
 			path = NearUser;
 			sourceTree = "<group>";
@@ -869,12 +872,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C28377BA2796EEEE00151297 /* NotoSansKR-Medium.otf in Resources */,
+				C23BAB1527BC39520083BFCF /* NotoSansKR-Medium.otf in Resources */,
 				C21A001827A3E02800222045 /* Images.xcassets in Resources */,
 				C242CDC22796BE7200905287 /* LaunchScreen.storyboard in Resources */,
 				C28377EE2798674A00151297 /* GoogleService-Info.plist in Resources */,
 				C242CDBF2796BE7200905287 /* Assets.xcassets in Resources */,
-				C28377BC2796EEEE00151297 /* NotoSansKR-Regular.otf in Resources */,
+				C23BAB1327BC39480083BFCF /* NotoSansKR-Regular.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1106,6 +1109,7 @@
 				C26E99F127ABD35F00E00E15 /* InfoAgeRestrictView.swift in Sources */,
 				C23D867E27BA67FA00153655 /* SearchSesacViewController.swift in Sources */,
 				C28377AF2796E36100151297 /* UIColor+Extension.swift in Sources */,
+				C23BAB1127BC30A00083BFCF /* EmptyUserView.swift in Sources */,
 				C21A001627A3DF8600222045 /* GenderButton.swift in Sources */,
 				C2E20D2127A3E93500AB9BC0 /* Images+Generated.swift in Sources */,
 				C2A6E5EA27AD853B00829EE0 /* AlertView.swift in Sources */,

@@ -73,7 +73,10 @@ final class NearUserViewController: UIViewController {
     //MARK: Method
     
     func bind() {
-        Observable.of(mockData)
+        let data = Observable.of(mockData)
+            .share()
+        
+        data
             .bind(to: mainView.tableView.rx.items(cellIdentifier: NearUserTableViewCell.useIdentifier, cellType: NearUserTableViewCell.self)) { [weak self](index, element, cell) in
                 guard let self = self else { return }
                 let data = element.fromQueueDB[0]
@@ -105,6 +108,18 @@ final class NearUserViewController: UIViewController {
             }
             .disposed(by: disposeBag)
         
+        data
+            .observe(on: MainScheduler.instance)
+            .bind(with: self) { owner, friends in
+                if friends.isEmpty {
+                    owner.mainView.emptyUserView.isHidden = false
+                    owner.mainView.tableView.isHidden = true
+                } else {
+                    owner.mainView.emptyUserView.isHidden = false
+                    owner.mainView.tableView.isHidden = true
+                }
+            }
+            .disposed(by: disposeBag)
         
         mainView.tableView.rx.itemSelected
             .observe(on: MainScheduler.instance)

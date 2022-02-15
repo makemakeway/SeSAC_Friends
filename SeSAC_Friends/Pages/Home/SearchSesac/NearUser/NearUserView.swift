@@ -13,14 +13,23 @@ final class NearUserView: UIView, ViewRepresentable {
     
     let tableView = UITableView()
     
+    let emptyUserView = EmptyUserView()
+    
     func setUp() {
         addSubview(tableView)
+        addSubview(emptyUserView)
         self.backgroundColor = .defaultWhite
         tableView.register(NearUserTableViewCell.self, forCellReuseIdentifier: NearUserTableViewCell.useIdentifier)
     }
     
     func setConstraints() {
         tableView.snp.makeConstraints { make in
+            make.top.equalTo(safeAreaLayoutGuide)
+            make.bottom.equalToSuperview()
+            make.leading.trailing.equalToSuperview()
+        }
+        
+        emptyUserView.snp.makeConstraints { make in
             make.top.equalTo(safeAreaLayoutGuide)
             make.bottom.equalToSuperview()
             make.leading.trailing.equalToSuperview()
