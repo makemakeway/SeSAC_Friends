@@ -83,7 +83,7 @@ final class InfoManageViewController: UIViewController {
             .drive(viewModel.input.tapNicknameView)
             .disposed(by: disposeBag)
         
-        mainView.cardView.cardStackView.sesacReviewChevronImage.rx.tapGesture()
+        mainView.cardView.cardStackView.sesacReviewView.sesacReviewChevronImage.rx.tapGesture()
             .when(.recognized)
             .withLatestFrom(reviews)
             .filter { !($0.isEmpty) }
@@ -207,12 +207,12 @@ final class InfoManageViewController: UIViewController {
             .asDriver(onErrorJustReturn: [])
             .drive(with: self) { owner, reviews in
                 if !(reviews.isEmpty) {
-                    owner.mainView.cardView.cardStackView.sesacReviewContentLabel.text = reviews[0]
-                    owner.mainView.cardView.cardStackView.sesacReviewChevronImage.isHidden = false
-                    owner.mainView.cardView.cardStackView.sesacReviewContentLabel.textColor = .defaultBlack
+                    owner.mainView.cardView.cardStackView.sesacReviewView.sesacReviewContentLabel.text = reviews[0]
+                    owner.mainView.cardView.cardStackView.sesacReviewView.sesacReviewChevronImage.isHidden = false
+                    owner.mainView.cardView.cardStackView.sesacReviewView.sesacReviewContentLabel.textColor = .defaultBlack
                 } else {
-                    owner.mainView.cardView.cardStackView.sesacReviewChevronImage.isHidden = true
-                    owner.mainView.cardView.cardStackView.sesacReviewContentLabel.textColor = .gray6
+                    owner.mainView.cardView.cardStackView.sesacReviewView.sesacReviewChevronImage.isHidden = true
+                    owner.mainView.cardView.cardStackView.sesacReviewView.sesacReviewContentLabel.textColor = .gray6
                 }
             }
             .disposed(by: disposeBag)

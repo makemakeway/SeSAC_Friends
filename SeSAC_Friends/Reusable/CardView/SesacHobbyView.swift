@@ -18,6 +18,7 @@ final class SesacHobbyView: UIView, ViewRepresentable {
     }
     let sesacHobbyStackView = UIStackView().then {
         $0.axis = .horizontal
+        $0.distribution = .fill
         $0.spacing = 8
     }
     
@@ -39,8 +40,9 @@ final class SesacHobbyView: UIView, ViewRepresentable {
         }
         
         sesacHobbyStackView.snp.makeConstraints { make in
-            make.top.leading.equalToSuperview()
+            make.leading.trailing.equalToSuperview()
             make.top.equalTo(sesacHobbyLabel.snp.bottom).offset(16)
+            make.bottom.equalToSuperview()
         }
     }
     

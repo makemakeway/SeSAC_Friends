@@ -52,11 +52,10 @@ final class CardView: UIView, ViewRepresentable {
             make.leading.trailing.equalToSuperview()
             make.height.equalTo(58)
         }
-
         
         cardStackView.snp.makeConstraints { make in
+            make.top.equalTo(nicknameView.snp.bottom)
             make.leading.trailing.equalToSuperview()
-            
         }
     }
     

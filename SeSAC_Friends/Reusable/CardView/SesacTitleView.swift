@@ -33,6 +33,7 @@ final class SesacTitleView: UIView, ViewRepresentable {
         titleStackView.snp.makeConstraints { make in
             make.top.equalTo(sesacTitleLabel.snp.bottom).offset(16)
             make.leading.trailing.equalToSuperview()
+            make.bottom.lessThanOrEqualToSuperview()
         }
     }
     

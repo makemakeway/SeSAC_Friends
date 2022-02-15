@@ -34,6 +34,7 @@
 		C23BAB0427BBDB220083BFCF /* SesacTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23BAB0327BBDB220083BFCF /* SesacTitleView.swift */; };
 		C23BAB0927BBDDB20083BFCF /* SesacHobbyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23BAB0827BBDDB20083BFCF /* SesacHobbyView.swift */; };
 		C23BAB0C27BBE23A0083BFCF /* CardNicknameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23BAB0B27BBE23A0083BFCF /* CardNicknameView.swift */; };
+		C23BAB0E27BBEB9D0083BFCF /* SesacReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23BAB0D27BBEB9D0083BFCF /* SesacReviewView.swift */; };
 		C23D867227BA5B2D00153655 /* NearUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23D867127BA5B2D00153655 /* NearUserView.swift */; };
 		C23D867427BA5C0200153655 /* NearUserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23D867327BA5C0200153655 /* NearUserTableViewCell.swift */; };
 		C23D867627BA5C6C00153655 /* UITableViewCell+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23D867527BA5C6C00153655 /* UITableViewCell+Extension.swift */; };
@@ -171,6 +172,7 @@
 		C23BAB0327BBDB220083BFCF /* SesacTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SesacTitleView.swift; sourceTree = "<group>"; };
 		C23BAB0827BBDDB20083BFCF /* SesacHobbyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SesacHobbyView.swift; sourceTree = "<group>"; };
 		C23BAB0B27BBE23A0083BFCF /* CardNicknameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardNicknameView.swift; sourceTree = "<group>"; };
+		C23BAB0D27BBEB9D0083BFCF /* SesacReviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SesacReviewView.swift; sourceTree = "<group>"; };
 		C23D867127BA5B2D00153655 /* NearUserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearUserView.swift; sourceTree = "<group>"; };
 		C23D867327BA5C0200153655 /* NearUserTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearUserTableViewCell.swift; sourceTree = "<group>"; };
 		C23D867527BA5C6C00153655 /* UITableViewCell+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableViewCell+Extension.swift"; sourceTree = "<group>"; };
@@ -362,8 +364,9 @@
 				C23BAB0B27BBE23A0083BFCF /* CardNicknameView.swift */,
 				C26E99E627ABB25600E00E15 /* CardStackView.swift */,
 				C23BAB0327BBDB220083BFCF /* SesacTitleView.swift */,
-				C26E99E827ABB30C00E00E15 /* TitleStackView.swift */,
 				C23BAB0827BBDDB20083BFCF /* SesacHobbyView.swift */,
+				C23BAB0D27BBEB9D0083BFCF /* SesacReviewView.swift */,
+				C26E99E827ABB30C00E00E15 /* TitleStackView.swift */,
 				C23D868227BA8C3200153655 /* CardViewButton.swift */,
 			);
 			path = CardView;
@@ -1076,6 +1079,7 @@
 				C26E99D727AAC9C100E00E15 /* InfoManageViewController.swift in Sources */,
 				C20EB13F27B413C6007B53B0 /* EnterHobbyView.swift in Sources */,
 				C28377F027987D0A00151297 /* TextFieldState.swift in Sources */,
+				C23BAB0E27BBEB9D0083BFCF /* SesacReviewView.swift in Sources */,
 				C23BA6C8279FF34600AD2EE3 /* NickNameViewModel.swift in Sources */,
 				C23BA6B5279C42EC00AD2EE3 /* InputViewContentType.swift in Sources */,
 				C28377DE279728E700151297 /* UIButton+Extension.swift in Sources */,
