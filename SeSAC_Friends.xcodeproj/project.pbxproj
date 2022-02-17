@@ -77,6 +77,9 @@
 		C26E99EF27ABD30500E00E15 /* InfoAllowPhoneNumberSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26E99EE27ABD30500E00E15 /* InfoAllowPhoneNumberSearchView.swift */; };
 		C26E99F127ABD35F00E00E15 /* InfoAgeRestrictView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26E99F027ABD35F00E00E15 /* InfoAgeRestrictView.swift */; };
 		C26E99F327ABD38800E00E15 /* InfoWithdrawView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26E99F227ABD38800E00E15 /* InfoWithdrawView.swift */; };
+		C273F1D727BE882C0077A6B7 /* UIWindow+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C273F1D627BE882B0077A6B7 /* UIWindow+Extension.swift */; };
+		C273F1D927BE95DD0077A6B7 /* UserState.swift in Sources */ = {isa = PBXBuildFile; fileRef = C273F1D827BE95DD0077A6B7 /* UserState.swift */; };
+		C273F1DB27BEA1F40077A6B7 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C273F1DA27BEA1F40077A6B7 /* ChatViewController.swift */; };
 		C2826B3F27B0325600C1CA23 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2826B3E27B0325600C1CA23 /* HomeViewModel.swift */; };
 		C2826B4127B0EA4600C1CA23 /* FilterButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2826B4027B0EA4500C1CA23 /* FilterButton.swift */; };
 		C2826B4327B0F91D00C1CA23 /* Friends.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2826B4227B0F91D00C1CA23 /* Friends.swift */; };
@@ -219,6 +222,9 @@
 		C26E99EE27ABD30500E00E15 /* InfoAllowPhoneNumberSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoAllowPhoneNumberSearchView.swift; sourceTree = "<group>"; };
 		C26E99F027ABD35F00E00E15 /* InfoAgeRestrictView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoAgeRestrictView.swift; sourceTree = "<group>"; };
 		C26E99F227ABD38800E00E15 /* InfoWithdrawView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoWithdrawView.swift; sourceTree = "<group>"; };
+		C273F1D627BE882B0077A6B7 /* UIWindow+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIWindow+Extension.swift"; sourceTree = "<group>"; };
+		C273F1D827BE95DD0077A6B7 /* UserState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserState.swift; sourceTree = "<group>"; };
+		C273F1DA27BEA1F40077A6B7 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		C2826B3E27B0325600C1CA23 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		C2826B4027B0EA4500C1CA23 /* FilterButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterButton.swift; sourceTree = "<group>"; };
 		C2826B4227B0F91D00C1CA23 /* Friends.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Friends.swift; sourceTree = "<group>"; };
@@ -345,6 +351,7 @@
 		C20EB13B27B41197007B53B0 /* Chat */ = {
 			isa = PBXGroup;
 			children = (
+				C273F1DA27BEA1F40077A6B7 /* ChatViewController.swift */,
 			);
 			path = Chat;
 			sourceTree = "<group>";
@@ -514,6 +521,7 @@
 				C2826B4227B0F91D00C1CA23 /* Friends.swift */,
 				C260F09F27B532D30087948F /* Hobbies.swift */,
 				C260F0A127B550670087948F /* UserHobbySection.swift */,
+				C273F1D827BE95DD0077A6B7 /* UserState.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -543,6 +551,7 @@
 				C260F0A527B561D30087948F /* UICollectionViewCell+Extension.swift */,
 				C253E1B327B6A8DF009EC9F8 /* UICollectionViewLayout+Extension.swift */,
 				C23D867527BA5C6C00153655 /* UITableViewCell+Extension.swift */,
+				C273F1D627BE882B0077A6B7 /* UIWindow+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -1062,6 +1071,7 @@
 				C20EB13D27B411B6007B53B0 /* EnterHobbyViewController.swift in Sources */,
 				C2E20D3827A908F200AB9BC0 /* OnBoardingCollectionViewCell.swift in Sources */,
 				C26E99E927ABB30C00E00E15 /* TitleStackView.swift in Sources */,
+				C273F1D927BE95DD0077A6B7 /* UserState.swift in Sources */,
 				C28377E527980E1000151297 /* ButtonState.swift in Sources */,
 				C2A6E5E327AD371600829EE0 /* APIRouter.swift in Sources */,
 				C2E20D2327A44A6800AB9BC0 /* GenderViewModel.swift in Sources */,
@@ -1081,6 +1091,7 @@
 				C242CDB82796BE7000905287 /* SceneDelegate.swift in Sources */,
 				C26E99D727AAC9C100E00E15 /* InfoManageViewController.swift in Sources */,
 				C20EB13F27B413C6007B53B0 /* EnterHobbyView.swift in Sources */,
+				C273F1D727BE882C0077A6B7 /* UIWindow+Extension.swift in Sources */,
 				C28377F027987D0A00151297 /* TextFieldState.swift in Sources */,
 				C23BAB0E27BBEB9D0083BFCF /* SesacReviewView.swift in Sources */,
 				C23BA6C8279FF34600AD2EE3 /* NickNameViewModel.swift in Sources */,
@@ -1099,6 +1110,7 @@
 				C23BA6C2279D9C5400AD2EE3 /* FirebaseAuthService.swift in Sources */,
 				C26E99EB27ABD16B00E00E15 /* InfoHobbyView.swift in Sources */,
 				C23BAB0927BBDDB20083BFCF /* SesacHobbyView.swift in Sources */,
+				C273F1DB27BEA1F40077A6B7 /* ChatViewController.swift in Sources */,
 				C23D867427BA5C0200153655 /* NearUserTableViewCell.swift in Sources */,
 				C28377BF2796F1C900151297 /* UIFont+Extension.swift in Sources */,
 				C2E20D2A27A599C700AB9BC0 /* TabbarController.swift in Sources */,

@@ -46,4 +46,28 @@ extension UIViewController {
         vc.needSelectGender = true
         nav.pushViewController(vc, animated: true)
     }
+    
+    func selectedSesacTitle(titles: [Int], view: SesacTitleView) {
+        let view = view.titleStackView
+        for (index, title) in titles.enumerated() {
+            if title != 0 {
+                switch index {
+                case 0:
+                    view.goodMannerButton.buttonState = .fill
+                case 1:
+                    view.exactTimeButton.buttonState = .fill
+                case 2:
+                    view.fastResponseButton.buttonState = .fill
+                case 3:
+                    view.kindnessButton.buttonState = .fill
+                case 4:
+                    view.greatJobButton.buttonState = .fill
+                case 5:
+                    view.goodTimeButton.buttonState = .fill
+                default:
+                    print("아직 추가 안된 케이스")
+                }
+            }
+        }
+    }
 }

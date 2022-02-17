@@ -20,6 +20,7 @@ final class NearUserViewModel: ViewModelType {
         let refreshButtonClicked = PublishSubject<Void>()
         let refreshControlValueChanged = PublishSubject<Void>()
         let cardViewClosed = PublishSubject<Void>()
+        let timerStarted = PublishSubject<Int>()
     }
     
     struct Output {
@@ -27,14 +28,20 @@ final class NearUserViewModel: ViewModelType {
         let openOrClose: BehaviorRelay<Bool> = BehaviorRelay(value: false)
         let errorMessage = PublishRelay<String>()
         let goToOnboarding = PublishRelay<Void>()
-        let friendsValue = PublishRelay<[FromQueueDB]>()
+        let nearUsers = PublishRelay<[FromQueueDB]>()
+        let requestedUsers = PublishRelay<[FromQueueDB]>()
         let activating = PublishRelay<Bool>()
+        let refreshLoading = PublishRelay<Bool>()
+        let currentUserState = PublishRelay<UserState>()
+        let matchedOtherUser = PublishRelay<Void>()
+        let tooLongWaited = PublishRelay<Void>()
     }
     
     let input = Input()
     let output = Output()
     
     func transform() {
+        
         input.cellClicked
             .withLatestFrom(output.openOrClose)
             .asDriver(onErrorJustReturn: false)
@@ -48,15 +55,31 @@ final class NearUserViewModel: ViewModelType {
             .disposed(by: disposeBag)
 
         Observable.merge(input.willAppear, input.cardViewClosed, input.refreshButtonClicked, input.refreshControlValueChanged)
+            .do(onNext: { [weak self]_ in self?.output.activating.accept(true) })
             .throttle(.seconds(5), latest: true, scheduler: MainScheduler.instance)
             .withUnretained(self)
-            .do(onNext: { owner, _ in owner.output.activating.accept(true) })
             .flatMap { owner, _ in owner.fetchFriends(position: UserInfo.mapPosition) }
             .do(onNext: { [weak self]_ in self?.output.activating.accept(false) })
             .bind(with: self) { owner, friends in
-                owner.output.friendsValue.accept(friends.fromQueueDB)
+                owner.output.nearUsers.accept(friends.fromQueueDB)
+                owner.output.requestedUsers.accept(friends.fromQueueDBRequested)
+                owner.output.refreshLoading.accept(false)
             }
             .disposed(by: disposeBag)
+        
+        input.timerStarted
+            .withUnretained(self)
+            .flatMap { owner, _ in owner.fetchUserState() }
+            .bind(with: self) { owner, userState in
+                print("CURRENT: \(userState)")
+                if userState.matched == 1 {
+                    owner.output.matchedOtherUser.accept(())
+                    owner.output.errorMessage.accept("\(userState.matchedNick ?? "")님과 매칭되셨습니다. 잠시 후 채팅방으로 이동합니다")
+                    UserInfo.userState = .matched
+                }
+            }
+            .disposed(by: disposeBag)
+
     }
     
     func fetchFriends(position: (Double, Double)) -> Observable<Friends> {
@@ -104,6 +127,41 @@ final class NearUserViewModel: ViewModelType {
         let stringGrid = "\(gridX)\(gridY)"
         let grid = Int(stringGrid) ?? 0
         return grid
+    }
+    
+    func fetchUserState() -> Observable<UserState> {
+        return APIService.shared.getMyQueueState()
+            .catch { [weak self](error) in
+                if let error = error as? APIError {
+                    switch error {
+                    case .tokenExpired:
+                        return .error(APIError.tokenExpired)
+                    case .serverError:
+                        self?.output.errorMessage.accept(APIError.serverError.rawValue)
+                    case .unKnownedUser:
+                        self?.output.goToOnboarding.accept(())
+                    case .disConnect:
+                        self?.output.errorMessage.accept(APIError.disConnect.rawValue)
+                    case .tooLongWating:
+                        self?.output.errorMessage.accept(APIError.tooLongWating.rawValue)
+                        self?.output.tooLongWaited.accept(())
+                        UserInfo.userState = .matched
+                    default:
+                        self?.output.errorMessage.accept(APIError.clientError.rawValue)
+                    }
+                }
+                return .never()
+            }
+            .retry { (error: Observable<Error>) in
+                error.filter { error in
+                    if let error = error as? APIError, error == .tokenExpired {
+                        return true
+                    }
+                    return false
+                }
+                .flatMap { _ -> Single<String> in FirebaseAuthService.shared.getIdToken().debug("REFresh IDTOKEN") }
+            }
+            .asObservable()
     }
     
     init() {

@@ -220,27 +220,8 @@ final class InfoManageViewController: UIViewController {
         viewModel.output.sesacTitles
             .asDriver()
             .drive(with: self) { owner, titles in
-                let view = owner.mainView.cardView.cardStackView.sesacTitleView.titleStackView
-                for (index, title) in titles.enumerated() {
-                    if title != 0 {
-                        switch index {
-                        case 0:
-                            view.goodMannerButton.buttonState = .fill
-                        case 1:
-                            view.exactTimeButton.buttonState = .fill
-                        case 2:
-                            view.fastResponseButton.buttonState = .fill
-                        case 3:
-                            view.kindnessButton.buttonState = .fill
-                        case 4:
-                            view.greatJobButton.buttonState = .fill
-                        case 5:
-                            view.goodTimeButton.buttonState = .fill
-                        default:
-                            print("아직 추가 안된 케이스")
-                        }
-                    }
-                }
+                let view = owner.mainView.cardView.cardStackView.sesacTitleView
+                owner.selectedSesacTitle(titles: titles, view: view)
             }
             .disposed(by: disposeBag)
         

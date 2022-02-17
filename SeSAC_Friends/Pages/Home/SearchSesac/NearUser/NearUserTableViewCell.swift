@@ -58,6 +58,16 @@ final class NearUserTableViewCell: UITableViewCell, ViewRepresentable {
     override func prepareForReuse() {
         super.prepareForReuse()
         self.opened = false
+        let titleView = self.cardView.cardStackView.sesacTitleView.titleStackView
+        titleView.exactTimeButton.buttonState = .inactive
+        titleView.fastResponseButton.buttonState = .inactive
+        titleView.goodTimeButton.buttonState = .inactive
+        titleView.greatJobButton.buttonState = .inactive
+        titleView.kindnessButton.buttonState = .inactive
+        titleView.goodMannerButton.buttonState = .inactive
+        let reviewView = cardView.cardStackView.sesacReviewView
+        reviewView.sesacReviewChevronImage.isHidden = true
+        reviewView.sesacReviewContentLabel.textColor = .gray6
         
         disposeBag = DisposeBag()
     }

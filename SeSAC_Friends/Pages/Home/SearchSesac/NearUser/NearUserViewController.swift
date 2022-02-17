@@ -18,64 +18,21 @@ final class NearUserViewController: UIViewController {
     
     private let viewModel = NearUserViewModel()
     
-    let mockData: [Friends] = [
-        Friends(fromQueueDB: [FromQueueDB(uid: "x4r4tjQZ8Pf9mFYUgkfmC4REcvu2",
-                                          nick: "미묘한고래",
-                                          lat: 37.48511640269022,
-                                          long: 126.92947109241517,
-                                          reputation: [0, 0, 0, 0, 0, 0, 0, 0, 0],
-                                          hf: ["anything", "coding"],
-                                          reviews: ["친절해요", "재밌어요"],
-                                          gender: 0,
-                                          type: 2,
-                                          sesac: 0,
-                                          background: 0)],
-                fromQueueDBRequested: [FromQueueDB(uid: "x4r4tjQZ8Pf9mFYUgkfmC4REcvu2",
-                                                   nick: "커피의나라",
-                                                   lat: 37.48511640269022,
-                                                   long: 126.92947109241517,
-                                                   reputation: [4, 4, 4, 4, 4, 4, 4, 4, 4],
-                                                   hf: ["anything", "coding"],
-                                                   reviews: ["재밌어요", "약속을 잘지켜요"],
-                                                   gender: 0,
-                                                   type: 2,
-                                                   sesac: 0,
-                                                   background: 0)],
-                fromRecommend: ["요가", "독서모임", "SeSAC", "코딩"]),
-        Friends(fromQueueDB: [FromQueueDB(uid: "x4r4tjQZ8Pf9mFYUgkfmC4REcvu2",
-                                          nick: "케케케",
-                                          lat: 37.48511640269022,
-                                          long: 126.92947109241517,
-                                          reputation: [0, 0, 0, 0, 0, 0, 0, 0, 0],
-                                          hf: ["암거나 ㅋㅋ", "coding", "앙큼퐉쓰!", "미이이이이이이", "캬아아아앙아악", "구아아아아아앙"],
-                                          reviews: ["친절해요", "재밌어요"],
-                                          gender: 0,
-                                          type: 2,
-                                          sesac: 0,
-                                          background: 0)],
-                fromQueueDBRequested: [FromQueueDB(uid: "x4r4tjQZ8Pf9mFYUgkfmC4REcvu2",
-                                                   nick: "커피의나라",
-                                                   lat: 37.48511640269022,
-                                                   long: 126.92947109241517,
-                                                   reputation: [4, 4, 4, 4, 4, 4, 4, 4, 4],
-                                                   hf: ["anything", "coding"],
-                                                   reviews: ["재밌어요", "약속을 잘지켜요"],
-                                                   gender: 0,
-                                                   type: 2,
-                                                   sesac: 0,
-                                                   background: 0)],
-                fromRecommend: ["요가", "독서모임", "SeSAC", "코딩"])
-    ]
+    private var timerDisposable: Disposable?
     
     //MARK: UI
-    
-    private let mainView = NearUserView()
+    let mainView = NearUserView()
     
     //MARK: Method
     
     func bind() {
-        
         //MARK: Input Binding
+        
+        mainView.emptyUserView.refreshButton.rx.tap
+            .asDriver()
+            .drive(viewModel.input.refreshButtonClicked)
+            .disposed(by: disposeBag)
+        
         
         mainView.tableView.rx.itemSelected
             .observe(on: MainScheduler.instance)
@@ -84,14 +41,23 @@ final class NearUserViewController: UIViewController {
                 owner.mainView.tableView.beginUpdates()
                 cell.opened.toggle()
                 cell.cardView.openOrClose(opened: cell.opened)
+                if cell.opened == false {
+                    owner.viewModel.input.cardViewClosed.onNext(())
+                }
                 owner.mainView.tableView.endUpdates()
             }
+            .disposed(by: disposeBag)
+        
+        mainView.refreshControl.rx.controlEvent(.valueChanged)
+            .debug("refresh control")
+            .asDriver(onErrorJustReturn: ())
+            .drive(viewModel.input.refreshControlValueChanged)
             .disposed(by: disposeBag)
         
         
         //MARK: Output Binding
         
-        let data = viewModel.output.friendsValue
+        let data = viewModel.output.nearUsers
             .share()
             .asDriver(onErrorJustReturn: [])
         
@@ -99,6 +65,7 @@ final class NearUserViewController: UIViewController {
             .drive(mainView.tableView.rx.items(cellIdentifier: NearUserTableViewCell.useIdentifier, cellType: NearUserTableViewCell.self)) { [weak self](index, element, cell) in
                 guard let self = self else { return }
                 cell.cardView.nicknameView.nicknameLabel.text = element.nick
+                self.selectedSesacTitle(titles: element.reputation, view: cell.cardView.cardStackView.sesacTitleView)
                 
                 cell.cardViewButtonClicked
                     .debug("\(index)번 카드뷰 버튼 눌림")
@@ -122,7 +89,6 @@ final class NearUserViewController: UIViewController {
                         }
                     }
                     .disposed(by: cell.disposeBag)
-                
             }
             .disposed(by: disposeBag)
         
@@ -144,9 +110,73 @@ final class NearUserViewController: UIViewController {
                 activating == true ? owner.view.makeToastActivity(.center) : owner.view.hideToastActivity()
             }
             .disposed(by: disposeBag)
+        
+        viewModel.output.refreshLoading
+            .bind(to: mainView.refreshControl.rx.isRefreshing)
+            .disposed(by: disposeBag)
+        
+        viewModel.output.errorMessage
+            .asDriver(onErrorJustReturn: "")
+            .drive(with: self) { owner, message in
+                owner.view.makeToast(message, duration: 1, position: .bottom)
+            }
+            .disposed(by: disposeBag)
+
+        viewModel.output.matchedOtherUser
+            .asDriver(onErrorJustReturn: ())
+            .drive(with: self) { owner, _ in
+                owner.view.isUserInteractionEnabled = false
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                    let vc = ChatViewController()
+                    owner.navigationController?.pushViewController(vc, animated: true)
+                }
+            }
+            .disposed(by: disposeBag)
+
+        viewModel.output.tooLongWaited
+            .asDriver(onErrorJustReturn: ())
+            .drive(with: self) { owner, _ in
+                owner.view.isUserInteractionEnabled = false
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                    owner.changeRootViewToHome()
+                }
+            }
+            .disposed(by: disposeBag)
+
+        viewModel.output.goToOnboarding
+            .asDriver(onErrorJustReturn: ())
+            .drive(with: self) { owner, _ in
+                let vc = OnBoardingViewController()
+                owner.changeRootView(viewController: vc)
+            }
+            .disposed(by: disposeBag)
+
 
     }
     
+    func timerStart() {
+        timerDisposable = Observable<Int>
+            .timer(.seconds(0),
+                   period: .seconds(5),
+                   scheduler: MainScheduler.instance)
+            .bind(to: viewModel.input.timerStarted)
+    }
+    
+    @objc func poo() {
+        print("poo")
+    }
+    
+    func navBarConfig() {
+        let button = UIButton()
+        button.setTitle("찾기중단", for: .normal)
+        button.titleLabel?.font = .title3_M14
+        button.setTitleColor(.defaultBlack, for: .normal)
+        button.addTarget(self, action: #selector(poo), for: .touchUpInside)
+        
+        let barButton = UIBarButtonItem(customView: button)
+        
+        self.navigationItem.rightBarButtonItems = [barButton]
+    }
     
     //MARK: LifeCycle
     override func loadView() {
@@ -156,12 +186,19 @@ final class NearUserViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        bind()
+        navBarConfig()
         mainView.tableView.rowHeight = UITableView.automaticDimension
+        bind()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         viewModel.input.willAppear.onNext(())
+        timerStart()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        timerDisposable?.dispose()
     }
 }

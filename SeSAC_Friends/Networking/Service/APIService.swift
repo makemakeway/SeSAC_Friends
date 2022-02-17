@@ -16,6 +16,7 @@ enum APIError: String, Error {
     case invalidNickname = "해당 닉네임은 사용할 수 없습니다."
     case unKnownedUser
     case disConnect = "네트워크 연결이 원활하지 않습니다. 연결상태 확인 후 다시 시도해 주세요!"
+    case tooLongWating = "오랜 시간 동안 매칭 되지 않아 새싹 친구 찾기를 그만둡니다"
 }
 
 final class APIService {
@@ -252,6 +253,39 @@ final class APIService {
                         single(.success(205))
                     case 206:
                         single(.success(206))
+                    case 401:
+                        single(.failure(APIError.tokenExpired))
+                    case 406:
+                        single(.failure(APIError.unKnownedUser))
+                    case 500:
+                        single(.failure(APIError.serverError))
+                    default:
+                        single(.failure(APIError.clientError))
+                    }
+                }
+            return Disposables.create()
+        }
+    }
+    
+    func getMyQueueState() -> Single<UserState> {
+        return Single.create { single in
+            if !(Connectivity.isConnectedToInternet) {
+                single(.failure(APIError.disConnect))
+            }
+            
+            AF.request(APIRouter.myQueueState)
+                .validate()
+                .responseDecodable(of: UserState.self) { response in
+                    switch response.response?.statusCode {
+                    case 200:
+                        switch response.result {
+                        case .success(let state):
+                            single(.success(state))
+                        case .failure(let error):
+                            single(.failure(error))
+                        }
+                    case 201:
+                        single(.failure(APIError.tooLongWating))
                     case 401:
                         single(.failure(APIError.tokenExpired))
                     case 406:

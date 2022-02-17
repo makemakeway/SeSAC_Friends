@@ -26,20 +26,3 @@ extension UserHobbySection: AnimatableSectionModelType {
     }
 }
 
-struct OtherUserHobbySection {
-    let header: String
-    var items: [String]
-}
-
-extension OtherUserHobbySection: AnimatableSectionModelType {
-    typealias Item = String
-    
-    init(original: OtherUserHobbySection, items: [String]) {
-        self = original
-        self.items = items
-    }
-    
-    var identity: String {
-        return header
-    }
-}

@@ -17,10 +17,11 @@ enum APIRouter: URLRequestConvertible {
     case startRequestFriends(type: Int, region: Int, lat: Double, long: Double, hf: [String])
     case stopRequestFriends
     case searchRequestFriends(region: Int, lat: Double, long: Double)
+    case myQueueState
     
     private var method: HTTPMethod {
         switch self {
-        case .login:
+        case .login, .myQueueState:
             return .get
         case .signUp, .withdraw, .updateMyPage, .startRequestFriends, .searchRequestFriends:
             return .post
@@ -49,6 +50,8 @@ enum APIRouter: URLRequestConvertible {
             return "queue"
         case .searchRequestFriends:
             return "queue/onqueue"
+        case .myQueueState:
+            return "queue/myQueueState"
         }
     }
     
@@ -85,6 +88,8 @@ enum APIRouter: URLRequestConvertible {
             return [CustomKey.APIParameterKey.region: region,
                     CustomKey.APIParameterKey.lat: lat,
                     CustomKey.APIParameterKey.long: long]
+        case .myQueueState:
+            return nil
         }
     }
     

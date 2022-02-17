@@ -15,9 +15,13 @@ final class NearUserView: UIView, ViewRepresentable {
         $0.separatorStyle = .none
     }
     
+    let refreshControl = UIRefreshControl()
+    
     let emptyUserView = EmptyUserView()
     
     func setUp() {
+        refreshControl.endRefreshing()
+        tableView.refreshControl = refreshControl
         addSubview(tableView)
         addSubview(emptyUserView)
         self.backgroundColor = .defaultWhite
