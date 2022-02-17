@@ -53,19 +53,6 @@ final class NearUserViewModel: ViewModelType {
                 }
             }
             .disposed(by: disposeBag)
-
-        Observable.merge(input.willAppear, input.cardViewClosed, input.refreshButtonClicked, input.refreshControlValueChanged)
-            .do(onNext: { [weak self]_ in self?.output.activating.accept(true) })
-            .throttle(.seconds(5), latest: true, scheduler: MainScheduler.instance)
-            .withUnretained(self)
-            .flatMap { owner, _ in owner.fetchFriends(position: UserInfo.mapPosition) }
-            .do(onNext: { [weak self]_ in self?.output.activating.accept(false) })
-            .bind(with: self) { owner, friends in
-                owner.output.nearUsers.accept(friends.fromQueueDB)
-                owner.output.requestedUsers.accept(friends.fromQueueDBRequested)
-                owner.output.refreshLoading.accept(false)
-            }
-            .disposed(by: disposeBag)
         
         input.timerStarted
             .withUnretained(self)
@@ -80,6 +67,19 @@ final class NearUserViewModel: ViewModelType {
             }
             .disposed(by: disposeBag)
 
+        Observable.merge(input.willAppear, input.cardViewClosed, input.refreshButtonClicked, input.refreshControlValueChanged)
+            .debug("Merge")
+            .do(onNext: { [weak self]_ in self?.output.activating.accept(true) })
+            .throttle(.seconds(5), latest: true, scheduler: MainScheduler.instance)
+            .withUnretained(self)
+            .flatMap { owner, _ in owner.fetchFriends(position: UserInfo.mapPosition) }
+            .do(onNext: { [weak self]_ in self?.output.activating.accept(false) })
+            .bind(with: self) { owner, friends in
+                owner.output.nearUsers.accept(friends.fromQueueDB)
+                owner.output.requestedUsers.accept(friends.fromQueueDBRequested)
+                owner.output.refreshLoading.accept(false)
+            }
+            .disposed(by: disposeBag)
     }
     
     func fetchFriends(position: (Double, Double)) -> Observable<Friends> {
