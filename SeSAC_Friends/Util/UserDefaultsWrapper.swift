@@ -40,6 +40,7 @@ class UserInfo {
     @UserDefault(key: "FCMToken", defaultValue: "")static var fcmToken: String
     @UserDefault(key: "userState", defaultValue: FloatingButtonState.normal)static var userState: FloatingButtonState
     @UserDefault(key: "position", defaultValue: (37.517819364682694, 126.88647317074734))static var userPosition: (Double, Double)
+    @UserDefault(key: "mapPosition", defaultValue: (37.517819364682694, 126.88647317074734))static var mapPosition: (Double, Double)
     
     static func setToDefaults() {
         self.birthday = ""
@@ -53,5 +54,6 @@ class UserInfo {
         self.userState = FloatingButtonState.normal
         self.verificationID = ""
         self.userPosition = (37.517819364682694, 126.88647317074734)
+        self.mapPosition = (37.517819364682694, 126.88647317074734)
     }
 }

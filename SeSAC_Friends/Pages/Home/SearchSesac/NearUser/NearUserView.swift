@@ -11,7 +11,9 @@ import SnapKit
 
 final class NearUserView: UIView, ViewRepresentable {
     
-    let tableView = UITableView()
+    let tableView = UITableView().then {
+        $0.separatorStyle = .none
+    }
     
     let emptyUserView = EmptyUserView()
     

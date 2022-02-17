@@ -9,6 +9,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 import RxGesture
+import Toast
 
 final class NearUserViewController: UIViewController {
     //MARK: Properties
@@ -73,53 +74,8 @@ final class NearUserViewController: UIViewController {
     //MARK: Method
     
     func bind() {
-        let data = Observable.of(mockData)
-            .share()
         
-        data
-            .bind(to: mainView.tableView.rx.items(cellIdentifier: NearUserTableViewCell.useIdentifier, cellType: NearUserTableViewCell.self)) { [weak self](index, element, cell) in
-                guard let self = self else { return }
-                let data = element.fromQueueDB[0]
-                cell.cardView.nicknameView.nicknameLabel.text = data.nick
-                
-                cell.cardViewButtonClicked
-                    .debug("카드뷰 버튼 눌림")
-                    .bind(to: self.viewModel.input.requestButtonClicked)
-                    .disposed(by: cell.disposeBag)
-                
-                element.fromQueueDB.forEach {
-                    Observable.of($0.hf)
-                        .debug("HF")
-                        .bind(to: cell.cardView.cardStackView.sesacHobbyView.collectionView.rx.items(cellIdentifier: EnterHobbyCollectionViewCell.useIdentifier, cellType: EnterHobbyCollectionViewCell.self)) { index, hobby, item in
-                            item.button.setTitle(hobby, for: .normal)
-                            item.button.buttonState = .fromOtherUser
-                            
-                            let collectionView = cell.cardView.cardStackView.sesacHobbyView.collectionView
-                            DispatchQueue.main.async {
-                                let height = collectionView.collectionViewLayout.collectionViewContentSize.height
-                                collectionView.snp.updateConstraints { make in
-                                    make.height.greaterThanOrEqualTo(height)
-                                    make.bottom.equalToSuperview()
-                                }
-                            }
-                        }
-                        .disposed(by: cell.disposeBag)
-                }
-            }
-            .disposed(by: disposeBag)
-        
-        data
-            .observe(on: MainScheduler.instance)
-            .bind(with: self) { owner, friends in
-                if friends.isEmpty {
-                    owner.mainView.emptyUserView.isHidden = false
-                    owner.mainView.tableView.isHidden = true
-                } else {
-                    owner.mainView.emptyUserView.isHidden = false
-                    owner.mainView.tableView.isHidden = true
-                }
-            }
-            .disposed(by: disposeBag)
+        //MARK: Input Binding
         
         mainView.tableView.rx.itemSelected
             .observe(on: MainScheduler.instance)
@@ -129,6 +85,63 @@ final class NearUserViewController: UIViewController {
                 cell.opened.toggle()
                 cell.cardView.openOrClose(opened: cell.opened)
                 owner.mainView.tableView.endUpdates()
+            }
+            .disposed(by: disposeBag)
+        
+        
+        //MARK: Output Binding
+        
+        let data = viewModel.output.friendsValue
+            .share()
+            .asDriver(onErrorJustReturn: [])
+        
+        data
+            .drive(mainView.tableView.rx.items(cellIdentifier: NearUserTableViewCell.useIdentifier, cellType: NearUserTableViewCell.self)) { [weak self](index, element, cell) in
+                guard let self = self else { return }
+                cell.cardView.nicknameView.nicknameLabel.text = element.nick
+                
+                cell.cardViewButtonClicked
+                    .debug("\(index)번 카드뷰 버튼 눌림")
+                    .asDriver(onErrorJustReturn: ())
+                    .drive(self.viewModel.input.requestButtonClicked)
+                    .disposed(by: cell.disposeBag)
+                
+                Observable.of(element.hf)
+                    .debug("HF")
+                    .bind(to: cell.cardView.cardStackView.sesacHobbyView.collectionView.rx.items(cellIdentifier: EnterHobbyCollectionViewCell.useIdentifier, cellType: EnterHobbyCollectionViewCell.self)) { index, hobby, item in
+                        item.button.setTitle(hobby, for: .normal)
+                        item.button.buttonState = .fromOtherUser
+                        
+                        let collectionView = cell.cardView.cardStackView.sesacHobbyView.collectionView
+                        DispatchQueue.main.async {
+                            let height = collectionView.collectionViewLayout.collectionViewContentSize.height
+                            collectionView.snp.updateConstraints { make in
+                                make.height.greaterThanOrEqualTo(height)
+                                make.bottom.equalToSuperview()
+                            }
+                        }
+                    }
+                    .disposed(by: cell.disposeBag)
+                
+            }
+            .disposed(by: disposeBag)
+        
+        data
+            .drive(with: self) { owner, friends in
+                if friends.isEmpty {
+                    owner.mainView.emptyUserView.isHidden = false
+                    owner.mainView.tableView.isHidden = true
+                } else {
+                    owner.mainView.emptyUserView.isHidden = true
+                    owner.mainView.tableView.isHidden = false
+                }
+            }
+            .disposed(by: disposeBag)
+        
+        viewModel.output.activating
+            .asDriver(onErrorJustReturn: false)
+            .drive(with: self) { owner, activating in
+                activating == true ? owner.view.makeToastActivity(.center) : owner.view.hideToastActivity()
             }
             .disposed(by: disposeBag)
 
@@ -145,5 +158,10 @@ final class NearUserViewController: UIViewController {
         super.viewDidLoad()
         bind()
         mainView.tableView.rowHeight = UITableView.automaticDimension
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        viewModel.input.willAppear.onNext(())
     }
 }

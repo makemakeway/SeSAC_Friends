@@ -31,4 +31,9 @@ final class RequestViewController: UIViewController {
         super.viewDidLoad()
         self.view.backgroundColor = .systemBackground
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        print("Request View Appear")
+    }
 }

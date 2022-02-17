@@ -28,7 +28,7 @@ final class HomeViewModel: ViewModelType {
         let entireButtonState: BehaviorRelay<ButtonState> = BehaviorRelay(value: .fill)
         let manButtonState: BehaviorRelay<ButtonState> = BehaviorRelay(value: .disable)
         let womanButtonState: BehaviorRelay<ButtonState> = BehaviorRelay(value: .disable)
-        let currentMapViewCamera = PublishRelay<CLLocationCoordinate2D>()
+        let currentMapViewCamera: BehaviorRelay<CLLocationCoordinate2D> = BehaviorRelay(value: DefaultValue.location)
         let errorMessage = PublishRelay<String>()
         let goToOnboarding = PublishRelay<Void>()
         let friendsList = PublishRelay<Friends>()
@@ -99,6 +99,8 @@ final class HomeViewModel: ViewModelType {
                         owner.output.goToInfoManage.accept(())
                     } else {
                         owner.output.goToEnterHobby.accept(())
+                        let positon = owner.output.currentMapViewCamera.value
+                        UserInfo.mapPosition = (positon.latitude, positon.longitude)
                     }
                 } else {
                     owner.output.showAlert.accept(())
@@ -201,6 +203,7 @@ final class HomeViewModel: ViewModelType {
             .asDriver(onErrorJustReturn: DefaultValue.location)
             .drive(with: self) { owner, location in
                 owner.output.currentMapViewCamera.accept(location)
+                UserInfo.userPosition = (location.latitude, location.longitude)
             }
             .disposed(by: disposeBag)
 
