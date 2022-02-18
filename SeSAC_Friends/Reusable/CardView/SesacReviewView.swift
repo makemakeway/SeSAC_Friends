@@ -22,7 +22,9 @@ final class SesacReviewView: UIView, ViewRepresentable {
         $0.numberOfLines = 0
     }
     
-    let sesacReviewChevronImage = UIImageView(image: UIImage(asset: Asset.moreArrow))
+    let sesacReviewChevronImage = UIButton().then {
+        $0.setImage(UIImage(asset: Asset.moreArrow), for: .normal)
+    }
     
     func setUp() {
         addSubview(sesacReviewLabel)

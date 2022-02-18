@@ -18,8 +18,14 @@ final class NearUserTableViewCell: UITableViewCell, ViewRepresentable {
     var disposeBag = DisposeBag()
     var opened = false
     
-    var cardViewButtonClicked : Observable<Void>{
+    var cardViewButtonClicked: Observable<Void> {
         return self.cardViewButton.rx.tap
+            .asObservable()
+    }
+    
+    var nickNameViewClicked: Observable<UITapGestureRecognizer> {
+        return self.cardView.nicknameView.rx.tapGesture()
+            .when(.recognized)
             .asObservable()
     }
     
@@ -58,6 +64,11 @@ final class NearUserTableViewCell: UITableViewCell, ViewRepresentable {
     override func prepareForReuse() {
         super.prepareForReuse()
         self.opened = false
+        let stackView = self.cardView.cardStackView
+        stackView.sesacReviewView.isHidden = true
+        stackView.sesacHobbyView.isHidden = true
+        stackView.sesacTitleView.isHidden = true
+        
         let titleView = self.cardView.cardStackView.sesacTitleView.titleStackView
         titleView.exactTimeButton.buttonState = .inactive
         titleView.fastResponseButton.buttonState = .inactive
@@ -68,7 +79,7 @@ final class NearUserTableViewCell: UITableViewCell, ViewRepresentable {
         let reviewView = cardView.cardStackView.sesacReviewView
         reviewView.sesacReviewChevronImage.isHidden = true
         reviewView.sesacReviewContentLabel.textColor = .gray6
-        
+        reviewView.sesacReviewContentLabel.text = "첫 리뷰를 기다리는 중이에요!"
         disposeBag = DisposeBag()
     }
 }

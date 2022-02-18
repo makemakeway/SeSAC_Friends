@@ -78,8 +78,9 @@
 		C26E99F127ABD35F00E00E15 /* InfoAgeRestrictView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26E99F027ABD35F00E00E15 /* InfoAgeRestrictView.swift */; };
 		C26E99F327ABD38800E00E15 /* InfoWithdrawView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26E99F227ABD38800E00E15 /* InfoWithdrawView.swift */; };
 		C273F1D727BE882C0077A6B7 /* UIWindow+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C273F1D627BE882B0077A6B7 /* UIWindow+Extension.swift */; };
-		C273F1D927BE95DD0077A6B7 /* UserState.swift in Sources */ = {isa = PBXBuildFile; fileRef = C273F1D827BE95DD0077A6B7 /* UserState.swift */; };
+		C273F1D927BE95DD0077A6B7 /* UserMatchingState.swift in Sources */ = {isa = PBXBuildFile; fileRef = C273F1D827BE95DD0077A6B7 /* UserMatchingState.swift */; };
 		C273F1DB27BEA1F40077A6B7 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C273F1DA27BEA1F40077A6B7 /* ChatViewController.swift */; };
+		C278D45127BFEE93000BF0C9 /* UserLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C278D45027BFEE93000BF0C9 /* UserLocation.swift */; };
 		C2826B3F27B0325600C1CA23 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2826B3E27B0325600C1CA23 /* HomeViewModel.swift */; };
 		C2826B4127B0EA4600C1CA23 /* FilterButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2826B4027B0EA4500C1CA23 /* FilterButton.swift */; };
 		C2826B4327B0F91D00C1CA23 /* Friends.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2826B4227B0F91D00C1CA23 /* Friends.swift */; };
@@ -223,8 +224,9 @@
 		C26E99F027ABD35F00E00E15 /* InfoAgeRestrictView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoAgeRestrictView.swift; sourceTree = "<group>"; };
 		C26E99F227ABD38800E00E15 /* InfoWithdrawView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoWithdrawView.swift; sourceTree = "<group>"; };
 		C273F1D627BE882B0077A6B7 /* UIWindow+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIWindow+Extension.swift"; sourceTree = "<group>"; };
-		C273F1D827BE95DD0077A6B7 /* UserState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserState.swift; sourceTree = "<group>"; };
+		C273F1D827BE95DD0077A6B7 /* UserMatchingState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserMatchingState.swift; sourceTree = "<group>"; };
 		C273F1DA27BEA1F40077A6B7 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
+		C278D45027BFEE93000BF0C9 /* UserLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLocation.swift; sourceTree = "<group>"; };
 		C2826B3E27B0325600C1CA23 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		C2826B4027B0EA4500C1CA23 /* FilterButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterButton.swift; sourceTree = "<group>"; };
 		C2826B4227B0F91D00C1CA23 /* Friends.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Friends.swift; sourceTree = "<group>"; };
@@ -521,7 +523,8 @@
 				C2826B4227B0F91D00C1CA23 /* Friends.swift */,
 				C260F09F27B532D30087948F /* Hobbies.swift */,
 				C260F0A127B550670087948F /* UserHobbySection.swift */,
-				C273F1D827BE95DD0077A6B7 /* UserState.swift */,
+				C273F1D827BE95DD0077A6B7 /* UserMatchingState.swift */,
+				C278D45027BFEE93000BF0C9 /* UserLocation.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1071,7 +1074,7 @@
 				C20EB13D27B411B6007B53B0 /* EnterHobbyViewController.swift in Sources */,
 				C2E20D3827A908F200AB9BC0 /* OnBoardingCollectionViewCell.swift in Sources */,
 				C26E99E927ABB30C00E00E15 /* TitleStackView.swift in Sources */,
-				C273F1D927BE95DD0077A6B7 /* UserState.swift in Sources */,
+				C273F1D927BE95DD0077A6B7 /* UserMatchingState.swift in Sources */,
 				C28377E527980E1000151297 /* ButtonState.swift in Sources */,
 				C2A6E5E327AD371600829EE0 /* APIRouter.swift in Sources */,
 				C2E20D2327A44A6800AB9BC0 /* GenderViewModel.swift in Sources */,
@@ -1120,6 +1123,7 @@
 				C2826B3F27B0325600C1CA23 /* HomeViewModel.swift in Sources */,
 				C26E99F127ABD35F00E00E15 /* InfoAgeRestrictView.swift in Sources */,
 				C23D867E27BA67FA00153655 /* SearchSesacViewController.swift in Sources */,
+				C278D45127BFEE93000BF0C9 /* UserLocation.swift in Sources */,
 				C28377AF2796E36100151297 /* UIColor+Extension.swift in Sources */,
 				C23BAB1127BC30A00083BFCF /* EmptyUserView.swift in Sources */,
 				C21A001627A3DF8600222045 /* GenderButton.swift in Sources */,

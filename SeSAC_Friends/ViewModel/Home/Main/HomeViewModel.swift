@@ -100,7 +100,7 @@ final class HomeViewModel: ViewModelType {
                     } else {
                         owner.output.goToEnterHobby.accept(())
                         let positon = owner.output.currentMapViewCamera.value
-                        UserInfo.mapPosition = (positon.latitude, positon.longitude)
+                        UserInfo.mapPosition = UserLocation(lat: positon.latitude, lng: positon.longitude)
                     }
                 } else {
                     owner.output.showAlert.accept(())
@@ -203,7 +203,7 @@ final class HomeViewModel: ViewModelType {
             .asDriver(onErrorJustReturn: DefaultValue.location)
             .drive(with: self) { owner, location in
                 owner.output.currentMapViewCamera.accept(location)
-                UserInfo.userPosition = (location.latitude, location.longitude)
+                UserInfo.userPosition = UserLocation(lat: location.latitude, lng: location.longitude)
             }
             .disposed(by: disposeBag)
 

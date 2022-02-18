@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct UserState: Codable {
+struct UserMatchingState: Codable {
     let dodged, matched, reviewed: Int
     let matchedNick, matchedUid: String?
 }

@@ -37,7 +37,7 @@ final class EnterHobbyViewModel: ViewModelType {
             .debug("will Appear")
             .withUnretained(self)
             .do(onNext: { owner, _ in owner.output.activating.accept(true) })
-            .flatMap { owner, _ in owner.fetchFriends(position: UserInfo.userPosition) }
+                .flatMap { owner, _ in owner.fetchFriends(position: (UserInfo.userPosition.lat, UserInfo.userPosition.lng)) }
             .share()
         
         hobbies
@@ -166,10 +166,10 @@ final class EnterHobbyViewModel: ViewModelType {
             hf.append("AnyThing")
         }
         return APIService.shared.startRequestFriends(type: 2,
-                                              region: locationToRegion(position: position),
-                                              lat: position.0,
-                                              long: position.1,
-                                              hf: hf)
+                                                     region: locationToRegion(position: (position.lat, position.lng)),
+                                                     lat: position.lat,
+                                                     long: position.lng,
+                                                     hf: hf)
             .catch { [weak self](error) in
                 if let error = error as? APIError {
                     switch error {

@@ -7,7 +7,7 @@
 
 import UIKit
 
-enum FloatingButtonState {
+enum FloatingButtonState: Codable {
     case normal
     case matching
     case matched

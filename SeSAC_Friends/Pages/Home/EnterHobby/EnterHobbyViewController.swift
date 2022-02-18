@@ -151,7 +151,9 @@ final class EnterHobbyViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         viewModel.input.willAppear.onNext(())
-        
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        view.endEditing(true)
     }
 }
 

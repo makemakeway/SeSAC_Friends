@@ -8,7 +8,7 @@
 import Foundation
 
 @propertyWrapper
-struct UserDefault<Value> {
+struct UserDefault<Value: Codable> {
     private let key: String
     private let defaultValue: Value
     
@@ -19,11 +19,17 @@ struct UserDefault<Value> {
     
     var wrappedValue: Value {
         get {
-            return UserDefaults.standard.object(forKey: key) as? Value ?? defaultValue
+            if let object = UserDefaults.standard.object(forKey: key) as? Value {
+                return object
+            } else {
+                guard let object = UserDefaults.standard.object(forKey: key) as? Data else { return defaultValue }
+                guard let data = try? PropertyListDecoder().decode(Value.self, from: object) else { return defaultValue }
+                return data
+            }
         }
         
         set {
-            UserDefaults.standard.set(newValue, forKey: key)
+            UserDefaults.standard.setValue(try? PropertyListEncoder().encode(newValue), forKey: key)
         }
     }
 }
@@ -39,8 +45,8 @@ class UserInfo {
     @UserDefault(key: "email", defaultValue: "")static var email: String
     @UserDefault(key: "FCMToken", defaultValue: "")static var fcmToken: String
     @UserDefault(key: "userState", defaultValue: FloatingButtonState.normal)static var userState: FloatingButtonState
-    @UserDefault(key: "position", defaultValue: (37.517819364682694, 126.88647317074734))static var userPosition: (Double, Double)
-    @UserDefault(key: "mapPosition", defaultValue: (37.517819364682694, 126.88647317074734))static var mapPosition: (Double, Double)
+    @UserDefault(key: "position", defaultValue: UserLocation(lat: 37.517819364682694, lng: 126.88647317074734))static var userPosition: UserLocation
+    @UserDefault(key: "mapPosition", defaultValue: UserLocation(lat: 37.517819364682694, lng: 126.88647317074734))static var mapPosition: UserLocation
     
     static func setToDefaults() {
         self.birthday = ""
@@ -53,7 +59,7 @@ class UserInfo {
         self.signUpCompleted = false
         self.userState = FloatingButtonState.normal
         self.verificationID = ""
-        self.userPosition = (37.517819364682694, 126.88647317074734)
-        self.mapPosition = (37.517819364682694, 126.88647317074734)
+        self.userPosition = UserLocation(lat: 37.517819364682694, lng: 126.88647317074734)
+        self.mapPosition = UserLocation(lat: 37.517819364682694, lng: 126.88647317074734)
     }
 }

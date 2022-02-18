@@ -36,20 +36,6 @@ final class SearchSesacViewController: TabmanViewController {
             .drive(viewModel.input.refreshButtonClicked)
             .disposed(by: disposeBag)
         
-        nearUserView.mainView.tableView.rx.itemSelected
-            .observe(on: MainScheduler.instance)
-            .bind(with: self) { owner, indexPath in
-                guard let cell = nearUserView.mainView.tableView.cellForRow(at: indexPath) as? NearUserTableViewCell else { return }
-                nearUserView.mainView.tableView.beginUpdates()
-                cell.opened.toggle()
-                cell.cardView.openOrClose(opened: cell.opened)
-                if cell.opened == false {
-                    owner.viewModel.input.cardViewClosed.onNext(())
-                }
-                nearUserView.mainView.tableView.endUpdates()
-            }
-            .disposed(by: disposeBag)
-        
         nearUserView.mainView.refreshControl.rx.controlEvent(.valueChanged)
             .debug("refresh control")
             .asDriver(onErrorJustReturn: ())
@@ -79,6 +65,27 @@ final class SearchSesacViewController: TabmanViewController {
                 cell.cardView.nicknameView.nicknameLabel.text = element.nick
                 self.selectedSesacTitle(titles: element.reputation, view: cell.cardView.cardStackView.sesacTitleView)
                 cell.cardViewButton.cardType = .require
+                
+                if !(element.reviews.isEmpty) {
+                    let text = cell.cardView.cardStackView.sesacReviewView.sesacReviewContentLabel
+                    text.text = element.reviews.first!
+                    text.textColor = .defaultBlack
+                    cell.cardView.cardStackView.sesacReviewView.sesacReviewChevronImage.isHidden = false
+                }
+                
+                cell.nickNameViewClicked
+                    .observe(on: MainScheduler.instance)
+                    .bind(with: self) { owner, _ in
+                        nearUserView.mainView.tableView.beginUpdates()
+                        cell.opened.toggle()
+                        cell.cardView.openOrClose(opened: cell.opened)
+                        if cell.opened == false {
+                            owner.viewModel.input.cardViewClosed.onNext(())
+                        }
+                        nearUserView.mainView.tableView.endUpdates()
+                    }
+                    .disposed(by: cell.disposeBag)
+                    
                 
                 cell.cardViewButtonClicked
                     .debug("\(index)번 카드뷰 버튼 눌림")
@@ -120,42 +127,6 @@ final class SearchSesacViewController: TabmanViewController {
         viewModel.output.refreshLoading
             .bind(to: nearUserView.mainView.refreshControl.rx.isRefreshing)
             .disposed(by: disposeBag)
-        
-        viewModel.output.errorMessage
-            .asDriver(onErrorJustReturn: "")
-            .drive(with: self) { owner, message in
-                owner.view.makeToast(message, duration: 1, position: .bottom)
-            }
-            .disposed(by: disposeBag)
-
-        viewModel.output.matchedOtherUser
-            .asDriver(onErrorJustReturn: ())
-            .drive(with: self) { owner, _ in
-                owner.view.isUserInteractionEnabled = false
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                    let vc = ChatViewController()
-                    owner.navigationController?.pushViewController(vc, animated: true)
-                }
-            }
-            .disposed(by: disposeBag)
-
-        viewModel.output.tooLongWaited
-            .asDriver(onErrorJustReturn: ())
-            .drive(with: self) { owner, _ in
-                owner.view.isUserInteractionEnabled = false
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                    owner.changeRootViewToHome()
-                }
-            }
-            .disposed(by: disposeBag)
-
-        viewModel.output.goToOnboarding
-            .asDriver(onErrorJustReturn: ())
-            .drive(with: self) { owner, _ in
-                let vc = OnBoardingViewController()
-                owner.changeRootView(viewController: vc)
-            }
-            .disposed(by: disposeBag)
     }
     
     func bindRequestView() {
@@ -163,20 +134,6 @@ final class SearchSesacViewController: TabmanViewController {
         requestView.mainView.emptyUserView.refreshButton.rx.tap
             .asDriver()
             .drive(viewModel.input.refreshButtonClicked)
-            .disposed(by: disposeBag)
-        
-        requestView.mainView.tableView.rx.itemSelected
-            .observe(on: MainScheduler.instance)
-            .bind(with: self) { owner, indexPath in
-                guard let cell = requestView.mainView.tableView.cellForRow(at: indexPath) as? NearUserTableViewCell else { return }
-                requestView.mainView.tableView.beginUpdates()
-                cell.opened.toggle()
-                cell.cardView.openOrClose(opened: cell.opened)
-                if cell.opened == false {
-                    owner.viewModel.input.cardViewClosed.onNext(())
-                }
-                requestView.mainView.tableView.endUpdates()
-            }
             .disposed(by: disposeBag)
         
         requestView.mainView.refreshControl.rx.controlEvent(.valueChanged)
@@ -188,7 +145,7 @@ final class SearchSesacViewController: TabmanViewController {
         
         //MARK: Output Binding
         
-        let data = viewModel.output.nearUsers
+        let data = viewModel.output.requestedUsers
             .share()
             .asDriver(onErrorJustReturn: [])
         
@@ -199,6 +156,27 @@ final class SearchSesacViewController: TabmanViewController {
                 self.selectedSesacTitle(titles: element.reputation, view: cell.cardView.cardStackView.sesacTitleView)
                 cell.cardViewButton.cardType = .required
                 cell.cardViewButton.setTitle("수락하기", for: .normal)
+                
+                cell.nickNameViewClicked
+                    .observe(on: MainScheduler.instance)
+                    .bind(with: self) { owner, _ in
+                        requestView.mainView.tableView.beginUpdates()
+                        cell.opened.toggle()
+                        cell.cardView.openOrClose(opened: cell.opened)
+                        if cell.opened == false {
+                            owner.viewModel.input.cardViewClosed.onNext(())
+                        }
+                        requestView.mainView.tableView.endUpdates()
+                    }
+                    .disposed(by: cell.disposeBag)
+                
+                if !(element.reviews.isEmpty) {
+                    let text = cell.cardView.cardStackView.sesacReviewView.sesacReviewContentLabel
+                    text.text = element.reviews.first!
+                    text.textColor = .defaultBlack
+                    cell.cardView.cardStackView.sesacReviewView.sesacReviewChevronImage.isHidden = false
+                }
+                
                 
                 cell.cardViewButtonClicked
                     .debug("\(index)번 카드뷰 버튼 눌림")
@@ -237,17 +215,36 @@ final class SearchSesacViewController: TabmanViewController {
             }
             .disposed(by: disposeBag)
         
-        viewModel.output.activating
-            .asDriver(onErrorJustReturn: false)
-            .drive(with: self) { owner, activating in
-                let currentVC = owner.vcs[1] as! RequestViewController
-                activating == true ? currentVC.view.makeToastActivity(.center) : currentVC.view.hideToastActivity()
-            }
-            .disposed(by: disposeBag)
-        
         viewModel.output.refreshLoading
             .bind(to: requestView.mainView.refreshControl.rx.isRefreshing)
             .disposed(by: disposeBag)
+        
+        viewModel.output.activating
+            .asDriver(onErrorJustReturn: false)
+            .drive(with: self) { owner, activating in
+                activating == true ? requestView.mainView.makeToastActivity(.center) : requestView.mainView.hideToastActivity()
+            }
+            .disposed(by: disposeBag)
+    }
+    
+    func bindCommon() {
+        viewModel.output.stopSearch
+            .asDriver(onErrorJustReturn: ())
+            .drive(with: self) { owner, _ in
+                owner.timerDisposable?.dispose()
+                owner.changeRootViewToHome()
+            }
+            .disposed(by: disposeBag)
+
+        
+        viewModel.output.goToOnboarding
+            .asDriver(onErrorJustReturn: ())
+            .drive(with: self) { owner, _ in
+                let vc = OnBoardingViewController()
+                owner.changeRootView(viewController: vc)
+            }
+            .disposed(by: disposeBag)
+        
         
         viewModel.output.errorMessage
             .asDriver(onErrorJustReturn: "")
@@ -277,13 +274,6 @@ final class SearchSesacViewController: TabmanViewController {
             }
             .disposed(by: disposeBag)
 
-        viewModel.output.goToOnboarding
-            .asDriver(onErrorJustReturn: ())
-            .drive(with: self) { owner, _ in
-                let vc = OnBoardingViewController()
-                owner.changeRootView(viewController: vc)
-            }
-            .disposed(by: disposeBag)
     }
 
     
@@ -302,17 +292,15 @@ final class SearchSesacViewController: TabmanViewController {
         bar.backgroundView.style = .flat(color: .defaultWhite)
     }
     
-    @objc func poo() {
-        timerDisposable?.dispose()
-    }
-    
     func navBarConfig() {
         let button = UIButton()
         button.setTitle("찾기중단", for: .normal)
         button.titleLabel?.font = .title3_M14
         button.setTitleColor(.defaultBlack, for: .normal)
-        button.addTarget(self, action: #selector(poo), for: .touchUpInside)
         let barButton = UIBarButtonItem(customView: button)
+        button.rx.tap
+            .bind(to: viewModel.input.stopSearchButtonClicked)
+            .disposed(by: disposeBag)
         self.navigationItem.rightBarButtonItem = barButton
     }
     
@@ -333,6 +321,7 @@ final class SearchSesacViewController: TabmanViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        bindCommon()
         bindNearUserView()
         bindRequestView()
         self.dataSource = self

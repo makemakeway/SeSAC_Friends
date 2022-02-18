@@ -21,6 +21,7 @@ final class NearUserViewModel: ViewModelType {
         let refreshControlValueChanged = PublishSubject<Void>()
         let cardViewClosed = PublishSubject<Void>()
         let timerStarted = PublishSubject<Int>()
+        let stopSearchButtonClicked = PublishSubject<Void>()
     }
     
     struct Output {
@@ -32,15 +33,37 @@ final class NearUserViewModel: ViewModelType {
         let requestedUsers = PublishRelay<[FromQueueDB]>()
         let activating = PublishRelay<Bool>()
         let refreshLoading = PublishRelay<Bool>()
-        let currentUserState = PublishRelay<UserState>()
+        let currentUserState = PublishRelay<UserMatchingState>()
         let matchedOtherUser = PublishRelay<Void>()
         let tooLongWaited = PublishRelay<Void>()
+        let stopSearch = PublishRelay<Void>()
     }
     
     let input = Input()
     let output = Output()
     
     func transform() {
+        
+        input.stopSearchButtonClicked
+            .withUnretained(self)
+            .do(onNext: { [weak self] _ in self?.output.activating.accept(true) })
+            .flatMap { owner, _ in owner.stopSearch() }
+            .do(onNext: { [weak self] _ in self?.output.activating.accept(false) })
+            .asDriver(onErrorJustReturn: 0)
+            .drive(with: self) { owner, status in
+                print(status)
+                switch status {
+                case 200:
+                    UserInfo.userState = FloatingButtonState.normal
+                    owner.output.stopSearch.accept(())
+                case 201:
+                    owner.output.matchedOtherUser.accept(())
+                default:
+                    owner.output.errorMessage.accept("에러가 발생했습니다.")
+                }
+            }
+            .disposed(by: disposeBag)
+
         
         input.cellClicked
             .withLatestFrom(output.openOrClose)
@@ -72,7 +95,7 @@ final class NearUserViewModel: ViewModelType {
             .do(onNext: { [weak self]_ in self?.output.activating.accept(true) })
             .throttle(.seconds(5), latest: true, scheduler: MainScheduler.instance)
             .withUnretained(self)
-            .flatMap { owner, _ in owner.fetchFriends(position: UserInfo.mapPosition) }
+                .flatMap { owner, _ in owner.fetchFriends(position: (UserInfo.mapPosition.lat, UserInfo.mapPosition.lng)) }
             .do(onNext: { [weak self]_ in self?.output.activating.accept(false) })
             .bind(with: self) { owner, friends in
                 owner.output.nearUsers.accept(friends.fromQueueDB)
@@ -80,6 +103,37 @@ final class NearUserViewModel: ViewModelType {
                 owner.output.refreshLoading.accept(false)
             }
             .disposed(by: disposeBag)
+    }
+    
+    func stopSearch() -> Observable<Int> {
+        return APIService.shared.stopSearchSesac()
+            .catch { [weak self](error) in
+                if let error = error as? APIError {
+                    switch error {
+                    case .tokenExpired:
+                        return .error(APIError.tokenExpired)
+                    case .serverError:
+                        self?.output.errorMessage.accept(APIError.serverError.rawValue)
+                    case .unKnownedUser:
+                        self?.output.goToOnboarding.accept(())
+                    case .disConnect:
+                        self?.output.errorMessage.accept(APIError.disConnect.rawValue)
+                    default:
+                        self?.output.errorMessage.accept(APIError.clientError.rawValue)
+                    }
+                }
+                return .never()
+            }
+            .retry { error in
+                error.filter { error in
+                    if let error = error as? APIError, error == .tokenExpired {
+                        return true
+                    }
+                    return false
+                }
+                .flatMap { _ -> Single<String> in FirebaseAuthService.shared.getIdToken().debug("REFresh IDTOKEN") }
+            }
+            .asObservable()
     }
     
     func fetchFriends(position: (Double, Double)) -> Observable<Friends> {
@@ -129,7 +183,7 @@ final class NearUserViewModel: ViewModelType {
         return grid
     }
     
-    func fetchUserState() -> Observable<UserState> {
+    func fetchUserState() -> Observable<UserMatchingState> {
         return APIService.shared.getMyQueueState()
             .catch { [weak self](error) in
                 if let error = error as? APIError {
