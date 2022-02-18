@@ -272,7 +272,7 @@ final class InfoManageViewController: UIViewController {
         self.title = "정보 관리"
         let barButton = UIBarButtonItem(customView: saveButton)
         self.navigationItem.rightBarButtonItem = barButton
-        
+        view.backgroundColor = .systemBackground
     }
     
     override func viewWillAppear(_ animated: Bool) {

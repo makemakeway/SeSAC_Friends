@@ -29,5 +29,6 @@ class ShopViewController: UIViewController {
         super.viewDidLoad()
         self.title = "새싹샵"
         self.view.backgroundColor = .systemBackground
+        hidesBottomBarWhenPushed = false
     }
 }

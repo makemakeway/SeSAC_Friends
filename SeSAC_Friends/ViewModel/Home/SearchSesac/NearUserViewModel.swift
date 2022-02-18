@@ -15,13 +15,13 @@ final class NearUserViewModel: ViewModelType {
     
     struct Input {
         let requestButtonClicked = PublishSubject<Void>()
-        let cellClicked = PublishSubject<Void>()
         let willAppear = PublishSubject<Void>()
         let refreshButtonClicked = PublishSubject<Void>()
         let refreshControlValueChanged = PublishSubject<Void>()
         let cardViewClosed = PublishSubject<Void>()
         let timerStarted = PublishSubject<Int>()
         let stopSearchButtonClicked = PublishSubject<Void>()
+        let acceptButtonClicked = PublishSubject<Void>()
     }
     
     struct Output {
@@ -65,18 +65,6 @@ final class NearUserViewModel: ViewModelType {
             .disposed(by: disposeBag)
 
         
-        input.cellClicked
-            .withLatestFrom(output.openOrClose)
-            .asDriver(onErrorJustReturn: false)
-            .drive(with: self) { owner, opened in
-                if opened {
-                    owner.output.openOrClose.accept(false)
-                } else {
-                    owner.output.openOrClose.accept(true)
-                }
-            }
-            .disposed(by: disposeBag)
-        
         input.timerStarted
             .withUnretained(self)
             .flatMap { owner, _ in owner.fetchUserState() }
@@ -105,6 +93,38 @@ final class NearUserViewModel: ViewModelType {
             .disposed(by: disposeBag)
     }
     
+    private func hobbyRequest(uid: String) -> Observable<Int> {
+        return APIService.shared.hobbyRequest(uid: uid)
+            .catch { [weak self](error) in
+                if let error = error as? APIError {
+                    switch error {
+                    case .tokenExpired:
+                        return .error(APIError.tokenExpired)
+                    case .serverError:
+                        self?.output.errorMessage.accept(APIError.serverError.rawValue)
+                    case .unKnownedUser:
+                        self?.output.goToOnboarding.accept(())
+                    case .disConnect:
+                        self?.output.errorMessage.accept(APIError.disConnect.rawValue)
+                    default:
+                        self?.output.errorMessage.accept(APIError.clientError.rawValue)
+                    }
+                }
+                return .never()
+            }
+            .retry { error in
+                error.filter { error in
+                    if let error = error as? APIError, error == .tokenExpired {
+                        return true
+                    }
+                    return false
+                }
+                .take(2)
+                .flatMap { _ -> Single<String> in FirebaseAuthService.shared.getIdToken().debug("REFresh IDTOKEN") }
+            }
+            .asObservable()
+    }
+    
     func stopSearch() -> Observable<Int> {
         return APIService.shared.stopSearchSesac()
             .catch { [weak self](error) in
@@ -131,6 +151,7 @@ final class NearUserViewModel: ViewModelType {
                     }
                     return false
                 }
+                .take(2)
                 .flatMap { _ -> Single<String> in FirebaseAuthService.shared.getIdToken().debug("REFresh IDTOKEN") }
             }
             .asObservable()
@@ -164,6 +185,7 @@ final class NearUserViewModel: ViewModelType {
                     }
                     return false
                 }
+                .take(2)
                 .flatMap { _ -> Single<String> in FirebaseAuthService.shared.getIdToken().debug("REFresh IDTOKEN") }
             }
             .asObservable()
@@ -213,6 +235,7 @@ final class NearUserViewModel: ViewModelType {
                     }
                     return false
                 }
+                .take(2)
                 .flatMap { _ -> Single<String> in FirebaseAuthService.shared.getIdToken().debug("REFresh IDTOKEN") }
             }
             .asObservable()

@@ -131,6 +131,7 @@ final class HomeViewController: UIViewController {
             .asDriver(onErrorJustReturn: ())
             .drive(with: self) { owner, _ in
                 let vc = EnterHobbyViewController()
+                owner.hidesBottomBarWhenPushed = true
                 owner.navigationController?.pushViewController(vc, animated: true)
             }
             .disposed(by: disposeBag)
@@ -189,17 +190,22 @@ final class HomeViewController: UIViewController {
     
     func removeMarkers() {
         print(#function)
-        let group = DispatchGroup()
         
-        group.enter()
-        for marker in markers {
-            marker.mapView = nil
-            group.leave()
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            let group = DispatchGroup()
+            
+            for marker in self.markers {
+                group.enter()
+                marker.self.mapView = nil
+                group.leave()
+            }
+            
+            group.notify(queue: DispatchQueue.global()) {
+                self.markers.removeAll()
+            }
         }
         
-        group.notify(queue: DispatchQueue.global()) { [weak self] in
-            self?.markers.removeAll()
-        }
     }
     
     func addMarker(friends: [FromQueueDB]) {
@@ -260,7 +266,9 @@ final class HomeViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.isHidden = true
+        hidesBottomBarWhenPushed = false
         viewModel.input.homeWillAppear.onNext(())
+        locationManager.startUpdatingLocation()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -284,11 +292,15 @@ extension HomeViewController: NMFMapViewCameraDelegate {
 
 extension HomeViewController: CLLocationManagerDelegate {
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
+        print("위치권한 : \(manager.authorizationStatus)")
         viewModel.input.currentAuthority.onNext(manager.authorizationStatus)
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let location = locations.last?.coordinate else { return }
-        viewModel.input.locationDidChanged.onNext(location)
+        viewModel.input.locationDidChanged
+            .onNext(location)
+        manager.stopUpdatingLocation()
     }
+    
 }

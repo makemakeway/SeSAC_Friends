@@ -227,6 +227,7 @@
 		C273F1D827BE95DD0077A6B7 /* UserMatchingState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserMatchingState.swift; sourceTree = "<group>"; };
 		C273F1DA27BEA1F40077A6B7 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		C278D45027BFEE93000BF0C9 /* UserLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLocation.swift; sourceTree = "<group>"; };
+		C27930D927C01416006673A3 /* SeSAC_Friends.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SeSAC_Friends.entitlements; sourceTree = "<group>"; };
 		C2826B3E27B0325600C1CA23 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		C2826B4027B0EA4500C1CA23 /* FilterButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterButton.swift; sourceTree = "<group>"; };
 		C2826B4227B0F91D00C1CA23 /* Friends.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Friends.swift; sourceTree = "<group>"; };
@@ -447,6 +448,7 @@
 		C242CDB42796BE7000905287 /* SeSAC_Friends */ = {
 			isa = PBXGroup;
 			children = (
+				C27930D927C01416006673A3 /* SeSAC_Friends.entitlements */,
 				C283FB6927A96228001ED1DC /* Constants */,
 				C2A6E5E127AD233000829EE0 /* Networking */,
 				C28377E327980E0000151297 /* Util */,
@@ -1310,15 +1312,18 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = SeSAC_Friends/SeSAC_Friends.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 2EZ5QWFYX2;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SeSAC_Friends/Info.plist;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "주변 새싹 친구들을 찾기 위해서 위치 정보가 필요해요!";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1338,15 +1343,18 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = SeSAC_Friends/SeSAC_Friends.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 2EZ5QWFYX2;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SeSAC_Friends/Info.plist;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "주변 새싹 친구들을 찾기 위해서 위치 정보가 필요해요!";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

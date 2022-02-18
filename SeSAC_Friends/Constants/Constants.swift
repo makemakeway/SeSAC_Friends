@@ -29,6 +29,7 @@ struct CustomKey {
         static let lat = "lat"
         static let long = "long"
         static let hf = "hf"
+        static let otherUid = "otheruid"
     }
 }
 

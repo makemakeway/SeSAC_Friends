@@ -38,8 +38,11 @@ final class FirebaseAuthService {
                 verificationCode: verificationCode
             )
             
+            print("ID: \(verificationID)")
+            
             Auth.auth().signIn(with: credential) { (result, error) in
                 if error != nil {
+                    print(error)
                     print("ERROR: userVerificationError!")
                     single(.failure(FirebaseAuthError.inCorrectVerificationCode))
                 }
@@ -86,6 +89,7 @@ final class FirebaseAuthService {
                       return
                   }
                   if let verificationID = verificationID {
+                      print("verificationID = \(verificationID)")
                       UserInfo.verificationID = verificationID
                       single(.success(()))
                   }

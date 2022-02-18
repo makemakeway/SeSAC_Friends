@@ -328,6 +328,36 @@ final class APIService {
         }
     }
     
+    func hobbyRequest(uid: String) -> Single<Int> {
+        return Single<Int>.create { single in
+            if !(Connectivity.isConnectedToInternet) {
+                single(.failure(APIError.disConnect))
+            }
+            
+            AF.request(APIRouter.hobbyRequest(uid: uid))
+                .validate()
+                .response { response in
+                    switch response.response?.statusCode {
+                    case 200:
+                        single(.success(200))
+                    case 201:
+                        single(.success(201))
+                    case 202:
+                        single(.success(202))
+                    case 401:
+                        single(.failure(APIError.tokenExpired))
+                    case 406:
+                        single(.failure(APIError.unKnownedUser))
+                    case 500:
+                        single(.failure(APIError.serverError))
+                    default:
+                        single(.failure(APIError.clientError))
+                    }
+                }
+            return Disposables.create()
+        }
+    }
+    
     func apiErrorHandler(error: APIError) -> String {
         switch error {
         default:

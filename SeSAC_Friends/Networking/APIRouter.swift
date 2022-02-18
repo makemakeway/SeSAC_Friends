@@ -18,12 +18,14 @@ enum APIRouter: URLRequestConvertible {
     case stopRequestFriends
     case searchRequestFriends(region: Int, lat: Double, long: Double)
     case myQueueState
+    case hobbyRequest(uid: String)
+    case hobbyAccept(uid: String)
     
     private var method: HTTPMethod {
         switch self {
         case .login, .myQueueState:
             return .get
-        case .signUp, .withdraw, .updateMyPage, .startRequestFriends, .searchRequestFriends:
+        case .signUp, .withdraw, .updateMyPage, .startRequestFriends, .searchRequestFriends, .hobbyAccept, .hobbyRequest:
             return .post
         case .updateFCMToken:
             return .put
@@ -34,9 +36,7 @@ enum APIRouter: URLRequestConvertible {
     
     private var path: String {
         switch self {
-        case .login:
-            return "user"
-        case .signUp:
+        case .login, .signUp:
             return "user"
         case .withdraw:
             return "user/withdraw"
@@ -44,14 +44,16 @@ enum APIRouter: URLRequestConvertible {
             return "user/update_fcm_token"
         case .updateMyPage:
             return "user/update/mypage"
-        case .startRequestFriends:
-            return "queue"
-        case .stopRequestFriends:
+        case .startRequestFriends, .stopRequestFriends:
             return "queue"
         case .searchRequestFriends:
             return "queue/onqueue"
         case .myQueueState:
             return "queue/myQueueState"
+        case .hobbyAccept:
+            return "queue/hobbyaccept"
+        case .hobbyRequest:
+            return "queue/hobbyrequest"
         }
     }
     
@@ -90,6 +92,8 @@ enum APIRouter: URLRequestConvertible {
                     CustomKey.APIParameterKey.long: long]
         case .myQueueState:
             return nil
+        case .hobbyAccept(let uid), .hobbyRequest(let uid):
+            return [CustomKey.APIParameterKey.otherUid: uid]
         }
     }
     

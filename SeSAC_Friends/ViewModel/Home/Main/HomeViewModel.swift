@@ -63,6 +63,7 @@ final class HomeViewModel: ViewModelType {
         
         let currentLocation = input.locationDidChanged
             .share()
+            
         
         homeWillAppear
             .withLatestFrom(input.userStateChanged)
@@ -77,6 +78,7 @@ final class HomeViewModel: ViewModelType {
             .share()
         
         let currentUserAuth = homeWillAppear
+            .debug("현재 유저 위치 권한")
             .withLatestFrom(input.currentAuthority)
             .withUnretained(self)
             .map { owner, state in owner.checkUserAuthorization(state: state) }
@@ -200,6 +202,10 @@ final class HomeViewModel: ViewModelType {
             .disposed(by: disposeBag)
         
         currentLocation
+            .debug("Current Location Changed")
+            .distinctUntilChanged({ lh, rh in
+                (lh.latitude == rh.latitude) && (lh.longitude == rh.longitude)
+            })
             .asDriver(onErrorJustReturn: DefaultValue.location)
             .drive(with: self) { owner, location in
                 owner.output.currentMapViewCamera.accept(location)

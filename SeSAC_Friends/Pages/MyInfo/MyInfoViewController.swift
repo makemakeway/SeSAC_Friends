@@ -38,6 +38,11 @@ class MyInfoViewController: UIViewController {
         super.viewDidLoad()
         self.title = "내정보"
         tableViewConfig()
+        hidesBottomBarWhenPushed = false
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.tabBarController?.tabBar.isHidden = false
     }
 }
 
@@ -87,6 +92,7 @@ extension MyInfoViewController: UITableViewDataSource, UITableViewDelegate {
         switch indexPath.row {
         case 0:
             let vc = InfoManageViewController()
+            hidesBottomBarWhenPushed = true
             self.navigationController?.pushViewController(vc, animated: true)
         default:
             print("기능 없음")

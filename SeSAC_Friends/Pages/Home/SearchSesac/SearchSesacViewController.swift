@@ -181,7 +181,7 @@ final class SearchSesacViewController: TabmanViewController {
                 cell.cardViewButtonClicked
                     .debug("\(index)번 카드뷰 버튼 눌림")
                     .asDriver(onErrorJustReturn: ())
-                    .drive(self.viewModel.input.requestButtonClicked)
+                    .drive(self.viewModel.input.acceptButtonClicked)
                     .disposed(by: cell.disposeBag)
                 
                 Observable.of(element.hf)
@@ -229,6 +229,7 @@ final class SearchSesacViewController: TabmanViewController {
     
     func bindCommon() {
         viewModel.output.stopSearch
+            .debug("찾기 중지")
             .asDriver(onErrorJustReturn: ())
             .drive(with: self) { owner, _ in
                 owner.timerDisposable?.dispose()
@@ -249,7 +250,7 @@ final class SearchSesacViewController: TabmanViewController {
         viewModel.output.errorMessage
             .asDriver(onErrorJustReturn: "")
             .drive(with: self) { owner, message in
-                owner.view.makeToast(message, duration: 1, position: .bottom)
+                owner.view.makeToast(message, duration: 1)
             }
             .disposed(by: disposeBag)
 
