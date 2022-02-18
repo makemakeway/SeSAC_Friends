@@ -136,6 +136,15 @@ final class EnterHobbyViewController: UIViewController {
             .disposed(by: disposeBag)
     }
     
+    override func willMove(toParent parent: UIViewController?) {
+        if parent == nil {
+            let viewControllers = self.navigationController!.viewControllers
+            if ((viewControllers[viewControllers.count - 2]).isKind(of: HomeViewController.self)) {
+                (viewControllers[viewControllers.count - 2] as! HomeViewController).hidesBottomBarWhenPushed = false
+            }
+        }
+    }
+    
     //MARK: LifeCycle
     override func loadView() {
         super.loadView()

@@ -81,6 +81,7 @@
 		C273F1D927BE95DD0077A6B7 /* UserMatchingState.swift in Sources */ = {isa = PBXBuildFile; fileRef = C273F1D827BE95DD0077A6B7 /* UserMatchingState.swift */; };
 		C273F1DB27BEA1F40077A6B7 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C273F1DA27BEA1F40077A6B7 /* ChatViewController.swift */; };
 		C278D45127BFEE93000BF0C9 /* UserLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C278D45027BFEE93000BF0C9 /* UserLocation.swift */; };
+		C27930DB27C03A2D006673A3 /* CustomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27930DA27C03A2D006673A3 /* CustomViewController.swift */; };
 		C2826B3F27B0325600C1CA23 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2826B3E27B0325600C1CA23 /* HomeViewModel.swift */; };
 		C2826B4127B0EA4600C1CA23 /* FilterButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2826B4027B0EA4500C1CA23 /* FilterButton.swift */; };
 		C2826B4327B0F91D00C1CA23 /* Friends.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2826B4227B0F91D00C1CA23 /* Friends.swift */; };
@@ -228,6 +229,7 @@
 		C273F1DA27BEA1F40077A6B7 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		C278D45027BFEE93000BF0C9 /* UserLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLocation.swift; sourceTree = "<group>"; };
 		C27930D927C01416006673A3 /* SeSAC_Friends.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SeSAC_Friends.entitlements; sourceTree = "<group>"; };
+		C27930DA27C03A2D006673A3 /* CustomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomViewController.swift; sourceTree = "<group>"; };
 		C2826B3E27B0325600C1CA23 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		C2826B4027B0EA4500C1CA23 /* FilterButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterButton.swift; sourceTree = "<group>"; };
 		C2826B4227B0F91D00C1CA23 /* Friends.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Friends.swift; sourceTree = "<group>"; };
@@ -393,6 +395,7 @@
 				C20EB13627B13211007B53B0 /* FloatingButton.swift */,
 				C2826B4027B0EA4500C1CA23 /* FilterButton.swift */,
 				C21A001527A3DF8600222045 /* GenderButton.swift */,
+				C27930DA27C03A2D006673A3 /* CustomViewController.swift */,
 			);
 			path = Buttons;
 			sourceTree = "<group>";
@@ -1087,6 +1090,7 @@
 				C26E99E127AB98DE00E00E15 /* InfoStackView.swift in Sources */,
 				C28377F52799A41000151297 /* LoginViewModel.swift in Sources */,
 				C2A6E5E527AD40D300829EE0 /* Constants.swift in Sources */,
+				C27930DB27C03A2D006673A3 /* CustomViewController.swift in Sources */,
 				C242CDB62796BE7000905287 /* AppDelegate.swift in Sources */,
 				C2E20D3A27A90F4000AB9BC0 /* OnBoardingView.swift in Sources */,
 				C26E99DD27AB787300E00E15 /* Expandable.swift in Sources */,
