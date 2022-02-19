@@ -46,7 +46,6 @@
 		C23D868127BA82DC00153655 /* Tabman in Frameworks */ = {isa = PBXBuildFile; productRef = C23D868027BA82DC00153655 /* Tabman */; };
 		C23D868327BA8C3200153655 /* CardViewButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23D868227BA8C3200153655 /* CardViewButton.swift */; };
 		C23D868627BAD31200153655 /* NearUserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23D868527BAD31100153655 /* NearUserViewModel.swift */; };
-		C23D868827BADB3D00153655 /* CustomGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23D868727BADB3D00153655 /* CustomGesture.swift */; };
 		C242CDB62796BE7000905287 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C242CDB52796BE7000905287 /* AppDelegate.swift */; };
 		C242CDB82796BE7000905287 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C242CDB72796BE7000905287 /* SceneDelegate.swift */; };
 		C242CDBA2796BE7000905287 /* RequestAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C242CDB92796BE7000905287 /* RequestAuthViewController.swift */; };
@@ -81,7 +80,6 @@
 		C273F1D927BE95DD0077A6B7 /* UserMatchingState.swift in Sources */ = {isa = PBXBuildFile; fileRef = C273F1D827BE95DD0077A6B7 /* UserMatchingState.swift */; };
 		C273F1DB27BEA1F40077A6B7 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C273F1DA27BEA1F40077A6B7 /* ChatViewController.swift */; };
 		C278D45127BFEE93000BF0C9 /* UserLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C278D45027BFEE93000BF0C9 /* UserLocation.swift */; };
-		C27930DB27C03A2D006673A3 /* CustomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27930DA27C03A2D006673A3 /* CustomViewController.swift */; };
 		C2826B3F27B0325600C1CA23 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2826B3E27B0325600C1CA23 /* HomeViewModel.swift */; };
 		C2826B4127B0EA4600C1CA23 /* FilterButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2826B4027B0EA4500C1CA23 /* FilterButton.swift */; };
 		C2826B4327B0F91D00C1CA23 /* Friends.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2826B4227B0F91D00C1CA23 /* Friends.swift */; };
@@ -189,7 +187,6 @@
 		C23D867D27BA67FA00153655 /* SearchSesacViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchSesacViewController.swift; sourceTree = "<group>"; };
 		C23D868227BA8C3200153655 /* CardViewButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewButton.swift; sourceTree = "<group>"; };
 		C23D868527BAD31100153655 /* NearUserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearUserViewModel.swift; sourceTree = "<group>"; };
-		C23D868727BADB3D00153655 /* CustomGesture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomGesture.swift; sourceTree = "<group>"; };
 		C242CDB22796BE7000905287 /* SeSAC_Friends.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SeSAC_Friends.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C242CDB52796BE7000905287 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C242CDB72796BE7000905287 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -229,7 +226,6 @@
 		C273F1DA27BEA1F40077A6B7 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		C278D45027BFEE93000BF0C9 /* UserLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLocation.swift; sourceTree = "<group>"; };
 		C27930D927C01416006673A3 /* SeSAC_Friends.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SeSAC_Friends.entitlements; sourceTree = "<group>"; };
-		C27930DA27C03A2D006673A3 /* CustomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomViewController.swift; sourceTree = "<group>"; };
 		C2826B3E27B0325600C1CA23 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		C2826B4027B0EA4500C1CA23 /* FilterButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterButton.swift; sourceTree = "<group>"; };
 		C2826B4227B0F91D00C1CA23 /* Friends.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Friends.swift; sourceTree = "<group>"; };
@@ -395,7 +391,6 @@
 				C20EB13627B13211007B53B0 /* FloatingButton.swift */,
 				C2826B4027B0EA4500C1CA23 /* FilterButton.swift */,
 				C21A001527A3DF8600222045 /* GenderButton.swift */,
-				C27930DA27C03A2D006673A3 /* CustomViewController.swift */,
 			);
 			path = Buttons;
 			sourceTree = "<group>";
@@ -605,7 +600,6 @@
 				C28377EB279831F000151297 /* InputView.swift */,
 				C26E99EC27ABD1CC00E00E15 /* CustomTextField.swift */,
 				C2A6E5E927AD853B00829EE0 /* AlertView.swift */,
-				C23D868727BADB3D00153655 /* CustomGesture.swift */,
 			);
 			path = Reusable;
 			sourceTree = "<group>";
@@ -1063,7 +1057,6 @@
 				C2E20D3C27A91E1900AB9BC0 /* OnboardingModel.swift in Sources */,
 				C2E20D3627A6FD9400AB9BC0 /* SeSACUser.swift in Sources */,
 				C2D0928527B94AEF00FB4A14 /* NearUserViewController.swift in Sources */,
-				C23D868827BADB3D00153655 /* CustomGesture.swift in Sources */,
 				C23BA6BF279D7C9C00AD2EE3 /* UserDefaultsWrapper.swift in Sources */,
 				C23D868327BA8C3200153655 /* CardViewButton.swift in Sources */,
 				C28377F227988C0500151297 /* LogInViewController.swift in Sources */,
@@ -1090,7 +1083,6 @@
 				C26E99E127AB98DE00E00E15 /* InfoStackView.swift in Sources */,
 				C28377F52799A41000151297 /* LoginViewModel.swift in Sources */,
 				C2A6E5E527AD40D300829EE0 /* Constants.swift in Sources */,
-				C27930DB27C03A2D006673A3 /* CustomViewController.swift in Sources */,
 				C242CDB62796BE7000905287 /* AppDelegate.swift in Sources */,
 				C2E20D3A27A90F4000AB9BC0 /* OnBoardingView.swift in Sources */,
 				C26E99DD27AB787300E00E15 /* Expandable.swift in Sources */,

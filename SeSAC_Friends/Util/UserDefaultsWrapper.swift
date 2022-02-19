@@ -40,14 +40,14 @@ struct CustomUserDefault<Value: Codable> {
     var wrappedValue: Value {
         get {
             let decoder = PropertyListDecoder()
-            guard let data = UserDefaults.standard.object(forKey: key) as? Data else { return defaultValue }
-            let value = try? decoder.decode(Value.self, from: data)
-            return value ?? defaultValue
+            let data = UserDefaults.standard.value(forKey: key) as! Data
+            let value = try! decoder.decode(Value.self, from: data)
+            return value
         }
         set {
             let encoder = PropertyListEncoder()
-            let data = try? encoder.encode(newValue)
-            UserDefaults.standard.setValue(data ?? defaultValue, forKey: key)
+            let data = try! encoder.encode(newValue)
+            UserDefaults.standard.setValue(data, forKey: key)
         }
     }
 }
@@ -79,5 +79,12 @@ class UserInfo {
         self.verificationID = ""
         self.userPosition = UserLocation(lat: 37.517819364682694, lng: 126.88647317074734)
         self.mapPosition = UserLocation(lat: 37.517819364682694, lng: 126.88647317074734)
+    }
+    
+    static func printAllUserInfo() {
+        print("USER: \(userPosition)")
+        print("MAP: \(mapPosition)")
+        print("State: \(userState)")
+        print("IDTOKEN: \(idToken)")
     }
 }

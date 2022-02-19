@@ -12,10 +12,14 @@ import RxSwift
 import RxCocoa
 import Toast
 
+enum SearchSesacType {
+    case require
+    case accept
+}
+
 final class SearchSesacViewController: TabmanViewController {
     
     //MARK: Properties
-    
     private let viewModel = NearUserViewModel()
     private let disposeBag = DisposeBag()
     private var timerDisposable: Disposable?
@@ -56,6 +60,7 @@ final class SearchSesacViewController: TabmanViewController {
             .disposed(by: disposeBag)
         
         let data = viewModel.output.nearUsers
+            .debug("near users")
             .share()
             .asDriver(onErrorJustReturn: [])
         
@@ -89,12 +94,13 @@ final class SearchSesacViewController: TabmanViewController {
                 
                 cell.cardViewButtonClicked
                     .debug("\(index)번 카드뷰 버튼 눌림")
-                    .asDriver(onErrorJustReturn: ())
-                    .drive(self.viewModel.input.requestButtonClicked)
+                    .observe(on: MainScheduler.instance)
+                    .bind(with: self) { owner, _ in
+                        owner.alertConfig(type: .require, uid: element.uid)
+                    }
                     .disposed(by: cell.disposeBag)
                 
                 Observable.of(element.hf)
-                    .debug("HF")
                     .bind(to: cell.cardView.cardStackView.sesacHobbyView.collectionView.rx.items(cellIdentifier: EnterHobbyCollectionViewCell.useIdentifier, cellType: EnterHobbyCollectionViewCell.self)) { index, hobby, item in
                         item.button.setTitle(hobby, for: .normal)
                         item.button.buttonState = .fromOtherUser
@@ -180,9 +186,12 @@ final class SearchSesacViewController: TabmanViewController {
                 
                 cell.cardViewButtonClicked
                     .debug("\(index)번 카드뷰 버튼 눌림")
-                    .asDriver(onErrorJustReturn: ())
-                    .drive(self.viewModel.input.acceptButtonClicked)
+                    .observe(on: MainScheduler.instance)
+                    .bind(with: self) { owner, _ in
+                        owner.alertConfig(type: .accept, uid: element.uid)
+                    }
                     .disposed(by: cell.disposeBag)
+                    
                 
                 Observable.of(element.hf)
                     .debug("HF")
@@ -228,6 +237,14 @@ final class SearchSesacViewController: TabmanViewController {
     }
     
     func bindCommon() {
+        viewModel.output.goToChat
+            .asDriver(onErrorJustReturn: ())
+            .drive(with: self) { owner, _ in
+                let vc = ChatViewController()
+                owner.navigationController?.pushViewController(vc, animated: true)
+            }
+            .disposed(by: disposeBag)
+        
         viewModel.output.stopSearch
             .debug("찾기 중지")
             .asDriver(onErrorJustReturn: ())
@@ -274,9 +291,44 @@ final class SearchSesacViewController: TabmanViewController {
                 }
             }
             .disposed(by: disposeBag)
-
     }
 
+    func alertConfig(type: SearchSesacType, uid: String) {
+        let vc = CustomAlertViewController()
+        vc.modalPresentationStyle = .overCurrentContext
+        
+        switch type {
+        case .require:
+            vc.mainView.mainTitleLabel.text = "취미 같이 하기를 요청할게요!"
+            vc.mainView.subtextLabel.text = "요청이 수락되면 30분 후에 리뷰를 남길 수 있어요"
+            vc.mainView.okButton.rx.tap
+                .asDriver()
+                .drive(with: self) { owner, _ in
+                    owner.viewModel.input.requestButtonClicked.onNext(uid)
+                    vc.dismiss(animated: false)
+                }
+                .disposed(by: disposeBag)
+        case .accept:
+            vc.mainView.mainTitleLabel.text = "취미 같이 하기를 수락할까요?"
+            vc.mainView.subtextLabel.text = "요청을 수락하면 채팅창에서 대화를 나눌 수 있어요"
+            vc.mainView.okButton.rx.tap
+                .asDriver()
+                .drive(with: self) { owner, _ in
+                    owner.viewModel.input.acceptButtonClicked.onNext(uid)
+                    vc.dismiss(animated: false)
+                }
+                .disposed(by: disposeBag)
+        }
+        
+        vc.mainView.cancelButton.rx.tap
+            .asDriver()
+            .drive { _ in
+                vc.dismiss(animated: false, completion: nil)
+            }
+            .disposed(by: disposeBag)
+
+        present(vc, animated: false, completion: nil)
+    }
     
     func setTMBar(bar: TMBar.ButtonBar) {
         bar.buttons.customize { button in
@@ -303,6 +355,18 @@ final class SearchSesacViewController: TabmanViewController {
             .bind(to: viewModel.input.stopSearchButtonClicked)
             .disposed(by: disposeBag)
         self.navigationItem.rightBarButtonItem = barButton
+        
+        let backButton = UIButton()
+        backButton.setImage(UIImage(asset: Asset.arrow), for: .normal)
+        backButton.tintColor = .defaultBlack
+        backButton.rx.tap
+            .bind(with: self) { owner, _ in
+                owner.navigationController?.popToRootViewController(animated: true)
+            }
+            .disposed(by: disposeBag)
+        let backBarButton = UIBarButtonItem(customView: backButton)
+        self.navigationItem.leftBarButtonItem = backBarButton
+        self.navigationItem.hidesBackButton = true
     }
     
     func timerStart() {
@@ -317,6 +381,14 @@ final class SearchSesacViewController: TabmanViewController {
         viewModel.input.willAppear.onNext(())
     }
     
+    override func willMove(toParent parent: UIViewController?) {
+        if parent == nil {
+            let viewControllers = self.navigationController!.viewControllers
+            if ((viewControllers[viewControllers.count - 2]).isKind(of: HomeViewController.self)) {
+                (viewControllers[viewControllers.count - 2] as! HomeViewController).hidesBottomBarWhenPushed = false
+            }
+        }
+    }
     
     //MARK: LifeCycle
     
@@ -340,6 +412,7 @@ final class SearchSesacViewController: TabmanViewController {
     }
 }
 
+//MARK: TabBar
 extension SearchSesacViewController: PageboyViewControllerDataSource, TMBarDataSource {
     func barItem(for bar: TMBar, at index: Int) -> TMBarItemable {
         switch index {

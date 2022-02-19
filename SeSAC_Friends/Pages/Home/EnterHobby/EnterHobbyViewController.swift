@@ -155,6 +155,7 @@ final class EnterHobbyViewController: UIViewController {
         super.viewDidLoad()
         searchBarConfig()
         bind()
+        UserInfo.printAllUserInfo()
     }
     
     override func viewWillAppear(_ animated: Bool) {

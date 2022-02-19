@@ -12,6 +12,7 @@ import CoreLocation
 
 final class HomeViewModel: ViewModelType {
     struct Input {
+        let homeInit = PublishSubject<Void>()
         let entireButtonClicked = BehaviorSubject(value: ())
         let manButtonClicked = PublishSubject<Void>()
         let womanButtonClicked = PublishSubject<Void>()
@@ -66,13 +67,20 @@ final class HomeViewModel: ViewModelType {
             
         
         homeWillAppear
-            .withLatestFrom(input.userStateChanged)
-            .debug("홈윌어피어 + 유저스테이트")
-            .asDriver(onErrorJustReturn: .normal)
+            .asDriver(onErrorJustReturn: ())
             .drive(with: self) { owner, state in
-                owner.output.currentUserState.accept(state)
+                owner.output.currentUserState.accept(UserInfo.userState)
             }
             .disposed(by: disposeBag)
+        
+        input.homeInit
+            .withUnretained(self)
+            .flatMap { owner, _ in owner.updateFCMToken() }
+            .bind(with: self) { owner, status in
+                print("FCM TOKEN UPDATE STATUS: \(status)")
+            }
+            .disposed(by: disposeBag)
+            
 
         let currentUserState = input.userStateChanged
             .share()
@@ -86,11 +94,10 @@ final class HomeViewModel: ViewModelType {
             .share()
         
         let floatingButtonClicked = input.floatingButtonClicked
-            .withLatestFrom(currentUserState)
             .share()
         
         floatingButtonClicked
-            .filter { $0 == .normal }
+            .filter { UserInfo.userState == .normal }
             .withLatestFrom(currentUserAuth)
             .observe(on: MainScheduler.instance)
             .bind(with: self) { owner, allowed in
@@ -101,8 +108,6 @@ final class HomeViewModel: ViewModelType {
                         owner.output.goToInfoManage.accept(())
                     } else {
                         owner.output.goToEnterHobby.accept(())
-                        let positon = owner.output.currentMapViewCamera.value
-                        UserInfo.mapPosition = UserLocation(lat: positon.latitude, lng: positon.longitude)
                     }
                 } else {
                     owner.output.showAlert.accept(())
@@ -111,7 +116,7 @@ final class HomeViewModel: ViewModelType {
             .disposed(by: disposeBag)
         
         floatingButtonClicked
-            .filter { $0 == .matching }
+            .filter { UserInfo.userState == .matching }
             .observe(on: MainScheduler.instance)
             .bind(with: self) { owner, _ in
                 owner.output.goToSearchSesac.accept(())
@@ -119,7 +124,7 @@ final class HomeViewModel: ViewModelType {
             .disposed(by: disposeBag)
         
         floatingButtonClicked
-            .filter { $0 == .matched }
+            .filter { UserInfo.userState == .matched }
             .observe(on: MainScheduler.instance)
             .bind(with: self) { owner, _ in
                 owner.output.goToChat.accept(())
@@ -188,12 +193,10 @@ final class HomeViewModel: ViewModelType {
 
         currentMapViewPosition
             .withUnretained(self)
-            .distinctUntilChanged { lh, rh in
-                (lh.1.latitude == rh.1.latitude) && (lh.1.longitude == rh.1.longitude)
-            }
             .debug("맵뷰 카메라 변경")
-            .flatMap { owner, position in
-                owner.fetchFriends(position: position)
+            .flatMap { owner, position -> Observable<Friends> in
+                UserInfo.mapPosition = UserLocation(lat: position.latitude, lng: position.longitude)
+                return owner.fetchFriends(position: position)
             }
             .observe(on: MainScheduler.instance)
             .bind(with: self) { owner, friends in
@@ -296,6 +299,36 @@ final class HomeViewModel: ViewModelType {
                     }
                 }
                 return .never()
+            }
+            .retry { (error: Observable<Error>) in
+                error.filter { error in
+                    if let error = error as? APIError, error == .tokenExpired {
+                        return true
+                    }
+                    return false
+                }
+                .flatMap { _ -> Single<String> in FirebaseAuthService.shared.getIdToken().debug("REFresh IDTOKEN") }
+            }
+            .asObservable()
+    }
+    
+    func updateFCMToken() -> Observable<Int> {
+        return APIService.shared.updateFCMToken()
+            .catch { [weak self]error in
+                guard let self = self else { return .just(0) }
+                if let error = error as? APIError {
+                    switch error {
+                    case .tokenExpired:
+                        return .error(error)
+                    case .serverError:
+                        self.output.errorMessage.accept("서버 에러")
+                    case .unKnownedUser:
+                        self.output.goToOnboarding.accept(())
+                    default:
+                        self.output.errorMessage.accept(String(describing: error))
+                    }
+                }
+                return .just(0)
             }
             .retry { (error: Observable<Error>) in
                 error.filter { error in

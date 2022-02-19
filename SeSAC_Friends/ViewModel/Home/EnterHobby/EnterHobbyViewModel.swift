@@ -37,7 +37,7 @@ final class EnterHobbyViewModel: ViewModelType {
             .debug("will Appear")
             .withUnretained(self)
             .do(onNext: { owner, _ in owner.output.activating.accept(true) })
-                .flatMap { owner, _ in owner.fetchFriends(position: (UserInfo.userPosition.lat, UserInfo.userPosition.lng)) }
+                .flatMap { owner, _ in owner.fetchFriends(position: (UserInfo.mapPosition.lat, UserInfo.mapPosition.lng)) }
             .share()
         
         hobbies
@@ -89,6 +89,7 @@ final class EnterHobbyViewModel: ViewModelType {
                 print("상태코드: \(status)")
                 switch status {
                 case 200:
+                    UserInfo.userState = .matching
                     owner.output.goToNearUser.accept(())
                 case 201:
                     owner.output.errorMessage.accept("신고가 누적되어 이용하실 수 없습니다")
@@ -160,10 +161,10 @@ final class EnterHobbyViewModel: ViewModelType {
     }
     
     func startRequest() -> Observable<Int> {
-        let position = UserInfo.userPosition
+        let position = UserInfo.mapPosition
         var hf = output.nowAround.value[1].items.map { $0.hobby }
         if hf.isEmpty {
-            hf.append("AnyThing")
+            hf.append("Anything")
         }
         return APIService.shared.startRequestFriends(type: 2,
                                                      region: locationToRegion(position: (position.lat, position.lng)),

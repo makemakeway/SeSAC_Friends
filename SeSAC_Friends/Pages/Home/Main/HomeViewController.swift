@@ -28,6 +28,8 @@ final class HomeViewController: UIViewController {
     private func bind() {
         
         //MARK: Input Binding
+        viewModel.input.homeInit.onNext(())
+        
         mainView.entireButton.rx.tap
             .asDriver()
             .drive(viewModel.input.entireButtonClicked)
@@ -152,6 +154,31 @@ final class HomeViewController: UIViewController {
             }
             .disposed(by: disposeBag)
 
+        viewModel.output.goToSearchSesac
+            .asDriver(onErrorJustReturn: ())
+            .drive(with: self) { owner, _ in
+                let vc = SearchSesacViewController()
+                owner.hidesBottomBarWhenPushed = true
+                owner.navigationController?.pushViewController(vc, animated: true)
+            }
+            .disposed(by: disposeBag)
+        
+        viewModel.output.goToChat
+            .asDriver(onErrorJustReturn: ())
+            .drive(with: self) { owner, _ in
+                let vc = ChatViewController()
+                owner.hidesBottomBarWhenPushed = true
+                owner.navigationController?.pushViewController(vc, animated: true)
+            }
+            .disposed(by: disposeBag)
+
+        viewModel.output.goToOnboarding
+            .asDriver(onErrorJustReturn: ())
+            .drive(with: self) { owner, _ in
+                let vc = OnBoardingViewController()
+                owner.changeRootView(viewController: vc)
+            }
+            .disposed(by: disposeBag)
     }
     
     func alertConfig() {
@@ -189,23 +216,17 @@ final class HomeViewController: UIViewController {
     }
     
     func removeMarkers() {
-        print(#function)
+        let group = DispatchGroup()
         
-        DispatchQueue.main.async { [weak self] in
-            guard let self = self else { return }
-            let group = DispatchGroup()
-            
-            for marker in self.markers {
-                group.enter()
-                marker.self.mapView = nil
-                group.leave()
-            }
-            
-            group.notify(queue: DispatchQueue.global()) {
-                self.markers.removeAll()
-            }
+        group.enter()
+        for marker in self.markers {
+            marker.self.mapView = nil
         }
+        group.leave()
         
+        group.notify(queue: DispatchQueue.global()) {
+            self.markers.removeAll()
+        }
     }
     
     func addMarker(friends: [FromQueueDB]) {

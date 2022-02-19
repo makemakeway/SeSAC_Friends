@@ -97,6 +97,11 @@ enum APIRouter: URLRequestConvertible {
         }
     }
     
+    private var encoding: ParameterEncoding {
+        let encoding = URLEncoding(destination: .httpBody, arrayEncoding: .noBrackets)
+        return encoding
+    }
+    
     func asURLRequest() throws -> URLRequest {
         let url = try CustomKey.ProductionServer.baseURL.asURL()
         var request = URLRequest(url: url.appendingPathComponent(path))
@@ -106,15 +111,7 @@ enum APIRouter: URLRequestConvertible {
         request.setValue(UserInfo.idToken, forHTTPHeaderField: HTTPHeaderField.idToken.rawValue)
         
         if let parameters = parameters {
-            
-            let formDataArray = parameters.compactMap({ (key, value) -> String in
-                return "\(key)=\(value)"
-            }) as [String]
-        
-            let formDataString = formDataArray.joined(separator: "&")
-            let formEncodedData = formDataString.data(using: .utf8)
-            
-            request.httpBody = formEncodedData
+            request = try encoding.encode(request, with: parameters)
         }
         
         return request
