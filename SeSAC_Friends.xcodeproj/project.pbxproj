@@ -80,6 +80,9 @@
 		C273F1D927BE95DD0077A6B7 /* UserMatchingState.swift in Sources */ = {isa = PBXBuildFile; fileRef = C273F1D827BE95DD0077A6B7 /* UserMatchingState.swift */; };
 		C273F1DB27BEA1F40077A6B7 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C273F1DA27BEA1F40077A6B7 /* ChatViewController.swift */; };
 		C278D45127BFEE93000BF0C9 /* UserLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C278D45027BFEE93000BF0C9 /* UserLocation.swift */; };
+		C27930DE27C2826C006673A3 /* SocketIO in Frameworks */ = {isa = PBXBuildFile; productRef = C27930DD27C2826C006673A3 /* SocketIO */; };
+		C27930E027C291B2006673A3 /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27930DF27C291B2006673A3 /* ChatView.swift */; };
+		C27930E227C295A8006673A3 /* ChatTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27930E127C295A8006673A3 /* ChatTextView.swift */; };
 		C2826B3F27B0325600C1CA23 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2826B3E27B0325600C1CA23 /* HomeViewModel.swift */; };
 		C2826B4127B0EA4600C1CA23 /* FilterButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2826B4027B0EA4500C1CA23 /* FilterButton.swift */; };
 		C2826B4327B0F91D00C1CA23 /* Friends.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2826B4227B0F91D00C1CA23 /* Friends.swift */; };
@@ -226,6 +229,8 @@
 		C273F1DA27BEA1F40077A6B7 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		C278D45027BFEE93000BF0C9 /* UserLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLocation.swift; sourceTree = "<group>"; };
 		C27930D927C01416006673A3 /* SeSAC_Friends.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SeSAC_Friends.entitlements; sourceTree = "<group>"; };
+		C27930DF27C291B2006673A3 /* ChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
+		C27930E127C295A8006673A3 /* ChatTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatTextView.swift; sourceTree = "<group>"; };
 		C2826B3E27B0325600C1CA23 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		C2826B4027B0EA4500C1CA23 /* FilterButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterButton.swift; sourceTree = "<group>"; };
 		C2826B4227B0F91D00C1CA23 /* Friends.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Friends.swift; sourceTree = "<group>"; };
@@ -278,6 +283,7 @@
 				C23BA6AC279AF7D400AD2EE3 /* FirebaseMessaging in Frameworks */,
 				C2A6E5DC27ABF41700829EE0 /* MultiSlider in Frameworks */,
 				C28377DC279720D800151297 /* Then in Frameworks */,
+				C27930DE27C2826C006673A3 /* SocketIO in Frameworks */,
 				C28377D9279720CA00151297 /* Alamofire in Frameworks */,
 				C28377D6279720B900151297 /* Toast in Frameworks */,
 				C23D868127BA82DC00153655 /* Tabman in Frameworks */,
@@ -353,6 +359,8 @@
 			isa = PBXGroup;
 			children = (
 				C273F1DA27BEA1F40077A6B7 /* ChatViewController.swift */,
+				C27930DF27C291B2006673A3 /* ChatView.swift */,
+				C27930E127C295A8006673A3 /* ChatTextView.swift */,
 			);
 			path = Chat;
 			sourceTree = "<group>";
@@ -782,6 +790,7 @@
 				C23BA6AB279AF7D400AD2EE3 /* FirebaseMessaging */,
 				C2A6E5DB27ABF41700829EE0 /* MultiSlider */,
 				C23D868027BA82DC00153655 /* Tabman */,
+				C27930DD27C2826C006673A3 /* SocketIO */,
 			);
 			productName = SeSAC_Friends;
 			productReference = C242CDB22796BE7000905287 /* SeSAC_Friends.app */;
@@ -866,6 +875,7 @@
 				C23BA6A8279AF7D400AD2EE3 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				C2A6E5DA27ABF41600829EE0 /* XCRemoteSwiftPackageReference "MultiSlider" */,
 				C23D867F27BA82DC00153655 /* XCRemoteSwiftPackageReference "Tabman" */,
+				C27930DC27C2826B006673A3 /* XCRemoteSwiftPackageReference "socket" */,
 			);
 			productRefGroup = C242CDB32796BE7000905287 /* Products */;
 			projectDirPath = "";
@@ -1125,9 +1135,11 @@
 				C28377AF2796E36100151297 /* UIColor+Extension.swift in Sources */,
 				C23BAB1127BC30A00083BFCF /* EmptyUserView.swift in Sources */,
 				C21A001627A3DF8600222045 /* GenderButton.swift in Sources */,
+				C27930E027C291B2006673A3 /* ChatView.swift in Sources */,
 				C2E20D2127A3E93500AB9BC0 /* Images+Generated.swift in Sources */,
 				C2A6E5EA27AD853B00829EE0 /* AlertView.swift in Sources */,
 				C2E20D3E27A951E300AB9BC0 /* HomeView.swift in Sources */,
+				C27930E227C295A8006673A3 /* ChatTextView.swift in Sources */,
 				C23BA6D227A1B0B000AD2EE3 /* EmailViewModel.swift in Sources */,
 				C2FB2F1E27B7CE5400E1CA81 /* EnterHobbyViewModel.swift in Sources */,
 				C23BA6AE279BCF2300AD2EE3 /* H40Button.swift in Sources */,
@@ -1522,6 +1534,14 @@
 				version = 2.12.0;
 			};
 		};
+		C27930DC27C2826B006673A3 /* XCRemoteSwiftPackageReference "socket" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/socketio/socket.io-client-swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 15.0.0;
+			};
+		};
 		C28377C12796F78200151297 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
@@ -1579,6 +1599,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = C23D867F27BA82DC00153655 /* XCRemoteSwiftPackageReference "Tabman" */;
 			productName = Tabman;
+		};
+		C27930DD27C2826C006673A3 /* SocketIO */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C27930DC27C2826B006673A3 /* XCRemoteSwiftPackageReference "socket" */;
+			productName = SocketIO;
 		};
 		C28377C22796F78200151297 /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;

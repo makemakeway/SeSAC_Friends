@@ -63,7 +63,7 @@ final class EnterHobbyViewController: UIViewController {
         searchBar.rx.textDidEndEditing
             .asDriver()
             .drive(with: self) { owner, _ in
-                UIView.animate(withDuration: 0) {
+                UIView.animate(withDuration: 0.1) {
                     owner.mainView.searchSesacButton.layer.cornerRadius = 10
                     owner.mainView.searchSesacButton.snp.updateConstraints { make in
                         make.bottom.equalTo(owner.mainView.safeAreaLayoutGuide).offset(owner.extra == 0 ? -16 : 0)
@@ -78,7 +78,7 @@ final class EnterHobbyViewController: UIViewController {
 
         RxKeyboard.instance.willShowVisibleHeight
             .drive(with: self) { owner, height in
-                UIView.animate(withDuration: 0) {
+                UIView.animate(withDuration: 0.1) {
                     owner.mainView.searchSesacButton.layer.cornerRadius = 0
                     owner.mainView.searchSesacButton.snp.updateConstraints { make in
                         make.bottom.equalTo(owner.mainView.safeAreaLayoutGuide).offset(-height + owner.extra)
