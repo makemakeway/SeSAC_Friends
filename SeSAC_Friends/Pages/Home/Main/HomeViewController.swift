@@ -12,11 +12,18 @@ import CoreLocation
 import NMapsMap
 import Toast
 
+enum HomeType {
+    case defaults
+    case fromBackbutton
+}
+
 final class HomeViewController: UIViewController {
     //MARK: Properties
     private var disposeBag = DisposeBag()
     private let viewModel = HomeViewModel()
     private let locationManager = CLLocationManager()
+    
+    var homeType = HomeType.defaults
     
     //MARK: UI
     
@@ -157,9 +164,12 @@ final class HomeViewController: UIViewController {
         viewModel.output.goToSearchSesac
             .asDriver(onErrorJustReturn: ())
             .drive(with: self) { owner, _ in
-                let vc = SearchSesacViewController()
+                let root = HomeViewController()
+                let vc1 = EnterHobbyViewController()
+                let vc2 = SearchSesacViewController()
                 owner.hidesBottomBarWhenPushed = true
-                owner.navigationController?.pushViewController(vc, animated: true)
+                let vcs = [owner, root, vc1, vc2]
+                owner.navigationController?.setViewControllers(vcs, animated: true)
             }
             .disposed(by: disposeBag)
         
@@ -322,6 +332,12 @@ extension HomeViewController: CLLocationManagerDelegate {
         viewModel.input.locationDidChanged
             .onNext(location)
         manager.stopUpdatingLocation()
+        
+        if homeType == .fromBackbutton {
+            let position = UserInfo.mapPosition
+            print("FROM BACKBUTTON")
+            moveCamera(location: CLLocationCoordinate2D(latitude: position.lat, longitude: position.lng))
+        }
     }
     
 }

@@ -42,7 +42,6 @@ final class FirebaseAuthService {
             
             Auth.auth().signIn(with: credential) { (result, error) in
                 if error != nil {
-                    print(error)
                     print("ERROR: userVerificationError!")
                     single(.failure(FirebaseAuthError.inCorrectVerificationCode))
                 }

@@ -42,7 +42,7 @@ final class NearUserTableViewCell: UITableViewCell, ViewRepresentable {
             make.top.equalToSuperview().offset(20)
             make.leading.equalToSuperview().offset(16)
             make.trailing.equalToSuperview().offset(-16)
-            make.bottom.equalToSuperview()
+            make.bottom.equalToSuperview().priority(.low)
         }
         
         cardViewButton.snp.makeConstraints { make in

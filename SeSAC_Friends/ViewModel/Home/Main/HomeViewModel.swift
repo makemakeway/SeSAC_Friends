@@ -45,6 +45,7 @@ final class HomeViewModel: ViewModelType {
         let goToChat = PublishRelay<Void>()
     }
     
+    private var currentMapPosition = UserLocation(lat: DefaultValue.location.latitude, lng: DefaultValue.location.longitude)
     var disposeBag = DisposeBag()
     let input = Input()
     let output = Output()
@@ -107,6 +108,7 @@ final class HomeViewModel: ViewModelType {
                         owner.output.errorMessage.accept("새싹 찾기 기능을 이용하기 위해서는 성별이 필요해요!")
                         owner.output.goToInfoManage.accept(())
                     } else {
+                        UserInfo.mapPosition = owner.currentMapPosition
                         owner.output.goToEnterHobby.accept(())
                     }
                 } else {
@@ -119,6 +121,7 @@ final class HomeViewModel: ViewModelType {
             .filter { UserInfo.userState == .matching }
             .observe(on: MainScheduler.instance)
             .bind(with: self) { owner, _ in
+                UserInfo.mapPosition = owner.currentMapPosition
                 owner.output.goToSearchSesac.accept(())
             }
             .disposed(by: disposeBag)
@@ -195,7 +198,7 @@ final class HomeViewModel: ViewModelType {
             .withUnretained(self)
             .debug("맵뷰 카메라 변경")
             .flatMap { owner, position -> Observable<Friends> in
-                UserInfo.mapPosition = UserLocation(lat: position.latitude, lng: position.longitude)
+                owner.currentMapPosition = UserLocation(lat: position.latitude, lng: position.longitude)
                 return owner.fetchFriends(position: position)
             }
             .observe(on: MainScheduler.instance)

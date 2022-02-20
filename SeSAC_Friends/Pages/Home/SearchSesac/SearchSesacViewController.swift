@@ -40,6 +40,15 @@ final class SearchSesacViewController: TabmanViewController {
             .drive(viewModel.input.refreshButtonClicked)
             .disposed(by: disposeBag)
         
+        nearUserView.mainView.emptyUserView.changeHobbyButton.rx.tap
+            .asDriver()
+            .drive(with: self) { owner, _ in
+                UserInfo.userState = .normal
+                owner.navigationController?.popViewController(animated: true)
+            }
+            .disposed(by: disposeBag)
+
+        
         nearUserView.mainView.refreshControl.rx.controlEvent(.valueChanged)
             .debug("refresh control")
             .asDriver(onErrorJustReturn: ())
@@ -77,6 +86,10 @@ final class SearchSesacViewController: TabmanViewController {
                     text.textColor = .defaultBlack
                     cell.cardView.cardStackView.sesacReviewView.sesacReviewChevronImage.isHidden = false
                 }
+                
+                self.setSesacAndBackgroundImage(background: element.background,
+                                                sesac: element.sesac,
+                                                view: cell.cardView.cardImageView)
                 
                 cell.nickNameViewClicked
                     .observe(on: MainScheduler.instance)
@@ -142,6 +155,14 @@ final class SearchSesacViewController: TabmanViewController {
             .drive(viewModel.input.refreshButtonClicked)
             .disposed(by: disposeBag)
         
+        requestView.mainView.emptyUserView.changeHobbyButton.rx.tap
+            .asDriver()
+            .drive(with: self) { owner, _ in
+                UserInfo.userState = .normal
+                owner.navigationController?.popViewController(animated: true)
+            }
+            .disposed(by: disposeBag)
+        
         requestView.mainView.refreshControl.rx.controlEvent(.valueChanged)
             .debug("refresh control")
             .asDriver(onErrorJustReturn: ())
@@ -162,6 +183,10 @@ final class SearchSesacViewController: TabmanViewController {
                 self.selectedSesacTitle(titles: element.reputation, view: cell.cardView.cardStackView.sesacTitleView)
                 cell.cardViewButton.cardType = .required
                 cell.cardViewButton.setTitle("수락하기", for: .normal)
+
+                self.setSesacAndBackgroundImage(background: element.background,
+                                                sesac: element.sesac,
+                                                view: cell.cardView.cardImageView)
                 
                 cell.nickNameViewClicked
                     .observe(on: MainScheduler.instance)
@@ -356,17 +381,27 @@ final class SearchSesacViewController: TabmanViewController {
             .disposed(by: disposeBag)
         self.navigationItem.rightBarButtonItem = barButton
         
+        
         let backButton = UIButton()
         backButton.setImage(UIImage(asset: Asset.arrow), for: .normal)
         backButton.tintColor = .defaultBlack
-        backButton.rx.tap
-            .bind(with: self) { owner, _ in
-                owner.navigationController?.popToRootViewController(animated: true)
-            }
-            .disposed(by: disposeBag)
+        backButton.addTarget(self, action: #selector(goToTop), for: .touchUpInside)
+        backButton.frame.size = CGSize(width: 24, height: 24)
         let backBarButton = UIBarButtonItem(customView: backButton)
-        self.navigationItem.leftBarButtonItem = backBarButton
         self.navigationItem.hidesBackButton = true
+        self.navigationItem.leftBarButtonItem = backBarButton
+        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
+    }
+    
+    @objc func goToTop() {
+//        guard let viewControllerStack = self.navigationController?.viewControllers else { return }
+//        for viewController in viewControllerStack {
+//            if let home = viewController as? HomeViewController {
+//                self.navigationController?.popToViewController(home, animated: true)
+//            }
+//        }
+        changeRootViewToHome(homeType: .fromBackbutton)
+//        changeRootViewToHome()
     }
     
     func timerStart() {
@@ -404,6 +439,8 @@ final class SearchSesacViewController: TabmanViewController {
         addBar(bar, dataSource: self, at: .top)
         self.isScrollEnabled = false
         navBarConfig()
+        
+        print("CURRENT NAVIGATION STACK: \(self.navigationController?.viewControllers)")
     }
     
     override func viewWillAppear(_ animated: Bool) {
