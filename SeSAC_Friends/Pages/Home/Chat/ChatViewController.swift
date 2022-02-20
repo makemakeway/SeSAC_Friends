@@ -57,20 +57,41 @@ final class ChatViewController: UIViewController {
         
         mainView.chatTextView.textView.rx.text.orEmpty
             .bind(with: self) { owner, text in
-                let textView = owner.mainView.chatTextView
-                text.isEmpty == true ? (textView.placeholerLabel.isHidden = false) : (textView.placeholerLabel.isHidden = true)
-                
-                DispatchQueue.main.async {
-                    let height = textView.textView.contentSize.height
-                    if height <= 80 {
-                        textView.textView.snp.updateConstraints { make in
-                            make.height.equalTo(height)
-                        }
-                    }
-                }
+                owner.chatTextViewTask(empty: text.isEmpty)
+                owner.calculateChatTextViewHeight()
             }
             .disposed(by: disposeBag)
         
+        mainView.chatTextView.sendButton.rx.tap
+            .asDriver()
+            .drive(with: self) { owner, _ in
+                // send 버튼 눌렀을 때 일어나는 Action 정의
+                owner.mainView.chatTextView.textView.text = ""
+            }
+            .disposed(by: disposeBag)
+    }
+    
+    func calculateChatTextViewHeight() {
+        let textView = mainView.chatTextView
+        DispatchQueue.main.async {
+            let height = textView.textView.contentSize.height
+            if height <= 80 {
+                textView.textView.snp.updateConstraints { make in
+                    make.height.equalTo(height)
+                }
+            }
+        }
+    }
+    
+    func chatTextViewTask(empty: Bool) {
+        let textView = mainView.chatTextView
+        if empty {
+            textView.placeholerLabel.isHidden = false
+            textView.sendButton.setImage(UIImage(asset: Asset.property1SendProperty2Inact), for: .normal)
+        } else {
+            textView.placeholerLabel.isHidden = true
+            textView.sendButton.setImage(UIImage(asset: Asset.property1SendProperty2Act), for: .normal)
+        }
     }
     
     //MARK: LifeCycle
