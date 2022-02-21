@@ -71,9 +71,19 @@ final class ChatViewController: UIViewController {
             .disposed(by: disposeBag)
         
         Observable.of(["11월 23일 목요일", "1월 15일 토요일"])
-            .bind(to: mainView.tableView.rx.items(cellIdentifier: ChatDateTableViewCell.useIdentifier, cellType: ChatDateTableViewCell.self)) { row, element, cell in
-                cell.dateLabel.text = element
-                
+            .bind(to: mainView.tableView.rx.items) { (tv, row, item) -> UITableViewCell in
+                switch row {
+                case 0:
+                    guard let cell = tv.dequeueReusableCell(withIdentifier: ChatDateTableViewCell.useIdentifier, for: IndexPath(row: row, section: 0)) as? ChatDateTableViewCell else { return UITableViewCell() }
+                    cell.dateLabel.text = item
+                    return cell
+                case 1:
+                    guard let cell = tv.dequeueReusableCell(withIdentifier: ChatNicknameTableViewCell.useIdentifier, for: IndexPath(row: row, section: 0)) as? ChatNicknameTableViewCell else { return UITableViewCell() }
+                    cell.nicknameLabel.text = "\(item)님과 매칭되었습니다."
+                    return cell
+                default:
+                    return UITableViewCell()
+                }
             }
             .disposed(by: disposeBag)
     }

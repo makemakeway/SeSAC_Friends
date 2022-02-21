@@ -61,6 +61,7 @@
 		C260F0A627B561D30087948F /* UICollectionViewCell+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C260F0A527B561D30087948F /* UICollectionViewCell+Extension.swift */; };
 		C260F0A827B570390087948F /* EnterHobbyCollectionViewSectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = C260F0A727B570390087948F /* EnterHobbyCollectionViewSectionHeader.swift */; };
 		C263330127C3A7B100917796 /* ChatDateTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C263330027C3A7B100917796 /* ChatDateTableViewCell.swift */; };
+		C263330327C3AE0A00917796 /* ChatNicknameTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C263330227C3AE0A00917796 /* ChatNicknameTableViewCell.swift */; };
 		C26E99D527AA9C9200E00E15 /* MyInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26E99D427AA9C9200E00E15 /* MyInfoView.swift */; };
 		C26E99D727AAC9C100E00E15 /* InfoManageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26E99D627AAC9C100E00E15 /* InfoManageViewController.swift */; };
 		C26E99D927AAC9CA00E00E15 /* InfoManageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26E99D827AAC9CA00E00E15 /* InfoManageView.swift */; };
@@ -210,6 +211,7 @@
 		C260F0A527B561D30087948F /* UICollectionViewCell+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionViewCell+Extension.swift"; sourceTree = "<group>"; };
 		C260F0A727B570390087948F /* EnterHobbyCollectionViewSectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterHobbyCollectionViewSectionHeader.swift; sourceTree = "<group>"; };
 		C263330027C3A7B100917796 /* ChatDateTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatDateTableViewCell.swift; sourceTree = "<group>"; };
+		C263330227C3AE0A00917796 /* ChatNicknameTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatNicknameTableViewCell.swift; sourceTree = "<group>"; };
 		C26E99D427AA9C9200E00E15 /* MyInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInfoView.swift; sourceTree = "<group>"; };
 		C26E99D627AAC9C100E00E15 /* InfoManageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoManageViewController.swift; sourceTree = "<group>"; };
 		C26E99D827AAC9CA00E00E15 /* InfoManageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoManageView.swift; sourceTree = "<group>"; };
@@ -364,6 +366,7 @@
 				C27930DF27C291B2006673A3 /* ChatView.swift */,
 				C27930E127C295A8006673A3 /* ChatTextView.swift */,
 				C263330027C3A7B100917796 /* ChatDateTableViewCell.swift */,
+				C263330227C3AE0A00917796 /* ChatNicknameTableViewCell.swift */,
 			);
 			path = Chat;
 			sourceTree = "<group>";
@@ -1084,6 +1087,7 @@
 				C23BAB0C27BBE23A0083BFCF /* CardNicknameView.swift in Sources */,
 				C20EB13D27B411B6007B53B0 /* EnterHobbyViewController.swift in Sources */,
 				C2E20D3827A908F200AB9BC0 /* OnBoardingCollectionViewCell.swift in Sources */,
+				C263330327C3AE0A00917796 /* ChatNicknameTableViewCell.swift in Sources */,
 				C26E99E927ABB30C00E00E15 /* TitleStackView.swift in Sources */,
 				C273F1D927BE95DD0077A6B7 /* UserMatchingState.swift in Sources */,
 				C28377E527980E1000151297 /* ButtonState.swift in Sources */,
