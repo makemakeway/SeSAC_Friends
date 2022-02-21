@@ -76,15 +76,18 @@ final class ChatViewController: UIViewController {
                 case 0:
                     guard let cell = tv.dequeueReusableCell(withIdentifier: ChatDateTableViewCell.useIdentifier, for: IndexPath(row: row, section: 0)) as? ChatDateTableViewCell else { return UITableViewCell() }
                     cell.dateLabel.text = item
+                    cell.selectionStyle = .none
                     return cell
                 case 1:
                     guard let cell = tv.dequeueReusableCell(withIdentifier: ChatNicknameTableViewCell.useIdentifier, for: IndexPath(row: row, section: 0)) as? ChatNicknameTableViewCell else { return UITableViewCell() }
                     cell.nicknameLabel.text = "\(item)님과 매칭되었습니다."
+                    cell.selectionStyle = .none
                     return cell
                 default:
                     guard let cell = tv.dequeueReusableCell(withIdentifier: ChatTableViewCell.useIdentifier, for: IndexPath(row: row, section: 0)) as? ChatTableViewCell else { return UITableViewCell() }
                     cell.chatLabel.text = "ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ"
                     cell.timeLabel.text = "15:02"
+                    cell.selectionStyle = .none
                     return cell
                 }
             }
@@ -114,6 +117,46 @@ final class ChatViewController: UIViewController {
         }
     }
     
+    func navBarConfig() {
+        let button = UIButton()
+        button.setImage(UIImage(systemName: "ellipsis"), for: .normal)
+        button.tintColor = .defaultBlack
+        button.frame.size = CGSize(width: 24, height: 24)
+        button.rx.tap
+            .asDriver()
+            .drive(with: self) { owner, _ in
+                print("메뉴창")
+                owner.presentMenu()
+            }
+            .disposed(by: disposeBag)
+
+        let barButton = UIBarButtonItem(customView: button)
+        self.navigationItem.rightBarButtonItem = barButton
+        
+        let backButton = UIButton()
+        backButton.rx.tap
+            .asDriver()
+            .drive(with: self) { owner, _ in
+                print("홈으로")
+//                owner.changeRootViewToHome(homeType: .fromBackbutton)
+            }
+            .disposed(by: disposeBag)
+        
+        backButton.setImage(UIImage(asset: Asset.arrow), for: .normal)
+        let backBarButton = UIBarButtonItem(customView: backButton)
+        self.navigationItem.leftBarButtonItem = backBarButton
+    }
+    
+    func presentMenu() {
+        let vc = ChatMenuViewController()
+        let transition = CATransition()
+        transition.duration = 0.5
+        transition.type = CATransitionType.moveIn
+        transition.subtype = CATransitionSubtype.fromBottom
+        view.window!.layer.add(transition, forKey: kCATransition)
+        self.present(vc, animated: false, completion: nil)
+    }
+    
     //MARK: LifeCycle
     
     override func loadView() {
@@ -125,6 +168,7 @@ final class ChatViewController: UIViewController {
         super.viewDidLoad()
         self.title = "채팅"
         mainView.backgroundColor = .systemBackground
+        navBarConfig()
         bind()
     }
 }

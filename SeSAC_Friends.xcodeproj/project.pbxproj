@@ -65,6 +65,9 @@
 		C263330527C3C7B200917796 /* ChatModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C263330427C3C7B200917796 /* ChatModel.swift */; };
 		C263330727C3CBA800917796 /* ChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C263330627C3CBA800917796 /* ChatTableViewCell.swift */; };
 		C263330927C3DEA100917796 /* OtherUserChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C263330827C3DEA100917796 /* OtherUserChatTableViewCell.swift */; };
+		C263330D27C3F3CA00917796 /* ChatMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C263330C27C3F3CA00917796 /* ChatMenuViewController.swift */; };
+		C263330F27C3F3F200917796 /* ChatMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C263330E27C3F3F200917796 /* ChatMenuView.swift */; };
+		C263331327C3F9AB00917796 /* MenuItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C263331227C3F9AA00917796 /* MenuItemView.swift */; };
 		C26E99D527AA9C9200E00E15 /* MyInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26E99D427AA9C9200E00E15 /* MyInfoView.swift */; };
 		C26E99D727AAC9C100E00E15 /* InfoManageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26E99D627AAC9C100E00E15 /* InfoManageViewController.swift */; };
 		C26E99D927AAC9CA00E00E15 /* InfoManageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26E99D827AAC9CA00E00E15 /* InfoManageView.swift */; };
@@ -218,6 +221,9 @@
 		C263330427C3C7B200917796 /* ChatModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatModel.swift; sourceTree = "<group>"; };
 		C263330627C3CBA800917796 /* ChatTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatTableViewCell.swift; sourceTree = "<group>"; };
 		C263330827C3DEA100917796 /* OtherUserChatTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherUserChatTableViewCell.swift; sourceTree = "<group>"; };
+		C263330C27C3F3CA00917796 /* ChatMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMenuViewController.swift; sourceTree = "<group>"; };
+		C263330E27C3F3F200917796 /* ChatMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMenuView.swift; sourceTree = "<group>"; };
+		C263331227C3F9AA00917796 /* MenuItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItemView.swift; sourceTree = "<group>"; };
 		C26E99D427AA9C9200E00E15 /* MyInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInfoView.swift; sourceTree = "<group>"; };
 		C26E99D627AAC9C100E00E15 /* InfoManageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoManageViewController.swift; sourceTree = "<group>"; };
 		C26E99D827AAC9CA00E00E15 /* InfoManageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoManageView.swift; sourceTree = "<group>"; };
@@ -368,13 +374,11 @@
 		C20EB13B27B41197007B53B0 /* Chat */ = {
 			isa = PBXGroup;
 			children = (
+				C263330B27C3F3BD00917796 /* Menu */,
+				C263330A27C3F3A500917796 /* Cells */,
 				C273F1DA27BEA1F40077A6B7 /* ChatViewController.swift */,
 				C27930DF27C291B2006673A3 /* ChatView.swift */,
 				C27930E127C295A8006673A3 /* ChatTextView.swift */,
-				C263330027C3A7B100917796 /* ChatDateTableViewCell.swift */,
-				C263330227C3AE0A00917796 /* ChatNicknameTableViewCell.swift */,
-				C263330627C3CBA800917796 /* ChatTableViewCell.swift */,
-				C263330827C3DEA100917796 /* OtherUserChatTableViewCell.swift */,
 			);
 			path = Chat;
 			sourceTree = "<group>";
@@ -501,6 +505,27 @@
 				C242CDD82796BE7300905287 /* SeSAC_FriendsUITestsLaunchTests.swift */,
 			);
 			path = SeSAC_FriendsUITests;
+			sourceTree = "<group>";
+		};
+		C263330A27C3F3A500917796 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				C263330027C3A7B100917796 /* ChatDateTableViewCell.swift */,
+				C263330227C3AE0A00917796 /* ChatNicknameTableViewCell.swift */,
+				C263330627C3CBA800917796 /* ChatTableViewCell.swift */,
+				C263330827C3DEA100917796 /* OtherUserChatTableViewCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		C263330B27C3F3BD00917796 /* Menu */ = {
+			isa = PBXGroup;
+			children = (
+				C263330C27C3F3CA00917796 /* ChatMenuViewController.swift */,
+				C263330E27C3F3F200917796 /* ChatMenuView.swift */,
+				C263331227C3F9AA00917796 /* MenuItemView.swift */,
+			);
+			path = Menu;
 			sourceTree = "<group>";
 		};
 		C2826B3D27B0324C00C1CA23 /* Home */ = {
@@ -1098,6 +1123,7 @@
 				C23BAB0C27BBE23A0083BFCF /* CardNicknameView.swift in Sources */,
 				C20EB13D27B411B6007B53B0 /* EnterHobbyViewController.swift in Sources */,
 				C2E20D3827A908F200AB9BC0 /* OnBoardingCollectionViewCell.swift in Sources */,
+				C263331327C3F9AB00917796 /* MenuItemView.swift in Sources */,
 				C263330327C3AE0A00917796 /* ChatNicknameTableViewCell.swift in Sources */,
 				C26E99E927ABB30C00E00E15 /* TitleStackView.swift in Sources */,
 				C273F1D927BE95DD0077A6B7 /* UserMatchingState.swift in Sources */,
@@ -1117,6 +1143,7 @@
 				C2E20D3A27A90F4000AB9BC0 /* OnBoardingView.swift in Sources */,
 				C26E99DD27AB787300E00E15 /* Expandable.swift in Sources */,
 				C26E99E727ABB25600E00E15 /* CardStackView.swift in Sources */,
+				C263330D27C3F3CA00917796 /* ChatMenuViewController.swift in Sources */,
 				C23BA6B7279C554900AD2EE3 /* NickNameViewController.swift in Sources */,
 				C260F0A227B550670087948F /* UserHobbySection.swift in Sources */,
 				C242CDB82796BE7000905287 /* SceneDelegate.swift in Sources */,
@@ -1134,6 +1161,7 @@
 				C23D867227BA5B2D00153655 /* NearUserView.swift in Sources */,
 				C26E99EF27ABD30500E00E15 /* InfoAllowPhoneNumberSearchView.swift in Sources */,
 				C23D867627BA5C6C00153655 /* UITableViewCell+Extension.swift in Sources */,
+				C263330F27C3F3F200917796 /* ChatMenuView.swift in Sources */,
 				C23BA6B9279C5AF100AD2EE3 /* BirthDayViewController.swift in Sources */,
 				C26E99DB27AAD58000E00E15 /* CardImageView.swift in Sources */,
 				C23BA6CE27A1A97600AD2EE3 /* EmailViewController.swift in Sources */,
