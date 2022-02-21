@@ -48,14 +48,13 @@ final class ChatNicknameTableViewCell: UITableViewCell, ViewRepresentable {
         }
         
         bellImageView.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(2)
-            make.bottom.equalToSuperview().offset(-2)
+            make.size.equalTo(16)
         }
         
         subtextLabel.snp.makeConstraints { make in
             make.top.equalTo(nicknameStackView.snp.bottom).offset(2)
             make.centerX.equalToSuperview()
-            make.bottom.equalToSuperview().offset(-12)
+            make.bottom.equalToSuperview().offset(-24)
         }
     }
     

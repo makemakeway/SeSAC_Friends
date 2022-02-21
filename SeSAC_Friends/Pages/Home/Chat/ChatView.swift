@@ -20,6 +20,8 @@ final class ChatView: UIView, ViewRepresentable {
     func tableViewConfig() {
         tableView.register(ChatDateTableViewCell.self, forCellReuseIdentifier: ChatDateTableViewCell.useIdentifier)
         tableView.register(ChatNicknameTableViewCell.self, forCellReuseIdentifier: ChatNicknameTableViewCell.useIdentifier)
+        tableView.register(ChatTableViewCell.self, forCellReuseIdentifier: ChatTableViewCell.useIdentifier)
+        tableView.register(OtherUserChatTableViewCell.self, forCellReuseIdentifier: OtherUserChatTableViewCell.useIdentifier)
     }
     
     func setUp() {

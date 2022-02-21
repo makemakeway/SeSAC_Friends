@@ -62,6 +62,9 @@
 		C260F0A827B570390087948F /* EnterHobbyCollectionViewSectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = C260F0A727B570390087948F /* EnterHobbyCollectionViewSectionHeader.swift */; };
 		C263330127C3A7B100917796 /* ChatDateTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C263330027C3A7B100917796 /* ChatDateTableViewCell.swift */; };
 		C263330327C3AE0A00917796 /* ChatNicknameTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C263330227C3AE0A00917796 /* ChatNicknameTableViewCell.swift */; };
+		C263330527C3C7B200917796 /* ChatModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C263330427C3C7B200917796 /* ChatModel.swift */; };
+		C263330727C3CBA800917796 /* ChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C263330627C3CBA800917796 /* ChatTableViewCell.swift */; };
+		C263330927C3DEA100917796 /* OtherUserChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C263330827C3DEA100917796 /* OtherUserChatTableViewCell.swift */; };
 		C26E99D527AA9C9200E00E15 /* MyInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26E99D427AA9C9200E00E15 /* MyInfoView.swift */; };
 		C26E99D727AAC9C100E00E15 /* InfoManageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26E99D627AAC9C100E00E15 /* InfoManageViewController.swift */; };
 		C26E99D927AAC9CA00E00E15 /* InfoManageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26E99D827AAC9CA00E00E15 /* InfoManageView.swift */; };
@@ -212,6 +215,9 @@
 		C260F0A727B570390087948F /* EnterHobbyCollectionViewSectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterHobbyCollectionViewSectionHeader.swift; sourceTree = "<group>"; };
 		C263330027C3A7B100917796 /* ChatDateTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatDateTableViewCell.swift; sourceTree = "<group>"; };
 		C263330227C3AE0A00917796 /* ChatNicknameTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatNicknameTableViewCell.swift; sourceTree = "<group>"; };
+		C263330427C3C7B200917796 /* ChatModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatModel.swift; sourceTree = "<group>"; };
+		C263330627C3CBA800917796 /* ChatTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatTableViewCell.swift; sourceTree = "<group>"; };
+		C263330827C3DEA100917796 /* OtherUserChatTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherUserChatTableViewCell.swift; sourceTree = "<group>"; };
 		C26E99D427AA9C9200E00E15 /* MyInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInfoView.swift; sourceTree = "<group>"; };
 		C26E99D627AAC9C100E00E15 /* InfoManageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoManageViewController.swift; sourceTree = "<group>"; };
 		C26E99D827AAC9CA00E00E15 /* InfoManageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoManageView.swift; sourceTree = "<group>"; };
@@ -367,6 +373,8 @@
 				C27930E127C295A8006673A3 /* ChatTextView.swift */,
 				C263330027C3A7B100917796 /* ChatDateTableViewCell.swift */,
 				C263330227C3AE0A00917796 /* ChatNicknameTableViewCell.swift */,
+				C263330627C3CBA800917796 /* ChatTableViewCell.swift */,
+				C263330827C3DEA100917796 /* OtherUserChatTableViewCell.swift */,
 			);
 			path = Chat;
 			sourceTree = "<group>";
@@ -539,6 +547,7 @@
 				C260F0A127B550670087948F /* UserHobbySection.swift */,
 				C273F1D827BE95DD0077A6B7 /* UserMatchingState.swift */,
 				C278D45027BFEE93000BF0C9 /* UserLocation.swift */,
+				C263330427C3C7B200917796 /* ChatModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1051,6 +1060,7 @@
 			files = (
 				C2E20D2F27A59A4E00AB9BC0 /* ShopViewController.swift in Sources */,
 				C23BA6CC27A16B3A00AD2EE3 /* BirthViewModel.swift in Sources */,
+				C263330927C3DEA100917796 /* OtherUserChatTableViewCell.swift in Sources */,
 				C2A6E5E727AD84F700829EE0 /* CustomAlertViewController.swift in Sources */,
 				C28377C927971E5800151297 /* AuthView.swift in Sources */,
 				C2E20D3127A59A7800AB9BC0 /* FriendsViewController.swift in Sources */,
@@ -1060,6 +1070,7 @@
 				C23BA6D427A1BFCE00AD2EE3 /* GenderViewController.swift in Sources */,
 				C23BA6D027A1AA5900AD2EE3 /* DateManager.swift in Sources */,
 				C2826B4327B0F91D00C1CA23 /* Friends.swift in Sources */,
+				C263330527C3C7B200917796 /* ChatModel.swift in Sources */,
 				C23BAB0427BBDB220083BFCF /* SesacTitleView.swift in Sources */,
 				C20EB13727B13211007B53B0 /* FloatingButton.swift in Sources */,
 				C26E99DF27AB79AA00E00E15 /* CardView.swift in Sources */,
@@ -1097,6 +1108,7 @@
 				C26E99D927AAC9CA00E00E15 /* InfoManageView.swift in Sources */,
 				C263330127C3A7B100917796 /* ChatDateTableViewCell.swift in Sources */,
 				C23BA6CA27A02A7900AD2EE3 /* Connectivity.swift in Sources */,
+				C263330727C3CBA800917796 /* ChatTableViewCell.swift in Sources */,
 				C28377E9279825EF00151297 /* ViewModelType.swift in Sources */,
 				C26E99E127AB98DE00E00E15 /* InfoStackView.swift in Sources */,
 				C28377F52799A41000151297 /* LoginViewModel.swift in Sources */,
