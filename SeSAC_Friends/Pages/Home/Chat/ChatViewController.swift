@@ -69,13 +69,20 @@ final class ChatViewController: UIViewController {
                 owner.mainView.chatTextView.textView.text = ""
             }
             .disposed(by: disposeBag)
+        
+        Observable.of(["11월 23일 목요일", "1월 15일 토요일"])
+            .bind(to: mainView.tableView.rx.items(cellIdentifier: ChatDateTableViewCell.useIdentifier, cellType: ChatDateTableViewCell.self)) { row, element, cell in
+                cell.dateLabel.text = element
+                
+            }
+            .disposed(by: disposeBag)
     }
     
     func calculateChatTextViewHeight() {
         let textView = mainView.chatTextView
         DispatchQueue.main.async {
             let height = textView.textView.contentSize.height
-            if height <= 80 {
+            if height <= 70 {
                 textView.textView.snp.updateConstraints { make in
                     make.height.equalTo(height)
                 }

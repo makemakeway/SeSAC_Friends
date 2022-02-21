@@ -17,9 +17,14 @@ final class ChatView: UIView, ViewRepresentable {
     
     let chatTextView = ChatTextView()
     
+    func tableViewConfig() {
+        tableView.register(ChatDateTableViewCell.self, forCellReuseIdentifier: ChatDateTableViewCell.useIdentifier)
+    }
+    
     func setUp() {
         [tableView, chatTextView]
             .forEach { addSubview($0) }
+        tableViewConfig()
     }
     
     func setConstraints() {
