@@ -17,6 +17,18 @@ final class ChatView: UIView, ViewRepresentable {
     
     let chatTextView = ChatTextView()
     
+    let chatMenuView = ChatMenuView().then {
+        $0.isHidden = true
+        $0.layer.borderWidth = 0
+    }
+    
+    let darkView = UIView().then {
+        $0.backgroundColor = .defaultBlack.withAlphaComponent(0.5)
+        $0.isHidden = true
+    }
+    
+    var menuOpened = false
+    
     func tableViewConfig() {
         tableView.register(ChatDateTableViewCell.self, forCellReuseIdentifier: ChatDateTableViewCell.useIdentifier)
         tableView.register(ChatNicknameTableViewCell.self, forCellReuseIdentifier: ChatNicknameTableViewCell.useIdentifier)
@@ -25,7 +37,7 @@ final class ChatView: UIView, ViewRepresentable {
     }
     
     func setUp() {
-        [tableView, chatTextView]
+        [tableView, chatTextView, darkView, chatMenuView]
             .forEach { addSubview($0) }
         tableViewConfig()
     }
@@ -38,12 +50,21 @@ final class ChatView: UIView, ViewRepresentable {
             make.bottom.equalTo(chatTextView.snp.top)
         }
         
-        
         chatTextView.snp.makeConstraints { make in
             make.top.equalTo(tableView.snp.bottom)
             make.leading.equalToSuperview().offset(16)
             make.trailing.equalToSuperview().offset(-16)
             make.bottom.equalTo(safeAreaLayoutGuide).offset(-16)
+        }
+        
+        chatMenuView.snp.makeConstraints { make in
+            make.top.equalTo(safeAreaLayoutGuide)
+            make.leading.trailing.equalToSuperview()
+        }
+        
+        darkView.snp.makeConstraints { make in
+            make.top.equalTo(safeAreaLayoutGuide)
+            make.leading.bottom.trailing.equalToSuperview()
         }
     }
     

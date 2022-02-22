@@ -32,6 +32,8 @@ final class ChatViewController: UIViewController {
     }
     
     private func bind() {
+        
+        //MARK: Input Binding
         RxKeyboard.instance.willShowVisibleHeight
             .drive(with: self) { owner, height in
                 UIView.animate(withDuration: 0.1) {
@@ -69,6 +71,8 @@ final class ChatViewController: UIViewController {
                 owner.mainView.chatTextView.textView.text = ""
             }
             .disposed(by: disposeBag)
+        
+        //MARK: Output Binding
         
         Observable.of(["11월 23일 목요일", "1월 15일 토요일", "zzzz"])
             .bind(to: mainView.tableView.rx.items) { (tv, row, item) -> UITableViewCell in
@@ -148,13 +152,24 @@ final class ChatViewController: UIViewController {
     }
     
     func presentMenu() {
-        let vc = ChatMenuViewController()
-        let transition = CATransition()
+        if self.mainView.menuOpened {
+            self.mainView.chatMenuView.isHidden = true
+            self.mainView.darkView.isHidden = true
+        } else {
+            self.mainView.chatMenuView.isHidden = false
+            self.mainView.darkView.isHidden = false
+            viewSlideInFromTopToBottom(view: mainView.chatMenuView)
+        }
+        mainView.menuOpened.toggle()
+    }
+    
+    func viewSlideInFromTopToBottom(view: UIView) -> Void {
+        let transition:CATransition = CATransition()
         transition.duration = 0.5
-        transition.type = CATransitionType.moveIn
+        transition.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.linear)
+        transition.type = CATransitionType.push
         transition.subtype = CATransitionSubtype.fromBottom
-        view.window!.layer.add(transition, forKey: kCATransition)
-        self.present(vc, animated: false, completion: nil)
+        view.layer.add(transition, forKey: kCATransition)
     }
     
     //MARK: LifeCycle
