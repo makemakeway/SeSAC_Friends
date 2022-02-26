@@ -18,7 +18,6 @@ final class RequestViewController: UIViewController {
     
     //MARK: LifeCycle
     override func loadView() {
-        super.loadView()
         self.view = mainView
     }
     

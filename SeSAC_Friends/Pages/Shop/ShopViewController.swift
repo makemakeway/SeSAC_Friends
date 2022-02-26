@@ -22,7 +22,6 @@ class ShopViewController: UIViewController {
     
     //MARK: LifeCycle
     override func loadView() {
-        super.loadView()
     }
     
     override func viewDidLoad() {

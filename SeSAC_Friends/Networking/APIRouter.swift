@@ -20,12 +20,13 @@ enum APIRouter: URLRequestConvertible {
     case myQueueState
     case hobbyRequest(uid: String)
     case hobbyAccept(uid: String)
+    case chatTo(uid: String, text: String)
     
     private var method: HTTPMethod {
         switch self {
         case .login, .myQueueState:
             return .get
-        case .signUp, .withdraw, .updateMyPage, .startRequestFriends, .searchRequestFriends, .hobbyAccept, .hobbyRequest:
+        case .signUp, .withdraw, .updateMyPage, .startRequestFriends, .searchRequestFriends, .hobbyAccept, .hobbyRequest, .chatTo:
             return .post
         case .updateFCMToken:
             return .put
@@ -54,6 +55,8 @@ enum APIRouter: URLRequestConvertible {
             return "queue/hobbyaccept"
         case .hobbyRequest:
             return "queue/hobbyrequest"
+        case .chatTo(let uid, _):
+            return "chat/\(uid)"
         }
     }
     
@@ -94,6 +97,8 @@ enum APIRouter: URLRequestConvertible {
             return nil
         case .hobbyAccept(let uid), .hobbyRequest(let uid):
             return [CustomKey.APIParameterKey.otherUid: uid]
+        case .chatTo(_, let text):
+            return [CustomKey.APIParameterKey.chat: text]
         }
     }
     

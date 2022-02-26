@@ -22,7 +22,6 @@ class FriendsViewController: UIViewController {
     
     //MARK: LifeCycle
     override func loadView() {
-        super.loadView()
     }
     
     

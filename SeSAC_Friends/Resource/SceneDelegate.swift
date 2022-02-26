@@ -57,7 +57,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 
     func sceneDidBecomeActive(_ scene: UIScene) {
-        guard let topVC = UIWindow.getTopViewController() else { return }
+        
     }
 
     func sceneWillResignActive(_ scene: UIScene) {

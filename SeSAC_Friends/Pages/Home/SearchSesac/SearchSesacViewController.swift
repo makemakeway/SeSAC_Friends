@@ -439,8 +439,6 @@ final class SearchSesacViewController: TabmanViewController {
         addBar(bar, dataSource: self, at: .top)
         self.isScrollEnabled = false
         navBarConfig()
-        
-        print("CURRENT NAVIGATION STACK: \(self.navigationController?.viewControllers)")
     }
     
     override func viewWillAppear(_ animated: Bool) {

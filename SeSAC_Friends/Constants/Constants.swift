@@ -30,6 +30,7 @@ struct CustomKey {
         static let long = "long"
         static let hf = "hf"
         static let otherUid = "otheruid"
+        static let chat = "chat"
     }
 }
 

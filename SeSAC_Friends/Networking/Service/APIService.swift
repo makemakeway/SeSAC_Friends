@@ -416,6 +416,28 @@ final class APIService {
         }
     }
     
+    func postChat(to uid: String, text: String) -> Single<Int> {
+        return Single.create { single in
+            if !(Connectivity.isConnectedToInternet) {
+                single(.failure(APIError.disConnect))
+            }
+            
+            AF.request(APIRouter.chatTo(uid: uid, text: text))
+                .validate()
+                .response { response in
+                    switch response.response?.statusCode {
+                    case 200:
+                        single(.success(200))
+                    case 201:
+                        single(.success(201))
+                    default:
+                        single(.failure(APIError.clientError))
+                    }
+                }
+            return Disposables.create()
+        }
+    }
+    
     func apiErrorHandler(error: APIError) -> String {
         switch error {
         default:

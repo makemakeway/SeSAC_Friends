@@ -14,6 +14,9 @@
 		C20EB13F27B413C6007B53B0 /* EnterHobbyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20EB13E27B413C6007B53B0 /* EnterHobbyView.swift */; };
 		C21A001627A3DF8600222045 /* GenderButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C21A001527A3DF8600222045 /* GenderButton.swift */; };
 		C21A001827A3E02800222045 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C21A001727A3E02800222045 /* Images.xcassets */; };
+		C222A60227C528BA002A7E58 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = C222A60127C528BA002A7E58 /* Realm */; };
+		C222A60427C528BA002A7E58 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = C222A60327C528BA002A7E58 /* RealmSwift */; };
+		C222A60727C52E79002A7E58 /* ChatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C222A60627C52E79002A7E58 /* ChatViewModel.swift */; };
 		C23BA6AA279AF7D400AD2EE3 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = C23BA6A9279AF7D400AD2EE3 /* FirebaseAuth */; };
 		C23BA6AC279AF7D400AD2EE3 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = C23BA6AB279AF7D400AD2EE3 /* FirebaseMessaging */; };
 		C23BA6AE279BCF2300AD2EE3 /* H40Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23BA6AD279BCF2300AD2EE3 /* H40Button.swift */; };
@@ -65,7 +68,6 @@
 		C263330527C3C7B200917796 /* ChatModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C263330427C3C7B200917796 /* ChatModel.swift */; };
 		C263330727C3CBA800917796 /* ChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C263330627C3CBA800917796 /* ChatTableViewCell.swift */; };
 		C263330927C3DEA100917796 /* OtherUserChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C263330827C3DEA100917796 /* OtherUserChatTableViewCell.swift */; };
-		C263330D27C3F3CA00917796 /* ChatMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C263330C27C3F3CA00917796 /* ChatMenuViewController.swift */; };
 		C263330F27C3F3F200917796 /* ChatMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C263330E27C3F3F200917796 /* ChatMenuView.swift */; };
 		C263331327C3F9AB00917796 /* MenuItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C263331227C3F9AA00917796 /* MenuItemView.swift */; };
 		C26E99D527AA9C9200E00E15 /* MyInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26E99D427AA9C9200E00E15 /* MyInfoView.swift */; };
@@ -169,6 +171,7 @@
 		C20EB13E27B413C6007B53B0 /* EnterHobbyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterHobbyView.swift; sourceTree = "<group>"; };
 		C21A001527A3DF8600222045 /* GenderButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenderButton.swift; sourceTree = "<group>"; };
 		C21A001727A3E02800222045 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		C222A60627C52E79002A7E58 /* ChatViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewModel.swift; sourceTree = "<group>"; };
 		C23BA6AD279BCF2300AD2EE3 /* H40Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = H40Button.swift; sourceTree = "<group>"; };
 		C23BA6B4279C42EC00AD2EE3 /* InputViewContentType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputViewContentType.swift; sourceTree = "<group>"; };
 		C23BA6B6279C554900AD2EE3 /* NickNameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NickNameViewController.swift; sourceTree = "<group>"; };
@@ -221,7 +224,6 @@
 		C263330427C3C7B200917796 /* ChatModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatModel.swift; sourceTree = "<group>"; };
 		C263330627C3CBA800917796 /* ChatTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatTableViewCell.swift; sourceTree = "<group>"; };
 		C263330827C3DEA100917796 /* OtherUserChatTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherUserChatTableViewCell.swift; sourceTree = "<group>"; };
-		C263330C27C3F3CA00917796 /* ChatMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMenuViewController.swift; sourceTree = "<group>"; };
 		C263330E27C3F3F200917796 /* ChatMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMenuView.swift; sourceTree = "<group>"; };
 		C263331227C3F9AA00917796 /* MenuItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItemView.swift; sourceTree = "<group>"; };
 		C26E99D427AA9C9200E00E15 /* MyInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInfoView.swift; sourceTree = "<group>"; };
@@ -296,6 +298,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C222A60427C528BA002A7E58 /* RealmSwift in Frameworks */,
+				C222A60227C528BA002A7E58 /* Realm in Frameworks */,
 				C23BA6AC279AF7D400AD2EE3 /* FirebaseMessaging in Frameworks */,
 				C2A6E5DC27ABF41700829EE0 /* MultiSlider in Frameworks */,
 				C28377DC279720D800151297 /* Then in Frameworks */,
@@ -379,6 +383,14 @@
 				C273F1DA27BEA1F40077A6B7 /* ChatViewController.swift */,
 				C27930DF27C291B2006673A3 /* ChatView.swift */,
 				C27930E127C295A8006673A3 /* ChatTextView.swift */,
+			);
+			path = Chat;
+			sourceTree = "<group>";
+		};
+		C222A60527C52E6B002A7E58 /* Chat */ = {
+			isa = PBXGroup;
+			children = (
+				C222A60627C52E79002A7E58 /* ChatViewModel.swift */,
 			);
 			path = Chat;
 			sourceTree = "<group>";
@@ -521,7 +533,6 @@
 		C263330B27C3F3BD00917796 /* Menu */ = {
 			isa = PBXGroup;
 			children = (
-				C263330C27C3F3CA00917796 /* ChatMenuViewController.swift */,
 				C263330E27C3F3F200917796 /* ChatMenuView.swift */,
 				C263331227C3F9AA00917796 /* MenuItemView.swift */,
 			);
@@ -531,6 +542,7 @@
 		C2826B3D27B0324C00C1CA23 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				C222A60527C52E6B002A7E58 /* Chat */,
 				C23D868427BAD2F400153655 /* SearchSesac */,
 				C2FB2F1C27B7CE3400E1CA81 /* EnterHobby */,
 				C2FB2F1B27B7CE2C00E1CA81 /* Main */,
@@ -831,6 +843,8 @@
 				C2A6E5DB27ABF41700829EE0 /* MultiSlider */,
 				C23D868027BA82DC00153655 /* Tabman */,
 				C27930DD27C2826C006673A3 /* SocketIO */,
+				C222A60127C528BA002A7E58 /* Realm */,
+				C222A60327C528BA002A7E58 /* RealmSwift */,
 			);
 			productName = SeSAC_Friends;
 			productReference = C242CDB22796BE7000905287 /* SeSAC_Friends.app */;
@@ -916,6 +930,7 @@
 				C2A6E5DA27ABF41600829EE0 /* XCRemoteSwiftPackageReference "MultiSlider" */,
 				C23D867F27BA82DC00153655 /* XCRemoteSwiftPackageReference "Tabman" */,
 				C27930DC27C2826B006673A3 /* XCRemoteSwiftPackageReference "socket" */,
+				C222A60027C528BA002A7E58 /* XCRemoteSwiftPackageReference "realm-swift" */,
 			);
 			productRefGroup = C242CDB32796BE7000905287 /* Products */;
 			projectDirPath = "";
@@ -1143,7 +1158,6 @@
 				C2E20D3A27A90F4000AB9BC0 /* OnBoardingView.swift in Sources */,
 				C26E99DD27AB787300E00E15 /* Expandable.swift in Sources */,
 				C26E99E727ABB25600E00E15 /* CardStackView.swift in Sources */,
-				C263330D27C3F3CA00917796 /* ChatMenuViewController.swift in Sources */,
 				C23BA6B7279C554900AD2EE3 /* NickNameViewController.swift in Sources */,
 				C260F0A227B550670087948F /* UserHobbySection.swift in Sources */,
 				C242CDB82796BE7000905287 /* SceneDelegate.swift in Sources */,
@@ -1175,6 +1189,7 @@
 				C2E20D2A27A599C700AB9BC0 /* TabbarController.swift in Sources */,
 				C23D868627BAD31200153655 /* NearUserViewModel.swift in Sources */,
 				C26E99E327AB9B7A00E00E15 /* InfoGenderView.swift in Sources */,
+				C222A60727C52E79002A7E58 /* ChatViewModel.swift in Sources */,
 				C28377E7279825D000151297 /* RequestAuthViewModel.swift in Sources */,
 				C2826B3F27B0325600C1CA23 /* HomeViewModel.swift in Sources */,
 				C26E99F127ABD35F00E00E15 /* InfoAgeRestrictView.swift in Sources */,
@@ -1566,6 +1581,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		C222A60027C528BA002A7E58 /* XCRemoteSwiftPackageReference "realm-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-swift";
+			requirement = {
+				kind = exactVersion;
+				version = 10.22.0;
+			};
+		};
 		C23BA6A8279AF7D400AD2EE3 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
@@ -1633,6 +1656,16 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		C222A60127C528BA002A7E58 /* Realm */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C222A60027C528BA002A7E58 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = Realm;
+		};
+		C222A60327C528BA002A7E58 /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C222A60027C528BA002A7E58 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
+		};
 		C23BA6A9279AF7D400AD2EE3 /* FirebaseAuth */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = C23BA6A8279AF7D400AD2EE3 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
